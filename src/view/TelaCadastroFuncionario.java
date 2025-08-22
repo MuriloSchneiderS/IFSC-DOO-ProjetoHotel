@@ -150,6 +150,11 @@ public class TelaCadastroFuncionario extends javax.swing.JDialog {
             ex.printStackTrace();
         }
 
+        try {
+            jFormattedTextField5.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         jFormattedTextField5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFormattedTextField5ActionPerformed(evt);
@@ -401,10 +406,6 @@ public class TelaCadastroFuncionario extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jFormattedTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextField5ActionPerformed
-
     private void jCheckBoxMostrarSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMostrarSenhaActionPerformed
         if(jCheckBoxMostrarSenha.isSelected()){
             jPasswordFieldSenha.setEchoChar((char)0);
@@ -412,6 +413,10 @@ public class TelaCadastroFuncionario extends javax.swing.JDialog {
             jPasswordFieldSenha.setEchoChar('*');
         }
     }//GEN-LAST:event_jCheckBoxMostrarSenhaActionPerformed
+
+    private void jFormattedTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFormattedTextField5ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

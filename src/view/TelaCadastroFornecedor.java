@@ -164,6 +164,12 @@ public class TelaCadastroFornecedor extends javax.swing.JDialog {
             ex.printStackTrace();
         }
 
+        try {
+            jFormattedTextField5.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         jLabelCadastro.setText("Data de Cadastro");
 
         jLabelCep.setText("CEP");
