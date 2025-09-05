@@ -9,7 +9,7 @@ public class ConnectionFactory {
     private static final String driver = "com.mysql.jdbc.Deiver";
     private static final String banco = "jdbc:mysql//localhost:3306/hotel";
     private static final String usuario = "root";
-    private static final String senha = "ifsc";
+    private static final String senha = "admin";
     
     public static Connection getConnection(){
         try {
