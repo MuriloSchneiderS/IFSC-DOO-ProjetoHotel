@@ -25,14 +25,16 @@ public class ControllerBuscaHospede implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent evento) {
-
+        //Botão Carregar
         if (evento.getSource() == this.telaBuscaHospede.getjButtonCarregar()) {
-            JOptionPane.showMessageDialog(null, "Botão Carregar Pressionado...");
-            if (this.telaBuscaHospede.getjTableDados().getRowCount() == 0) {
-                JOptionPane.showMessageDialog(null, "Errrrooooooouuu. \nNão Existem Dados Selecionados!");
-            } else {
-                JOptionPane.showMessageDialog(null, "Carregando Dados para Edição....");
+            if(this.telaBuscaHospede.getjTableDados().getRowCount()==0){
+                JOptionPane.showMessageDialog(null,"Nenhum dado selecionado.");
+            }else{
+                //retorno dos dados para a tela de cadastro
+                ControllerCadHospede.codigo = (int) this.telaBuscaHospede.getjTableDados().getValueAt(this.telaBuscaHospede.getjTableDados().getSelectedRow(), 0);
+                this.telaBuscaHospede.dispose();
             }
+        //Botão Filtrar
         } else if (evento.getSource() == this.telaBuscaHospede.getjButtonFiltar()) {
             JOptionPane.showMessageDialog(null, "Botão Filtrar Pressionado...");
             if (this.telaBuscaHospede.getjTFFiltro().getText().trim().equalsIgnoreCase("")) {
@@ -62,6 +64,7 @@ public class ControllerBuscaHospede implements ActionListener {
                     JOptionPane.showMessageDialog(null, "Filtrando por CPF");
                 }
             }
+        //Botão Sair
         } else if (evento.getSource() == this.telaBuscaHospede.getjButtonSair()) {
             this.telaBuscaHospede.dispose();
         }

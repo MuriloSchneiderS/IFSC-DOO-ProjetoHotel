@@ -2,12 +2,15 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+import model.Hospede;
 import view.TelaBuscaHospede;
 import view.TelaCadastroHospede;
 
 public class ControllerCadHospede implements ActionListener {
 
     TelaCadastroHospede telaCadastroHospede;
+    public static int codigo;
 
     public ControllerCadHospede(TelaCadastroHospede telaCadastroHospede) {
 
@@ -38,16 +41,80 @@ public class ControllerCadHospede implements ActionListener {
         } else if (evento.getSource() == this.telaCadastroHospede.getjButtonCancelar()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroHospede.getjPanelBotoes(), true);
             utilities.Utilities.limpaComponentes(this.telaCadastroHospede.getjPanelDados(), false);
+            //Botão Gravar
         } else if (evento.getSource() == this.telaCadastroHospede.getjButtonGravar()) {
-            utilities.Utilities.ativaDesativa(this.telaCadastroHospede.getjPanelBotoes(), true);
-            utilities.Utilities.limpaComponentes(this.telaCadastroHospede.getjPanelDados(), false);
+            if (this.telaCadastroHospede.getjTextFieldNomeFantasia().getText().trim().equals("")) {
+                JOptionPane.showMessageDialog(null, "Atributo Obrigatório.");
+                this.telaCadastroHospede.getjTextFieldNomeFantasia().requestFocus();
+            } else {
+                Hospede hospede = new Hospede();
 
+                hospede.setCep(this.telaCadastroHospede.getjFormattedTextFieldCep().getText());
+                hospede.setCnpj(this.telaCadastroHospede.getjFormattedTextFieldCnpj().getText());
+                hospede.setCpf(this.telaCadastroHospede.getjFormattedTextFieldCpf().getText());
+                hospede.setDataCadastro(this.telaCadastroHospede.getjFormattedTextFieldDataCadastro().getText());
+                hospede.setBairro(this.telaCadastroHospede.getjTextFieldBairro().getText());
+                hospede.setCidade(this.telaCadastroHospede.getjTextFieldCidade().getText());
+                hospede.setComplemento(this.telaCadastroHospede.getjTextFieldComplemento().getText());
+                hospede.setContato(this.telaCadastroHospede.getjTextFieldContato().getText());
+                hospede.setEmail(this.telaCadastroHospede.getjTextFieldEmail().getText());
+                hospede.setInscricaoEstadual(this.telaCadastroHospede.getjTextFieldInscricaoEstadual().getText());
+                hospede.setLogradouro(this.telaCadastroHospede.getjTextFieldLogradouro().getText());
+                hospede.setNome(this.telaCadastroHospede.getjTextFieldNomeFantasia().getText());
+                hospede.setObs(this.telaCadastroHospede.getjTextFieldObs().getText());
+                hospede.setRazaoSocial(this.telaCadastroHospede.getjTextFieldRazaoSocial().getText());
+                hospede.setRg(this.telaCadastroHospede.getjTextFieldRg().getText());
+
+                if (this.telaCadastroHospede.getjTextFieldId().getText().trim().equalsIgnoreCase("")) {
+                    //Inclusão
+                    hospede.setStatus('A');
+                    service.HospedeService.Criar(hospede);
+                } else {
+                    //Atualização
+                    hospede.setId(Integer.parseInt(this.telaCadastroHospede.getjTextFieldId().getText()));
+                    service.HospedeService.Atualizar(hospede);
+                }
+                utilities.Utilities.ativaDesativa(this.telaCadastroHospede.getjPanelBotoes(), true);
+                utilities.Utilities.limpaComponentes(this.telaCadastroHospede.getjPanelDados(), false);
+            }
+            //Botão Buscar
         } else if (evento.getSource() == this.telaCadastroHospede.getjButtonBuscar()) {
-            
+            codigo = 0;
+
             TelaBuscaHospede telaBuscaHospede = new TelaBuscaHospede(null, true);
             ControllerBuscaHospede controllerBuscaHospede = new ControllerBuscaHospede(telaBuscaHospede);
             telaBuscaHospede.setVisible(true);
-            
+
+            if (codigo != 0) {
+                //rotina de carga de hóspede
+                utilities.Utilities.ativaDesativa(this.telaCadastroHospede.getjPanelBotoes(), false);
+                utilities.Utilities.limpaComponentes(this.telaCadastroHospede.getjPanelDados(), true);
+
+                this.telaCadastroHospede.getjTextFieldId().setText(codigo + "");
+                this.telaCadastroHospede.getjTextFieldId().setEnabled(false);
+
+                Hospede hospede = new Hospede();
+                hospede = service.HospedeService.Carregar(codigo);
+
+                this.telaCadastroHospede.getjFormattedTextFieldCep().setText(hospede.getCep());
+                this.telaCadastroHospede.getjFormattedTextFieldCnpj().setText(hospede.getCnpj());
+                this.telaCadastroHospede.getjFormattedTextFieldCpf().setText(hospede.getCpf());
+                this.telaCadastroHospede.getjFormattedTextFieldDataCadastro().setText(hospede.getDataCadastro());
+                this.telaCadastroHospede.getjTextFieldBairro().setText(hospede.getBairro());
+                this.telaCadastroHospede.getjTextFieldCidade().setText(hospede.getCidade());
+                this.telaCadastroHospede.getjTextFieldComplemento().setText(hospede.getComplemento());
+                this.telaCadastroHospede.getjTextFieldContato().setText(hospede.getContato());
+                this.telaCadastroHospede.getjTextFieldEmail().setText(hospede.getEmail());
+                this.telaCadastroHospede.getjTextFieldId().setText(hospede.getId() + "");
+                this.telaCadastroHospede.getjTextFieldInscricaoEstadual().setText(hospede.getInscricaoEstadual());
+                this.telaCadastroHospede.getjTextFieldLogradouro().setText(hospede.getLogradouro());
+                this.telaCadastroHospede.getjTextFieldNomeFantasia().setText(hospede.getNome());
+                this.telaCadastroHospede.getjTextFieldObs().setText(hospede.getObs());
+                this.telaCadastroHospede.getjTextFieldRazaoSocial().setText(hospede.getRazaoSocial());
+                this.telaCadastroHospede.getjTextFieldRg().setText(hospede.getRg());
+
+                this.telaCadastroHospede.getjTextFieldNomeFantasia().requestFocus();
+            }
         } else if (evento.getSource() == this.telaCadastroHospede.getjButtonSair()) {
             this.telaCadastroHospede.dispose();
         }
