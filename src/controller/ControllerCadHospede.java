@@ -34,14 +34,15 @@ public class ControllerCadHospede implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent evento) {
+        //Botão Novo
         if (evento.getSource() == this.telaCadastroHospede.getjButtonNovo()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroHospede.getjPanelBotoes(), false);
             utilities.Utilities.limpaComponentes(this.telaCadastroHospede.getjPanelDados(), true);
-
+        //Botão Cancelar
         } else if (evento.getSource() == this.telaCadastroHospede.getjButtonCancelar()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroHospede.getjPanelBotoes(), true);
             utilities.Utilities.limpaComponentes(this.telaCadastroHospede.getjPanelDados(), false);
-            //Botão Gravar
+        //Botão Gravar
         } else if (evento.getSource() == this.telaCadastroHospede.getjButtonGravar()) {
             if (this.telaCadastroHospede.getjTextFieldNomeFantasia().getText().trim().equals("")) {
                 JOptionPane.showMessageDialog(null, "Atributo Obrigatório.");
@@ -77,7 +78,7 @@ public class ControllerCadHospede implements ActionListener {
                 utilities.Utilities.ativaDesativa(this.telaCadastroHospede.getjPanelBotoes(), true);
                 utilities.Utilities.limpaComponentes(this.telaCadastroHospede.getjPanelDados(), false);
             }
-            //Botão Buscar
+        //Botão Buscar
         } else if (evento.getSource() == this.telaCadastroHospede.getjButtonBuscar()) {
             codigo = 0;
 
@@ -115,6 +116,7 @@ public class ControllerCadHospede implements ActionListener {
 
                 this.telaCadastroHospede.getjTextFieldNomeFantasia().requestFocus();
             }
+        //Botão Sair
         } else if (evento.getSource() == this.telaCadastroHospede.getjButtonSair()) {
             this.telaCadastroHospede.dispose();
         }
