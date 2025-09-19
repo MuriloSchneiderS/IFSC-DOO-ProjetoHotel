@@ -1,7 +1,11 @@
 package view;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 public class TelaCadastroFuncionario extends javax.swing.JDialog {
 
@@ -36,6 +40,74 @@ public class TelaCadastroFuncionario extends javax.swing.JDialog {
 
     public JPanel getjPanelDados() {
         return jPanelDados;
+    }
+
+    public JCheckBox getjCheckBoxMostrarSenha() {
+        return jCheckBoxMostrarSenha;
+    }
+
+    public JFormattedTextField getjFormattedTextFieldCep() {
+        return jFormattedTextFieldCep;
+    }
+
+    public JFormattedTextField getjFormattedTextFieldCpf() {
+        return jFormattedTextFieldCpf;
+    }
+
+    public JFormattedTextField getjFormattedTextFieldDataCadastro() {
+        return jFormattedTextFieldDataCadastro;
+    }
+
+    public JFormattedTextField getjFormattedTextFieldFone1() {
+        return jFormattedTextFieldFone1;
+    }
+
+    public JFormattedTextField getjFormattedTextFieldFone2() {
+        return jFormattedTextFieldFone2;
+    }
+
+    public JPasswordField getjPasswordFieldSenha() {
+        return jPasswordFieldSenha;
+    }
+
+    public JTextField getjTextFieldBairro() {
+        return jTextFieldBairro;
+    }
+
+    public JTextField getjTextFieldCidade() {
+        return jTextFieldCidade;
+    }
+
+    public JTextField getjTextFieldComplemento() {
+        return jTextFieldComplemento;
+    }
+
+    public JTextField getjTextFieldEmail() {
+        return jTextFieldEmail;
+    }
+
+    public JTextField getjTextFieldId() {
+        return jTextFieldId;
+    }
+
+    public JTextField getjTextFieldLogradouro() {
+        return jTextFieldLogradouro;
+    }
+
+    public JTextField getjTextFieldNomeFantasia() {
+        return jTextFieldNomeFantasia;
+    }
+
+    public JTextField getjTextFieldObs() {
+        return jTextFieldObs;
+    }
+
+    public JTextField getjTextFieldRg() {
+        return jTextFieldRg;
+    }
+
+    public JTextField getjTextFieldUsuario() {
+        return jTextFieldUsuario;
     }
     
     
@@ -72,7 +144,7 @@ public class TelaCadastroFuncionario extends javax.swing.JDialog {
         jLabelEmail = new javax.swing.JLabel();
         jTextFieldEmail = new javax.swing.JTextField();
         jFormattedTextFieldFone1 = new javax.swing.JFormattedTextField();
-        jFormattedTextField5 = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldDataCadastro = new javax.swing.JFormattedTextField();
         jLabelCadastro = new javax.swing.JLabel();
         jLabelCep = new javax.swing.JLabel();
         jFormattedTextFieldCep = new javax.swing.JFormattedTextField();
@@ -151,13 +223,13 @@ public class TelaCadastroFuncionario extends javax.swing.JDialog {
         }
 
         try {
-            jFormattedTextField5.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            jFormattedTextFieldDataCadastro.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField5.addActionListener(new java.awt.event.ActionListener() {
+        jFormattedTextFieldDataCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextField5ActionPerformed(evt);
+                jFormattedTextFieldDataCadastroActionPerformed(evt);
             }
         });
 
@@ -207,7 +279,7 @@ public class TelaCadastroFuncionario extends javax.swing.JDialog {
                             .addComponent(jLabelId))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jFormattedTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jFormattedTextFieldDataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelCadastro)))
                     .addComponent(jTextFieldNomeFantasia)
                     .addGroup(jPanelDadosLayout.createSequentialGroup()
@@ -276,7 +348,7 @@ public class TelaCadastroFuncionario extends javax.swing.JDialog {
                     .addComponent(jLabelId))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jFormattedTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextFieldDataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -414,9 +486,9 @@ public class TelaCadastroFuncionario extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jCheckBoxMostrarSenhaActionPerformed
 
-    private void jFormattedTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField5ActionPerformed
+    private void jFormattedTextFieldDataCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldDataCadastroActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextField5ActionPerformed
+    }//GEN-LAST:event_jFormattedTextFieldDataCadastroActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -464,9 +536,9 @@ public class TelaCadastroFuncionario extends javax.swing.JDialog {
     private javax.swing.JButton jButtonNovo;
     private javax.swing.JButton jButtonSair;
     private javax.swing.JCheckBox jCheckBoxMostrarSenha;
-    private javax.swing.JFormattedTextField jFormattedTextField5;
     private javax.swing.JFormattedTextField jFormattedTextFieldCep;
     private javax.swing.JFormattedTextField jFormattedTextFieldCpf;
+    private javax.swing.JFormattedTextField jFormattedTextFieldDataCadastro;
     private javax.swing.JFormattedTextField jFormattedTextFieldFone1;
     private javax.swing.JFormattedTextField jFormattedTextFieldFone2;
     private javax.swing.JLabel jLabel1;
