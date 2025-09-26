@@ -11,9 +11,10 @@
         <group>
             <file>file:/C:/Users/Murilo/Documents/Projects/ifsc/ProjetoHotel/src/controller/ControllerCadHospede.java</file>
             <file>file:/C:/Users/Murilo/Documents/Projects/ifsc/ProjetoHotel/src/controller/ControllerBuscaHospede.java</file>
-            <file>file:/C:/Users/Murilo/Documents/Projects/ifsc/ProjetoHotel/src/view/TelaCadastroHospede.java</file>
-            <file>file:/C:/Users/Murilo/Documents/Projects/ifsc/ProjetoHotel/src/model/Hospede.java</file>
-            <file>file:/C:/Users/Murilo/Documents/Projects/ifsc/ProjetoHotel/src/model/Pessoa.java</file>
+            <file>file:/C:/Users/Murilo/Documents/Projects/ifsc/ProjetoHotel/src/modelDAO/HospedeDAO.java</file>
+            <file>file:/C:/Users/Murilo/Documents/Projects/ifsc/ProjetoHotel/src/controller/ControllerCadFuncionario.java</file>
+            <file>file:/C:/Users/Murilo/Documents/Projects/ifsc/ProjetoHotel/src/controller/ControllerBuscaFuncionario.java</file>
+            <file>file:/C:/Users/Murilo/Documents/Projects/ifsc/ProjetoHotel/src/modelDAO/FuncionarioDAO.java</file>
         </group>
     </open-files>
 </project-private>

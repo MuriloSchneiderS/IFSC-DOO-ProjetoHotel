@@ -2,6 +2,8 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import model.Fornecedor;
 import view.TelaBuscaFornecedor;
@@ -32,6 +34,13 @@ public class ControllerCadFornecedor implements ActionListener {
         if (evento.getSource() == this.telaCadastroFornecedor.getjButtonNovo()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroFornecedor.getjPanelBotoes(), false);
             utilities.Utilities.limpaComponentes(this.telaCadastroFornecedor.getjPanelDados(), true);
+            //Data atual colocada em data de cadastro
+            this.telaCadastroFornecedor.getjTextFieldId().setEnabled(false);
+            java.util.Date dataAtual = new Date();
+            SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+            String novaData = dataFormatada.format(dataAtual);
+            this.telaCadastroFornecedor.getjFormattedTextFieldDataCadastro().setText(novaData);
+            this.telaCadastroFornecedor.getjFormattedTextFieldDataCadastro().setEnabled(false);
         //Botão Cancelar
         } else if (evento.getSource() == this.telaCadastroFornecedor.getjButtonCancelar()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroFornecedor.getjPanelBotoes(), true);

@@ -48,8 +48,8 @@ public class FuncionarioDAO implements InterfaceDAO<Funcionario>{
             pstm.setString(12, objeto.getRg());
             pstm.setString(13, objeto.getObs());
             pstm.setString(14, String.valueOf(objeto.getStatus()));
-            pstm.setString(17, objeto.getUsuario());
-            pstm.setString(18, objeto.getSenha());
+            pstm.setString(15, objeto.getUsuario());
+            pstm.setString(16, objeto.getSenha());
             pstm.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -211,9 +211,9 @@ public class FuncionarioDAO implements InterfaceDAO<Funcionario>{
             pstm.setString(12, objeto.getRg());
             pstm.setString(13, objeto.getObs());
             pstm.setString(14, String.valueOf(objeto.getStatus()));
-            pstm.setString(17, objeto.getUsuario());
-            pstm.setString(18, objeto.getSenha());
-            pstm.setInt(19, objeto.getId());
+            pstm.setString(15, objeto.getUsuario());
+            pstm.setString(16, objeto.getSenha());
+            pstm.setInt(17, objeto.getId());
             pstm.execute();
         }catch (SQLException ex) {
             ex.printStackTrace();

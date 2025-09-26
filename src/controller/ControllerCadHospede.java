@@ -2,6 +2,8 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import model.Hospede;
 import view.TelaBuscaHospede;
@@ -38,6 +40,13 @@ public class ControllerCadHospede implements ActionListener {
         if (evento.getSource() == this.telaCadastroHospede.getjButtonNovo()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroHospede.getjPanelBotoes(), false);
             utilities.Utilities.limpaComponentes(this.telaCadastroHospede.getjPanelDados(), true);
+            //Data atual colocada em data de cadastro
+            this.telaCadastroHospede.getjTextFieldId().setEnabled(false);
+            java.util.Date dataAtual = new Date();
+            SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+            String novaData = dataFormatada.format(dataAtual);
+            this.telaCadastroHospede.getjFormattedTextFieldDataCadastro().setText(novaData);
+            this.telaCadastroHospede.getjFormattedTextFieldDataCadastro().setEnabled(false);
         //Botão Cancelar
         } else if (evento.getSource() == this.telaCadastroHospede.getjButtonCancelar()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroHospede.getjPanelBotoes(), true);

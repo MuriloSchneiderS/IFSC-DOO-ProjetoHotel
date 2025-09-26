@@ -2,6 +2,8 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import model.Funcionario;
 import view.TelaBuscaFuncionario;
@@ -32,6 +34,13 @@ public class ControllerCadFuncionario implements ActionListener {
         if (evento.getSource() == this.telaCadastroFuncionario.getjButtonNovo()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroFuncionario.getjPanelBotoes(), false);
             utilities.Utilities.limpaComponentes(this.telaCadastroFuncionario.getjPanelDados(), true);
+            //Data atual colocada em data de cadastro
+            this.telaCadastroFuncionario.getjTextFieldId().setEnabled(false);
+            java.util.Date dataAtual = new Date();
+            SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+            String novaData = dataFormatada.format(dataAtual);
+            this.telaCadastroFuncionario.getjFormattedTextFieldDataCadastro().setText(novaData);
+            this.telaCadastroFuncionario.getjFormattedTextFieldDataCadastro().setEnabled(false);
         //Botão Cancelar
         } else if (evento.getSource() == this.telaCadastroFuncionario.getjButtonCancelar()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroFuncionario.getjPanelBotoes(), true);

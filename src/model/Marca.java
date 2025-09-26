@@ -6,6 +6,7 @@ public class Marca {
     private String descricao;
     private char status;
 
+    public Marca(){}
     public Marca(int id, String descricao, char status) {
         this.id = id;
         this.descricao = descricao;

@@ -1,7 +1,9 @@
 package view;
 
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class TelaCadastroMarca extends javax.swing.JDialog {
 
@@ -37,6 +39,30 @@ public class TelaCadastroMarca extends javax.swing.JDialog {
     public JPanel getjPanelDados() {
         return jPanelDados;
     }
+
+    public JFormattedTextField getjFormattedTextFieldDataCadastro() {
+        return jFormattedTextFieldDataCadastro;
+    }
+
+    public void setjFormattedTextFieldDataCadastro(JFormattedTextField jFormattedTextFieldDataCadastro) {
+        this.jFormattedTextFieldDataCadastro = jFormattedTextFieldDataCadastro;
+    }
+
+    public JTextField getjTextFieldDescricao() {
+        return jTextFieldDescricao;
+    }
+
+    public void setjTextFieldDescricao(JTextField jTextFieldDescricao) {
+        this.jTextFieldDescricao = jTextFieldDescricao;
+    }
+
+    public JTextField getjTextFieldId() {
+        return jTextFieldId;
+    }
+
+    public void setjTextFieldId(JTextField jTextFieldId) {
+        this.jTextFieldId = jTextFieldId;
+    }
     
     
     
@@ -60,10 +86,10 @@ public class TelaCadastroMarca extends javax.swing.JDialog {
         jPanelDados = new javax.swing.JPanel();
         jLabelId = new javax.swing.JLabel();
         jTextFieldId = new javax.swing.JTextField();
-        jFormattedTextField5 = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldDataCadastro = new javax.swing.JFormattedTextField();
         jLabelCadastro = new javax.swing.JLabel();
         jTextFieldDescricao = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelDescricao = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jPanelBotoes = new javax.swing.JPanel();
         jButtonNovo = new javax.swing.JButton();
@@ -100,7 +126,7 @@ public class TelaCadastroMarca extends javax.swing.JDialog {
 
         jLabelCadastro.setText("Data de Cadastro");
 
-        jLabel2.setText("Descrição");
+        jLabelDescricao.setText("Descrição");
 
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);
         jPanelDados.setLayout(jPanelDadosLayout);
@@ -112,7 +138,7 @@ public class TelaCadastroMarca extends javax.swing.JDialog {
                     .addGroup(jPanelDadosLayout.createSequentialGroup()
                         .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 451, Short.MAX_VALUE)
-                        .addComponent(jFormattedTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jFormattedTextFieldDataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(jPanelDadosLayout.createSequentialGroup()
                         .addComponent(jLabelId)
@@ -125,7 +151,7 @@ public class TelaCadastroMarca extends javax.swing.JDialog {
                             .addComponent(jSeparator1))
                         .addContainerGap())
                     .addGroup(jPanelDadosLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(jLabelDescricao)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanelDadosLayout.setVerticalGroup(
@@ -138,11 +164,11 @@ public class TelaCadastroMarca extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFormattedTextFieldDataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addComponent(jLabelDescricao)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -250,9 +276,9 @@ public class TelaCadastroMarca extends javax.swing.JDialog {
     private javax.swing.JButton jButtonGravar;
     private javax.swing.JButton jButtonNovo;
     private javax.swing.JButton jButtonSair;
-    private javax.swing.JFormattedTextField jFormattedTextField5;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JFormattedTextField jFormattedTextFieldDataCadastro;
     private javax.swing.JLabel jLabelCadastro;
+    private javax.swing.JLabel jLabelDescricao;
     private javax.swing.JLabel jLabelId;
     private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JPanel jPanelBotoes;
