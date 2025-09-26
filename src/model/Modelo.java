@@ -7,6 +7,7 @@ public class Modelo {
     private char status;
     private Marca marca;
 
+    public Modelo(){}
     public Modelo(int id, String descricao, char status, Marca marca) {
         this.id = id;
         this.descricao = descricao;

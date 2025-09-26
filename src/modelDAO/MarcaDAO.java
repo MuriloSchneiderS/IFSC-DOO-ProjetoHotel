@@ -62,7 +62,7 @@ public class MarcaDAO implements InterfaceDAO<Marca>{
         String sqlInstrucao = "SELECT"
                 + " id,"
                 + " descricao,"
-                + " status,"
+                + " status"
                 + " FROM marca"
                 + " WHERE "+atributo+" LIKE ?";
         Connection conexao = ConnectionFactory.getConnection();

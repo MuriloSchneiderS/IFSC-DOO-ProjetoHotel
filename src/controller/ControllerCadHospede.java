@@ -96,7 +96,7 @@ public class ControllerCadHospede implements ActionListener {
             telaBuscaHospede.setVisible(true);
 
             if (codigo != 0) {
-                //rotina de carga de hóspede
+                //rotina de carga de hospede
                 utilities.Utilities.ativaDesativa(this.telaCadastroHospede.getjPanelBotoes(), false);
                 utilities.Utilities.limpaComponentes(this.telaCadastroHospede.getjPanelDados(), true);
 
