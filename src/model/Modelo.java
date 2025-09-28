@@ -8,11 +8,11 @@ public class Modelo {
     private Marca marca;
 
     public Modelo(){}
-    public Modelo(int id, String descricao, char status, Marca marca) {
+    public Modelo(int id, String descricao, Marca marca) {
         this.id = id;
         this.descricao = descricao;
-        this.status = status;
         this.marca = marca;
+        this.status = 'A';
     }
 
     public int getId() {

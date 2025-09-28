@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import model.Modelo;
 import java.util.List;
+import model.Marca;
 
 public class ModeloDAO implements InterfaceDAO<Modelo>{
 
@@ -22,7 +23,7 @@ public class ModeloDAO implements InterfaceDAO<Modelo>{
             pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setString(1, objeto.getDescricao());
             pstm.setString(2, String.valueOf(objeto.getStatus()));
-            pstm.setString(3, objeto.getMarca());
+            pstm.setString(3, Integer.toString(objeto.getMarca().getId()));
             pstm.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -43,6 +44,7 @@ public class ModeloDAO implements InterfaceDAO<Modelo>{
         PreparedStatement pstm = null;
         ResultSet rst = null;
         Modelo modelo = new Modelo();
+        Marca marca = new Marca();
         try {
             pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setInt(1, id);
@@ -51,7 +53,8 @@ public class ModeloDAO implements InterfaceDAO<Modelo>{
                 modelo.setId(rst.getInt("id"));
                 modelo.setDescricao(rst.getString(2));
                 modelo.setStatus(rst.getString("status").charAt(0));
-                modelo.setMarca(rst.getInt("marca_id"));
+                marca.setId(rst.getInt("marca_id"));
+                modelo.setMarca(marca);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -80,9 +83,12 @@ public class ModeloDAO implements InterfaceDAO<Modelo>{
             rst = pstm.executeQuery();
             while (!rst.next()) {
                 Modelo modelo = new Modelo();
+                Marca marca = new Marca();
                 modelo.setId(rst.getInt("id"));
                 modelo.setDescricao(rst.getString(2));
                 modelo.setStatus(rst.getString("status").charAt(0));
+                marca.setId(rst.getInt("marca_id"));
+                modelo.setMarca(marca);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -106,7 +112,7 @@ public class ModeloDAO implements InterfaceDAO<Modelo>{
             pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setString(1, objeto.getDescricao());
             pstm.setString(2, String.valueOf(objeto.getStatus()));
-            pstm.setInt(3, objeto.getId());
+            pstm.setInt(3, objeto.getMarca().getId());
             pstm.execute();
         }catch (SQLException ex) {
             ex.printStackTrace();

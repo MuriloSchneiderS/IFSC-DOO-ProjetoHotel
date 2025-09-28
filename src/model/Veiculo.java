@@ -3,20 +3,22 @@ package model;
 public class Veiculo {
     private int id;
     private String placa, cor;
-    private char status;
     private Modelo modelo;
-    private AlocacaoVaga vaga;
-
-    public Veiculo(int id, String placa, String cor, char status, Modelo modelo) {
+    private Funcionario funcionario;
+    private Fornecedor fornecedor;
+    private Hospede hospede;
+    private char status;
+  
+    public Veiculo(){}
+    public Veiculo(int id, String placa, String cor, Modelo modelo, Funcionario funcionario, Fornecedor fornecedor, Hospede hospede) {
         this.id = id;
         this.placa = placa;
         this.cor = cor;
-        this.status = status;
         this.modelo = modelo;
-    }
-
-    public void alocarVaga(AlocacaoVaga vaga){
-        this.vaga=vaga;
+        this.funcionario = funcionario;
+        this.fornecedor = fornecedor;
+        this.hospede = hospede;
+        this.status = status;
     }
     
     public int getId() {
@@ -58,5 +60,30 @@ public class Veiculo {
     public void setModelo(Modelo modelo) {
         this.modelo = modelo;
     }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
+
+    public Fornecedor getFornecedor() {
+        return fornecedor;
+    }
+
+    public void setFornecedor(Fornecedor fornecedor) {
+        this.fornecedor = fornecedor;
+    }
+
+    public Hospede getHospede() {
+        return hospede;
+    }
+
+    public void setHospede(Hospede hospede) {
+        this.hospede = hospede;
+    }
+    
     
 }

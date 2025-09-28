@@ -36,11 +36,9 @@ public class ControllerBuscaFuncionario implements ActionListener {
             }
         //Botão Filtrar
         } else if (evento.getSource() == this.telaBuscaFuncionario.getjButtonFiltar()) {
-            JOptionPane.showMessageDialog(null, "Botão Filtrar Pressionado...");
             if (this.telaBuscaFuncionario.getjTFFiltro().getText().trim().equalsIgnoreCase("")) {
                 JOptionPane.showMessageDialog(null, "Sem Dados para a Seleção...");
             } else {
-                JOptionPane.showMessageDialog(null, "Filtrando informações...");
                 if (this.telaBuscaFuncionario.getjCBFiltro().getSelectedIndex() == 0) {
                     //Criando objeto para receber o dado que virà do banco de dados
                     Funcionario funcionario = new Funcionario();

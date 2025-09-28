@@ -36,11 +36,9 @@ public class ControllerBuscaMarca implements ActionListener {
             }
         //Botão Filtrar
         } else if (evento.getSource() == this.telaBuscaMarca.getjButtonFiltar()) {
-            JOptionPane.showMessageDialog(null, "Botão Filtrar Pressionado...");
             if (this.telaBuscaMarca.getjTFFiltro().getText().trim().equalsIgnoreCase("")) {
                 JOptionPane.showMessageDialog(null, "Sem Dados para a Seleção...");
             } else {
-                JOptionPane.showMessageDialog(null, "Filtrando informações...");
                 if (this.telaBuscaMarca.getjCBFiltro().getSelectedIndex() == 0) {//Ordenar por Id
                     //Criando objeto para receber o dado que virà do banco de dados
                     Marca marca = new Marca();
@@ -48,7 +46,7 @@ public class ControllerBuscaMarca implements ActionListener {
                     marca = service.MarcaService.Carregar(Integer.parseInt(this.telaBuscaMarca.getjTFFiltro().getText()));
                     //Criando um objeto tabela do tipo defaulttableModel e atribuindo o modelo da tela a ele
                     DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaMarca.getjTableDados().getModel();
-                    tabela.addRow(new Object[]{marca.getId(), marca.getDescricao(), marca.getStatus()});
+                    tabela.addRow(new Object[]{marca.getId(), marca.getDescricao()});
                 } else if (this.telaBuscaMarca.getjCBFiltro().getSelectedIndex() == 1) {//Ordenar por Descricao
                     //Criando a lista para receber as marcas
                     List<Marca> listaMarcas = new ArrayList<>();
@@ -58,7 +56,7 @@ public class ControllerBuscaMarca implements ActionListener {
                     tabela.setRowCount(0);
                     //Adicionando os marcas na tabela
                     for(Marca marcaAtualDaLista : listaMarcas){
-                        tabela.addRow(new Object[]{marcaAtualDaLista.getId(), marcaAtualDaLista.getDescricao(), marcaAtualDaLista.getStatus()});
+                        tabela.addRow(new Object[]{marcaAtualDaLista.getId(), marcaAtualDaLista.getDescricao()});
                     }
                 }
             }

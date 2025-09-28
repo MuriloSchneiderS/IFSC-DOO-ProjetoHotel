@@ -36,11 +36,9 @@ public class ControllerBuscaHospede implements ActionListener {
             }
         //Botão Filtrar
         } else if (evento.getSource() == this.telaBuscaHospede.getjButtonFiltar()) {
-            JOptionPane.showMessageDialog(null, "Botão Filtrar Pressionado...");
             if (this.telaBuscaHospede.getjTFFiltro().getText().trim().equalsIgnoreCase("")) {
                 JOptionPane.showMessageDialog(null, "Sem Dados para a Seleção...");
             } else {
-                JOptionPane.showMessageDialog(null, "Filtrando informações...");
                 if (this.telaBuscaHospede.getjCBFiltro().getSelectedIndex() == 0) {
                     //Criando objeto para receber o dado que virà do banco de dados
                     Hospede hospede = new Hospede();

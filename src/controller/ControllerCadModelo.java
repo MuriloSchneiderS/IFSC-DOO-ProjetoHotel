@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import model.Marca;
 import model.Modelo;
 import view.TelaBuscaModelo;
 import view.TelaCadastroModelo;
@@ -52,8 +53,9 @@ public class ControllerCadModelo implements ActionListener {
                 this.telaCadastroModelo.getjTextFieldDescricao().requestFocus();
             } else {
                 Modelo modelo = new Modelo();
-
+                
                 modelo.setDescricao(this.telaCadastroModelo.getjTextFieldDescricao().getText());
+                modelo.setMarca(service.MarcaService.Carregar("descricao", this.telaCadastroModelo.getjComboBoxMarca().getSelectedItem().toString()).getFirst());
                 
                 if (this.telaCadastroModelo.getjTextFieldId().getText().trim().equalsIgnoreCase("")) {
                     //Inclusão
@@ -86,7 +88,8 @@ public class ControllerCadModelo implements ActionListener {
                 Modelo modelo = new Modelo();
                 modelo = service.ModeloService.Carregar(codigo);
 
-                this.telaCadastroModelo.getjFormattedTextFieldDataCadastro().setText(modelo.getDescricao());
+                this.telaCadastroModelo.getjTextFieldDescricao().setText(modelo.getDescricao());
+                this.telaCadastroModelo.getjComboBoxMarca().setSelectedItem(modelo.getMarca().getDescricao());
                 
                 this.telaCadastroModelo.getjTextFieldDescricao().requestFocus();
             }

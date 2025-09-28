@@ -40,7 +40,6 @@ public class ControllerBuscaFornecedor implements ActionListener {
             if (this.telaBuscaFornecedor.getjTFFiltro().getText().trim().equalsIgnoreCase("")) {
                 JOptionPane.showMessageDialog(null, "Sem Dados para a Seleção...");
             } else {
-                JOptionPane.showMessageDialog(null, "Filtrando informações...");
                 if (this.telaBuscaFornecedor.getjCBFiltro().getSelectedIndex() == 0) {
                     //Criando objeto para receber o dado que virà do banco de dados
                     Fornecedor fornecedor = new Fornecedor();

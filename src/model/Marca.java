@@ -7,10 +7,10 @@ public class Marca {
     private char status;
 
     public Marca(){}
-    public Marca(int id, String descricao, char status) {
+    public Marca(int id, String descricao) {
         this.id = id;
         this.descricao = descricao;
-        this.status = status;
+        this.status = 'A';
     }
 
     public int getId() {

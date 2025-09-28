@@ -36,11 +36,9 @@ public class ControllerBuscaModelo implements ActionListener {
             }
         //Botão Filtrar
         } else if (evento.getSource() == this.telaBuscaModelo.getjButtonFiltar()) {
-            JOptionPane.showMessageDialog(null, "Botão Filtrar Pressionado...");
             if (this.telaBuscaModelo.getjTFFiltro().getText().trim().equalsIgnoreCase("")) {
                 JOptionPane.showMessageDialog(null, "Sem Dados para a Seleção...");
             } else {
-                JOptionPane.showMessageDialog(null, "Filtrando informações...");
                 if (this.telaBuscaModelo.getjCBFiltro().getSelectedIndex() == 0) {//Ordenar por Id
                     //Criando objeto para receber o dado que virà do banco de dados
                     Modelo modelo = new Modelo();
@@ -48,7 +46,11 @@ public class ControllerBuscaModelo implements ActionListener {
                     modelo = service.ModeloService.Carregar(Integer.parseInt(this.telaBuscaModelo.getjTFFiltro().getText()));
                     //Criando um objeto tabela do tipo defaulttableModel e atribuindo o modelo da tela a ele
                     DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaModelo.getjTableDados().getModel();
-                    tabela.addRow(new Object[]{modelo.getId(), modelo.getDescricao(), modelo.getStatus()});
+                    tabela.addRow(new Object[]{
+                        modelo.getId(), 
+                        modelo.getDescricao(), 
+                        modelo.getMarca().getDescricao()
+                    });
                 } else if (this.telaBuscaModelo.getjCBFiltro().getSelectedIndex() == 1) {//Ordenar por Descricao
                     //Criando a lista para receber as modelos
                     List<Modelo> listaModelos = new ArrayList<>();
@@ -58,7 +60,11 @@ public class ControllerBuscaModelo implements ActionListener {
                     tabela.setRowCount(0);
                     //Adicionando os modelos na tabela
                     for(Modelo modeloAtualDaLista : listaModelos){
-                        tabela.addRow(new Object[]{modeloAtualDaLista.getId(), modeloAtualDaLista.getDescricao(), modeloAtualDaLista.getStatus()});
+                        tabela.addRow(new Object[]{
+                            modeloAtualDaLista.getId(), 
+                            modeloAtualDaLista.getDescricao(), 
+                            modeloAtualDaLista.getMarca().getDescricao()
+                        });
                     }
                 }
             }
