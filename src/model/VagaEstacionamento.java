@@ -6,7 +6,8 @@ public class VagaEstacionamento {
     private float metragemVaga;
     private char status;
     private AlocacaoVaga alocacao;
-
+    
+    public VagaEstacionamento(){}
     public VagaEstacionamento(int id, String descricao, String obs, float metragemVaga, char status) {
         this.id = id;
         this.descricao = descricao;

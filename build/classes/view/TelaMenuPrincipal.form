@@ -55,7 +55,7 @@
                 <Property name="text" type="java.lang.String" value="Estacionamento"/>
               </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItemEstacionamento">
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItemVagaEstacionamento">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/imagens/Database.png"/>
@@ -63,7 +63,7 @@
                     <Property name="text" type="java.lang.String" value="Vaga"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemEstacionamentoActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemVagaEstacionamentoActionPerformed"/>
                   </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItemVeiculo">

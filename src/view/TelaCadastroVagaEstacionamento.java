@@ -1,11 +1,14 @@
 package view;
 
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
 
-public class TelaCadastroVaga extends javax.swing.JDialog {
+public class TelaCadastroVagaEstacionamento extends javax.swing.JDialog {
 
-    public TelaCadastroVaga(java.awt.Frame parent, boolean modal) {
+    public TelaCadastroVagaEstacionamento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -37,6 +40,46 @@ public class TelaCadastroVaga extends javax.swing.JDialog {
     public JPanel getjPanelDados() {
         return jPanelDados;
     }
+
+    public JFormattedTextField getjFormattedTextFieldDataCadastro() {
+        return jFormattedTextFieldDataCadastro;
+    }
+
+    public void setjFormattedTextFieldDataCadastro(JFormattedTextField jFormattedTextFieldDataCadastro) {
+        this.jFormattedTextFieldDataCadastro = jFormattedTextFieldDataCadastro;
+    }
+
+    public JSpinner getjSpinnerMetragemVaga() {
+        return jSpinnerMetragemVaga;
+    }
+
+    public void setjSpinnerMetragemVaga(JSpinner jSpinnerMetragemVaga) {
+        this.jSpinnerMetragemVaga = jSpinnerMetragemVaga;
+    }
+
+    public JTextField getjTextFieldDescricao() {
+        return jTextFieldDescricao;
+    }
+
+    public void setjTextFieldDescricao(JTextField jTextFieldDescricao) {
+        this.jTextFieldDescricao = jTextFieldDescricao;
+    }
+
+    public JTextField getjTextFieldId() {
+        return jTextFieldId;
+    }
+
+    public void setjTextFieldId(JTextField jTextFieldId) {
+        this.jTextFieldId = jTextFieldId;
+    }
+
+    public JTextField getjTextFieldObs() {
+        return jTextFieldObs;
+    }
+
+    public void setjTextFieldObs(JTextField jTextFieldObs) {
+        this.jTextFieldObs = jTextFieldObs;
+    }
     
     
     
@@ -60,15 +103,15 @@ public class TelaCadastroVaga extends javax.swing.JDialog {
         jPanelDados = new javax.swing.JPanel();
         jLabelId = new javax.swing.JLabel();
         jTextFieldId = new javax.swing.JTextField();
-        jFormattedTextField5 = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldDataCadastro = new javax.swing.JFormattedTextField();
         jLabelCadastro = new javax.swing.JLabel();
         jTextFieldObs = new javax.swing.JTextField();
         jLabelObs = new javax.swing.JLabel();
         jTextFieldDescricao = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelDescricao = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
-        jSpinnerVaga = new javax.swing.JSpinner();
+        jSpinnerMetragemVaga = new javax.swing.JSpinner();
         jPanelBotoes = new javax.swing.JPanel();
         jButtonNovo = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
@@ -106,12 +149,12 @@ public class TelaCadastroVaga extends javax.swing.JDialog {
 
         jLabelObs.setText("OBS.:");
 
-        jLabel2.setText("Descrição");
+        jLabelDescricao.setText("Descrição");
 
         jLabel1.setText("Metragem da vaga");
 
-        jSpinnerVaga.setModel(new javax.swing.SpinnerNumberModel(0.0f, 0.0f, null, 1.0f));
-        jSpinnerVaga.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jSpinnerMetragemVaga.setModel(new javax.swing.SpinnerNumberModel(0.0f, 0.0f, null, 1.0f));
+        jSpinnerMetragemVaga.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);
         jPanelDados.setLayout(jPanelDadosLayout);
@@ -126,18 +169,18 @@ public class TelaCadastroVaga extends javax.swing.JDialog {
                     .addGroup(jPanelDadosLayout.createSequentialGroup()
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelDadosLayout.createSequentialGroup()
-                                .addComponent(jLabel2)
+                                .addComponent(jLabelDescricao)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jTextFieldDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSpinnerVaga, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSpinnerMetragemVaga, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
                         .addContainerGap())
                     .addGroup(jPanelDadosLayout.createSequentialGroup()
                         .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jFormattedTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jFormattedTextFieldDataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(jPanelDadosLayout.createSequentialGroup()
                         .addComponent(jLabelId)
@@ -160,17 +203,17 @@ public class TelaCadastroVaga extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFormattedTextFieldDataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(jLabelDescricao)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinnerVaga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jSpinnerMetragemVaga)
+                    .addComponent(jTextFieldDescricao))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelObs)
@@ -226,7 +269,7 @@ public class TelaCadastroVaga extends javax.swing.JDialog {
                 .addComponent(jPanelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jPanelBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -262,7 +305,7 @@ public class TelaCadastroVaga extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                TelaCadastroVaga dialog = new TelaCadastroVaga(new javax.swing.JFrame(), true);
+                TelaCadastroVagaEstacionamento dialog = new TelaCadastroVagaEstacionamento(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -280,10 +323,10 @@ public class TelaCadastroVaga extends javax.swing.JDialog {
     private javax.swing.JButton jButtonGravar;
     private javax.swing.JButton jButtonNovo;
     private javax.swing.JButton jButtonSair;
-    private javax.swing.JFormattedTextField jFormattedTextField5;
+    private javax.swing.JFormattedTextField jFormattedTextFieldDataCadastro;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelCadastro;
+    private javax.swing.JLabel jLabelDescricao;
     private javax.swing.JLabel jLabelId;
     private javax.swing.JLabel jLabelObs;
     private javax.swing.JLabel jLabelTitulo;
@@ -291,7 +334,7 @@ public class TelaCadastroVaga extends javax.swing.JDialog {
     private javax.swing.JPanel jPanelDados;
     private javax.swing.JPanel jPanelTitulo;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSpinner jSpinnerVaga;
+    private javax.swing.JSpinner jSpinnerMetragemVaga;
     private javax.swing.JTextField jTextFieldDescricao;
     private javax.swing.JTextField jTextFieldId;
     private javax.swing.JTextField jTextFieldObs;

@@ -48,7 +48,8 @@ public class ControllerBuscaVeiculo implements ActionListener {
                     DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaVeiculo.getjTableDados().getModel();
                     tabela.addRow(new Object[]{
                         veiculo.getId(), 
-                        veiculo.getPlaca(), veiculo.getCor(), 
+                        veiculo.getPlaca(), 
+                        veiculo.getCor(), 
                         veiculo.getModelo().getDescricao(), 
                         veiculo.getFuncionario().getNome(), 
                         veiculo.getFornecedor().getNome(), 

@@ -13,7 +13,7 @@ import controller.ControllerCadModelo;
 import controller.ControllerCadProduto;
 import controller.ControllerCadQuarto;
 import controller.ControllerCadServico;
-import controller.ControllerCadVaga;
+import controller.ControllerCadVagaEstacionamento;
 import controller.ControllerCadVeiculo;
 
 /**
@@ -46,7 +46,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         jMenuItemProduto = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuVeiculos = new javax.swing.JMenu();
-        jMenuItemEstacionamento = new javax.swing.JMenuItem();
+        jMenuItemVagaEstacionamento = new javax.swing.JMenuItem();
         jMenuItemVeiculo = new javax.swing.JMenuItem();
         jMenuItemModelo = new javax.swing.JMenuItem();
         jMenuItemMarca = new javax.swing.JMenuItem();
@@ -99,14 +99,14 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         jMenuVeiculos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Delivery.png"))); // NOI18N
         jMenuVeiculos.setText("Estacionamento");
 
-        jMenuItemEstacionamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Database.png"))); // NOI18N
-        jMenuItemEstacionamento.setText("Vaga");
-        jMenuItemEstacionamento.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemVagaEstacionamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Database.png"))); // NOI18N
+        jMenuItemVagaEstacionamento.setText("Vaga");
+        jMenuItemVagaEstacionamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemEstacionamentoActionPerformed(evt);
+                jMenuItemVagaEstacionamentoActionPerformed(evt);
             }
         });
-        jMenuVeiculos.add(jMenuItemEstacionamento);
+        jMenuVeiculos.add(jMenuItemVagaEstacionamento);
 
         jMenuItemVeiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Car key.png"))); // NOI18N
         jMenuItemVeiculo.setText("Veículo");
@@ -251,11 +251,11 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         telaCadastroServico.setVisible(true);
     }//GEN-LAST:event_jMenuItemServicoActionPerformed
 
-    private void jMenuItemEstacionamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEstacionamentoActionPerformed
-        TelaCadastroVaga telaCadastroVaga = new TelaCadastroVaga(null,true);
-        ControllerCadVaga controllerCadVaga = new ControllerCadVaga(telaCadastroVaga);
-        telaCadastroVaga.setVisible(true);
-    }//GEN-LAST:event_jMenuItemEstacionamentoActionPerformed
+    private void jMenuItemVagaEstacionamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVagaEstacionamentoActionPerformed
+        TelaCadastroVagaEstacionamento telaCadastroVagaEstacionamento = new TelaCadastroVagaEstacionamento(null,true);
+        ControllerCadVagaEstacionamento controllerCadVagaEstacionamento = new ControllerCadVagaEstacionamento(telaCadastroVagaEstacionamento);
+        telaCadastroVagaEstacionamento.setVisible(true);
+    }//GEN-LAST:event_jMenuItemVagaEstacionamentoActionPerformed
 
     private void jMenuItemVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVeiculoActionPerformed
         TelaCadastroVeiculo telaCadastroVeiculo = new TelaCadastroVeiculo(null,true);
@@ -317,7 +317,6 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItemEstacionamento;
     private javax.swing.JMenuItem jMenuItemFornecedor;
     private javax.swing.JMenuItem jMenuItemFuncionario;
     private javax.swing.JMenuItem jMenuItemHospede;
@@ -327,6 +326,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemQuarto;
     private javax.swing.JMenuItem jMenuItemSair;
     private javax.swing.JMenuItem jMenuItemServico;
+    private javax.swing.JMenuItem jMenuItemVagaEstacionamento;
     private javax.swing.JMenuItem jMenuItemVeiculo;
     private javax.swing.JMenu jMenuVeiculos;
     private javax.swing.JPopupMenu.Separator jSeparator1;
