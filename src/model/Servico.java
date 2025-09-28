@@ -5,6 +5,7 @@ public class Servico {
     private String descricao, obs;
     private char status;
 
+    public Servico(){}
     public Servico(int id, String descricao, String obs, char status) {
         this.id = id;
         this.descricao = descricao;

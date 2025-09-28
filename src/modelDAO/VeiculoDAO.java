@@ -158,6 +158,7 @@ public class VeiculoDAO implements InterfaceDAO<Veiculo>{
             pstm.setInt(5, objeto.getFornecedor().getId());
             pstm.setInt(6, objeto.getHospede().getId());
             pstm.setString(7, String.valueOf(objeto.getStatus()));
+            pstm.setInt(8, objeto.getId());
             pstm.execute();
         }catch (SQLException ex) {
             ex.printStackTrace();

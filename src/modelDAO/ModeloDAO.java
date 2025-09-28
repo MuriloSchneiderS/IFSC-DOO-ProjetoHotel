@@ -16,7 +16,7 @@ public class ModeloDAO implements InterfaceDAO<Modelo>{
                 + " descricao,"
                 + " status,"
                 + " marca_id)"
-                + " VALUES (?,?)";
+                + " VALUES (?,?,?)";
         Connection conexao = ConnectionFactory.getConnection();
         PreparedStatement pstm = null;
         try {
@@ -113,6 +113,7 @@ public class ModeloDAO implements InterfaceDAO<Modelo>{
             pstm.setString(1, objeto.getDescricao());
             pstm.setString(2, String.valueOf(objeto.getStatus()));
             pstm.setInt(3, objeto.getMarca().getId());
+            pstm.setInt(4, objeto.getId());
             pstm.execute();
         }catch (SQLException ex) {
             ex.printStackTrace();

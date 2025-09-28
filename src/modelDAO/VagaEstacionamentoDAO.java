@@ -119,6 +119,7 @@ public class VagaEstacionamentoDAO implements InterfaceDAO<VagaEstacionamento>{
             pstm.setString(2, objeto.getObs());
             pstm.setFloat(3, objeto.getMetragemVaga());
             pstm.setString(4, String.valueOf(objeto.getStatus()));
+            pstm.setInt(5, objeto.getId());
             pstm.execute();
         }catch (SQLException ex) {
             ex.printStackTrace();
