@@ -4,10 +4,11 @@ public class Quarto {
     private int id, capacidadeHospedes, andar;
     private String descricao, identificacao, obs;
     private float metragem;
-    private boolean flagAnimais;
+    private int flagAnimais;
     private char status;
 
-    public Quarto(int id, int capacidadeHospedes, int andar, String descricao, String identificacao, String obs, float metragem, boolean flagAnimais, char status) {
+    public Quarto(){}
+    public Quarto(int id, int capacidadeHospedes, int andar, String descricao, String identificacao, String obs, float metragem, int flagAnimais, char status) {
         this.id = id;
         this.capacidadeHospedes = capacidadeHospedes;
         this.andar = andar;
@@ -75,11 +76,11 @@ public class Quarto {
         this.metragem = metragem;
     }
 
-    public boolean isFlagAnimais() {
+    public int getFlagAnimais() {
         return flagAnimais;
     }
 
-    public void setFlagAnimais(boolean flagAnimais) {
+    public void setFlagAnimais(int flagAnimais) {
         this.flagAnimais = flagAnimais;
     }
 

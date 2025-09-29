@@ -1,7 +1,11 @@
 package view;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
 
 public class TelaCadastroQuarto extends javax.swing.JDialog {
 
@@ -37,6 +41,78 @@ public class TelaCadastroQuarto extends javax.swing.JDialog {
     public JPanel getjPanelDados() {
         return jPanelDados;
     }
+
+    public JCheckBox getjCheckBoxPermiteAnimais() {
+        return jCheckBoxPermiteAnimais;
+    }
+
+    public void setjCheckBoxPermiteAnimais(JCheckBox jCheckBoxPermiteAnimais) {
+        this.jCheckBoxPermiteAnimais = jCheckBoxPermiteAnimais;
+    }
+
+    public JFormattedTextField getjFormattedTextFieldDataCadastro() {
+        return jFormattedTextFieldDataCadastro;
+    }
+
+    public void setjFormattedTextFieldDataCadastro(JFormattedTextField jFormattedTextFieldDataCadastro) {
+        this.jFormattedTextFieldDataCadastro = jFormattedTextFieldDataCadastro;
+    }
+
+    public JSpinner getjSpinnerAndar() {
+        return jSpinnerAndar;
+    }
+
+    public void setjSpinnerAndar(JSpinner jSpinnerAndar) {
+        this.jSpinnerAndar = jSpinnerAndar;
+    }
+
+    public JSpinner getjSpinnerCapacidadeHospedes() {
+        return jSpinnerCapacidadeHospedes;
+    }
+
+    public void setjSpinnerCapacidadeHospedes(JSpinner jSpinnerCapacidadeHospedes) {
+        this.jSpinnerCapacidadeHospedes = jSpinnerCapacidadeHospedes;
+    }
+
+    public JSpinner getjSpinnerMetragem() {
+        return jSpinnerMetragem;
+    }
+
+    public void setjSpinnerMetragem(JSpinner jSpinnerMetragem) {
+        this.jSpinnerMetragem = jSpinnerMetragem;
+    }
+
+    public JTextField getjTextFieldDescricao() {
+        return jTextFieldDescricao;
+    }
+
+    public void setjTextFieldDescricao(JTextField jTextFieldDescricao) {
+        this.jTextFieldDescricao = jTextFieldDescricao;
+    }
+
+    public JTextField getjTextFieldId() {
+        return jTextFieldId;
+    }
+
+    public void setjTextFieldId(JTextField jTextFieldId) {
+        this.jTextFieldId = jTextFieldId;
+    }
+
+    public JTextField getjTextFieldIdentificacao() {
+        return jTextFieldIdentificacao;
+    }
+
+    public void setjTextFieldIdentificacao(JTextField jTextFieldIdentificacao) {
+        this.jTextFieldIdentificacao = jTextFieldIdentificacao;
+    }
+
+    public JTextField getjTextFieldObs() {
+        return jTextFieldObs;
+    }
+
+    public void setjTextFieldObs(JTextField jTextFieldObs) {
+        this.jTextFieldObs = jTextFieldObs;
+    }
     
     
     
@@ -60,22 +136,22 @@ public class TelaCadastroQuarto extends javax.swing.JDialog {
         jPanelDados = new javax.swing.JPanel();
         jLabelId = new javax.swing.JLabel();
         jTextFieldId = new javax.swing.JTextField();
-        jFormattedTextField5 = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldDataCadastro = new javax.swing.JFormattedTextField();
         jLabelCadastro = new javax.swing.JLabel();
         jTextFieldObs = new javax.swing.JTextField();
         jLabelObs = new javax.swing.JLabel();
         jTextFieldDescricao = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelDescricao = new javax.swing.JLabel();
         jSpinnerMetragem = new javax.swing.JSpinner();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jSpinnerCapacidade = new javax.swing.JSpinner();
+        jLabelCapacidadeHospedes = new javax.swing.JLabel();
+        jLabelMetragem = new javax.swing.JLabel();
+        jSpinnerCapacidadeHospedes = new javax.swing.JSpinner();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jSpinnerCapacidade1 = new javax.swing.JSpinner();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        jLabelIdentificacao = new javax.swing.JLabel();
+        jTextFieldIdentificacao = new javax.swing.JTextField();
+        jLabelAndar = new javax.swing.JLabel();
+        jSpinnerAndar = new javax.swing.JSpinner();
+        jCheckBoxPermiteAnimais = new javax.swing.JCheckBox();
         jPanelBotoes = new javax.swing.JPanel();
         jButtonNovo = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
@@ -113,25 +189,25 @@ public class TelaCadastroQuarto extends javax.swing.JDialog {
 
         jLabelObs.setText("OBS.:");
 
-        jLabel2.setText("Descrição");
+        jLabelDescricao.setText("Descrição");
 
         jSpinnerMetragem.setModel(new javax.swing.SpinnerNumberModel(0.0d, null, null, 1.0d));
 
-        jLabel3.setText("Capacidade de Hóspedes");
+        jLabelCapacidadeHospedes.setText("Capacidade de Hóspedes");
 
-        jLabel1.setText("Metragem");
+        jLabelMetragem.setText("Metragem");
 
-        jSpinnerCapacidade.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        jSpinnerCapacidadeHospedes.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
-        jLabel4.setText("Identificação");
+        jLabelIdentificacao.setText("Identificação");
 
-        jLabel5.setText("Andar");
+        jLabelAndar.setText("Andar");
 
-        jSpinnerCapacidade1.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        jSpinnerAndar.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
-        jCheckBox1.setText("Permite animais");
-        jCheckBox1.setBorder(null);
-        jCheckBox1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jCheckBoxPermiteAnimais.setText("Permite animais");
+        jCheckBoxPermiteAnimais.setBorder(null);
+        jCheckBoxPermiteAnimais.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);
         jPanelDados.setLayout(jPanelDadosLayout);
@@ -147,29 +223,29 @@ public class TelaCadastroQuarto extends javax.swing.JDialog {
                         .addGap(374, 374, 374)
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelCadastro)
-                            .addComponent(jFormattedTextField5)))
+                            .addComponent(jFormattedTextFieldDataCadastro)))
                     .addGroup(jPanelDadosLayout.createSequentialGroup()
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelDadosLayout.createSequentialGroup()
-                                .addComponent(jLabel2)
+                                .addComponent(jLabelDescricao)
                                 .addGap(346, 346, 346))
                             .addComponent(jTextFieldDescricao))
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelDadosLayout.createSequentialGroup()
                                 .addGap(12, 12, 12)
                                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel3)
+                                    .addComponent(jLabelMetragem)
+                                    .addComponent(jLabelCapacidadeHospedes)
                                     .addComponent(jSpinnerMetragem, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDadosLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSpinnerCapacidade, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jSpinnerCapacidadeHospedes, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jSeparator1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDadosLayout.createSequentialGroup()
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldIdentificacao, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelDadosLayout.createSequentialGroup()
-                                .addComponent(jLabel4)
+                                .addComponent(jLabelIdentificacao)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanelDadosLayout.createSequentialGroup()
                                 .addComponent(jLabelObs)
@@ -177,9 +253,9 @@ public class TelaCadastroQuarto extends javax.swing.JDialog {
                                 .addComponent(jTextFieldObs)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel5)
-                            .addComponent(jSpinnerCapacidade1, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-                            .addComponent(jCheckBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jLabelAndar)
+                            .addComponent(jSpinnerAndar, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                            .addComponent(jCheckBoxPermiteAnimais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanelDadosLayout.setVerticalGroup(
@@ -191,34 +267,34 @@ public class TelaCadastroQuarto extends javax.swing.JDialog {
                     .addComponent(jLabelCadastro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jFormattedTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextFieldDataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabelDescricao)
+                    .addComponent(jLabelCapacidadeHospedes))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelDadosLayout.createSequentialGroup()
-                        .addComponent(jSpinnerCapacidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jSpinnerCapacidadeHospedes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel1)
+                        .addComponent(jLabelMetragem)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jSpinnerMetragem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jTextFieldDescricao))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabelIdentificacao)
+                    .addComponent(jLabelAndar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinnerCapacidade1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSpinnerAndar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldIdentificacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox1)
+                    .addComponent(jCheckBoxPermiteAnimais)
                     .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabelObs)
                         .addComponent(jTextFieldObs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -327,27 +403,27 @@ public class TelaCadastroQuarto extends javax.swing.JDialog {
     private javax.swing.JButton jButtonGravar;
     private javax.swing.JButton jButtonNovo;
     private javax.swing.JButton jButtonSair;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JFormattedTextField jFormattedTextField5;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JCheckBox jCheckBoxPermiteAnimais;
+    private javax.swing.JFormattedTextField jFormattedTextFieldDataCadastro;
+    private javax.swing.JLabel jLabelAndar;
     private javax.swing.JLabel jLabelCadastro;
+    private javax.swing.JLabel jLabelCapacidadeHospedes;
+    private javax.swing.JLabel jLabelDescricao;
     private javax.swing.JLabel jLabelId;
+    private javax.swing.JLabel jLabelIdentificacao;
+    private javax.swing.JLabel jLabelMetragem;
     private javax.swing.JLabel jLabelObs;
     private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JPanel jPanelBotoes;
     private javax.swing.JPanel jPanelDados;
     private javax.swing.JPanel jPanelTitulo;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSpinner jSpinnerCapacidade;
-    private javax.swing.JSpinner jSpinnerCapacidade1;
+    private javax.swing.JSpinner jSpinnerAndar;
+    private javax.swing.JSpinner jSpinnerCapacidadeHospedes;
     private javax.swing.JSpinner jSpinnerMetragem;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextFieldDescricao;
     private javax.swing.JTextField jTextFieldId;
+    private javax.swing.JTextField jTextFieldIdentificacao;
     private javax.swing.JTextField jTextFieldObs;
     // End of variables declaration//GEN-END:variables
 }

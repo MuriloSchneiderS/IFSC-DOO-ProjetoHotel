@@ -109,7 +109,7 @@ public class TelaBuscaQuarto extends javax.swing.JDialog {
             jTableDados.getColumnModel().getColumn(2).setMaxWidth(70);
             jTableDados.getColumnModel().getColumn(3).setMaxWidth(80);
             jTableDados.getColumnModel().getColumn(4).setMaxWidth(60);
-            jTableDados.getColumnModel().getColumn(5).setMaxWidth(50);
+            jTableDados.getColumnModel().getColumn(5).setMaxWidth(40);
         }
 
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);
