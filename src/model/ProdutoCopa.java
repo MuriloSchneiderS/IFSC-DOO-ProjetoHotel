@@ -5,13 +5,16 @@ public class ProdutoCopa {
     private String descricao, obs;
     private float valor;
     private char status;
+    private int copaQuartoId;
 
-    public ProdutoCopa(int id, String descricao, String obs, float valor, char status) {
+    public ProdutoCopa(){}
+    public ProdutoCopa(int id, String descricao, String obs, float valor, char status, int copaQuartoId) {
         this.id = id;
         this.descricao = descricao;
         this.obs = obs;
         this.valor = valor;
         this.status = status;
+        this.copaQuartoId = copaQuartoId;
     }
 
     public int getId() {
@@ -52,6 +55,14 @@ public class ProdutoCopa {
 
     public void setStatus(char status) {
         this.status = status;
+    }
+
+    public int getCopaQuartoId() {
+        return copaQuartoId;
+    }
+
+    public void setCopaQuartoId(int copaQuartoId) {
+        this.copaQuartoId = copaQuartoId;
     }
     
     
