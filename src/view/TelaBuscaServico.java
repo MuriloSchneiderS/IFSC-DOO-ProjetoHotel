@@ -98,7 +98,7 @@ public class TelaBuscaServico extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Id", "Descricao", "Status"
+                "Id", "Descricao", "Obs"
             }
         ));
         jTableDados.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);

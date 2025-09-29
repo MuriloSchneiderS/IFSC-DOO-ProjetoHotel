@@ -30,6 +30,7 @@ public class ControllerCadMarca implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent evento) {
+        
         //Botão Novo
         if (evento.getSource() == this.telaCadastroMarca.getjButtonNovo()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroMarca.getjPanelBotoes(), false);
@@ -41,10 +42,12 @@ public class ControllerCadMarca implements ActionListener {
             String novaData = dataFormatada.format(dataAtual);
             this.telaCadastroMarca.getjFormattedTextFieldDataCadastro().setText(novaData);
             this.telaCadastroMarca.getjFormattedTextFieldDataCadastro().setEnabled(false);
+            
         //Botão Cancelar
         } else if (evento.getSource() == this.telaCadastroMarca.getjButtonCancelar()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroMarca.getjPanelBotoes(), true);
             utilities.Utilities.limpaComponentes(this.telaCadastroMarca.getjPanelDados(), false);
+            
         //Botão Gravar
         } else if (evento.getSource() == this.telaCadastroMarca.getjButtonGravar()) {
             if (this.telaCadastroMarca.getjTextFieldDescricao().getText().trim().equals("")) {
@@ -67,6 +70,7 @@ public class ControllerCadMarca implements ActionListener {
                 utilities.Utilities.ativaDesativa(this.telaCadastroMarca.getjPanelBotoes(), true);
                 utilities.Utilities.limpaComponentes(this.telaCadastroMarca.getjPanelDados(), false);
             }
+            
         //Botão Buscar
         } else if (evento.getSource() == this.telaCadastroMarca.getjButtonBuscar()) {
             codigo = 0;
@@ -86,10 +90,11 @@ public class ControllerCadMarca implements ActionListener {
                 Marca marca = new Marca();
                 marca = service.MarcaService.Carregar(codigo);
 
-                this.telaCadastroMarca.getjFormattedTextFieldDataCadastro().setText(marca.getDescricao());
+                this.telaCadastroMarca.getjTextFieldDescricao().setText(marca.getDescricao());
                 
                 this.telaCadastroMarca.getjTextFieldDescricao().requestFocus();
             }
+            
         //Botão Sair
         } else if (evento.getSource() == this.telaCadastroMarca.getjButtonSair()) {
             this.telaCadastroMarca.dispose();

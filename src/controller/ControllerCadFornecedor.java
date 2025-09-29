@@ -30,6 +30,7 @@ public class ControllerCadFornecedor implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent evento) {
+        
         //Botão Novo
         if (evento.getSource() == this.telaCadastroFornecedor.getjButtonNovo()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroFornecedor.getjPanelBotoes(), false);
@@ -41,10 +42,12 @@ public class ControllerCadFornecedor implements ActionListener {
             String novaData = dataFormatada.format(dataAtual);
             this.telaCadastroFornecedor.getjFormattedTextFieldDataCadastro().setText(novaData);
             this.telaCadastroFornecedor.getjFormattedTextFieldDataCadastro().setEnabled(false);
+            
         //Botão Cancelar
         } else if (evento.getSource() == this.telaCadastroFornecedor.getjButtonCancelar()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroFornecedor.getjPanelBotoes(), true);
             utilities.Utilities.limpaComponentes(this.telaCadastroFornecedor.getjPanelDados(), false);
+            
         //Botão Gravar
         } else if (evento.getSource() == this.telaCadastroFornecedor.getjButtonGravar()) {
             if(this.telaCadastroFornecedor.getjTextFieldNomeFantasia().getText().trim().equals("")){
@@ -81,6 +84,7 @@ public class ControllerCadFornecedor implements ActionListener {
             }
             utilities.Utilities.ativaDesativa(this.telaCadastroFornecedor.getjPanelBotoes(), true);
             utilities.Utilities.limpaComponentes(this.telaCadastroFornecedor.getjPanelDados(), false);
+            
         //Botão Buscar
         } else if (evento.getSource() == this.telaCadastroFornecedor.getjButtonBuscar()) {
             codigo = 0;
@@ -119,6 +123,7 @@ public class ControllerCadFornecedor implements ActionListener {
 
                 this.telaCadastroFornecedor.getjTextFieldNomeFantasia().requestFocus();
             }
+            
         //Botão Sair
         } else if (evento.getSource() == this.telaCadastroFornecedor.getjButtonSair()) {
             this.telaCadastroFornecedor.dispose();

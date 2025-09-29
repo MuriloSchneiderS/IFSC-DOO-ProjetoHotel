@@ -46,7 +46,7 @@ public class MarcaDAO implements InterfaceDAO<Marca>{
             rst = pstm.executeQuery();
             while (rst.next()) {
                 marca.setId(rst.getInt("id"));
-                marca.setDescricao(rst.getString(2));
+                marca.setDescricao(rst.getString("descricao"));
                 marca.setStatus(rst.getString("status").charAt(0));
             }
         } catch (SQLException ex) {
@@ -76,7 +76,7 @@ public class MarcaDAO implements InterfaceDAO<Marca>{
             while (!rst.next()) {
                 Marca marca = new Marca();
                 marca.setId(rst.getInt("id"));
-                marca.setDescricao(rst.getString(2));
+                marca.setDescricao(rst.getString("descricao"));
                 marca.setStatus(rst.getString("status").charAt(0));
             }
         } catch (SQLException ex) {

@@ -30,6 +30,7 @@ public class ControllerCadFuncionario implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent evento) {
+        
         //Botão Novo
         if (evento.getSource() == this.telaCadastroFuncionario.getjButtonNovo()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroFuncionario.getjPanelBotoes(), false);
@@ -41,10 +42,12 @@ public class ControllerCadFuncionario implements ActionListener {
             String novaData = dataFormatada.format(dataAtual);
             this.telaCadastroFuncionario.getjFormattedTextFieldDataCadastro().setText(novaData);
             this.telaCadastroFuncionario.getjFormattedTextFieldDataCadastro().setEnabled(false);
+            
         //Botão Cancelar
         } else if (evento.getSource() == this.telaCadastroFuncionario.getjButtonCancelar()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroFuncionario.getjPanelBotoes(), true);
             utilities.Utilities.limpaComponentes(this.telaCadastroFuncionario.getjPanelDados(), false);
+            
         //Botão Gravar
         } else if (evento.getSource() == this.telaCadastroFuncionario.getjButtonGravar()) {
             if (this.telaCadastroFuncionario.getjTextFieldNomeFantasia().getText().trim().equals("")) {
@@ -79,6 +82,7 @@ public class ControllerCadFuncionario implements ActionListener {
                 utilities.Utilities.ativaDesativa(this.telaCadastroFuncionario.getjPanelBotoes(), true);
                 utilities.Utilities.limpaComponentes(this.telaCadastroFuncionario.getjPanelDados(), false);
             }
+            
         //Botão Buscar
         } else if (evento.getSource() == this.telaCadastroFuncionario.getjButtonBuscar()) {
             codigo = 0;
@@ -115,6 +119,7 @@ public class ControllerCadFuncionario implements ActionListener {
                 
                 this.telaCadastroFuncionario.getjTextFieldNomeFantasia().requestFocus();
             }
+            
         //Botão Sair
         } else if (evento.getSource() == this.telaCadastroFuncionario.getjButtonSair()) {
             this.telaCadastroFuncionario.dispose();

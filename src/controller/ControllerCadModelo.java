@@ -31,6 +31,7 @@ public class ControllerCadModelo implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent evento) {
+        
         //Botão Novo
         if (evento.getSource() == this.telaCadastroModelo.getjButtonNovo()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroModelo.getjPanelBotoes(), false);
@@ -42,10 +43,12 @@ public class ControllerCadModelo implements ActionListener {
             String novaData = dataFormatada.format(dataAtual);
             this.telaCadastroModelo.getjFormattedTextFieldDataCadastro().setText(novaData);
             this.telaCadastroModelo.getjFormattedTextFieldDataCadastro().setEnabled(false);
+            
         //Botão Cancelar
         } else if (evento.getSource() == this.telaCadastroModelo.getjButtonCancelar()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroModelo.getjPanelBotoes(), true);
             utilities.Utilities.limpaComponentes(this.telaCadastroModelo.getjPanelDados(), false);
+            
         //Botão Gravar
         } else if (evento.getSource() == this.telaCadastroModelo.getjButtonGravar()) {
             if (this.telaCadastroModelo.getjTextFieldDescricao().getText().trim().equals("")) {
@@ -69,6 +72,7 @@ public class ControllerCadModelo implements ActionListener {
                 utilities.Utilities.ativaDesativa(this.telaCadastroModelo.getjPanelBotoes(), true);
                 utilities.Utilities.limpaComponentes(this.telaCadastroModelo.getjPanelDados(), false);
             }
+            
         //Botão Buscar
         } else if (evento.getSource() == this.telaCadastroModelo.getjButtonBuscar()) {
             codigo = 0;
@@ -93,6 +97,7 @@ public class ControllerCadModelo implements ActionListener {
                 
                 this.telaCadastroModelo.getjTextFieldDescricao().requestFocus();
             }
+            
         //Botão Sair
         } else if (evento.getSource() == this.telaCadastroModelo.getjButtonSair()) {
             this.telaCadastroModelo.dispose();

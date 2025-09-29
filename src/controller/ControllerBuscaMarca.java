@@ -25,6 +25,7 @@ public class ControllerBuscaMarca implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent evento) {
+        
         //Botão Carregar
         if (evento.getSource() == this.telaBuscaMarca.getjButtonCarregar()) {
             if(this.telaBuscaMarca.getjTableDados().getRowCount()==0){
@@ -34,6 +35,7 @@ public class ControllerBuscaMarca implements ActionListener {
                 ControllerCadMarca.codigo = (int) this.telaBuscaMarca.getjTableDados().getValueAt(this.telaBuscaMarca.getjTableDados().getSelectedRow(), 0);
                 this.telaBuscaMarca.dispose();
             }
+            
         //Botão Filtrar
         } else if (evento.getSource() == this.telaBuscaMarca.getjButtonFiltar()) {
             if (this.telaBuscaMarca.getjTFFiltro().getText().trim().equalsIgnoreCase("")) {
@@ -46,7 +48,10 @@ public class ControllerBuscaMarca implements ActionListener {
                     marca = service.MarcaService.Carregar(Integer.parseInt(this.telaBuscaMarca.getjTFFiltro().getText()));
                     //Criando um objeto tabela do tipo defaulttableModel e atribuindo o modelo da tela a ele
                     DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaMarca.getjTableDados().getModel();
-                    tabela.addRow(new Object[]{marca.getId(), marca.getDescricao()});
+                    tabela.addRow(new Object[]{
+                        marca.getId(), 
+                        marca.getDescricao()
+                    });
                 } else if (this.telaBuscaMarca.getjCBFiltro().getSelectedIndex() == 1) {//Ordenar por Descricao
                     //Criando a lista para receber as marcas
                     List<Marca> listaMarcas = new ArrayList<>();
@@ -56,10 +61,14 @@ public class ControllerBuscaMarca implements ActionListener {
                     tabela.setRowCount(0);
                     //Adicionando os marcas na tabela
                     for(Marca marcaAtualDaLista : listaMarcas){
-                        tabela.addRow(new Object[]{marcaAtualDaLista.getId(), marcaAtualDaLista.getDescricao()});
+                        tabela.addRow(new Object[]{
+                            marcaAtualDaLista.getId(), 
+                            marcaAtualDaLista.getDescricao()
+                        });
                     }
                 }
             }
+            
         //Botão Sair
         } else if (evento.getSource() == this.telaBuscaMarca.getjButtonSair()) {
             this.telaBuscaMarca.dispose();
