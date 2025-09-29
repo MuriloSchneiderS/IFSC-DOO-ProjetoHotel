@@ -10,7 +10,7 @@ import controller.ControllerCadFuncionario;
 import controller.ControllerCadHospede;
 import controller.ControllerCadMarca;
 import controller.ControllerCadModelo;
-import controller.ControllerCadProduto;
+import controller.ControllerCadProdutoCopa;
 import controller.ControllerCadQuarto;
 import controller.ControllerCadServico;
 import controller.ControllerCadVagaEstacionamento;
@@ -43,7 +43,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItemQuarto = new javax.swing.JMenuItem();
         jMenuItemServico = new javax.swing.JMenuItem();
-        jMenuItemProduto = new javax.swing.JMenuItem();
+        jMenuItemProdutoCopa = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuVeiculos = new javax.swing.JMenu();
         jMenuItemVagaEstacionamento = new javax.swing.JMenuItem();
@@ -86,14 +86,14 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItemServico);
 
-        jMenuItemProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Blue tag.png"))); // NOI18N
-        jMenuItemProduto.setText("Produto");
-        jMenuItemProduto.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemProdutoCopa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Blue tag.png"))); // NOI18N
+        jMenuItemProdutoCopa.setText("Produto");
+        jMenuItemProdutoCopa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemProdutoActionPerformed(evt);
+                jMenuItemProdutoCopaActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItemProduto);
+        jMenu2.add(jMenuItemProdutoCopa);
         jMenu2.add(jSeparator1);
 
         jMenuVeiculos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Delivery.png"))); // NOI18N
@@ -233,11 +233,11 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         telaCadastroFornecedor.setVisible(true);
     }//GEN-LAST:event_jMenuItemFornecedorActionPerformed
 
-    private void jMenuItemProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemProdutoActionPerformed
-        TelaCadastroProduto telaCadastroProduto = new TelaCadastroProduto(null,true);
-        ControllerCadProduto controllerCadProduto = new ControllerCadProduto(telaCadastroProduto);
-        telaCadastroProduto.setVisible(true);
-    }//GEN-LAST:event_jMenuItemProdutoActionPerformed
+    private void jMenuItemProdutoCopaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemProdutoCopaActionPerformed
+        TelaCadastroProdutoCopa telaCadastroProdutoCopa = new TelaCadastroProdutoCopa(null,true);
+        ControllerCadProdutoCopa controllerCadProdutoCopa = new ControllerCadProdutoCopa(telaCadastroProdutoCopa);
+        telaCadastroProdutoCopa.setVisible(true);
+    }//GEN-LAST:event_jMenuItemProdutoCopaActionPerformed
 
     private void jMenuItemQuartoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemQuartoActionPerformed
         TelaCadastroQuarto telaCadastroQuarto = new TelaCadastroQuarto(null,true);
@@ -322,7 +322,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemHospede;
     private javax.swing.JMenuItem jMenuItemMarca;
     private javax.swing.JMenuItem jMenuItemModelo;
-    private javax.swing.JMenuItem jMenuItemProduto;
+    private javax.swing.JMenuItem jMenuItemProdutoCopa;
     private javax.swing.JMenuItem jMenuItemQuarto;
     private javax.swing.JMenuItem jMenuItemSair;
     private javax.swing.JMenuItem jMenuItemServico;

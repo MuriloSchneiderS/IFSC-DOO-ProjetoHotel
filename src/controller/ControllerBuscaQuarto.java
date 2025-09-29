@@ -80,7 +80,7 @@ public class ControllerBuscaQuarto implements ActionListener {
                     }
                     
                 //Ordenar por Andar
-                } else if (this.telaBuscaQuarto.getjCBFiltro().getSelectedIndex() == 1) {
+                } else if (this.telaBuscaQuarto.getjCBFiltro().getSelectedIndex() == 2) {
                     //Criando a lista para receber as quartos
                     List<Quarto> listaQuartos = new ArrayList<>();
                     //Criando um objeto tabela do tipo defaulttablemodel e atribuindo o modelo da tabela a ele
@@ -101,7 +101,7 @@ public class ControllerBuscaQuarto implements ActionListener {
                     }
                     
                 //Ordenar por Capacidade De Hospedes
-                } else if (this.telaBuscaQuarto.getjCBFiltro().getSelectedIndex() == 1) {
+                } else if (this.telaBuscaQuarto.getjCBFiltro().getSelectedIndex() == 3) {
                     //Criando a lista para receber as quartos
                     List<Quarto> listaQuartos = new ArrayList<>();
                     //Criando um objeto tabela do tipo defaulttablemodel e atribuindo o modelo da tabela a ele
@@ -122,7 +122,7 @@ public class ControllerBuscaQuarto implements ActionListener {
                     }
                     
                 //Ordenar por Flag Animais
-                } else if (this.telaBuscaQuarto.getjCBFiltro().getSelectedIndex() == 1) {
+                } else if (this.telaBuscaQuarto.getjCBFiltro().getSelectedIndex() == 4) {
                     //Criando a lista para receber as quartos
                     List<Quarto> listaQuartos = new ArrayList<>();
                     //Criando um objeto tabela do tipo defaulttablemodel e atribuindo o modelo da tabela a ele
@@ -143,7 +143,7 @@ public class ControllerBuscaQuarto implements ActionListener {
                     }
                     
                 //Ordenar por Status
-                } else if (this.telaBuscaQuarto.getjCBFiltro().getSelectedIndex() == 1) {
+                } else if (this.telaBuscaQuarto.getjCBFiltro().getSelectedIndex() == 5) {
                     //Criando a lista para receber as quartos
                     List<Quarto> listaQuartos = new ArrayList<>();
                     //Criando um objeto tabela do tipo defaulttablemodel e atribuindo o modelo da tabela a ele
