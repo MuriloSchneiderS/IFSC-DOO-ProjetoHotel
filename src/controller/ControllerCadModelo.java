@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
 import model.Marca;
 import model.Modelo;
@@ -27,6 +28,13 @@ public class ControllerCadModelo implements ActionListener {
 
         utilities.Utilities.ativaDesativa(this.telaCadastroModelo.getjPanelBotoes(), true);
         utilities.Utilities.limpaComponentes(this.telaCadastroModelo.getjPanelDados(), false);
+        
+        
+            //Carregar o campo Marca
+            List<Marca> marcas = service.MarcaService.Carregar("descricao", "%");
+            for(Marca marca : marcas){
+                this.telaCadastroModelo.getjComboBoxMarca().addItem(marca.getDescricao());
+            }
     }
 
     @Override
@@ -37,12 +45,7 @@ public class ControllerCadModelo implements ActionListener {
             utilities.Utilities.ativaDesativa(this.telaCadastroModelo.getjPanelBotoes(), false);
             utilities.Utilities.limpaComponentes(this.telaCadastroModelo.getjPanelDados(), true);
             this.telaCadastroModelo.getjTextFieldId().setEnabled(false);
-            //Data atual colocada em data de cadastro
-            java.util.Date dataAtual = new Date();
-            SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
-            String novaData = dataFormatada.format(dataAtual);
-            this.telaCadastroModelo.getjFormattedTextFieldDataCadastro().setText(novaData);
-            this.telaCadastroModelo.getjFormattedTextFieldDataCadastro().setEnabled(false);
+            
             
         //Botão Cancelar
         } else if (evento.getSource() == this.telaCadastroModelo.getjButtonCancelar()) {
@@ -51,10 +54,7 @@ public class ControllerCadModelo implements ActionListener {
             
         //Botão Gravar
         } else if (evento.getSource() == this.telaCadastroModelo.getjButtonGravar()) {
-            if (this.telaCadastroModelo.getjTextFieldDescricao().getText().trim().equals("")) {
-                JOptionPane.showMessageDialog(null, "Atributo Obrigatório.");
-                this.telaCadastroModelo.getjTextFieldDescricao().requestFocus();
-            } else {
+            if(utilities.Utilities.todosOsCamposPreenchidos(this.telaCadastroModelo.getjPanelDados())) {
                 Modelo modelo = new Modelo();
                 
                 modelo.setDescricao(this.telaCadastroModelo.getjTextFieldDescricao().getText());

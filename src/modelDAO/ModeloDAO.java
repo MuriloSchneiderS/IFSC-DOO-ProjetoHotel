@@ -81,7 +81,7 @@ public class ModeloDAO implements InterfaceDAO<Modelo>{
             pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setString(1, "%"+valor+"%");
             rst = pstm.executeQuery();
-            while (!rst.next()) {
+            while (rst.next()) {
                 Modelo modelo = new Modelo();
                 Marca marca = new Marca();
                 modelo.setId(rst.getInt("id"));
@@ -89,6 +89,7 @@ public class ModeloDAO implements InterfaceDAO<Modelo>{
                 modelo.setStatus(rst.getString("status").charAt(0));
                 marca.setId(rst.getInt("marca_id"));
                 modelo.setMarca(marca);
+                listaModelos.add(modelo);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
