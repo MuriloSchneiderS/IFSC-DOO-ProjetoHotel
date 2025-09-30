@@ -50,10 +50,7 @@ public class ControllerCadFornecedor implements ActionListener {
             
         //Botão Gravar
         } else if (evento.getSource() == this.telaCadastroFornecedor.getjButtonGravar()) {
-            if(this.telaCadastroFornecedor.getjTextFieldNomeFantasia().getText().trim().equals("")){
-                JOptionPane.showMessageDialog(null, "Atributo Obrigatório.");
-                this.telaCadastroFornecedor.getjTextFieldNomeFantasia().requestFocus();
-            }else{
+            if(utilities.Utilities.todosOsCamposPreenchidos(this.telaCadastroFornecedor.getjPanelDados())){
                 Fornecedor fornecedor = new Fornecedor();
                 
                 fornecedor.setCep(this.telaCadastroFornecedor.getjFormattedTextFieldCep().getText());
@@ -68,6 +65,8 @@ public class ControllerCadFornecedor implements ActionListener {
                 fornecedor.setInscricaoEstadual(this.telaCadastroFornecedor.getjTextFieldInscricaoEstadual().getText());
                 fornecedor.setLogradouro(this.telaCadastroFornecedor.getjTextFieldLogradouro().getText());
                 fornecedor.setNome(this.telaCadastroFornecedor.getjTextFieldNomeFantasia().getText());
+                fornecedor.setFone1(this.telaCadastroFornecedor.getjFormattedTextFieldFone1().getText());
+                fornecedor.setFone2(this.telaCadastroFornecedor.getjFormattedTextFieldFone2().getText());
                 fornecedor.setObs(this.telaCadastroFornecedor.getjTextFieldObs().getText());
                 fornecedor.setRazaoSocial(this.telaCadastroFornecedor.getjTextFieldRazaoSocial().getText());
                 fornecedor.setRg(this.telaCadastroFornecedor.getjTextFieldRg().getText());
@@ -117,6 +116,8 @@ public class ControllerCadFornecedor implements ActionListener {
                 this.telaCadastroFornecedor.getjTextFieldInscricaoEstadual().setText(fornecedor.getInscricaoEstadual());
                 this.telaCadastroFornecedor.getjTextFieldLogradouro().setText(fornecedor.getLogradouro());
                 this.telaCadastroFornecedor.getjTextFieldNomeFantasia().setText(fornecedor.getNome());
+                this.telaCadastroFornecedor.getjFormattedTextFieldFone1().setText(fornecedor.getFone1());
+                this.telaCadastroFornecedor.getjFormattedTextFieldFone2().setText(fornecedor.getFone2());
                 this.telaCadastroFornecedor.getjTextFieldObs().setText(fornecedor.getObs());
                 this.telaCadastroFornecedor.getjTextFieldRazaoSocial().setText(fornecedor.getRazaoSocial());
                 this.telaCadastroFornecedor.getjTextFieldRg().setText(fornecedor.getRg());

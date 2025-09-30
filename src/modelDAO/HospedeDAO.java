@@ -6,7 +6,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class HospedeDAO implements InterfaceDAO<Hospede> {
 
@@ -27,11 +31,13 @@ public class HospedeDAO implements InterfaceDAO<Hospede> {
                 + " rg,"
                 + " obs,"
                 + " status,"
+                + " usuario,"
+                + " senha,"
                 + " razao_social,"
                 + " cnpj,"
                 + " inscricao_estadual,"
                 + " contato)"
-                + " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                + " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         Connection conexao = ConnectionFactory.getConnection();
         PreparedStatement pstm = null;
         try {
@@ -45,18 +51,22 @@ public class HospedeDAO implements InterfaceDAO<Hospede> {
             pstm.setString(7, objeto.getBairro());
             pstm.setString(8, objeto.getCidade());
             pstm.setString(9, objeto.getComplemento());
-            pstm.setNull(10, java.sql.Types.DATE);
+            pstm.setString(10, new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd/MM/yyyy").parse(objeto.getDataCadastro())));
             pstm.setString(11, objeto.getCpf());
             pstm.setString(12, objeto.getRg());
             pstm.setString(13, objeto.getObs());
-            pstm.setString(14, String.valueOf(objeto.getStatus()));
-            pstm.setString(15, objeto.getRazaoSocial());
-            pstm.setString(16, objeto.getCnpj());
-            pstm.setString(17, objeto.getInscricaoEstadual());
-            pstm.setString(18, objeto.getContato());
+            pstm.setString(14, objeto.getStatus()+"");
+            pstm.setString(15, objeto.getNome());//usuario temporariamente é apenas o nome
+            pstm.setString(16, "senha2025");//senha generica
+            pstm.setString(17, objeto.getRazaoSocial());
+            pstm.setString(18, objeto.getCnpj());
+            pstm.setString(19, objeto.getInscricaoEstadual());
+            pstm.setString(20, objeto.getContato());
             pstm.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();
+        } catch (ParseException ex) {
+            Logger.getLogger(HospedeDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             ConnectionFactory.closeConnection(conexao, pstm);
         }
@@ -80,6 +90,8 @@ public class HospedeDAO implements InterfaceDAO<Hospede> {
                 + " rg,"
                 + " obs,"
                 + " status,"
+                + " usuario,"
+                + " senha,"
                 + " razao_social,"
                 + " cnpj,"
                 + " inscricao_estadual,"
@@ -109,6 +121,8 @@ public class HospedeDAO implements InterfaceDAO<Hospede> {
                 hospede.setRg(rst.getString("rg"));
                 hospede.setObs(rst.getString("obs"));
                 hospede.setStatus(rst.getString("status").charAt(0));
+                hospede.setUsuario(rst.getString("usuario"));
+                hospede.setSenha(rst.getString("senha"));
                 hospede.setRazaoSocial(rst.getString("razao_social"));
                 hospede.setCnpj(rst.getString("cnpj"));
                 hospede.setInscricaoEstadual(rst.getString("inscricao_estadual"));
@@ -140,6 +154,8 @@ public class HospedeDAO implements InterfaceDAO<Hospede> {
                 + " rg,"
                 + " obs,"
                 + " status,"
+                + " usuario,"
+                + " senha"
                 + " razao_social,"
                 + " cnpj,"
                 + " inscricao_estadual,"
@@ -171,6 +187,8 @@ public class HospedeDAO implements InterfaceDAO<Hospede> {
                 hospede.setRg(rst.getString("rg"));
                 hospede.setObs(rst.getString("obs"));
                 hospede.setStatus(rst.getString("status").charAt(0));
+                hospede.setUsuario(rst.getString("usuario"));
+                hospede.setSenha(rst.getString("senha"));
                 hospede.setRazaoSocial(rst.getString("razao_social"));
                 hospede.setCnpj(rst.getString("cnpj"));
                 hospede.setInscricaoEstadual(rst.getString("inscricao_estadual"));
@@ -189,22 +207,24 @@ public class HospedeDAO implements InterfaceDAO<Hospede> {
         String sqlInstrucao = "UPDATE hospede "
                 + " SET"
                 + " nome =?,"
-                + " fone =?"
-                + " fone2 =?"
-                + " email =?"
-                + " cep =?"
-                + " logradouro =?"
-                + " bairro =?"
-                + " cidade =?"
-                + " complemento =?"
-                + " data_cadastro =?"
-                + " cpf =?"
-                + " rg =?"
-                + " obs =?"
-                + " status =?"
-                + " razao_social =?"
-                + " cnpj =?"
-                + " inscricao_estadual =?"
+                + " fone =?,"
+                + " fone2 =?,"
+                + " email =?,"
+                + " cep =?,"
+                + " logradouro =?,"
+                + " bairro =?,"
+                + " cidade =?,"
+                + " complemento =?,"
+                + " data_cadastro =?,"
+                + " cpf =?,"
+                + " rg =?,"
+                + " obs =?,"
+                + " status =?,"
+                + " usuario=?,"
+                + " senha=?,"
+                + " razao_social =?,"
+                + " cnpj =?,"
+                + " inscricao_estadual =?,"
                 + " contato =?"
                 + " WHERE id =?";
         Connection conexao = ConnectionFactory.getConnection();
@@ -220,16 +240,18 @@ public class HospedeDAO implements InterfaceDAO<Hospede> {
             pstm.setString(7, objeto.getBairro());
             pstm.setString(8, objeto.getCidade());
             pstm.setString(9, objeto.getComplemento());
-            pstm.setNull(10, java.sql.Types.DATE);
+            pstm.setString(10, new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd/MM/yyyy").parse(objeto.getDataCadastro())));
             pstm.setString(11, objeto.getCpf());
             pstm.setString(12, objeto.getRg());
             pstm.setString(13, objeto.getObs());
             pstm.setString(14, String.valueOf(objeto.getStatus()));
-            pstm.setString(15, objeto.getRazaoSocial());
-            pstm.setString(16, objeto.getCnpj());
-            pstm.setString(17, objeto.getInscricaoEstadual());
-            pstm.setString(18, objeto.getContato());
-            pstm.setInt(19, objeto.getId());
+            pstm.setString(15, objeto.getUsuario());
+            pstm.setString(16, objeto.getSenha());
+            pstm.setString(17, objeto.getRazaoSocial());
+            pstm.setString(18, objeto.getCnpj());
+            pstm.setString(19, objeto.getInscricaoEstadual());
+            pstm.setString(20, objeto.getContato());
+            pstm.setInt(21, objeto.getId());
             pstm.execute();
         }catch (SQLException ex) {
             ex.printStackTrace();

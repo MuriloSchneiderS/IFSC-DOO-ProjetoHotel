@@ -6,7 +6,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class FuncionarioDAO implements InterfaceDAO<Funcionario>{
 
@@ -43,16 +47,18 @@ public class FuncionarioDAO implements InterfaceDAO<Funcionario>{
             pstm.setString(7, objeto.getBairro());
             pstm.setString(8, objeto.getCidade());
             pstm.setString(9, objeto.getComplemento());
-            pstm.setNull(10, java.sql.Types.DATE);
+            pstm.setString(10, new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd/MM/yyyy").parse(objeto.getDataCadastro())));
             pstm.setString(11, objeto.getCpf());
             pstm.setString(12, objeto.getRg());
             pstm.setString(13, objeto.getObs());
-            pstm.setString(14, String.valueOf(objeto.getStatus()));
+            pstm.setString(14, objeto.getStatus()+"");
             pstm.setString(15, objeto.getUsuario());
             pstm.setString(16, objeto.getSenha());
             pstm.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();
+        } catch (ParseException ex) {
+            Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             ConnectionFactory.closeConnection(conexao, pstm);
         }
@@ -206,7 +212,7 @@ public class FuncionarioDAO implements InterfaceDAO<Funcionario>{
             pstm.setString(7, objeto.getBairro());
             pstm.setString(8, objeto.getCidade());
             pstm.setString(9, objeto.getComplemento());
-            pstm.setNull(10, java.sql.Types.DATE);
+            pstm.setString(10, new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd/MM/yyyy").parse(objeto.getDataCadastro())));
             pstm.setString(11, objeto.getCpf());
             pstm.setString(12, objeto.getRg());
             pstm.setString(13, objeto.getObs());

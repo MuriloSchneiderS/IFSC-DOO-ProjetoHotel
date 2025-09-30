@@ -5,6 +5,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
@@ -34,7 +35,7 @@ public class Utilities {
             if (componenteAtual instanceof JTextField) {
                 JTextField textField = (JTextField) componenteAtual;
                 if (textField.isEditable()) {
-                    textField.setText(""); 
+                    textField.setText("");
                 }
                 componenteAtual.setEnabled(ativa);
             } else if (componenteAtual instanceof JFormattedTextField) {
@@ -57,4 +58,57 @@ public class Utilities {
             }
         }
     }
+
+    public static boolean todosOsCamposPreenchidos(JPanel panel) {
+        for (Component component : panel.getComponents()) {
+            if (component instanceof JTextField) {
+                JTextField textField = (JTextField) component;
+                // Verifica se o campo esta desabilitado e ignora a validação
+                if (!textField.isEnabled()) {
+                    continue; // Pula a validação para este campo, ID pode estar vazio
+                } else if (textField.getText().trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, " atributo obrigatório.");
+                    textField.requestFocus();
+                    return false;
+                }
+            } else if (component instanceof JFormattedTextField) {
+                JFormattedTextField formattedTextField = (JFormattedTextField) component;
+                if (formattedTextField.getText().trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "atributo obrigatório.");
+                    formattedTextField.requestFocus();
+                    return false;
+                }
+            } else if (component instanceof JComboBox) {
+                JComboBox<?> comboBox = (JComboBox<?>) component;
+                if (comboBox.getSelectedItem() == null || comboBox.getSelectedIndex() == -1) {
+                    JOptionPane.showMessageDialog(null, "atributo obrigatório.");
+                    comboBox.requestFocus();
+                    return false;
+                }
+            } else if (component instanceof JPasswordField) {
+                JPasswordField passwordField = (JPasswordField) component;
+                if (passwordField.getPassword().length == 0) {
+                    JOptionPane.showMessageDialog(null, "atributo obrigatório.");
+                    passwordField.requestFocus();
+                    return false;
+                }
+            } else if (component instanceof JTextArea) {
+                JTextArea textArea = (JTextArea) component;
+                if (textArea.getText().trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "atributo obrigatório.");
+                    textArea.requestFocus();
+                    return false;
+                }
+            } else if (component instanceof JSpinner) {
+                JSpinner spinner = (JSpinner) component;
+                if (spinner.getValue() == null || spinner.getValue().toString().trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "atributo obrigatório.");
+                    spinner.requestFocus();
+                    return false;
+                }
+            }
+        }
+        return true; // Todos os campos estão preenchidos
+    }
+
 }

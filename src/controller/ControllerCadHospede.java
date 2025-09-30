@@ -56,10 +56,11 @@ public class ControllerCadHospede implements ActionListener {
             
         //Botão Gravar
         } else if (evento.getSource() == this.telaCadastroHospede.getjButtonGravar()) {
-            if (this.telaCadastroHospede.getjTextFieldNomeFantasia().getText().trim().equals("")) {
+            /*if (this.telaCadastroHospede.getjTextFieldNomeFantasia().getText().trim().equals("")) {
                 JOptionPane.showMessageDialog(null, "Atributo Obrigatório.");
                 this.telaCadastroHospede.getjTextFieldNomeFantasia().requestFocus();
-            } else {
+            } else {}*/
+            if(utilities.Utilities.todosOsCamposPreenchidos(this.telaCadastroHospede.getjPanelDados())){
                 Hospede hospede = new Hospede();
 
                 hospede.setCep(this.telaCadastroHospede.getjFormattedTextFieldCep().getText());
@@ -74,6 +75,8 @@ public class ControllerCadHospede implements ActionListener {
                 hospede.setInscricaoEstadual(this.telaCadastroHospede.getjTextFieldInscricaoEstadual().getText());
                 hospede.setLogradouro(this.telaCadastroHospede.getjTextFieldLogradouro().getText());
                 hospede.setNome(this.telaCadastroHospede.getjTextFieldNomeFantasia().getText());
+                hospede.setFone1(this.telaCadastroHospede.getjFormattedTextFieldFone1().getText());
+                hospede.setFone2(this.telaCadastroHospede.getjFormattedTextFieldFone2().getText());
                 hospede.setObs(this.telaCadastroHospede.getjTextFieldObs().getText());
                 hospede.setRazaoSocial(this.telaCadastroHospede.getjTextFieldRazaoSocial().getText());
                 hospede.setRg(this.telaCadastroHospede.getjTextFieldRg().getText());
@@ -123,6 +126,8 @@ public class ControllerCadHospede implements ActionListener {
                 this.telaCadastroHospede.getjTextFieldInscricaoEstadual().setText(hospede.getInscricaoEstadual());
                 this.telaCadastroHospede.getjTextFieldLogradouro().setText(hospede.getLogradouro());
                 this.telaCadastroHospede.getjTextFieldNomeFantasia().setText(hospede.getNome());
+                this.telaCadastroHospede.getjFormattedTextFieldFone1().setText(hospede.getFone1());
+                this.telaCadastroHospede.getjFormattedTextFieldFone2().setText(hospede.getFone2());
                 this.telaCadastroHospede.getjTextFieldObs().setText(hospede.getObs());
                 this.telaCadastroHospede.getjTextFieldRazaoSocial().setText(hospede.getRazaoSocial());
                 this.telaCadastroHospede.getjTextFieldRg().setText(hospede.getRg());

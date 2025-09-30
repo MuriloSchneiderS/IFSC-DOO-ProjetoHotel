@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import javax.swing.JOptionPane;
 import model.Funcionario;
 import view.TelaBuscaFuncionario;
 import view.TelaCadastroFuncionario;
@@ -50,10 +49,7 @@ public class ControllerCadFuncionario implements ActionListener {
             
         //Botão Gravar
         } else if (evento.getSource() == this.telaCadastroFuncionario.getjButtonGravar()) {
-            if (this.telaCadastroFuncionario.getjTextFieldNomeFantasia().getText().trim().equals("")) {
-                JOptionPane.showMessageDialog(null, "Atributo Obrigatório.");
-                this.telaCadastroFuncionario.getjTextFieldNomeFantasia().requestFocus();
-            } else {
+            if(utilities.Utilities.todosOsCamposPreenchidos(this.telaCadastroFuncionario.getjPanelDados())) {
                 Funcionario funcionario = new Funcionario();
 
                 funcionario.setCep(this.telaCadastroFuncionario.getjFormattedTextFieldCep().getText());
@@ -65,6 +61,8 @@ public class ControllerCadFuncionario implements ActionListener {
                 funcionario.setEmail(this.telaCadastroFuncionario.getjTextFieldEmail().getText());
                 funcionario.setLogradouro(this.telaCadastroFuncionario.getjTextFieldLogradouro().getText());
                 funcionario.setNome(this.telaCadastroFuncionario.getjTextFieldNomeFantasia().getText());
+                funcionario.setFone1(this.telaCadastroFuncionario.getjFormattedTextFieldFone1().getText());
+                funcionario.setFone2(this.telaCadastroFuncionario.getjFormattedTextFieldFone2().getText());
                 funcionario.setObs(this.telaCadastroFuncionario.getjTextFieldObs().getText());
                 funcionario.setRg(this.telaCadastroFuncionario.getjTextFieldRg().getText());
                 funcionario.setUsuario(this.telaCadastroFuncionario.getjTextFieldUsuario().getText());
@@ -112,6 +110,8 @@ public class ControllerCadFuncionario implements ActionListener {
                 this.telaCadastroFuncionario.getjTextFieldId().setText(funcionario.getId() + "");
                 this.telaCadastroFuncionario.getjTextFieldLogradouro().setText(funcionario.getLogradouro());
                 this.telaCadastroFuncionario.getjTextFieldNomeFantasia().setText(funcionario.getNome());
+                this.telaCadastroFuncionario.getjFormattedTextFieldFone1().setText(funcionario.getFone1());
+                this.telaCadastroFuncionario.getjFormattedTextFieldFone2().setText(funcionario.getFone2());
                 this.telaCadastroFuncionario.getjTextFieldObs().setText(funcionario.getObs());
                 this.telaCadastroFuncionario.getjTextFieldRg().setText(funcionario.getRg());
                 this.telaCadastroFuncionario.getjTextFieldUsuario().setText(funcionario.getUsuario());

@@ -5,6 +5,7 @@ public class Fornecedor extends Pessoa{
     private String cnpj;
     private String inscricaoEstadual;
     private String contato;
+    private String usuario,senha;
 
     public Fornecedor() {
     }
@@ -48,6 +49,23 @@ public class Fornecedor extends Pessoa{
     public void setContato(String contato) {
         this.contato = contato;
     }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+    
 
     @Override
     public String toString() {

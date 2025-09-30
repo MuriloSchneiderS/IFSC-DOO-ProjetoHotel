@@ -6,7 +6,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
 
@@ -27,11 +31,13 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
                 + " rg,"
                 + " obs,"
                 + " status,"
+                + " usuario,"
+                + " senha,"
                 + " razao_social,"
                 + " cnpj,"
                 + " inscricao_estadual,"
                 + " contato)"
-                + " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                + " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         Connection conexao = ConnectionFactory.getConnection();
         PreparedStatement pstm = null;
         try {
@@ -45,18 +51,22 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
             pstm.setString(7, objeto.getBairro());
             pstm.setString(8, objeto.getCidade());
             pstm.setString(9, objeto.getComplemento());
-            pstm.setNull(10, java.sql.Types.DATE);
+            pstm.setString(10, new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd/MM/yyyy").parse(objeto.getDataCadastro())));
             pstm.setString(11, objeto.getCpf());
             pstm.setString(12, objeto.getRg());
             pstm.setString(13, objeto.getObs());
-            pstm.setString(14, String.valueOf(objeto.getStatus()));
-            pstm.setString(15, objeto.getRazaoSocial());
-            pstm.setString(16, objeto.getCnpj());
-            pstm.setString(17, objeto.getInscricaoEstadual());
-            pstm.setString(18, objeto.getContato());
+            pstm.setString(14, objeto.getStatus()+"");
+            pstm.setString(15, objeto.getNome());//usuario temporariamente é apenas o nome
+            pstm.setString(16, "senha2025");//senha generica
+            pstm.setString(17, objeto.getRazaoSocial());
+            pstm.setString(18, objeto.getCnpj());
+            pstm.setString(19, objeto.getInscricaoEstadual());
+            pstm.setString(20, objeto.getContato());
             pstm.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();
+        } catch (ParseException ex) {
+            Logger.getLogger(FornecedorDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             ConnectionFactory.closeConnection(conexao, pstm);
         }
@@ -80,6 +90,8 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
                 + " rg,"
                 + " obs,"
                 + " status,"
+                + " usuario,"
+                + " senha,"
                 + " razao_social,"
                 + " cnpj,"
                 + " inscricao_estadual,"
@@ -109,6 +121,8 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
                 fornecedor.setRg(rst.getString("rg"));
                 fornecedor.setObs(rst.getString("obs"));
                 fornecedor.setStatus(rst.getString("status").charAt(0));
+                fornecedor.setUsuario(rst.getString("usuario"));
+                fornecedor.setSenha(rst.getString("senha"));
                 fornecedor.setRazaoSocial(rst.getString("razao_social"));
                 fornecedor.setCnpj(rst.getString("cnpj"));
                 fornecedor.setInscricaoEstadual(rst.getString("inscricao_estadual"));
@@ -140,6 +154,8 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
                 + " rg,"
                 + " obs,"
                 + " status,"
+                + " usuario,"
+                + " senha"
                 + " razao_social,"
                 + " cnpj,"
                 + " inscricao_estadual,"
@@ -149,7 +165,7 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
         Connection conexao = ConnectionFactory.getConnection();
         PreparedStatement pstm = null;
         ResultSet rst = null;
-        List<Fornecedor> listaFornecedores = new ArrayList<>();
+        List<Fornecedor> listaFornecedors = new ArrayList<>();
         try {
             pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setString(1, "%"+valor+"%");
@@ -171,6 +187,8 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
                 fornecedor.setRg(rst.getString("rg"));
                 fornecedor.setObs(rst.getString("obs"));
                 fornecedor.setStatus(rst.getString("status").charAt(0));
+                fornecedor.setUsuario(rst.getString("usuario"));
+                fornecedor.setSenha(rst.getString("senha"));
                 fornecedor.setRazaoSocial(rst.getString("razao_social"));
                 fornecedor.setCnpj(rst.getString("cnpj"));
                 fornecedor.setInscricaoEstadual(rst.getString("inscricao_estadual"));
@@ -180,7 +198,7 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
             ex.printStackTrace();
         } finally {
             ConnectionFactory.closeConnection(conexao, pstm, rst);
-            return listaFornecedores;
+            return listaFornecedors;
         }
     }
 
@@ -189,22 +207,24 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
         String sqlInstrucao = "UPDATE fornecedor "
                 + " SET"
                 + " nome =?,"
-                + " fone =?"
-                + " fone2 =?"
-                + " email =?"
-                + " cep =?"
-                + " logradouro =?"
-                + " bairro =?"
-                + " cidade =?"
-                + " complemento =?"
-                + " data_cadastro =?"
-                + " cpf =?"
-                + " rg =?"
-                + " obs =?"
-                + " status =?"
-                + " razao_social =?"
-                + " cnpj =?"
-                + " inscricao_estadual =?"
+                + " fone =?,"
+                + " fone2 =?,"
+                + " email =?,"
+                + " cep =?,"
+                + " logradouro =?,"
+                + " bairro =?,"
+                + " cidade =?,"
+                + " complemento =?,"
+                + " data_cadastro =?,"
+                + " cpf =?,"
+                + " rg =?,"
+                + " obs =?,"
+                + " status =?,"
+                + " usuario=?,"
+                + " senha=?,"
+                + " razao_social =?,"
+                + " cnpj =?,"
+                + " inscricao_estadual =?,"
                 + " contato =?"
                 + " WHERE id =?";
         Connection conexao = ConnectionFactory.getConnection();
@@ -220,16 +240,18 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
             pstm.setString(7, objeto.getBairro());
             pstm.setString(8, objeto.getCidade());
             pstm.setString(9, objeto.getComplemento());
-            pstm.setNull(10, java.sql.Types.DATE);
+            pstm.setString(10, new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd/MM/yyyy").parse(objeto.getDataCadastro())));
             pstm.setString(11, objeto.getCpf());
             pstm.setString(12, objeto.getRg());
             pstm.setString(13, objeto.getObs());
             pstm.setString(14, String.valueOf(objeto.getStatus()));
-            pstm.setString(15, objeto.getRazaoSocial());
-            pstm.setString(16, objeto.getCnpj());
-            pstm.setString(17, objeto.getInscricaoEstadual());
-            pstm.setString(18, objeto.getContato());
-            pstm.setInt(19, objeto.getId());
+            pstm.setString(15, objeto.getUsuario());
+            pstm.setString(16, objeto.getSenha());
+            pstm.setString(17, objeto.getRazaoSocial());
+            pstm.setString(18, objeto.getCnpj());
+            pstm.setString(19, objeto.getInscricaoEstadual());
+            pstm.setString(20, objeto.getContato());
+            pstm.setInt(21, objeto.getId());
             pstm.execute();
         }catch (SQLException ex) {
             ex.printStackTrace();
