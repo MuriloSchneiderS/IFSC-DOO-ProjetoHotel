@@ -150,7 +150,7 @@ public class FuncionarioDAO implements InterfaceDAO<Funcionario>{
             pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setString(1, "%"+valor+"%");
             rst = pstm.executeQuery();
-            while (!rst.next()) {
+            while (rst.next()) {
                 Funcionario funcionario = new Funcionario();
                 funcionario.setId(rst.getInt("id"));
                 funcionario.setNome(rst.getString(2));
@@ -169,6 +169,7 @@ public class FuncionarioDAO implements InterfaceDAO<Funcionario>{
                 funcionario.setStatus(rst.getString("status").charAt(0));
                 funcionario.setUsuario(rst.getString("usuario"));
                 funcionario.setSenha(rst.getString("senha"));
+                listaFuncionarios.add(funcionario);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

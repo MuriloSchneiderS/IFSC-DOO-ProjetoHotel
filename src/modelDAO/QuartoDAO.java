@@ -103,7 +103,7 @@ public class QuartoDAO implements InterfaceDAO<Quarto>{
             pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setString(1, "%"+valor+"%");
             rst = pstm.executeQuery();
-            while (!rst.next()) {
+            while (rst.next()) {
                 Quarto quarto = new Quarto();
                 quarto.setId(rst.getInt("id"));
                 quarto.setDescricao(rst.getString("descricao"));
@@ -114,6 +114,7 @@ public class QuartoDAO implements InterfaceDAO<Quarto>{
                 quarto.setFlagAnimais(rst.getInt("flag_animais"));
                 quarto.setObs(rst.getString("obs"));
                 quarto.setStatus(rst.getString("status").charAt(0));
+                listaQuartos.add(quarto);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

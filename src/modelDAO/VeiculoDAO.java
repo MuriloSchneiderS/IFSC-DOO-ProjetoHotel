@@ -109,7 +109,7 @@ public class VeiculoDAO implements InterfaceDAO<Veiculo>{
             pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setString(1, "%"+valor+"%");
             rst = pstm.executeQuery();
-            while (!rst.next()) {
+            while (rst.next()) {
                 Veiculo veiculo = new Veiculo();
                 Modelo modelo = new Modelo();
                 Funcionario funcionario = new Funcionario();
@@ -126,6 +126,7 @@ public class VeiculoDAO implements InterfaceDAO<Veiculo>{
                 veiculo.setFornecedor(fornecedor);
                 hospede.setId(rst.getInt("hospede_id"));
                 veiculo.setHospede(hospede);
+                listaVeiculos.add(veiculo);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

@@ -83,12 +83,12 @@ public class ProdutoCopaDAO implements InterfaceDAO<ProdutoCopa>{
         Connection conexao = ConnectionFactory.getConnection();
         PreparedStatement pstm = null;
         ResultSet rst = null;
-        List<ProdutoCopa> listaProdutoCopas = new ArrayList<>();
+        List<ProdutoCopa> listaProdutosCopa = new ArrayList<>();
         try {
             pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setString(1, "%"+valor+"%");
             rst = pstm.executeQuery();
-            while (!rst.next()) {
+            while (rst.next()) {
                 ProdutoCopa produtoCopa = new ProdutoCopa();
                 produtoCopa.setId(rst.getInt("id"));
                 produtoCopa.setDescricao(rst.getString("descricao"));
@@ -96,12 +96,13 @@ public class ProdutoCopaDAO implements InterfaceDAO<ProdutoCopa>{
                 produtoCopa.setObs(rst.getString("obs"));
                 produtoCopa.setStatus(rst.getString("status").charAt(0));
                 produtoCopa.setCopaQuartoId(rst.getInt("copa_quarto_id"));
+                listaProdutosCopa.add(produtoCopa);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
             ConnectionFactory.closeConnection(conexao, pstm, rst);
-            return listaProdutoCopas;
+            return listaProdutosCopa;
         }
     }
 

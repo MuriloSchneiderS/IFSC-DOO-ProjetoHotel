@@ -74,11 +74,12 @@ public class ServicoDAO implements InterfaceDAO<Servico>{
             pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setString(1, "%"+valor+"%");
             rst = pstm.executeQuery();
-            while (!rst.next()) {
+            while (rst.next()) {
                 Servico servico = new Servico();
                 servico.setId(rst.getInt("id"));
                 servico.setDescricao(rst.getString(2));
                 servico.setObs(rst.getString("obs"));
+                listaServicos.add(servico);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

@@ -170,7 +170,7 @@ public class HospedeDAO implements InterfaceDAO<Hospede> {
             pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setString(1, "%"+valor+"%");
             rst = pstm.executeQuery();
-            while (!rst.next()) {
+            while (rst.next()) {
                 Hospede hospede = new Hospede();
                 hospede.setId(rst.getInt("id"));
                 hospede.setNome(rst.getString(2));
@@ -193,6 +193,7 @@ public class HospedeDAO implements InterfaceDAO<Hospede> {
                 hospede.setCnpj(rst.getString("cnpj"));
                 hospede.setInscricaoEstadual(rst.getString("inscricao_estadual"));
                 hospede.setContato(rst.getString("contato"));
+                listaHospedes.add(hospede);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

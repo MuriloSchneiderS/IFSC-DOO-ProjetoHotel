@@ -165,12 +165,12 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
         Connection conexao = ConnectionFactory.getConnection();
         PreparedStatement pstm = null;
         ResultSet rst = null;
-        List<Fornecedor> listaFornecedors = new ArrayList<>();
+        List<Fornecedor> listaFornecedores = new ArrayList<>();
         try {
             pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setString(1, "%"+valor+"%");
             rst = pstm.executeQuery();
-            while (!rst.next()) {
+            while (rst.next()) {
                 Fornecedor fornecedor = new Fornecedor();
                 fornecedor.setId(rst.getInt("id"));
                 fornecedor.setNome(rst.getString(2));
@@ -193,12 +193,13 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
                 fornecedor.setCnpj(rst.getString("cnpj"));
                 fornecedor.setInscricaoEstadual(rst.getString("inscricao_estadual"));
                 fornecedor.setContato(rst.getString("contato"));
+                listaFornecedores.add(fornecedor);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
             ConnectionFactory.closeConnection(conexao, pstm, rst);
-            return listaFornecedors;
+            return listaFornecedores;
         }
     }
 
