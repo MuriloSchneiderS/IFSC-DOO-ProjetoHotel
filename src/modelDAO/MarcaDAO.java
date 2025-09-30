@@ -73,11 +73,12 @@ public class MarcaDAO implements InterfaceDAO<Marca>{
             pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setString(1, "%"+valor+"%");
             rst = pstm.executeQuery();
-            while (!rst.next()) {
+            while (rst.next()) {
                 Marca marca = new Marca();
                 marca.setId(rst.getInt("id"));
                 marca.setDescricao(rst.getString("descricao"));
                 marca.setStatus(rst.getString("status").charAt(0));
+                listaMarcas.add(marca);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

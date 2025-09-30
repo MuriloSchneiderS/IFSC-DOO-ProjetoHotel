@@ -36,12 +36,6 @@ public class ControllerCadMarca implements ActionListener {
             utilities.Utilities.ativaDesativa(this.telaCadastroMarca.getjPanelBotoes(), false);
             utilities.Utilities.limpaComponentes(this.telaCadastroMarca.getjPanelDados(), true);
             this.telaCadastroMarca.getjTextFieldId().setEnabled(false);
-            //Data atual colocada em data de cadastro
-            java.util.Date dataAtual = new Date();
-            SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
-            String novaData = dataFormatada.format(dataAtual);
-            this.telaCadastroMarca.getjFormattedTextFieldDataCadastro().setText(novaData);
-            this.telaCadastroMarca.getjFormattedTextFieldDataCadastro().setEnabled(false);
             
         //Botão Cancelar
         } else if (evento.getSource() == this.telaCadastroMarca.getjButtonCancelar()) {
@@ -50,10 +44,7 @@ public class ControllerCadMarca implements ActionListener {
             
         //Botão Gravar
         } else if (evento.getSource() == this.telaCadastroMarca.getjButtonGravar()) {
-            if (this.telaCadastroMarca.getjTextFieldDescricao().getText().trim().equals("")) {
-                JOptionPane.showMessageDialog(null, "Atributo Obrigatório.");
-                this.telaCadastroMarca.getjTextFieldDescricao().requestFocus();
-            } else {
+            if(utilities.Utilities.todosOsCamposPreenchidos(this.telaCadastroMarca.getjPanelDados())) {
                 Marca marca = new Marca();
 
                 marca.setDescricao(this.telaCadastroMarca.getjTextFieldDescricao().getText());
