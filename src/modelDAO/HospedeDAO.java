@@ -155,7 +155,7 @@ public class HospedeDAO implements InterfaceDAO<Hospede> {
                 + " obs,"
                 + " status,"
                 + " usuario,"
-                + " senha"
+                + " senha,"
                 + " razao_social,"
                 + " cnpj,"
                 + " inscricao_estadual,"

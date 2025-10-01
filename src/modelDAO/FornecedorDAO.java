@@ -155,7 +155,7 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
                 + " obs,"
                 + " status,"
                 + " usuario,"
-                + " senha"
+                + " senha,"
                 + " razao_social,"
                 + " cnpj,"
                 + " inscricao_estadual,"

@@ -29,12 +29,11 @@ public class ControllerCadModelo implements ActionListener {
         utilities.Utilities.ativaDesativa(this.telaCadastroModelo.getjPanelBotoes(), true);
         utilities.Utilities.limpaComponentes(this.telaCadastroModelo.getjPanelDados(), false);
         
-        
-            //Carregar o campo Marca
-            List<Marca> marcas = service.MarcaService.Carregar("descricao", "%");
-            for(Marca marca : marcas){
-                this.telaCadastroModelo.getjComboBoxMarca().addItem(marca.getDescricao());
-            }
+        //Carregar o campo Marca
+        List<Marca> marcas = service.MarcaService.Carregar("descricao", "%");
+        for(Marca marca : marcas){
+            this.telaCadastroModelo.getjComboBoxMarca().addItem(marca.getDescricao());
+        }
     }
 
     @Override
