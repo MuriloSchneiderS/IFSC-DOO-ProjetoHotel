@@ -5,7 +5,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
+import model.Fornecedor;
+import model.Funcionario;
+import model.Hospede;
+import model.Modelo;
 import model.Veiculo;
 import view.TelaBuscaVeiculo;
 import view.TelaCadastroVeiculo;
@@ -27,6 +32,27 @@ public class ControllerCadVeiculo implements ActionListener {
 
         utilities.Utilities.ativaDesativa(this.telaCadastroVeiculo.getjPanelBotoes(), true);
         utilities.Utilities.limpaComponentes(this.telaCadastroVeiculo.getjPanelDados(), false);
+        
+        //Carregar o campo Modelo
+        List<Modelo> modelos = service.ModeloService.Carregar("descricao", "%");
+        for(Modelo modelo : modelos){
+            this.telaCadastroVeiculo.getjComboBoxModelo().addItem(modelo.getDescricao());
+        }
+        //Carregar o campo Funcionario
+        List<Funcionario> funcionarios = service.FuncionarioService.Carregar("nome", "%");
+        for(Funcionario funcionario : funcionarios){
+            this.telaCadastroVeiculo.getjComboBoxFuncionario().addItem(funcionario.getNome());
+        }
+        //Carregar o campo Fornecedor
+        List<Fornecedor> fornecedores = service.FornecedorService.Carregar("nome", "%");
+        for(Fornecedor fornecedor : fornecedores){
+            this.telaCadastroVeiculo.getjComboBoxFornecedor().addItem(fornecedor.getNome());
+        }
+        //Carregar o campo Hospede
+        List<Hospede> hospedes = service.HospedeService.Carregar("nome", "%");
+        for(Hospede hospede : hospedes){
+            this.telaCadastroVeiculo.getjComboBoxHospede().addItem(hospede.getNome());
+        }
     }
 
     @Override
@@ -36,12 +62,6 @@ public class ControllerCadVeiculo implements ActionListener {
             utilities.Utilities.ativaDesativa(this.telaCadastroVeiculo.getjPanelBotoes(), false);
             utilities.Utilities.limpaComponentes(this.telaCadastroVeiculo.getjPanelDados(), true);
             this.telaCadastroVeiculo.getjTextFieldId().setEnabled(false);
-            //Data atual colocada em data de cadastro
-            java.util.Date dataAtual = new Date();
-            SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
-            String novaData = dataFormatada.format(dataAtual);
-            this.telaCadastroVeiculo.getjFormattedTextFieldDataCadastro().setText(novaData);
-            this.telaCadastroVeiculo.getjFormattedTextFieldDataCadastro().setEnabled(false);
             
         //Botão Cancelar
         } else if (evento.getSource() == this.telaCadastroVeiculo.getjButtonCancelar()) {
@@ -50,18 +70,15 @@ public class ControllerCadVeiculo implements ActionListener {
             
         //Botão Gravar
         } else if (evento.getSource() == this.telaCadastroVeiculo.getjButtonGravar()) {
-            if (this.telaCadastroVeiculo.getjTextFieldPlaca().getText().trim().equals("")) {
-                JOptionPane.showMessageDialog(null, "Atributo Obrigatório.");
-                this.telaCadastroVeiculo.getjTextFieldPlaca().requestFocus();
-            } else {
+            if(utilities.Utilities.todosOsCamposPreenchidos(this.telaCadastroVeiculo.getjPanelDados())) {
                 Veiculo veiculo = new Veiculo();
 
                 veiculo.setPlaca(this.telaCadastroVeiculo.getjTextFieldPlaca().getText());
                 veiculo.setCor(this.telaCadastroVeiculo.getjTextFieldCor().getText());
                 veiculo.setModelo(service.ModeloService.Carregar("descricao", this.telaCadastroVeiculo.getjComboBoxModelo().getSelectedItem().toString()).getFirst());
-                veiculo.setFuncionario(service.FuncionarioService.Carregar("nome", this.telaCadastroVeiculo.getjTextFieldFuncionario().getText()).getFirst());
-                veiculo.setFornecedor(service.FornecedorService.Carregar("nome", this.telaCadastroVeiculo.getjTextFieldFornecedor().getText()).getFirst());
-                veiculo.setHospede(service.HospedeService.Carregar("nome", this.telaCadastroVeiculo.getjTextFieldHospede().getText()).getFirst());
+                veiculo.setFuncionario(service.FuncionarioService.Carregar("nome", this.telaCadastroVeiculo.getjComboBoxFuncionario().getSelectedItem().toString()).getFirst());
+                veiculo.setFornecedor(service.FornecedorService.Carregar("nome", this.telaCadastroVeiculo.getjComboBoxFornecedor().getSelectedItem().toString()).getFirst());
+                veiculo.setHospede(service.HospedeService.Carregar("nome", this.telaCadastroVeiculo.getjComboBoxHospede().getSelectedItem().toString()).getFirst());
                 
                 if (this.telaCadastroVeiculo.getjTextFieldId().getText().trim().equalsIgnoreCase("")) {
                     //Inclusão
@@ -98,9 +115,9 @@ public class ControllerCadVeiculo implements ActionListener {
                 this.telaCadastroVeiculo.getjTextFieldPlaca().setText(veiculo.getPlaca());
                 this.telaCadastroVeiculo.getjTextFieldCor().setText(veiculo.getCor());
                 this.telaCadastroVeiculo.getjComboBoxModelo().setSelectedItem(veiculo.getModelo().getDescricao());
-                this.telaCadastroVeiculo.getjTextFieldFuncionario().setText(veiculo.getFuncionario().getNome());
-                this.telaCadastroVeiculo.getjTextFieldFornecedor().setText(veiculo.getFornecedor().getNome());
-                this.telaCadastroVeiculo.getjTextFieldHospede().setText(veiculo.getHospede().getNome());
+                this.telaCadastroVeiculo.getjComboBoxFuncionario().setSelectedItem(veiculo.getFuncionario().getNome());
+                this.telaCadastroVeiculo.getjComboBoxFornecedor().setSelectedItem(veiculo.getFornecedor().getNome());
+                this.telaCadastroVeiculo.getjComboBoxHospede().setSelectedItem(veiculo.getHospede().getNome());
                 
                 this.telaCadastroVeiculo.getjTextFieldPlaca().requestFocus();
             }

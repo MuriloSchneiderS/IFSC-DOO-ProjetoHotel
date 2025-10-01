@@ -49,14 +49,6 @@ public class TelaCadastroVeiculo extends javax.swing.JDialog {
         this.jComboBoxModelo = jComboBoxModelo;
     }
 
-    public JFormattedTextField getjFormattedTextFieldDataCadastro() {
-        return jFormattedTextFieldDataCadastro;
-    }
-
-    public void setjFormattedTextFieldDataCadastro(JFormattedTextField jFormattedTextFieldDataCadastro) {
-        this.jFormattedTextFieldDataCadastro = jFormattedTextFieldDataCadastro;
-    }
-
     public JTextField getjTextFieldCor() {
         return jTextFieldCor;
     }
@@ -81,29 +73,33 @@ public class TelaCadastroVeiculo extends javax.swing.JDialog {
         this.jTextFieldPlaca = jTextFieldPlaca;
     }
 
-    public JTextField getjTextFieldFornecedor() {
-        return jTextFieldFornecedor;
+    public JComboBox<String> getjComboBoxFornecedor() {
+        return jComboBoxFornecedor;
     }
 
-    public void setjTextFieldFornecedor(JTextField jTextFieldFornecedor) {
-        this.jTextFieldFornecedor = jTextFieldFornecedor;
+    public void setjComboBoxFornecedor(JComboBox<String> jComboBoxFornecedor) {
+        this.jComboBoxFornecedor = jComboBoxFornecedor;
     }
 
-    public JTextField getjTextFieldFuncionario() {
-        return jTextFieldFuncionario;
+    public JComboBox<String> getjComboBoxFuncionario() {
+        return jComboBoxFuncionario;
     }
 
-    public void setjTextFieldFuncionario(JTextField jTextFieldFuncionario) {
-        this.jTextFieldFuncionario = jTextFieldFuncionario;
+    public void setjComboBoxFuncionario(JComboBox<String> jComboBoxFuncionario) {
+        this.jComboBoxFuncionario = jComboBoxFuncionario;
     }
 
-    public JTextField getjTextFieldHospede() {
-        return jTextFieldHospede;
+    public JComboBox<String> getjComboBoxHospede() {
+        return jComboBoxHospede;
     }
 
-    public void setjTextFieldHospede(JTextField jTextFieldHospede) {
-        this.jTextFieldHospede = jTextFieldHospede;
+    public void setjComboBoxHospede(JComboBox<String> jComboBoxHospede) {
+        this.jComboBoxHospede = jComboBoxHospede;
     }
+
+    
+
+    
     
     
     
@@ -127,8 +123,6 @@ public class TelaCadastroVeiculo extends javax.swing.JDialog {
         jPanelDados = new javax.swing.JPanel();
         jLabelId = new javax.swing.JLabel();
         jTextFieldId = new javax.swing.JTextField();
-        jFormattedTextFieldDataCadastro = new javax.swing.JFormattedTextField();
-        jLabelCadastro = new javax.swing.JLabel();
         jTextFieldPlaca = new javax.swing.JTextField();
         jLabelPlaca = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -139,9 +133,9 @@ public class TelaCadastroVeiculo extends javax.swing.JDialog {
         jLabelFuncionario = new javax.swing.JLabel();
         jLabelFornecedor = new javax.swing.JLabel();
         jLabelHospede = new javax.swing.JLabel();
-        jTextFieldFuncionario = new javax.swing.JTextField();
-        jTextFieldHospede = new javax.swing.JTextField();
-        jTextFieldFornecedor = new javax.swing.JTextField();
+        jComboBoxHospede = new javax.swing.JComboBox<>();
+        jComboBoxFuncionario = new javax.swing.JComboBox<>();
+        jComboBoxFornecedor = new javax.swing.JComboBox<>();
         jPanelBotoes = new javax.swing.JPanel();
         jButtonNovo = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
@@ -175,15 +169,11 @@ public class TelaCadastroVeiculo extends javax.swing.JDialog {
 
         jLabelId.setText("ID");
 
-        jLabelCadastro.setText("Data de Cadastro");
-
         jLabelPlaca.setText("Placa");
 
         jLabelCor.setText("Cor");
 
         jLabelModelo.setText("Modelo");
-
-        jComboBoxModelo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "[Modelo]" }));
 
         jLabelFuncionario.setText("Funcionario");
 
@@ -198,61 +188,51 @@ public class TelaCadastroVeiculo extends javax.swing.JDialog {
             .addGroup(jPanelDadosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelDadosLayout.createSequentialGroup()
-                        .addComponent(jSeparator1)
-                        .addContainerGap())
-                    .addGroup(jPanelDadosLayout.createSequentialGroup()
-                        .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelDadosLayout.createSequentialGroup()
-                                .addComponent(jLabelPlaca)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jTextFieldPlaca, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelCor)
-                            .addComponent(jTextFieldCor, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())
-                    .addGroup(jPanelDadosLayout.createSequentialGroup()
-                        .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jFormattedTextFieldDataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(jPanelDadosLayout.createSequentialGroup()
-                        .addComponent(jLabelId)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabelCadastro)
-                        .addGap(66, 66, 66))
                     .addComponent(jComboBoxModelo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanelDadosLayout.createSequentialGroup()
                         .addComponent(jLabelModelo)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanelDadosLayout.createSequentialGroup()
-                        .addGap(11, 11, 11)
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelFuncionario)
+                            .addComponent(jSeparator1)
                             .addGroup(jPanelDadosLayout.createSequentialGroup()
-                                .addComponent(jTextFieldFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabelFornecedor))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(jPanelDadosLayout.createSequentialGroup()
+                                        .addComponent(jLabelPlaca)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jTextFieldPlaca, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
                                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelHospede)
-                                    .addComponent(jTextFieldHospede, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(jLabelCor)
+                                    .addComponent(jTextFieldCor, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanelDadosLayout.createSequentialGroup()
+                                .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelId)
+                                    .addGroup(jPanelDadosLayout.createSequentialGroup()
+                                        .addGap(11, 11, 11)
+                                        .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabelFuncionario)
+                                            .addGroup(jPanelDadosLayout.createSequentialGroup()
+                                                .addComponent(jComboBoxFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(26, 26, 26)
+                                                .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabelFornecedor)
+                                                    .addComponent(jComboBoxFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(26, 26, 26)
+                                                .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabelHospede)
+                                                    .addComponent(jComboBoxHospede, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         jPanelDadosLayout.setVerticalGroup(
             jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelDadosLayout.createSequentialGroup()
                 .addGap(13, 13, 13)
-                .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelCadastro, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelId))
+                .addComponent(jLabelId)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextFieldDataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -274,9 +254,9 @@ public class TelaCadastroVeiculo extends javax.swing.JDialog {
                     .addComponent(jLabelHospede))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldHospede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxHospede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -382,9 +362,10 @@ public class TelaCadastroVeiculo extends javax.swing.JDialog {
     private javax.swing.JButton jButtonGravar;
     private javax.swing.JButton jButtonNovo;
     private javax.swing.JButton jButtonSair;
+    private javax.swing.JComboBox<String> jComboBoxFornecedor;
+    private javax.swing.JComboBox<String> jComboBoxFuncionario;
+    private javax.swing.JComboBox<String> jComboBoxHospede;
     private javax.swing.JComboBox<String> jComboBoxModelo;
-    private javax.swing.JFormattedTextField jFormattedTextFieldDataCadastro;
-    private javax.swing.JLabel jLabelCadastro;
     private javax.swing.JLabel jLabelCor;
     private javax.swing.JLabel jLabelFornecedor;
     private javax.swing.JLabel jLabelFuncionario;
@@ -398,9 +379,6 @@ public class TelaCadastroVeiculo extends javax.swing.JDialog {
     private javax.swing.JPanel jPanelTitulo;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextFieldCor;
-    private javax.swing.JTextField jTextFieldFornecedor;
-    private javax.swing.JTextField jTextFieldFuncionario;
-    private javax.swing.JTextField jTextFieldHospede;
     private javax.swing.JTextField jTextFieldId;
     private javax.swing.JTextField jTextFieldPlaca;
     // End of variables declaration//GEN-END:variables
