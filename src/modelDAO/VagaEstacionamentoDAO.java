@@ -11,7 +11,7 @@ public class VagaEstacionamentoDAO implements InterfaceDAO<VagaEstacionamento>{
 
     @Override
     public void Create(VagaEstacionamento objeto) {
-        String sqlInstrucao = "INSERT INTO vagaEstacionamento("
+        String sqlInstrucao = "INSERT INTO vaga_estacionamento("
                 + " descricao,"
                 + " obs,"
                 + " metragem_vaga,"
@@ -41,7 +41,7 @@ public class VagaEstacionamentoDAO implements InterfaceDAO<VagaEstacionamento>{
                 + " obs,"
                 + " metragem_vaga,"
                 + " status"
-                + " FROM vagaEstacionamento WHERE id=?";
+                + " FROM vaga_estacionamento WHERE id=?";
         Connection conexao = ConnectionFactory.getConnection();
         PreparedStatement pstm = null;
         ResultSet rst = null;
@@ -74,7 +74,7 @@ public class VagaEstacionamentoDAO implements InterfaceDAO<VagaEstacionamento>{
                 + " obs,"
                 + " metragem_vaga,"
                 + " status"
-                + " FROM vagaEstacionamento"
+                + " FROM vaga_estacionamento"
                 + " WHERE "+atributo+" LIKE ?";
         Connection conexao = ConnectionFactory.getConnection();
         PreparedStatement pstm = null;
@@ -105,7 +105,7 @@ public class VagaEstacionamentoDAO implements InterfaceDAO<VagaEstacionamento>{
 
     @Override
     public void Update(VagaEstacionamento objeto) {
-        String sqlInstrucao = "UPDATE vagaEstacionamento"
+        String sqlInstrucao = "UPDATE vaga_estacionamento"
                 + " SET"
                 + " descricao=?,"
                 + " obs=?,"

@@ -36,12 +36,6 @@ public class ControllerCadVagaEstacionamento implements ActionListener {
             utilities.Utilities.ativaDesativa(this.telaCadastroVagaEstacionamento.getjPanelBotoes(), false);
             utilities.Utilities.limpaComponentes(this.telaCadastroVagaEstacionamento.getjPanelDados(), true);
             this.telaCadastroVagaEstacionamento.getjTextFieldId().setEnabled(false);
-            //Data atual colocada em data de cadastro
-            java.util.Date dataAtual = new Date();
-            SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
-            String novaData = dataFormatada.format(dataAtual);
-            this.telaCadastroVagaEstacionamento.getjFormattedTextFieldDataCadastro().setText(novaData);
-            this.telaCadastroVagaEstacionamento.getjFormattedTextFieldDataCadastro().setEnabled(false);
             
         //Botão Cancelar
         } else if (evento.getSource() == this.telaCadastroVagaEstacionamento.getjButtonCancelar()) {
@@ -59,7 +53,6 @@ public class ControllerCadVagaEstacionamento implements ActionListener {
                 vaga_estacionamento.setDescricao(this.telaCadastroVagaEstacionamento.getjTextFieldDescricao().getText());
                 vaga_estacionamento.setObs(this.telaCadastroVagaEstacionamento.getjTextFieldObs().getText());
                 vaga_estacionamento.setMetragemVaga((float) this.telaCadastroVagaEstacionamento.getjSpinnerMetragemVaga().getValue());
-                vaga_estacionamento.setStatus('A');
                 
                 if (this.telaCadastroVagaEstacionamento.getjTextFieldId().getText().trim().equalsIgnoreCase("")) {
                     //Inclusão
