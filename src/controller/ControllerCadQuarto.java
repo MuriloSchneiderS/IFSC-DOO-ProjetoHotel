@@ -36,12 +36,6 @@ public class ControllerCadQuarto implements ActionListener {
             utilities.Utilities.ativaDesativa(this.telaCadastroQuarto.getjPanelBotoes(), false);
             utilities.Utilities.limpaComponentes(this.telaCadastroQuarto.getjPanelDados(), true);
             this.telaCadastroQuarto.getjTextFieldId().setEnabled(false);
-            //Data atual colocada em data de cadastro
-            java.util.Date dataAtual = new Date();
-            SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
-            String novaData = dataFormatada.format(dataAtual);
-            this.telaCadastroQuarto.getjFormattedTextFieldDataCadastro().setText(novaData);
-            this.telaCadastroQuarto.getjFormattedTextFieldDataCadastro().setEnabled(false);
             
         //Botão Cancelar
         } else if (evento.getSource() == this.telaCadastroQuarto.getjButtonCancelar()) {
@@ -50,15 +44,12 @@ public class ControllerCadQuarto implements ActionListener {
             
         //Botão Gravar
         } else if (evento.getSource() == this.telaCadastroQuarto.getjButtonGravar()) {
-            if (this.telaCadastroQuarto.getjTextFieldDescricao().getText().trim().equals("")) {
-                JOptionPane.showMessageDialog(null, "Atributo Obrigatório.");
-                this.telaCadastroQuarto.getjTextFieldDescricao().requestFocus();
-            } else {
+            if(utilities.Utilities.todosOsCamposPreenchidos(this.telaCadastroQuarto.getjPanelDados())) {
                 Quarto quarto = new Quarto();
 
                 quarto.setDescricao(this.telaCadastroQuarto.getjTextFieldDescricao().getText());
                 quarto.setCapacidadeHospedes((int) this.telaCadastroQuarto.getjSpinnerCapacidadeHospedes().getValue());
-                quarto.setMetragem((float) this.telaCadastroQuarto.getjSpinnerMetragem().getValue());
+                quarto.setMetragem(Float.parseFloat(this.telaCadastroQuarto.getjSpinnerMetragem().getValue().toString()));
                 quarto.setIdentificacao(this.telaCadastroQuarto.getjTextFieldIdentificacao().getText());
                 quarto.setAndar((int) this.telaCadastroQuarto.getjSpinnerAndar().getValue());
                 quarto.setFlagAnimais(this.telaCadastroQuarto.getjCheckBoxPermiteAnimais().isSelected()?1:0);
@@ -70,7 +61,6 @@ public class ControllerCadQuarto implements ActionListener {
                     service.QuartoService.Criar(quarto);
                 } else {
                     //Atualização
-                    quarto.setStatus('B');
                     quarto.setId(Integer.parseInt(this.telaCadastroQuarto.getjTextFieldId().getText()));
                     service.QuartoService.Atualizar(quarto);
                 }
