@@ -110,24 +110,22 @@
                           <Component id="jLabelObs" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jTextFieldObs" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jTextFieldDescricao" alignment="0" max="32767" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jTextFieldId" min="-2" pref="35" max="-2" attributes="0"/>
-                                      <Component id="jLabelId" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="374" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabelCadastro" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jFormattedTextFieldDataCadastro" max="32767" attributes="0"/>
-                                  </Group>
+                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jTextFieldId" min="-2" pref="35" max="-2" attributes="0"/>
+                                  <Component id="jLabelId" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="jTextFieldObs" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jTextFieldDescricao" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
@@ -137,15 +135,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabelId" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabelCadastro" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jLabelId" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jFormattedTextFieldDataCadastro" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextFieldId" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jTextFieldId" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -168,13 +160,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldId">
-        </Component>
-        <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldDataCadastro">
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabelCadastro">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Data de Cadastro"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldObs">
         </Component>

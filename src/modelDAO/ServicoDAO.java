@@ -13,14 +13,16 @@ public class ServicoDAO implements InterfaceDAO<Servico>{
     public void Create(Servico objeto) {
         String sqlInstrucao = "INSERT INTO servico("
                 + " descricao,"
-                + " obs)"
-                + " VALUES (?,?)";
+                + " obs,"
+                + " status)"
+                + " VALUES (?,?,?)";
         Connection conexao = ConnectionFactory.getConnection();
         PreparedStatement pstm = null;
         try {
             pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setString(1, objeto.getDescricao());
             pstm.setString(2, objeto.getObs());
+            pstm.setString(3, objeto.getStatus()+"");
             pstm.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -34,7 +36,8 @@ public class ServicoDAO implements InterfaceDAO<Servico>{
         String sqlInstrucao = "SELECT"
                 + " id,"
                 + " descricao,"
-                + " obs"
+                + " obs,"
+                + " status"
                 + " FROM servico WHERE id=?";
         Connection conexao = ConnectionFactory.getConnection();
         PreparedStatement pstm = null;
@@ -49,6 +52,7 @@ public class ServicoDAO implements InterfaceDAO<Servico>{
                 servico.setId(rst.getInt("id"));
                 servico.setDescricao(rst.getString(2));
                 servico.setObs(rst.getString("obs"));
+                servico.setStatus(rst.getString("status").charAt(0));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -63,7 +67,8 @@ public class ServicoDAO implements InterfaceDAO<Servico>{
         String sqlInstrucao = "SELECT"
                 + " id,"
                 + " descricao,"
-                + " obs"
+                + " obs,"
+                + " status"
                 + " FROM servico"
                 + " WHERE "+atributo+" LIKE ?";
         Connection conexao = ConnectionFactory.getConnection();
@@ -79,6 +84,7 @@ public class ServicoDAO implements InterfaceDAO<Servico>{
                 servico.setId(rst.getInt("id"));
                 servico.setDescricao(rst.getString(2));
                 servico.setObs(rst.getString("obs"));
+                servico.setStatus(rst.getString("status").charAt(0));
                 listaServicos.add(servico);
             }
         } catch (SQLException ex) {
@@ -94,7 +100,8 @@ public class ServicoDAO implements InterfaceDAO<Servico>{
         String sqlInstrucao = "UPDATE servico "
                 + " SET"
                 + " descricao =?,"
-                + " obs=?"
+                + " obs=?,"
+                + " status=?"
                 + " WHERE id =?";
         Connection conexao = ConnectionFactory.getConnection();
         PreparedStatement pstm = null;
@@ -102,7 +109,8 @@ public class ServicoDAO implements InterfaceDAO<Servico>{
             pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setString(1, objeto.getDescricao());
             pstm.setString(2, objeto.getObs());
-            pstm.setInt(3, objeto.getId());
+            pstm.setString(3, objeto.getStatus()+"");
+            pstm.setInt(4, objeto.getId());
             pstm.execute();
         }catch (SQLException ex) {
             ex.printStackTrace();

@@ -36,12 +36,6 @@ public class ControllerCadServico implements ActionListener {
             utilities.Utilities.ativaDesativa(this.telaCadastroServico.getjPanelBotoes(), false);
             utilities.Utilities.limpaComponentes(this.telaCadastroServico.getjPanelDados(), true);
             this.telaCadastroServico.getjTextFieldId().setEnabled(false);
-            //Data atual colocada em data de cadastro
-            java.util.Date dataAtual = new Date();
-            SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
-            String novaData = dataFormatada.format(dataAtual);
-            this.telaCadastroServico.getjFormattedTextFieldDataCadastro().setText(novaData);
-            this.telaCadastroServico.getjFormattedTextFieldDataCadastro().setEnabled(false);
             
         //Botão Cancelar
         } else if (evento.getSource() == this.telaCadastroServico.getjButtonCancelar()) {
@@ -50,10 +44,7 @@ public class ControllerCadServico implements ActionListener {
             
         //Botão Gravar
         } else if (evento.getSource() == this.telaCadastroServico.getjButtonGravar()) {
-            if (this.telaCadastroServico.getjTextFieldDescricao().getText().trim().equals("")) {
-                JOptionPane.showMessageDialog(null, "Atributo Obrigatório.");
-                this.telaCadastroServico.getjTextFieldDescricao().requestFocus();
-            } else {
+            if(utilities.Utilities.todosOsCamposPreenchidos(this.telaCadastroServico.getjPanelDados())) {
                 Servico servico = new Servico();
                 
                 servico.setDescricao(this.telaCadastroServico.getjTextFieldDescricao().getText());
