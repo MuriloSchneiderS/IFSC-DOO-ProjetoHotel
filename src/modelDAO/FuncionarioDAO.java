@@ -53,7 +53,7 @@ public class FuncionarioDAO implements InterfaceDAO<Funcionario>{
             pstm.setString(13, objeto.getObs());
             pstm.setString(14, objeto.getStatus()+"");
             pstm.setString(15, objeto.getUsuario());
-            pstm.setString(16, objeto.getSenha());
+            pstm.setString(16, new String(objeto.getSenha()));
             pstm.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -110,7 +110,7 @@ public class FuncionarioDAO implements InterfaceDAO<Funcionario>{
                 funcionario.setObs(rst.getString("obs"));
                 funcionario.setStatus(rst.getString("status").charAt(0));
                 funcionario.setUsuario(rst.getString("usuario"));
-                funcionario.setSenha(rst.getString("senha"));
+                funcionario.setSenha(rst.getString("senha").toCharArray());
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -168,7 +168,7 @@ public class FuncionarioDAO implements InterfaceDAO<Funcionario>{
                 funcionario.setObs(rst.getString("obs"));
                 funcionario.setStatus(rst.getString("status").charAt(0));
                 funcionario.setUsuario(rst.getString("usuario"));
-                funcionario.setSenha(rst.getString("senha"));
+                funcionario.setSenha(rst.getString("senha").toCharArray());
                 listaFuncionarios.add(funcionario);
             }
         } catch (SQLException ex) {
@@ -219,7 +219,7 @@ public class FuncionarioDAO implements InterfaceDAO<Funcionario>{
             pstm.setString(13, objeto.getObs());
             pstm.setString(14, String.valueOf(objeto.getStatus()));
             pstm.setString(15, objeto.getUsuario());
-            pstm.setString(16, objeto.getSenha());
+            pstm.setString(16, new String(objeto.getSenha()));
             pstm.setInt(17, objeto.getId());
             pstm.execute();
         }catch (SQLException ex) {

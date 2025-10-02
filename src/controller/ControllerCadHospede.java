@@ -79,7 +79,7 @@ public class ControllerCadHospede implements ActionListener {
                 hospede.setFone2(this.telaCadastroHospede.getjFormattedTextFieldFone2().getText());
                 hospede.setObs(this.telaCadastroHospede.getjTextFieldObs().getText());
                 hospede.setRazaoSocial(this.telaCadastroHospede.getjTextFieldRazaoSocial().getText());
-                hospede.setRg(this.telaCadastroHospede.getjTextFieldRg().getText());
+                hospede.setRg(this.telaCadastroHospede.getjFormattedTextFieldRg().getText());
 
                 if (this.telaCadastroHospede.getjTextFieldId().getText().trim().equalsIgnoreCase("")) {
                     //Inclusão
@@ -130,7 +130,7 @@ public class ControllerCadHospede implements ActionListener {
                 this.telaCadastroHospede.getjFormattedTextFieldFone2().setText(hospede.getFone2());
                 this.telaCadastroHospede.getjTextFieldObs().setText(hospede.getObs());
                 this.telaCadastroHospede.getjTextFieldRazaoSocial().setText(hospede.getRazaoSocial());
-                this.telaCadastroHospede.getjTextFieldRg().setText(hospede.getRg());
+                this.telaCadastroHospede.getjFormattedTextFieldRg().setText(hospede.getRg());
 
                 this.telaCadastroHospede.getjTextFieldNomeFantasia().requestFocus();
             }

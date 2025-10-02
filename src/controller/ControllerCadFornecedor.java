@@ -69,7 +69,7 @@ public class ControllerCadFornecedor implements ActionListener {
                 fornecedor.setFone2(this.telaCadastroFornecedor.getjFormattedTextFieldFone2().getText());
                 fornecedor.setObs(this.telaCadastroFornecedor.getjTextFieldObs().getText());
                 fornecedor.setRazaoSocial(this.telaCadastroFornecedor.getjTextFieldRazaoSocial().getText());
-                fornecedor.setRg(this.telaCadastroFornecedor.getjTextFieldRg().getText());
+                fornecedor.setRg(this.telaCadastroFornecedor.getjFormattedTextFieldRg().getText());
                 
                 if (this.telaCadastroFornecedor.getjTextFieldId().getText().trim().equalsIgnoreCase("")) {
                     //Inclusão
@@ -120,7 +120,7 @@ public class ControllerCadFornecedor implements ActionListener {
                 this.telaCadastroFornecedor.getjFormattedTextFieldFone2().setText(fornecedor.getFone2());
                 this.telaCadastroFornecedor.getjTextFieldObs().setText(fornecedor.getObs());
                 this.telaCadastroFornecedor.getjTextFieldRazaoSocial().setText(fornecedor.getRazaoSocial());
-                this.telaCadastroFornecedor.getjTextFieldRg().setText(fornecedor.getRg());
+                this.telaCadastroFornecedor.getjFormattedTextFieldRg().setText(fornecedor.getRg());
 
                 this.telaCadastroFornecedor.getjTextFieldNomeFantasia().requestFocus();
             }

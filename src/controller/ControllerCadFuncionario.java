@@ -64,9 +64,9 @@ public class ControllerCadFuncionario implements ActionListener {
                 funcionario.setFone1(this.telaCadastroFuncionario.getjFormattedTextFieldFone1().getText());
                 funcionario.setFone2(this.telaCadastroFuncionario.getjFormattedTextFieldFone2().getText());
                 funcionario.setObs(this.telaCadastroFuncionario.getjTextFieldObs().getText());
-                funcionario.setRg(this.telaCadastroFuncionario.getjTextFieldRg().getText());
+                funcionario.setRg(this.telaCadastroFuncionario.getjFormattedTextFieldRg().getText());
                 funcionario.setUsuario(this.telaCadastroFuncionario.getjTextFieldUsuario().getText());
-                funcionario.setSenha(this.telaCadastroFuncionario.getjPasswordFieldSenha().getPassword().toString());
+                funcionario.setSenha(this.telaCadastroFuncionario.getjPasswordFieldSenha().getPassword());
 
                 if (this.telaCadastroFuncionario.getjTextFieldId().getText().trim().equalsIgnoreCase("")) {
                     //Inclusão
@@ -113,9 +113,9 @@ public class ControllerCadFuncionario implements ActionListener {
                 this.telaCadastroFuncionario.getjFormattedTextFieldFone1().setText(funcionario.getFone1());
                 this.telaCadastroFuncionario.getjFormattedTextFieldFone2().setText(funcionario.getFone2());
                 this.telaCadastroFuncionario.getjTextFieldObs().setText(funcionario.getObs());
-                this.telaCadastroFuncionario.getjTextFieldRg().setText(funcionario.getRg());
+                this.telaCadastroFuncionario.getjFormattedTextFieldRg().setText(funcionario.getRg());
                 this.telaCadastroFuncionario.getjTextFieldUsuario().setText(funcionario.getUsuario());
-                this.telaCadastroFuncionario.getjPasswordFieldSenha().setText(funcionario.getSenha());
+                this.telaCadastroFuncionario.getjPasswordFieldSenha().setText(new String(funcionario.getSenha()));
                 
                 this.telaCadastroFuncionario.getjTextFieldNomeFantasia().requestFocus();
             }

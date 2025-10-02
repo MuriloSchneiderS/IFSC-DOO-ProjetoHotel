@@ -158,7 +158,7 @@
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jTextFieldEmail" max="32767" attributes="0"/>
+                              <Component id="jTextFieldEmail" pref="439" max="32767" attributes="0"/>
                               <Component id="jTextFieldBairro" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -178,10 +178,10 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabelrg" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jTextFieldRg" alignment="0" min="-2" pref="177" max="-2" attributes="0"/>
+                                      <Component id="jLabelrg" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jFormattedTextFieldRg" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jFormattedTextFieldCpf" alignment="0" min="-2" pref="167" max="-2" attributes="0"/>
                                       <Component id="jLabelCpf" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -267,10 +267,10 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jTextFieldRg" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jFormattedTextFieldCpf" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jTextFieldInscricaoEstadual" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jFormattedTextFieldCnpj" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jFormattedTextFieldRg" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
@@ -375,8 +375,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Rg"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="jTextFieldRg">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelCpf">
           <Properties>
@@ -523,6 +521,13 @@
         <Component class="javax.swing.JLabel" name="jLabelObs">
           <Properties>
             <Property name="text" type="java.lang.String" value="OBS.:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldRg">
+          <Properties>
+            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
+              <Format format="###.###.###-##" subtype="-1" type="5"/>
+            </Property>
           </Properties>
         </Component>
       </SubComponents>

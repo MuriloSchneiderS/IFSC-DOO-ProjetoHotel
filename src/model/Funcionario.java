@@ -2,13 +2,13 @@ package model;
 public class Funcionario extends Pessoa{
    
     private String usuario;
-    private String senha;
+    private char[] senha;
 
     public Funcionario() {
   
     }
 
-    public Funcionario( int id, String nome, String fone1, String fone2, String email, String cep, String logradouro, String bairro, String cidade, String complemento, String dataCadastro, String cpf, String rg,String usuario, String senha, String obs, char status) {
+    public Funcionario( int id, String nome, String fone1, String fone2, String email, String cep, String logradouro, String bairro, String cidade, String complemento, String dataCadastro, String cpf, String rg,String usuario, char[] senha, String obs, char status) {
         super(id, nome, fone1, fone2, email, cep, logradouro, bairro, cidade, complemento, dataCadastro, cpf, rg, obs, status);
         this.usuario = usuario;
         this.senha = senha;
@@ -22,11 +22,11 @@ public class Funcionario extends Pessoa{
         this.usuario = usuario;
     }
 
-    public String getSenha() {
+    public char[] getSenha() {
         return senha;
     }
 
-    public void setSenha(String senha) {
+    public void setSenha(char[] senha) {
         this.senha = senha;
     }
 
