@@ -30,11 +30,11 @@ public class VeiculoDAO implements InterfaceDAO<Veiculo>{
             pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setString(1, objeto.getPlaca());
             pstm.setString(2, objeto.getCor());
-            pstm.setString(3, Integer.toString(objeto.getModelo().getId()));
-            pstm.setString(4, Integer.toString(objeto.getFuncionario().getId()));
-            pstm.setString(5, Integer.toString(objeto.getFornecedor().getId()));
-            pstm.setString(6, Integer.toString(objeto.getHospede().getId()));
-            pstm.setString(7, String.valueOf(objeto.getStatus()));
+            pstm.setInt(3, objeto.getModelo().getId());
+            pstm.setInt(4, objeto.getFuncionario().getId());
+            pstm.setInt(5, objeto.getFornecedor().getId());
+            pstm.setInt(6, objeto.getHospede().getId());
+            pstm.setString(7, objeto.getStatus()+"");
             pstm.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();

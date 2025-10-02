@@ -73,7 +73,7 @@ public class ControllerCadVeiculo implements ActionListener {
             if(utilities.Utilities.todosOsCamposPreenchidos(this.telaCadastroVeiculo.getjPanelDados())) {
                 Veiculo veiculo = new Veiculo();
 
-                veiculo.setPlaca(this.telaCadastroVeiculo.getjTextFieldPlaca().getText());
+                veiculo.setPlaca(this.telaCadastroVeiculo.getjFormattedTextFieldPlaca().getText());
                 veiculo.setCor(this.telaCadastroVeiculo.getjTextFieldCor().getText());
                 veiculo.setModelo(service.ModeloService.Carregar("descricao", this.telaCadastroVeiculo.getjComboBoxModelo().getSelectedItem().toString()).getFirst());
                 veiculo.setFuncionario(service.FuncionarioService.Carregar("nome", this.telaCadastroVeiculo.getjComboBoxFuncionario().getSelectedItem().toString()).getFirst());
@@ -112,14 +112,14 @@ public class ControllerCadVeiculo implements ActionListener {
                 Veiculo veiculo = new Veiculo();
                 veiculo = service.VeiculoService.Carregar(codigo);
 
-                this.telaCadastroVeiculo.getjTextFieldPlaca().setText(veiculo.getPlaca());
+                this.telaCadastroVeiculo.getjFormattedTextFieldPlaca().setText(veiculo.getPlaca());
                 this.telaCadastroVeiculo.getjTextFieldCor().setText(veiculo.getCor());
                 this.telaCadastroVeiculo.getjComboBoxModelo().setSelectedItem(veiculo.getModelo().getDescricao());
                 this.telaCadastroVeiculo.getjComboBoxFuncionario().setSelectedItem(veiculo.getFuncionario().getNome());
                 this.telaCadastroVeiculo.getjComboBoxFornecedor().setSelectedItem(veiculo.getFornecedor().getNome());
                 this.telaCadastroVeiculo.getjComboBoxHospede().setSelectedItem(veiculo.getHospede().getNome());
                 
-                this.telaCadastroVeiculo.getjTextFieldPlaca().requestFocus();
+                this.telaCadastroVeiculo.getjFormattedTextFieldPlaca().requestFocus();
             }
             
         //Botão Sair

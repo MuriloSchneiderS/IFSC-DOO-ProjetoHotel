@@ -491,7 +491,7 @@ DROP TABLE IF EXISTS `Hotel`.`produto_copa` ;
 
 CREATE TABLE IF NOT EXISTS `Hotel`.`produto_copa` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `decricao` VARCHAR(100) NOT NULL,
+  `descricao` VARCHAR(100) NOT NULL,
   `valor` FLOAT NOT NULL,
   `obs` VARCHAR(100) NOT NULL,
   `status` VARCHAR(1) NOT NULL,
