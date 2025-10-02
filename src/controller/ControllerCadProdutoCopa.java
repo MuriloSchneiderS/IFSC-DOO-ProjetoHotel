@@ -2,7 +2,9 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.JOptionPane;
+import model.CopaQuarto;
 import model.ProdutoCopa;
 import view.TelaBuscaProdutoCopa;
 import view.TelaCadastroProdutoCopa;
@@ -24,6 +26,12 @@ public class ControllerCadProdutoCopa implements ActionListener {
 
         utilities.Utilities.ativaDesativa(this.telaCadastroProdutoCopa.getjPanelBotoes(), true);
         utilities.Utilities.limpaComponentes(this.telaCadastroProdutoCopa.getjPanelDados(), false);
+        
+        //Carregar o campo Marca
+        List<CopaQuarto> copaQuartos = service.CopaQuartoService.Carregar("id", "%");
+        for(CopaQuarto copaQuarto : copaQuartos){
+            this.telaCadastroProdutoCopa.getjComboBoxCopaQuarto().addItem(copaQuarto.getId()+"");
+        }
     }
 
     @Override
@@ -49,9 +57,9 @@ public class ControllerCadProdutoCopa implements ActionListener {
                 ProdutoCopa produtoCopa = new ProdutoCopa();
 
                 produtoCopa.setDescricao(this.telaCadastroProdutoCopa.getjTextFieldDescricao().getText());
-                produtoCopa.setValor((float) this.telaCadastroProdutoCopa.getjSpinnerValor().getValue());
+                produtoCopa.setValor(((Double)this.telaCadastroProdutoCopa.getjSpinnerValor().getValue()).floatValue());
                 produtoCopa.setObs(this.telaCadastroProdutoCopa.getjTextFieldObs().getText());
-                produtoCopa.setCopaQuartoId((int) this.telaCadastroProdutoCopa.getjComboBoxCopaQuarto().getSelectedItem());
+                produtoCopa.setCopaQuartoId( Integer.parseInt(this.telaCadastroProdutoCopa.getjComboBoxCopaQuarto().getSelectedItem().toString()));
                         
                 if (this.telaCadastroProdutoCopa.getjTextFieldId().getText().trim().equalsIgnoreCase("")) {
                     //Inclusão

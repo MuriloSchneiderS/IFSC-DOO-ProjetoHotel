@@ -1,24 +1,23 @@
 package model;
 
-import java.security.Timestamp;
+import java.sql.Date;
 
 public class CopaQuarto {
     private int id;
     private float quantidade;
-    private Timestamp dataHoraPedido;
+    private Date dataHoraPedido;
     private String obs;
     private char status;
     private CheckQuarto checkQuarto;
-    private ProdutoCopa produtoCopa;
 
-    public CopaQuarto(int id, float quantidade, Timestamp dataHoraPedido, String obs, char status, CheckQuarto checkQuarto, ProdutoCopa produtoCopa) {
+    public CopaQuarto(){}
+    public CopaQuarto(int id, float quantidade, Date dataHoraPedido, String obs, char status, CheckQuarto checkQuarto) {
         this.id = id;
         this.quantidade = quantidade;
         this.dataHoraPedido = dataHoraPedido;
         this.obs = obs;
         this.status = status;
         this.checkQuarto = checkQuarto;
-        this.produtoCopa = produtoCopa;
     }
 
     public int getId() {
@@ -37,11 +36,11 @@ public class CopaQuarto {
         this.quantidade = quantidade;
     }
 
-    public Timestamp getDataHoraPedido() {
+    public Date getDataHoraPedido() {
         return dataHoraPedido;
     }
 
-    public void setDataHoraPedido(Timestamp dataHoraPedido) {
+    public void setDataHoraPedido(Date dataHoraPedido) {
         this.dataHoraPedido = dataHoraPedido;
     }
 
@@ -67,14 +66,6 @@ public class CopaQuarto {
 
     public void setCheckQuarto(CheckQuarto checkQuarto) {
         this.checkQuarto = checkQuarto;
-    }
-
-    public ProdutoCopa getProdutoCopa() {
-        return produtoCopa;
-    }
-
-    public void setProdutoCopa(ProdutoCopa produtoCopa) {
-        this.produtoCopa = produtoCopa;
     }
     
     

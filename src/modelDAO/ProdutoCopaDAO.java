@@ -11,7 +11,7 @@ public class ProdutoCopaDAO implements InterfaceDAO<ProdutoCopa>{
 
     @Override
     public void Create(ProdutoCopa objeto) {
-        String sqlInstrucao = "INSERT INTO produtoCopa("
+        String sqlInstrucao = "INSERT INTO produto_copa("
                 + " descricao,"
                 + " valor,"
                 + " obs,"
@@ -44,7 +44,7 @@ public class ProdutoCopaDAO implements InterfaceDAO<ProdutoCopa>{
                 + " obs,"
                 + " status,"
                 + " copa_quarto_id"
-                + " FROM produtoCopa WHERE id=?";
+                + " FROM produto_copa WHERE id=?";
         Connection conexao = ConnectionFactory.getConnection();
         PreparedStatement pstm = null;
         ResultSet rst = null;
@@ -78,7 +78,7 @@ public class ProdutoCopaDAO implements InterfaceDAO<ProdutoCopa>{
                 + " obs,"
                 + " status,"
                 + " copa_quarto_id"
-                + " FROM produtoCopa"
+                + " FROM produto_copa"
                 + " WHERE "+atributo+" LIKE ?";
         Connection conexao = ConnectionFactory.getConnection();
         PreparedStatement pstm = null;
@@ -108,7 +108,7 @@ public class ProdutoCopaDAO implements InterfaceDAO<ProdutoCopa>{
 
     @Override
     public void Update(ProdutoCopa objeto) {
-        String sqlInstrucao = "UPDATE produtoCopa "
+        String sqlInstrucao = "UPDATE produto_copa "
                 + " SET"
                 + " descricao =?,"
                 + " valor=?,"
