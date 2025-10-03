@@ -56,8 +56,8 @@ public class HospedeDAO implements InterfaceDAO<Hospede> {
             pstm.setString(12, objeto.getRg());
             pstm.setString(13, objeto.getObs());
             pstm.setString(14, objeto.getStatus()+"");
-            pstm.setString(15, objeto.getNome());//usuario temporariamente é apenas o nome
-            pstm.setString(16, "senha2025");//senha generica
+            pstm.setString(15, objeto.getUsuario());
+            pstm.setString(16, objeto.getSenha());
             pstm.setString(17, objeto.getRazaoSocial());
             pstm.setString(18, objeto.getCnpj());
             pstm.setString(19, objeto.getInscricaoEstadual());
@@ -252,7 +252,7 @@ public class HospedeDAO implements InterfaceDAO<Hospede> {
             pstm.setString(18, objeto.getCnpj());
             pstm.setString(19, objeto.getInscricaoEstadual());
             pstm.setString(20, objeto.getContato());
-            pstm.setInt(21, objeto.getId());
+            pstm.setString(21, objeto.getId()+"");
             pstm.execute();
         }catch (SQLException ex) {
             ex.printStackTrace();

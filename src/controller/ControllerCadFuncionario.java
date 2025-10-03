@@ -2,8 +2,11 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Funcionario;
 import view.TelaBuscaFuncionario;
 import view.TelaCadastroFuncionario;
@@ -102,7 +105,14 @@ public class ControllerCadFuncionario implements ActionListener {
 
                 this.telaCadastroFuncionario.getjFormattedTextFieldCep().setText(funcionario.getCep());
                 this.telaCadastroFuncionario.getjFormattedTextFieldCpf().setText(funcionario.getCpf());
-                this.telaCadastroFuncionario.getjFormattedTextFieldDataCadastro().setText(funcionario.getDataCadastro());
+                
+                    try {
+                        this.telaCadastroFuncionario.getjFormattedTextFieldDataCadastro().setText(new SimpleDateFormat("dd/MM/yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(funcionario.getDataCadastro())));
+                    } catch (ParseException ex) {
+                        Logger.getLogger(ControllerCadFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                this.telaCadastroFuncionario.getjFormattedTextFieldDataCadastro().setEnabled(false);
                 this.telaCadastroFuncionario.getjTextFieldBairro().setText(funcionario.getBairro());
                 this.telaCadastroFuncionario.getjTextFieldCidade().setText(funcionario.getCidade());
                 this.telaCadastroFuncionario.getjTextFieldComplemento().setText(funcionario.getComplemento());

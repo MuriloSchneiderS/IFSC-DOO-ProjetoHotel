@@ -110,9 +110,17 @@ public class TelaBuscaFornecedor extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Id", "Nome", "CPf", "Status"
+                "Id", "Nome", "CPF", "Status"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTableDados.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jTableDados);
         if (jTableDados.getColumnModel().getColumnCount() > 0) {

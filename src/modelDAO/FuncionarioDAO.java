@@ -184,20 +184,20 @@ public class FuncionarioDAO implements InterfaceDAO<Funcionario>{
         String sqlInstrucao = "UPDATE funcionario "
                 + " SET"
                 + " nome =?,"
-                + " fone =?"
-                + " fone2 =?"
-                + " email =?"
-                + " cep =?"
-                + " logradouro =?"
-                + " bairro =?"
-                + " cidade =?"
-                + " complemento =?"
-                + " data_cadastro =?"
-                + " cpf =?"
-                + " rg =?"
-                + " obs =?"
-                + " status =?"
-                + " usuario =?"
+                + " fone =?,"
+                + " fone2 =?,"
+                + " email =?,"
+                + " cep =?,"
+                + " logradouro =?,"
+                + " bairro =?,"
+                + " cidade =?,"
+                + " complemento =?,"
+                + " data_cadastro =?,"
+                + " cpf =?,"
+                + " rg =?,"
+                + " obs =?,"
+                + " status =?,"
+                + " usuario =?,"
                 + " senha =?"
                 + " WHERE id =?";
         Connection conexao = ConnectionFactory.getConnection();
@@ -217,10 +217,10 @@ public class FuncionarioDAO implements InterfaceDAO<Funcionario>{
             pstm.setString(11, objeto.getCpf());
             pstm.setString(12, objeto.getRg());
             pstm.setString(13, objeto.getObs());
-            pstm.setString(14, String.valueOf(objeto.getStatus()));
+            pstm.setString(14, objeto.getStatus()+"");
             pstm.setString(15, objeto.getUsuario());
-            pstm.setString(16, new String(objeto.getSenha()));
-            pstm.setInt(17, objeto.getId());
+            pstm.setString(16, objeto.getSenha()+"");
+            pstm.setString(17, objeto.getId()+"");
             pstm.execute();
         }catch (SQLException ex) {
             ex.printStackTrace();

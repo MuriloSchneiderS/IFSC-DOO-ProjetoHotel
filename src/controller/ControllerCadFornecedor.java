@@ -2,9 +2,11 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import javax.swing.JOptionPane;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Fornecedor;
 import view.TelaBuscaFornecedor;
 import view.TelaCadastroFornecedor;
@@ -30,7 +32,7 @@ public class ControllerCadFornecedor implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent evento) {
-        
+
         //Botão Novo
         if (evento.getSource() == this.telaCadastroFornecedor.getjButtonNovo()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroFornecedor.getjPanelBotoes(), false);
@@ -42,17 +44,17 @@ public class ControllerCadFornecedor implements ActionListener {
             String novaData = dataFormatada.format(dataAtual);
             this.telaCadastroFornecedor.getjFormattedTextFieldDataCadastro().setText(novaData);
             this.telaCadastroFornecedor.getjFormattedTextFieldDataCadastro().setEnabled(false);
-            
-        //Botão Cancelar
+
+            //Botão Cancelar
         } else if (evento.getSource() == this.telaCadastroFornecedor.getjButtonCancelar()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroFornecedor.getjPanelBotoes(), true);
             utilities.Utilities.limpaComponentes(this.telaCadastroFornecedor.getjPanelDados(), false);
-            
-        //Botão Gravar
+
+            //Botão Gravar
         } else if (evento.getSource() == this.telaCadastroFornecedor.getjButtonGravar()) {
-            if(utilities.Utilities.todosOsCamposPreenchidos(this.telaCadastroFornecedor.getjPanelDados())){
+            if (utilities.Utilities.todosOsCamposPreenchidos(this.telaCadastroFornecedor.getjPanelDados())) {
                 Fornecedor fornecedor = new Fornecedor();
-                
+
                 fornecedor.setCep(this.telaCadastroFornecedor.getjFormattedTextFieldCep().getText());
                 fornecedor.setCnpj(this.telaCadastroFornecedor.getjFormattedTextFieldCnpj().getText());
                 fornecedor.setCpf(this.telaCadastroFornecedor.getjFormattedTextFieldCpf().getText());
@@ -65,12 +67,14 @@ public class ControllerCadFornecedor implements ActionListener {
                 fornecedor.setInscricaoEstadual(this.telaCadastroFornecedor.getjTextFieldInscricaoEstadual().getText());
                 fornecedor.setLogradouro(this.telaCadastroFornecedor.getjTextFieldLogradouro().getText());
                 fornecedor.setNome(this.telaCadastroFornecedor.getjTextFieldNomeFantasia().getText());
+                fornecedor.setUsuario(this.telaCadastroFornecedor.getjTextFieldNomeFantasia().getText());//Usuario é nome fantasia para teste
+                fornecedor.setSenha("senha2025");//Senha genérica para teste
                 fornecedor.setFone1(this.telaCadastroFornecedor.getjFormattedTextFieldFone1().getText());
                 fornecedor.setFone2(this.telaCadastroFornecedor.getjFormattedTextFieldFone2().getText());
                 fornecedor.setObs(this.telaCadastroFornecedor.getjTextFieldObs().getText());
                 fornecedor.setRazaoSocial(this.telaCadastroFornecedor.getjTextFieldRazaoSocial().getText());
                 fornecedor.setRg(this.telaCadastroFornecedor.getjFormattedTextFieldRg().getText());
-                
+
                 if (this.telaCadastroFornecedor.getjTextFieldId().getText().trim().equalsIgnoreCase("")) {
                     //Inclusão
                     fornecedor.setStatus('A');
@@ -80,52 +84,59 @@ public class ControllerCadFornecedor implements ActionListener {
                     fornecedor.setId(Integer.parseInt(this.telaCadastroFornecedor.getjTextFieldId().getText()));
                     service.FornecedorService.Atualizar(fornecedor);
                 }
+                utilities.Utilities.ativaDesativa(this.telaCadastroFornecedor.getjPanelBotoes(), true);
+                utilities.Utilities.limpaComponentes(this.telaCadastroFornecedor.getjPanelDados(), false);
             }
-            utilities.Utilities.ativaDesativa(this.telaCadastroFornecedor.getjPanelBotoes(), true);
-            utilities.Utilities.limpaComponentes(this.telaCadastroFornecedor.getjPanelDados(), false);
-            
+
         //Botão Buscar
         } else if (evento.getSource() == this.telaCadastroFornecedor.getjButtonBuscar()) {
-            codigo = 0;
+                codigo = 0;
 
-            TelaBuscaFornecedor telaBuscaFornecedor = new TelaBuscaFornecedor(null, true);
-            ControllerBuscaFornecedor controllerBuscaFornecedor = new ControllerBuscaFornecedor(telaBuscaFornecedor);
-            telaBuscaFornecedor.setVisible(true);
+                TelaBuscaFornecedor telaBuscaFornecedor = new TelaBuscaFornecedor(null, true);
+                ControllerBuscaFornecedor controllerBuscaFornecedor = new ControllerBuscaFornecedor(telaBuscaFornecedor);
+                telaBuscaFornecedor.setVisible(true);
 
-            if (codigo != 0) {
-                //rotina de carga de fornecedor
-                utilities.Utilities.ativaDesativa(this.telaCadastroFornecedor.getjPanelBotoes(), false);
-                utilities.Utilities.limpaComponentes(this.telaCadastroFornecedor.getjPanelDados(), true);
+                if (codigo != 0) {
+                    //rotina de carga de fornecedor
+                    utilities.Utilities.ativaDesativa(this.telaCadastroFornecedor.getjPanelBotoes(), false);
+                    utilities.Utilities.limpaComponentes(this.telaCadastroFornecedor.getjPanelDados(), true);
 
-                this.telaCadastroFornecedor.getjTextFieldId().setText(codigo + "");
-                this.telaCadastroFornecedor.getjTextFieldId().setEnabled(false);
+                    this.telaCadastroFornecedor.getjTextFieldId().setText(codigo + "");
+                    this.telaCadastroFornecedor.getjTextFieldId().setEnabled(false);
 
-                Fornecedor fornecedor = new Fornecedor();
-                fornecedor = service.FornecedorService.Carregar(codigo);
+                    Fornecedor fornecedor = new Fornecedor();
+                    fornecedor = service.FornecedorService.Carregar(codigo);
 
-                this.telaCadastroFornecedor.getjFormattedTextFieldCep().setText(fornecedor.getCep());
-                this.telaCadastroFornecedor.getjFormattedTextFieldCnpj().setText(fornecedor.getCnpj());
-                this.telaCadastroFornecedor.getjFormattedTextFieldCpf().setText(fornecedor.getCpf());
-                this.telaCadastroFornecedor.getjFormattedTextFieldDataCadastro().setText(fornecedor.getDataCadastro());
-                this.telaCadastroFornecedor.getjTextFieldBairro().setText(fornecedor.getBairro());
-                this.telaCadastroFornecedor.getjTextFieldCidade().setText(fornecedor.getCidade());
-                this.telaCadastroFornecedor.getjTextFieldComplemento().setText(fornecedor.getComplemento());
-                this.telaCadastroFornecedor.getjTextFieldContato().setText(fornecedor.getContato());
-                this.telaCadastroFornecedor.getjTextFieldEmail().setText(fornecedor.getEmail());
-                this.telaCadastroFornecedor.getjTextFieldId().setText(fornecedor.getId() + "");
-                this.telaCadastroFornecedor.getjTextFieldInscricaoEstadual().setText(fornecedor.getInscricaoEstadual());
-                this.telaCadastroFornecedor.getjTextFieldLogradouro().setText(fornecedor.getLogradouro());
-                this.telaCadastroFornecedor.getjTextFieldNomeFantasia().setText(fornecedor.getNome());
-                this.telaCadastroFornecedor.getjFormattedTextFieldFone1().setText(fornecedor.getFone1());
-                this.telaCadastroFornecedor.getjFormattedTextFieldFone2().setText(fornecedor.getFone2());
-                this.telaCadastroFornecedor.getjTextFieldObs().setText(fornecedor.getObs());
-                this.telaCadastroFornecedor.getjTextFieldRazaoSocial().setText(fornecedor.getRazaoSocial());
-                this.telaCadastroFornecedor.getjFormattedTextFieldRg().setText(fornecedor.getRg());
+                    this.telaCadastroFornecedor.getjFormattedTextFieldCep().setText(fornecedor.getCep());
+                    this.telaCadastroFornecedor.getjFormattedTextFieldCnpj().setText(fornecedor.getCnpj());
+                    this.telaCadastroFornecedor.getjFormattedTextFieldCpf().setText(fornecedor.getCpf());
 
-                this.telaCadastroFornecedor.getjTextFieldNomeFantasia().requestFocus();
-            }
-            
-        //Botão Sair
+                    try {
+                        this.telaCadastroFornecedor.getjFormattedTextFieldDataCadastro().setText(new SimpleDateFormat("dd/MM/yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(fornecedor.getDataCadastro())));
+                    } catch (ParseException ex) {
+                        Logger.getLogger(ControllerCadFornecedor.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    this.telaCadastroFornecedor.getjFormattedTextFieldDataCadastro().setEnabled(false);
+                    this.telaCadastroFornecedor.getjTextFieldBairro().setText(fornecedor.getBairro());
+                    this.telaCadastroFornecedor.getjTextFieldCidade().setText(fornecedor.getCidade());
+                    this.telaCadastroFornecedor.getjTextFieldComplemento().setText(fornecedor.getComplemento());
+                    this.telaCadastroFornecedor.getjTextFieldContato().setText(fornecedor.getContato());
+                    this.telaCadastroFornecedor.getjTextFieldEmail().setText(fornecedor.getEmail());
+                    this.telaCadastroFornecedor.getjTextFieldId().setText(fornecedor.getId() + "");
+                    this.telaCadastroFornecedor.getjTextFieldInscricaoEstadual().setText(fornecedor.getInscricaoEstadual());
+                    this.telaCadastroFornecedor.getjTextFieldLogradouro().setText(fornecedor.getLogradouro());
+                    this.telaCadastroFornecedor.getjTextFieldNomeFantasia().setText(fornecedor.getNome());
+                    this.telaCadastroFornecedor.getjFormattedTextFieldFone1().setText(fornecedor.getFone1());
+                    this.telaCadastroFornecedor.getjFormattedTextFieldFone2().setText(fornecedor.getFone2());
+                    this.telaCadastroFornecedor.getjTextFieldObs().setText(fornecedor.getObs());
+                    this.telaCadastroFornecedor.getjTextFieldRazaoSocial().setText(fornecedor.getRazaoSocial());
+                    this.telaCadastroFornecedor.getjFormattedTextFieldRg().setText(fornecedor.getRg());
+
+                    this.telaCadastroFornecedor.getjTextFieldNomeFantasia().requestFocus();
+                }
+                
+            //Botão Sair
         } else if (evento.getSource() == this.telaCadastroFornecedor.getjButtonSair()) {
             this.telaCadastroFornecedor.dispose();
         }
