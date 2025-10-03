@@ -90,9 +90,10 @@ public class ControllerCadModelo implements ActionListener {
 
                 Modelo modelo = new Modelo();
                 modelo = service.ModeloService.Carregar(codigo);
+                Marca marca = service.MarcaService.Carregar(modelo.getMarca().getId());
 
                 this.telaCadastroModelo.getjTextFieldDescricao().setText(modelo.getDescricao());
-                this.telaCadastroModelo.getjComboBoxMarca().setSelectedItem(modelo.getMarca().getDescricao());
+                this.telaCadastroModelo.getjComboBoxMarca().setSelectedItem(marca.getDescricao());
                 
                 this.telaCadastroModelo.getjTextFieldDescricao().requestFocus();
             }

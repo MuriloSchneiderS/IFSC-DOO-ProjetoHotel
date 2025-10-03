@@ -25,51 +25,62 @@ public class ControllerBuscaMarca implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent evento) {
-        
+
         //Botão Carregar
         if (evento.getSource() == this.telaBuscaMarca.getjButtonCarregar()) {
-            if(this.telaBuscaMarca.getjTableDados().getRowCount()==0){
-                JOptionPane.showMessageDialog(null,"Nenhum dado selecionado.");
-            }else{
+            if (this.telaBuscaMarca.getjTableDados().getRowCount() == 0) {
+                JOptionPane.showMessageDialog(null, "Nenhum dado selecionado.");
+            } else {
                 //retorno dos dados para a tela de cadastro
                 ControllerCadMarca.codigo = (int) this.telaBuscaMarca.getjTableDados().getValueAt(this.telaBuscaMarca.getjTableDados().getSelectedRow(), 0);
                 this.telaBuscaMarca.dispose();
             }
-            
+
         //Botão Filtrar
         } else if (evento.getSource() == this.telaBuscaMarca.getjButtonFiltar()) {
             if (this.telaBuscaMarca.getjTFFiltro().getText().trim().equalsIgnoreCase("")) {
                 JOptionPane.showMessageDialog(null, "Sem Dados para a Seleção...");
             } else {
-                if (this.telaBuscaMarca.getjCBFiltro().getSelectedIndex() == 0) {//Ordenar por Id
-                    //Criando objeto para receber o dado que virà do banco de dados
-                    Marca marca = new Marca();
-                    //Carregando o registro do marca na entidade para o objeto marca
-                    marca = service.MarcaService.Carregar(Integer.parseInt(this.telaBuscaMarca.getjTFFiltro().getText()));
-                    //Criando um objeto tabela do tipo defaulttableModel e atribuindo o modelo da tela a ele
-                    DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaMarca.getjTableDados().getModel();
-                    tabela.addRow(new Object[]{
-                        marca.getId(), 
-                        marca.getDescricao()
-                    });
-                } else if (this.telaBuscaMarca.getjCBFiltro().getSelectedIndex() == 1) {//Ordenar por Descricao
-                    //Criando a lista para receber as marcas
-                    List<Marca> listaMarcas = new ArrayList<>();
-                    //Criando um objeto tabela do tipo defaulttablemodel e atribuindo o modelo da tabela a ele
-                    listaMarcas = service.MarcaService.Carregar("nome", this.telaBuscaMarca.getjTFFiltro().getText());
-                    DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaMarca.getjTableDados().getModel();
-                    tabela.setRowCount(0);
-                    //Adicionando os marcas na tabela
-                    for(Marca marcaAtualDaLista : listaMarcas){
+                DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaMarca.getjTableDados().getModel();
+                tabela.setRowCount(0); // Reseta a tabela
+                
+                switch (this.telaBuscaMarca.getjCBFiltro().getSelectedIndex()) {
+                    case 0://Id
+                    {
+                        //Criando objeto para receber o dado que virà do banco de dados
+                        Marca marca = new Marca();
+                        //Carregando o registro do marca na entidade para o objeto marca
+                        marca = service.MarcaService.Carregar(Integer.parseInt(this.telaBuscaMarca.getjTFFiltro().getText()));
+                        //Criando um objeto tabela do tipo defaulttableModel e atribuindo o modelo da tela a ele
+                        tabela = (DefaultTableModel) this.telaBuscaMarca.getjTableDados().getModel();
                         tabela.addRow(new Object[]{
-                            marcaAtualDaLista.getId(), 
-                            marcaAtualDaLista.getDescricao()
+                            marca.getId(), 
+                            marca.getDescricao()
                         });
+                        break;
                     }
+                    case 1://Descricao
+                    {
+                        //Criando a lista para receber os marcas
+                        List<Marca> listaMarcas = new ArrayList<>();
+                        //Criando um objeto tabela do tipo defaulttablemodel e atribuindo o modelo da tabela a ele
+                        listaMarcas = service.MarcaService.Carregar("descricao", this.telaBuscaMarca.getjTFFiltro().getText());
+                        tabela = (DefaultTableModel) this.telaBuscaMarca.getjTableDados().getModel();
+                        //Adicionando os marcas na tabela
+                        for (Marca marcaAtualDaLista : listaMarcas) {
+                            tabela.addRow(new Object[]{
+                                marcaAtualDaLista.getId(), 
+                                marcaAtualDaLista.getDescricao()
+                            });
+                        }
+                        break;
+                    }
+                    default:
+                        break;
                 }
             }
-            
-        //Botão Sair
+
+            //Botão Sair
         } else if (evento.getSource() == this.telaBuscaMarca.getjButtonSair()) {
             this.telaBuscaMarca.dispose();
         }
