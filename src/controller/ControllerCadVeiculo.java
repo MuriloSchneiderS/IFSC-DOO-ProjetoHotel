@@ -111,13 +111,17 @@ public class ControllerCadVeiculo implements ActionListener {
 
                 Veiculo veiculo = new Veiculo();
                 veiculo = service.VeiculoService.Carregar(codigo);
+                Modelo modelo = service.ModeloService.Carregar(veiculo.getModelo().getId());
+                Funcionario funcionario = service.FuncionarioService.Carregar(veiculo.getFuncionario().getId());
+                Fornecedor fornecedor = service.FornecedorService.Carregar(veiculo.getFornecedor().getId());
+                Hospede hospede = service.HospedeService.Carregar(veiculo.getHospede().getId());
 
                 this.telaCadastroVeiculo.getjFormattedTextFieldPlaca().setText(veiculo.getPlaca());
                 this.telaCadastroVeiculo.getjTextFieldCor().setText(veiculo.getCor());
-                this.telaCadastroVeiculo.getjComboBoxModelo().setSelectedItem(veiculo.getModelo().getDescricao());
-                this.telaCadastroVeiculo.getjComboBoxFuncionario().setSelectedItem(veiculo.getFuncionario().getNome());
-                this.telaCadastroVeiculo.getjComboBoxFornecedor().setSelectedItem(veiculo.getFornecedor().getNome());
-                this.telaCadastroVeiculo.getjComboBoxHospede().setSelectedItem(veiculo.getHospede().getNome());
+                this.telaCadastroVeiculo.getjComboBoxModelo().setSelectedItem(modelo.getDescricao());
+                this.telaCadastroVeiculo.getjComboBoxFuncionario().setSelectedItem(funcionario.getNome());
+                this.telaCadastroVeiculo.getjComboBoxFornecedor().setSelectedItem(fornecedor.getNome());
+                this.telaCadastroVeiculo.getjComboBoxHospede().setSelectedItem(hospede.getNome());
                 
                 this.telaCadastroVeiculo.getjFormattedTextFieldPlaca().requestFocus();
             }

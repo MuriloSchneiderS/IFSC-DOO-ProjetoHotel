@@ -71,10 +71,14 @@ public class ControllerBuscaVeiculo implements ActionListener {
                         //Criando a lista para receber os veiculos
                         List<Veiculo> listaVeiculos = new ArrayList<>();
                         Modelo modelo = new Modelo();
-                        //Criando um objeto tabela do tipo defaulttablemodel e atribuindo o veiculo da tabela a ele
+                        
+                        //lista de veiculos com a placa igual a placa pesquisada
                         listaVeiculos = service.VeiculoService.Carregar("placa", this.telaBuscaVeiculo.getjTFFiltro().getText());
+                        
+                        //Criando um objeto tabela do tipo defaulttablemodel e atribuindo o veiculo da tabela a ele
                         tabela = (DefaultTableModel) this.telaBuscaVeiculo.getjTableDados().getModel();
                         tabela.setRowCount(0);
+                        
                         //Adicionando os veiculos na tabela
                         for (Veiculo veiculoAtualDaLista : listaVeiculos) {
                             modelo = service.ModeloService.Carregar(veiculoAtualDaLista.getModelo().getId());
@@ -89,35 +93,70 @@ public class ControllerBuscaVeiculo implements ActionListener {
                         break;
                     }
                     case 2://Cor
-                        
+                    {
+                        List<Veiculo> listaVeiculos = new ArrayList<>();
+                        Modelo modelo = new Modelo();
+
+                        listaVeiculos = service.VeiculoService.Carregar("cor", this.telaBuscaVeiculo.getjTFFiltro().getText());
+                        tabela = (DefaultTableModel) this.telaBuscaVeiculo.getjTableDados().getModel();
+                        tabela.setRowCount(0);
+
+                        for (Veiculo veiculoAtualDaLista : listaVeiculos) {
+                            modelo = service.ModeloService.Carregar(veiculoAtualDaLista.getModelo().getId());
+                            tabela.addRow(new Object[]{
+                                veiculoAtualDaLista.getId(),
+                                veiculoAtualDaLista.getPlaca(),
+                                veiculoAtualDaLista.getCor(),
+                                service.MarcaService.Carregar(modelo.getMarca().getId()).getDescricao(),
+                                modelo.getDescricao()
+                            });
+                        }
                         break;
+                    }
                     case 3://Marca
-                        List<Veiculo> listaVeiculos = new ArrayList<>();
-                        Marca marca = service.MarcaService.Carregar("descricao", this.telaBuscaVeiculo.getjTFFiltro().getText()).getFirst();
+                    {
+                        //Busca a marca pela descrição digitada
+                        List<Marca> marcasEncontradas = service.MarcaService.Carregar("descricao", this.telaBuscaVeiculo.getjTFFiltro().getText());
+                        Marca marca = marcasEncontradas.getFirst();
 
-                        listaVeiculos = service.VeiculoService.Carregar("modelo_id", modelo.getId() + "");
+                        //Busca todos os modelos que pertencem a essa marca
+                        List<Modelo> modelosDaMarca = service.ModeloService.Carregar("marca_id", marca.getId()+"");
+
+                        //Coleta todos os veículos desses modelos
+                        List<Veiculo> listaVeiculos = new ArrayList<>();
+                        for (Modelo modelo : modelosDaMarca) {
+                            List<Veiculo> veiculosDoModelo = service.VeiculoService.Carregar("modelo_id", modelo.getId()+"");
+                            listaVeiculos.addAll(veiculosDoModelo);
+                        }
+
+                        //Preenche a tabela
                         tabela = (DefaultTableModel) this.telaBuscaVeiculo.getjTableDados().getModel();
                         tabela.setRowCount(0);
 
-                        for (Veiculo veiculoAtualDaLista : listaVeiculos) {
+                        for (Veiculo veiculo : listaVeiculos) {
+                            Modelo modelo = service.ModeloService.Carregar(veiculo.getModelo().getId());
                             tabela.addRow(new Object[]{
-                                veiculoAtualDaLista.getId(),
-                                veiculoAtualDaLista.getPlaca(),
-                                veiculoAtualDaLista.getCor(),
-                                service.MarcaService.Carregar(modelo.getMarca().getId()).getDescricao(),
+                                veiculo.getId(),
+                                veiculo.getPlaca(),
+                                veiculo.getCor(),
+                                marca.getDescricao(),
                                 modelo.getDescricao()
                             });
                         }
                         break;
+                    }
                     case 4://Modelo
+                    {
                         List<Veiculo> listaVeiculos = new ArrayList<>();
-                        Modelo modelo = service.ModeloService.Carregar("descricao", this.telaBuscaVeiculo.getjTFFiltro().getText()).getFirst();
+                        Modelo modelo = new Modelo();
 
-                        listaVeiculos = service.VeiculoService.Carregar("modelo_id", modelo.getId() + "");
+                        //lista de veiculos em que o modelo_id == id do modelo pesquisado pela descricao
+                        listaVeiculos = service.VeiculoService.Carregar("modelo_id", service.ModeloService.Carregar("descricao", this.telaBuscaVeiculo.getjTFFiltro().getText()).getFirst().getId() + "");
                         tabela = (DefaultTableModel) this.telaBuscaVeiculo.getjTableDados().getModel();
                         tabela.setRowCount(0);
 
                         for (Veiculo veiculoAtualDaLista : listaVeiculos) {
+                            modelo = service.ModeloService.Carregar(veiculoAtualDaLista.getModelo().getId());
                             tabela.addRow(new Object[]{
                                 veiculoAtualDaLista.getId(),
                                 veiculoAtualDaLista.getPlaca(),
@@ -127,7 +166,9 @@ public class ControllerBuscaVeiculo implements ActionListener {
                             });
                         }
                         break;
+                    }
                     default:
+                        JOptionPane.showMessageDialog(null, "Campo de pesquisa não configurado!");
                         break;
                 }
             }
