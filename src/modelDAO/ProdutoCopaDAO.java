@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import model.ProdutoCopa;
 import java.util.List;
+import model.CopaQuarto;
 
 public class ProdutoCopaDAO implements InterfaceDAO<ProdutoCopa>{
 
@@ -26,7 +27,7 @@ public class ProdutoCopaDAO implements InterfaceDAO<ProdutoCopa>{
             pstm.setFloat(2, objeto.getValor());
             pstm.setString(3, objeto.getObs());
             pstm.setString(4, String.valueOf(objeto.getStatus()));
-            pstm.setInt(5, objeto.getCopaQuartoId());
+            pstm.setInt(5, objeto.getCopaQuarto().getId());
             pstm.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -49,6 +50,7 @@ public class ProdutoCopaDAO implements InterfaceDAO<ProdutoCopa>{
         PreparedStatement pstm = null;
         ResultSet rst = null;
         ProdutoCopa produtoCopa = new ProdutoCopa();
+        CopaQuarto copaQuarto = new CopaQuarto();
         try {
             pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setInt(1, id);
@@ -59,7 +61,8 @@ public class ProdutoCopaDAO implements InterfaceDAO<ProdutoCopa>{
                 produtoCopa.setValor(rst.getFloat("valor"));
                 produtoCopa.setObs(rst.getString("obs"));
                 produtoCopa.setStatus(rst.getString("status").charAt(0));
-                produtoCopa.setCopaQuartoId(rst.getInt("copa_quarto_id"));
+                copaQuarto.setId(rst.getInt("copa_quarto_id"));
+                produtoCopa.setCopaQuarto(copaQuarto);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -84,6 +87,7 @@ public class ProdutoCopaDAO implements InterfaceDAO<ProdutoCopa>{
         PreparedStatement pstm = null;
         ResultSet rst = null;
         List<ProdutoCopa> listaProdutosCopa = new ArrayList<>();
+        CopaQuarto copaQuarto = new CopaQuarto();
         try {
             pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setString(1, "%"+valor+"%");
@@ -95,7 +99,9 @@ public class ProdutoCopaDAO implements InterfaceDAO<ProdutoCopa>{
                 produtoCopa.setValor(rst.getFloat("valor"));
                 produtoCopa.setObs(rst.getString("obs"));
                 produtoCopa.setStatus(rst.getString("status").charAt(0));
-                produtoCopa.setCopaQuartoId(rst.getInt("copa_quarto_id"));
+                copaQuarto.setId(rst.getInt("copa_quarto_id"));
+                produtoCopa.setCopaQuarto(copaQuarto);
+                
                 listaProdutosCopa.add(produtoCopa);
             }
         } catch (SQLException ex) {
@@ -124,7 +130,7 @@ public class ProdutoCopaDAO implements InterfaceDAO<ProdutoCopa>{
             pstm.setFloat(2, objeto.getValor());
             pstm.setString(3, objeto.getObs());
             pstm.setString(4, objeto.getStatus()+"");
-            pstm.setInt(5, objeto.getCopaQuartoId());
+            pstm.setInt(5, objeto.getCopaQuarto().getId());
             pstm.setInt(6, objeto.getId());
             pstm.execute();
         }catch (SQLException ex) {

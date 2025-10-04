@@ -100,13 +100,21 @@ public class TelaBuscaServico extends javax.swing.JDialog {
             new String [] {
                 "Id", "Descricao", "Obs"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTableDados.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jTableDados);
         if (jTableDados.getColumnModel().getColumnCount() > 0) {
             jTableDados.getColumnModel().getColumn(0).setMaxWidth(40);
-            jTableDados.getColumnModel().getColumn(1).setMaxWidth(420);
-            jTableDados.getColumnModel().getColumn(2).setMaxWidth(50);
+            jTableDados.getColumnModel().getColumn(1).setMaxWidth(300);
+            jTableDados.getColumnModel().getColumn(2).setMaxWidth(170);
         }
 
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);
@@ -122,7 +130,7 @@ public class TelaBuscaServico extends javax.swing.JDialog {
 
         jPanelFiltros.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jCBFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Id", "Descricao" }));
+        jCBFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Id", "Descricao", "Obs" }));
 
         jLabelFiltrar.setText("Filtrar Por");
 

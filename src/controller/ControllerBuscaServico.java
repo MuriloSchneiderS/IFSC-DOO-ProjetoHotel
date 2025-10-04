@@ -41,33 +41,64 @@ public class ControllerBuscaServico implements ActionListener {
             if (this.telaBuscaServico.getjTFFiltro().getText().trim().equalsIgnoreCase("")) {
                 JOptionPane.showMessageDialog(null, "Sem Dados para a Seleção...");
             } else {
-                if (this.telaBuscaServico.getjCBFiltro().getSelectedIndex() == 0) {//Ordenar por Id
-                    //Criando objeto para receber o dado que virà do banco de dados
-                    Servico servico = new Servico();
-                    //Carregando o registro do servico na entidade para o objeto servico
-                    servico = service.ServicoService.Carregar(Integer.parseInt(this.telaBuscaServico.getjTFFiltro().getText()));
-                    //Criando um objeto tabela do tipo defaulttableModel e atribuindo o servico da tela a ele
-                    DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaServico.getjTableDados().getModel();
-                    tabela.addRow(new Object[]{
-                        servico.getId(), 
-                        servico.getDescricao(), 
-                        servico.getObs()
-                    });
-                } else if (this.telaBuscaServico.getjCBFiltro().getSelectedIndex() == 1) {//Ordenar por Descricao
-                    //Criando a lista para receber as servicos
-                    List<Servico> listaServicos = new ArrayList<>();
-                    //Criando um objeto tabela do tipo defaulttablemodel e atribuindo o servico da tabela a ele
-                    listaServicos = service.ServicoService.Carregar("nome", this.telaBuscaServico.getjTFFiltro().getText());
-                    DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaServico.getjTableDados().getModel();
-                    tabela.setRowCount(0);
-                    //Adicionando os servicos na tabela
-                    for(Servico servicoAtualDaLista : listaServicos){
-                        tabela.addRow(new Object[]{
-                            servicoAtualDaLista.getId(), 
-                            servicoAtualDaLista.getDescricao(), 
-                            servicoAtualDaLista.getObs()
-                        });
-                    }
+                DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaServico.getjTableDados().getModel();
+                tabela.setRowCount(0); // Reseta a tabela
+                
+                switch (this.telaBuscaServico.getjCBFiltro().getSelectedIndex()) {
+                    case 0://Id
+                        {
+                            //Criando objeto para receber o dado que virà do banco de dados
+                            Servico servico = new Servico();
+                            //Carregando o registro do servico na entidade para o objeto servico
+                            servico = service.ServicoService.Carregar(Integer.parseInt(this.telaBuscaServico.getjTFFiltro().getText()));
+                            //Criando um objeto tabela do tipo defaulttableModel e atribuindo o servico da tela a ele
+                            tabela = (DefaultTableModel) this.telaBuscaServico.getjTableDados().getModel();
+                            tabela.addRow(new Object[]{
+                                servico.getId(),
+                                servico.getDescricao(),
+                                servico.getObs()
+                            });     
+                            break;
+                        }
+                    case 1://Descricao
+                        {
+                            //Criando a lista para receber as servicos
+                            List<Servico> listaServicos = new ArrayList<>();
+                            //Criando um objeto tabela do tipo defaulttablemodel e atribuindo o servico da tabela a ele
+                            listaServicos = service.ServicoService.Carregar("descricao", this.telaBuscaServico.getjTFFiltro().getText());
+                            tabela = (DefaultTableModel) this.telaBuscaServico.getjTableDados().getModel();
+                            tabela.setRowCount(0);
+                            //Adicionando os servicos na tabela
+                            for(Servico servicoAtualDaLista : listaServicos){
+                                tabela.addRow(new Object[]{
+                                    servicoAtualDaLista.getId(),
+                                    servicoAtualDaLista.getDescricao(),
+                                    servicoAtualDaLista.getObs()
+                                });
+                            }       
+                            break;
+                        }
+                    case 2://Obs
+                        {
+                            //Criando a lista para receber as servicos
+                            List<Servico> listaServicos = new ArrayList<>();
+                            //Criando um objeto tabela do tipo defaulttablemodel e atribuindo o servico da tabela a ele
+                            listaServicos = service.ServicoService.Carregar("obs", this.telaBuscaServico.getjTFFiltro().getText());
+                            tabela = (DefaultTableModel) this.telaBuscaServico.getjTableDados().getModel();
+                            tabela.setRowCount(0);
+                            //Adicionando os servicos na tabela
+                            for(Servico servicoAtualDaLista : listaServicos){
+                                tabela.addRow(new Object[]{
+                                    servicoAtualDaLista.getId(),
+                                    servicoAtualDaLista.getDescricao(),
+                                    servicoAtualDaLista.getObs()
+                                });
+                            }       
+                            break;
+                        }
+                    default:
+                        JOptionPane.showMessageDialog(null, "Campo de pesquisa não configurado!");
+                        break;
                 }
             }
             

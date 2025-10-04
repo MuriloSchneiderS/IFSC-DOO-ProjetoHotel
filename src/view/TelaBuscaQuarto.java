@@ -98,18 +98,26 @@ public class TelaBuscaQuarto extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Id", "Descricao", "Andar", "Capacidade", "Animais", "Status"
+                "Id", "Descricao", "Andar", "Metragem", "Capacidade", "Animais"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTableDados.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jTableDados);
         if (jTableDados.getColumnModel().getColumnCount() > 0) {
             jTableDados.getColumnModel().getColumn(0).setMaxWidth(40);
-            jTableDados.getColumnModel().getColumn(1).setMaxWidth(210);
+            jTableDados.getColumnModel().getColumn(1).setMaxWidth(200);
             jTableDados.getColumnModel().getColumn(2).setMaxWidth(70);
-            jTableDados.getColumnModel().getColumn(3).setMaxWidth(80);
-            jTableDados.getColumnModel().getColumn(4).setMaxWidth(60);
-            jTableDados.getColumnModel().getColumn(5).setMaxWidth(40);
+            jTableDados.getColumnModel().getColumn(3).setMaxWidth(65);
+            jTableDados.getColumnModel().getColumn(4).setMaxWidth(80);
+            jTableDados.getColumnModel().getColumn(5).setMaxWidth(60);
         }
 
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);
@@ -125,7 +133,7 @@ public class TelaBuscaQuarto extends javax.swing.JDialog {
 
         jPanelFiltros.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jCBFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Id", "Descricao", "Andar", "Capacidade", "Permite animais" }));
+        jCBFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Id", "Descricao", "Andar", "Metragem", "Capacidade", "Permite animais" }));
 
         jLabelFiltrar.setText("Filtrar Por");
 

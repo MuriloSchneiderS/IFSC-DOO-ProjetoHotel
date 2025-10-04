@@ -55,11 +55,13 @@ public class ControllerCadProdutoCopa implements ActionListener {
                 this.telaCadastroProdutoCopa.getjTextFieldDescricao().requestFocus();
             } else {
                 ProdutoCopa produtoCopa = new ProdutoCopa();
+                CopaQuarto copaQuarto = new CopaQuarto();
 
                 produtoCopa.setDescricao(this.telaCadastroProdutoCopa.getjTextFieldDescricao().getText());
                 produtoCopa.setValor(((Double)this.telaCadastroProdutoCopa.getjSpinnerValor().getValue()).floatValue());
                 produtoCopa.setObs(this.telaCadastroProdutoCopa.getjTextFieldObs().getText());
-                produtoCopa.setCopaQuartoId( Integer.parseInt(this.telaCadastroProdutoCopa.getjComboBoxCopaQuarto().getSelectedItem().toString()));
+                copaQuarto.setId(Integer.parseInt(this.telaCadastroProdutoCopa.getjComboBoxCopaQuarto().getSelectedItem().toString()));
+                produtoCopa.setCopaQuarto(copaQuarto);
                         
                 if (this.telaCadastroProdutoCopa.getjTextFieldId().getText().trim().equalsIgnoreCase("")) {
                     //Inclusão
@@ -98,7 +100,7 @@ public class ControllerCadProdutoCopa implements ActionListener {
                 this.telaCadastroProdutoCopa.getjTextFieldDescricao().setText(produtoCopa.getDescricao());
                 this.telaCadastroProdutoCopa.getjSpinnerValor().setValue(produtoCopa.getValor());
                 this.telaCadastroProdutoCopa.getjTextFieldObs().setText(produtoCopa.getObs());
-                this.telaCadastroProdutoCopa.getjComboBoxCopaQuarto().setSelectedItem(produtoCopa.getCopaQuartoId());
+                this.telaCadastroProdutoCopa.getjComboBoxCopaQuarto().setSelectedItem(produtoCopa.getCopaQuarto().getId()+"");
                 
                 this.telaCadastroProdutoCopa.getjTextFieldDescricao().requestFocus();
             }

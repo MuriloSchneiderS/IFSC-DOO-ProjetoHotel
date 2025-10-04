@@ -98,16 +98,25 @@ public class TelaBuscaVagaEstacionamento extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Id", "Descricao", "Metragem", "Status"
+                "Id", "Descricao", "Obs", "Metragem", "Status"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTableDados.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jTableDados);
         if (jTableDados.getColumnModel().getColumnCount() > 0) {
             jTableDados.getColumnModel().getColumn(0).setMaxWidth(40);
-            jTableDados.getColumnModel().getColumn(1).setMaxWidth(320);
-            jTableDados.getColumnModel().getColumn(2).setMaxWidth(100);
-            jTableDados.getColumnModel().getColumn(3).setMaxWidth(50);
+            jTableDados.getColumnModel().getColumn(1).setMaxWidth(250);
+            jTableDados.getColumnModel().getColumn(2).setMaxWidth(80);
+            jTableDados.getColumnModel().getColumn(3).setMaxWidth(80);
+            jTableDados.getColumnModel().getColumn(4).setMaxWidth(50);
         }
 
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);

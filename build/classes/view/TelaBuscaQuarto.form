@@ -118,12 +118,12 @@
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="6" rowCount="0">
-                    <Column editable="true" title="Id" type="java.lang.Object"/>
-                    <Column editable="true" title="Descricao" type="java.lang.Object"/>
-                    <Column editable="true" title="Andar" type="java.lang.Object"/>
-                    <Column editable="true" title="Capacidade" type="java.lang.Object"/>
-                    <Column editable="true" title="Animais" type="java.lang.Object"/>
-                    <Column editable="true" title="Status" type="java.lang.Object"/>
+                    <Column editable="false" title="Id" type="java.lang.Object"/>
+                    <Column editable="false" title="Descricao" type="java.lang.Object"/>
+                    <Column editable="false" title="Andar" type="java.lang.Object"/>
+                    <Column editable="false" title="Metragem" type="java.lang.Object"/>
+                    <Column editable="false" title="Capacidade" type="java.lang.Object"/>
+                    <Column editable="false" title="Animais" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -133,12 +133,17 @@
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="210" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="200" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
                     </Column>
                     <Column maxWidth="70" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="65" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
@@ -149,11 +154,6 @@
                       <Renderer/>
                     </Column>
                     <Column maxWidth="60" minWidth="-1" prefWidth="-1" resizable="true">
-                      <Title/>
-                      <Editor/>
-                      <Renderer/>
-                    </Column>
-                    <Column maxWidth="40" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
@@ -242,12 +242,13 @@
         <Component class="javax.swing.JComboBox" name="jCBFiltro">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="5">
+              <StringArray count="6">
                 <StringItem index="0" value="Id"/>
                 <StringItem index="1" value="Descricao"/>
                 <StringItem index="2" value="Andar"/>
-                <StringItem index="3" value="Capacidade"/>
-                <StringItem index="4" value="Permite animais"/>
+                <StringItem index="3" value="Metragem"/>
+                <StringItem index="4" value="Capacidade"/>
+                <StringItem index="5" value="Permite animais"/>
               </StringArray>
             </Property>
           </Properties>

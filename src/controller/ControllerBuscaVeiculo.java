@@ -38,7 +38,7 @@ public class ControllerBuscaVeiculo implements ActionListener {
                 this.telaBuscaVeiculo.dispose();
             }
 
-            //Botão Filtrar
+        //Botão Filtrar
         } else if (evento.getSource() == this.telaBuscaVeiculo.getjButtonFiltar()) {
             if (this.telaBuscaVeiculo.getjTFFiltro().getText().trim().equalsIgnoreCase("")) {
                 JOptionPane.showMessageDialog(null, "Sem Dados para a Seleção...");

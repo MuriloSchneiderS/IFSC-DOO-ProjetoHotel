@@ -41,127 +41,136 @@ public class ControllerBuscaQuarto implements ActionListener {
             if (this.telaBuscaQuarto.getjTFFiltro().getText().trim().equalsIgnoreCase("")) {
                 JOptionPane.showMessageDialog(null, "Sem Dados para a Seleção...");
             } else {
-                //Ordenar por Id
-                if (this.telaBuscaQuarto.getjCBFiltro().getSelectedIndex() == 0) {
-                    //Criando objeto para receber o dado que virà do banco de dados
-                    Quarto quarto = new Quarto();
-                    //Carregando o registro do quarto na entidade para o objeto quarto
-                    quarto = service.QuartoService.Carregar(Integer.parseInt(this.telaBuscaQuarto.getjTFFiltro().getText()));
-                    //Criando um objeto tabela do tipo defaulttableModel e atribuindo o modelo da tela a ele
-                    DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaQuarto.getjTableDados().getModel();
-                    tabela.addRow(new Object[]{
-                        quarto.getId(), 
-                        quarto.getDescricao(),
-                        quarto.getAndar(),
-                        quarto.getCapacidadeHospedes(),
-                        quarto.getFlagAnimais(),
-                        quarto.getStatus()
-                    });
-                    
-                //Ordenar por Descricao
-                } else if (this.telaBuscaQuarto.getjCBFiltro().getSelectedIndex() == 1) {
-                    //Criando a lista para receber as quartos
-                    List<Quarto> listaQuartos = new ArrayList<>();
-                    //Criando um objeto tabela do tipo defaulttablemodel e atribuindo o modelo da tabela a ele
-                    listaQuartos = service.QuartoService.Carregar("descricao", this.telaBuscaQuarto.getjTFFiltro().getText());
-                    
-                    DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaQuarto.getjTableDados().getModel();
-                    tabela.setRowCount(0);
-                    //Adicionando os quartos na tabela
-                    for(Quarto quartoAtualDaLista : listaQuartos){
-                        tabela.addRow(new Object[]{
-                            quartoAtualDaLista.getId(), 
-                            quartoAtualDaLista.getDescricao(),
-                            quartoAtualDaLista.getAndar(),
-                            quartoAtualDaLista.getCapacidadeHospedes(),
-                            quartoAtualDaLista.getFlagAnimais(),
-                            quartoAtualDaLista.getStatus()
-                        });
-                    }
-                    
-                //Ordenar por Andar
-                } else if (this.telaBuscaQuarto.getjCBFiltro().getSelectedIndex() == 2) {
-                    //Criando a lista para receber as quartos
-                    List<Quarto> listaQuartos = new ArrayList<>();
-                    //Criando um objeto tabela do tipo defaulttablemodel e atribuindo o modelo da tabela a ele
-                    listaQuartos = service.QuartoService.Carregar("andar", this.telaBuscaQuarto.getjTFFiltro().getText());
-                    
-                    DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaQuarto.getjTableDados().getModel();
-                    tabela.setRowCount(0);
-                    //Adicionando os quartos na tabela
-                    for(Quarto quartoAtualDaLista : listaQuartos){
-                        tabela.addRow(new Object[]{
-                            quartoAtualDaLista.getId(), 
-                            quartoAtualDaLista.getDescricao(),
-                            quartoAtualDaLista.getAndar(),
-                            quartoAtualDaLista.getCapacidadeHospedes(),
-                            quartoAtualDaLista.getFlagAnimais(),
-                            quartoAtualDaLista.getStatus()
-                        });
-                    }
-                    
-                //Ordenar por Capacidade De Hospedes
-                } else if (this.telaBuscaQuarto.getjCBFiltro().getSelectedIndex() == 3) {
-                    //Criando a lista para receber as quartos
-                    List<Quarto> listaQuartos = new ArrayList<>();
-                    //Criando um objeto tabela do tipo defaulttablemodel e atribuindo o modelo da tabela a ele
-                    listaQuartos = service.QuartoService.Carregar("capacidade_hospedes", this.telaBuscaQuarto.getjTFFiltro().getText());
-                    
-                    DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaQuarto.getjTableDados().getModel();
-                    tabela.setRowCount(0);
-                    //Adicionando os quartos na tabela
-                    for(Quarto quartoAtualDaLista : listaQuartos){
-                        tabela.addRow(new Object[]{
-                            quartoAtualDaLista.getId(), 
-                            quartoAtualDaLista.getDescricao(),
-                            quartoAtualDaLista.getAndar(),
-                            quartoAtualDaLista.getCapacidadeHospedes(),
-                            quartoAtualDaLista.getFlagAnimais(),
-                            quartoAtualDaLista.getStatus()
-                        });
-                    }
-                    
-                //Ordenar por Flag Animais
-                } else if (this.telaBuscaQuarto.getjCBFiltro().getSelectedIndex() == 4) {
-                    //Criando a lista para receber as quartos
-                    List<Quarto> listaQuartos = new ArrayList<>();
-                    //Criando um objeto tabela do tipo defaulttablemodel e atribuindo o modelo da tabela a ele
-                    listaQuartos = service.QuartoService.Carregar("flag_animais", this.telaBuscaQuarto.getjTFFiltro().getText());
-                    
-                    DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaQuarto.getjTableDados().getModel();
-                    tabela.setRowCount(0);
-                    //Adicionando os quartos na tabela
-                    for(Quarto quartoAtualDaLista : listaQuartos){
-                        tabela.addRow(new Object[]{
-                            quartoAtualDaLista.getId(), 
-                            quartoAtualDaLista.getDescricao(),
-                            quartoAtualDaLista.getAndar(),
-                            quartoAtualDaLista.getCapacidadeHospedes(),
-                            quartoAtualDaLista.getFlagAnimais(),
-                            quartoAtualDaLista.getStatus()
-                        });
-                    }
-                    
-                //Ordenar por Status
-                } else if (this.telaBuscaQuarto.getjCBFiltro().getSelectedIndex() == 5) {
-                    //Criando a lista para receber as quartos
-                    List<Quarto> listaQuartos = new ArrayList<>();
-                    //Criando um objeto tabela do tipo defaulttablemodel e atribuindo o modelo da tabela a ele
-                    listaQuartos = service.QuartoService.Carregar("status", this.telaBuscaQuarto.getjTFFiltro().getText());
-                    
-                    DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaQuarto.getjTableDados().getModel();
-                    tabela.setRowCount(0);
-                    //Adicionando os quartos na tabela
-                    for(Quarto quartoAtualDaLista : listaQuartos){
-                        tabela.addRow(new Object[]{
-                            quartoAtualDaLista.getId(), 
-                            quartoAtualDaLista.getDescricao(),
-                            quartoAtualDaLista.getAndar(),
-                            quartoAtualDaLista.getCapacidadeHospedes(),
-                            quartoAtualDaLista.getFlagAnimais(),
-                            quartoAtualDaLista.getStatus()
-                        });
-                    }
+                DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaQuarto.getjTableDados().getModel();
+                tabela.setRowCount(0); // Reseta a tabela
+                
+                switch (this.telaBuscaQuarto.getjCBFiltro().getSelectedIndex()) {
+                    case 0://Id
+                        {
+                            //Criando objeto para receber o dado que virà do banco de dados
+                            Quarto quarto = new Quarto();
+                            //Carregando o registro do quarto na entidade para o objeto quarto
+                            quarto = service.QuartoService.Carregar(Integer.parseInt(this.telaBuscaQuarto.getjTFFiltro().getText()));
+                            //Criando um objeto tabela do tipo defaulttableModel e atribuindo o modelo da tela a ele
+                            tabela = (DefaultTableModel) this.telaBuscaQuarto.getjTableDados().getModel();
+                            tabela.addRow(new Object[]{
+                                quarto.getId(),
+                                quarto.getDescricao(),
+                                quarto.getAndar(),
+                                quarto.getMetragem(),
+                                quarto.getCapacidadeHospedes(),
+                                quarto.getFlagAnimais()==1?"Sim":"Nao"
+                            });
+                            break;
+                        }
+                    case 1://Descricao
+                        {
+                            //Criando a lista para receber as quartos
+                            List<Quarto> listaQuartos = new ArrayList<>();
+                            //Criando um objeto tabela do tipo defaulttablemodel e atribuindo o modelo da tabela a ele
+                            listaQuartos = service.QuartoService.Carregar("descricao", this.telaBuscaQuarto.getjTFFiltro().getText());
+                            tabela = (DefaultTableModel) this.telaBuscaQuarto.getjTableDados().getModel();
+                            tabela.setRowCount(0);
+                            //Adicionando os quartos na tabela
+                            for(Quarto quartoAtualDaLista : listaQuartos){
+                                tabela.addRow(new Object[]{
+                                    quartoAtualDaLista.getId(),
+                                    quartoAtualDaLista.getDescricao(),
+                                    quartoAtualDaLista.getAndar(),
+                                    quartoAtualDaLista.getMetragem(),
+                                    quartoAtualDaLista.getCapacidadeHospedes(),
+                                    quartoAtualDaLista.getFlagAnimais()==1?"Sim":"Nao"
+                                });
+                            }
+                            break;
+                        }
+                    case 2://Andar
+                        {
+                            //Criando a lista para receber as quartos
+                            List<Quarto> listaQuartos = new ArrayList<>();
+                            //Criando um objeto tabela do tipo defaulttablemodel e atribuindo o modelo da tabela a ele
+                            listaQuartos = service.QuartoService.Carregar("andar", this.telaBuscaQuarto.getjTFFiltro().getText());
+                            tabela = (DefaultTableModel) this.telaBuscaQuarto.getjTableDados().getModel();
+                            tabela.setRowCount(0);
+                            //Adicionando os quartos na tabela
+                            for(Quarto quartoAtualDaLista : listaQuartos){
+                                tabela.addRow(new Object[]{
+                                    quartoAtualDaLista.getId(),
+                                    quartoAtualDaLista.getDescricao(),
+                                    quartoAtualDaLista.getAndar(),
+                                    quartoAtualDaLista.getMetragem(),
+                                    quartoAtualDaLista.getCapacidadeHospedes(),
+                                    quartoAtualDaLista.getFlagAnimais()==1?"Sim":"Nao"
+                                });
+                            }
+                            break;
+                        }
+                    case 3://Metragem
+                        {
+                            //Criando a lista para receber as quartos
+                            List<Quarto> listaQuartos = new ArrayList<>();
+                            //Criando um objeto tabela do tipo defaulttablemodel e atribuindo o modelo da tabela a ele
+                            listaQuartos = service.QuartoService.Carregar("metragem", this.telaBuscaQuarto.getjTFFiltro().getText());
+                            tabela = (DefaultTableModel) this.telaBuscaQuarto.getjTableDados().getModel();
+                            tabela.setRowCount(0);
+                            //Adicionando os quartos na tabela
+                            for(Quarto quartoAtualDaLista : listaQuartos){
+                                tabela.addRow(new Object[]{
+                                    quartoAtualDaLista.getId(),
+                                    quartoAtualDaLista.getDescricao(),
+                                    quartoAtualDaLista.getAndar(),
+                                    quartoAtualDaLista.getMetragem(),
+                                    quartoAtualDaLista.getCapacidadeHospedes(),
+                                    quartoAtualDaLista.getFlagAnimais()==1?"Sim":"Nao"
+                                });
+                            }
+                            break;
+                        }
+                    case 4://Capacidade de hospedes
+                        {
+                            //Criando a lista para receber as quartos
+                            List<Quarto> listaQuartos = new ArrayList<>();
+                            //Criando um objeto tabela do tipo defaulttablemodel e atribuindo o modelo da tabela a ele
+                            listaQuartos = service.QuartoService.Carregar("capacidade_hospedes", this.telaBuscaQuarto.getjTFFiltro().getText());
+                            tabela = (DefaultTableModel) this.telaBuscaQuarto.getjTableDados().getModel();
+                            tabela.setRowCount(0);
+                            //Adicionando os quartos na tabela
+                            for(Quarto quartoAtualDaLista : listaQuartos){
+                                tabela.addRow(new Object[]{
+                                    quartoAtualDaLista.getId(),
+                                    quartoAtualDaLista.getDescricao(),
+                                    quartoAtualDaLista.getAndar(),
+                                    quartoAtualDaLista.getMetragem(),
+                                    quartoAtualDaLista.getCapacidadeHospedes(),
+                                    quartoAtualDaLista.getFlagAnimais()==1?"Sim":"Nao"
+                                });
+                            }
+                            break;
+                        }
+                    case 5://Permite animais
+                        {
+                            //Criando a lista para receber as quartos
+                            List<Quarto> listaQuartos = new ArrayList<>();
+                            //Criando um objeto tabela do tipo defaulttablemodel e atribuindo o modelo da tabela a ele
+                            listaQuartos = service.QuartoService.Carregar("flag_animais", this.telaBuscaQuarto.getjTFFiltro().getText());
+                            tabela = (DefaultTableModel) this.telaBuscaQuarto.getjTableDados().getModel();
+                            tabela.setRowCount(0);
+                            //Adicionando os quartos na tabela
+                            for(Quarto quartoAtualDaLista : listaQuartos){
+                                tabela.addRow(new Object[]{
+                                    quartoAtualDaLista.getId(),
+                                    quartoAtualDaLista.getDescricao(),
+                                    quartoAtualDaLista.getAndar(),
+                                    quartoAtualDaLista.getMetragem(),
+                                    quartoAtualDaLista.getCapacidadeHospedes(),
+                                    quartoAtualDaLista.getFlagAnimais()==1?"Sim":"Nao"
+                                });
+                            }
+                            break;
+                        }
+                    default:
+                        JOptionPane.showMessageDialog(null, "Campo de pesquisa não configurado!");
+                        break;
                 }
             }
             

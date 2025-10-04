@@ -41,101 +41,110 @@ public class ControllerBuscaProdutoCopa implements ActionListener {
             if (this.telaBuscaProdutoCopa.getjTFFiltro().getText().trim().equalsIgnoreCase("")) {
                 JOptionPane.showMessageDialog(null, "Sem Dados para a Seleção...");
             } else {
-                //Ordenar por Id
-                if (this.telaBuscaProdutoCopa.getjCBFiltro().getSelectedIndex() == 0) {
-                    //Criando objeto para receber o dado que virà do banco de dados
-                    ProdutoCopa produtoCopa = new ProdutoCopa();
-                    //Carregando o registro do produtoCopa na entidade para o objeto produtoCopa
-                    produtoCopa = service.ProdutoCopaService.Carregar(Integer.parseInt(this.telaBuscaProdutoCopa.getjTFFiltro().getText()));
-                    //Criando um objeto tabela do tipo defaulttableModel e atribuindo o modelo da tela a ele
-                    DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaProdutoCopa.getjTableDados().getModel();
-                    tabela.addRow(new Object[]{
-                        produtoCopa.getId(), 
-                        produtoCopa.getDescricao(),
-                        produtoCopa.getValor(),
-                        produtoCopa.getObs(),
-                        produtoCopa.getCopaQuartoId()
-                    });
-                    
-                //Ordenar por Descricao
-                } else if (this.telaBuscaProdutoCopa.getjCBFiltro().getSelectedIndex() == 1) {
-                    //Criando a lista para receber as produtosCopa
-                    List<ProdutoCopa> listaProdutosCopa = new ArrayList<>();
-                    //Criando um objeto tabela do tipo defaulttablemodel e atribuindo o modelo da tabela a ele
-                    listaProdutosCopa = service.ProdutoCopaService.Carregar("descricao", this.telaBuscaProdutoCopa.getjTFFiltro().getText());
-                    
-                    DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaProdutoCopa.getjTableDados().getModel();
-                    tabela.setRowCount(0);
-                    //Adicionando os produtosCopa na tabela
-                    for(ProdutoCopa produtoCopaAtualDaLista : listaProdutosCopa){
-                        tabela.addRow(new Object[]{
-                            produtoCopaAtualDaLista.getId(), 
-                            produtoCopaAtualDaLista.getDescricao(),
-                            produtoCopaAtualDaLista.getValor(),
-                            produtoCopaAtualDaLista.getObs(),
-                            produtoCopaAtualDaLista.getCopaQuartoId()
-                        });
-                    }
-                    
-                //Ordenar por Valor
-                } else if (this.telaBuscaProdutoCopa.getjCBFiltro().getSelectedIndex() == 2) {
-                    //Criando a lista para receber as produtosCopa
-                    List<ProdutoCopa> listaProdutosCopa = new ArrayList<>();
-                    //Criando um objeto tabela do tipo defaulttablemodel e atribuindo o modelo da tabela a ele
-                    listaProdutosCopa = service.ProdutoCopaService.Carregar("valor", this.telaBuscaProdutoCopa.getjTFFiltro().getText());
-                    
-                    DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaProdutoCopa.getjTableDados().getModel();
-                    tabela.setRowCount(0);
-                    //Adicionando os produtosCopa na tabela
-                    for(ProdutoCopa produtoCopaAtualDaLista : listaProdutosCopa){
-                        tabela.addRow(new Object[]{
-                            produtoCopaAtualDaLista.getId(), 
-                            produtoCopaAtualDaLista.getDescricao(),
-                            produtoCopaAtualDaLista.getValor(),
-                            produtoCopaAtualDaLista.getObs(),
-                            produtoCopaAtualDaLista.getCopaQuartoId()
-                        });
-                    }
-                    
-                //Ordenar por Obs
-                } else if (this.telaBuscaProdutoCopa.getjCBFiltro().getSelectedIndex() == 3) {
-                    //Criando a lista para receber as produtosCopa
-                    List<ProdutoCopa> listaProdutosCopa = new ArrayList<>();
-                    //Criando um objeto tabela do tipo defaulttablemodel e atribuindo o modelo da tabela a ele
-                    listaProdutosCopa = service.ProdutoCopaService.Carregar("obs", this.telaBuscaProdutoCopa.getjTFFiltro().getText());
-                    
-                    DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaProdutoCopa.getjTableDados().getModel();
-                    tabela.setRowCount(0);
-                    //Adicionando os produtosCopa na tabela
-                    for(ProdutoCopa produtoCopaAtualDaLista : listaProdutosCopa){
-                        tabela.addRow(new Object[]{
-                            produtoCopaAtualDaLista.getId(), 
-                            produtoCopaAtualDaLista.getDescricao(),
-                            produtoCopaAtualDaLista.getValor(),
-                            produtoCopaAtualDaLista.getObs(),
-                            produtoCopaAtualDaLista.getCopaQuartoId()
-                        });
-                    }
-                    
-                //Ordenar por Copa Quarto
-                } else if (this.telaBuscaProdutoCopa.getjCBFiltro().getSelectedIndex() == 4) {
-                    //Criando a lista para receber as produtosCopa
-                    List<ProdutoCopa> listaProdutosCopa = new ArrayList<>();
-                    //Criando um objeto tabela do tipo defaulttablemodel e atribuindo o modelo da tabela a ele
-                    listaProdutosCopa = service.ProdutoCopaService.Carregar("copa_quarto_id", this.telaBuscaProdutoCopa.getjTFFiltro().getText());
-                    
-                    DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaProdutoCopa.getjTableDados().getModel();
-                    tabela.setRowCount(0);
-                    //Adicionando os produtosCopa na tabela
-                    for(ProdutoCopa produtoCopaAtualDaLista : listaProdutosCopa){
-                        tabela.addRow(new Object[]{
-                            produtoCopaAtualDaLista.getId(), 
-                            produtoCopaAtualDaLista.getDescricao(),
-                            produtoCopaAtualDaLista.getValor(),
-                            produtoCopaAtualDaLista.getObs(),
-                            produtoCopaAtualDaLista.getCopaQuartoId()
-                        });
-                    }
+                DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaProdutoCopa.getjTableDados().getModel();
+                tabela.setRowCount(0); // Reseta a tabela
+                
+                switch (this.telaBuscaProdutoCopa.getjCBFiltro().getSelectedIndex()) {
+                    case 0://Id
+                        {
+                            //Criando objeto para receber o dado que virà do banco de dados
+                            ProdutoCopa produtoCopa = new ProdutoCopa();
+                            //Carregando o registro do produtoCopa na entidade para o objeto produtoCopa
+                            produtoCopa = service.ProdutoCopaService.Carregar(Integer.parseInt(this.telaBuscaProdutoCopa.getjTFFiltro().getText()));
+                            //Criando um objeto tabela do tipo defaulttableModel e atribuindo o modelo da tela a ele
+                            tabela = (DefaultTableModel) this.telaBuscaProdutoCopa.getjTableDados().getModel();
+                            tabela.addRow(new Object[]{
+                                produtoCopa.getId(),
+                                produtoCopa.getDescricao(),
+                                produtoCopa.getValor(),
+                                produtoCopa.getObs(),
+                                produtoCopa.getCopaQuarto().getId()
+                            });
+                            break;
+                        }
+                    case 1://Descricao
+                        {
+                            //Criando a lista para receber as produtosCopa
+                            List<ProdutoCopa> listaProdutosCopa = new ArrayList<>();
+                            //Criando um objeto tabela do tipo defaulttablemodel e atribuindo o modelo da tabela a ele
+                            listaProdutosCopa = service.ProdutoCopaService.Carregar("descricao", this.telaBuscaProdutoCopa.getjTFFiltro().getText());
+                            tabela = (DefaultTableModel) this.telaBuscaProdutoCopa.getjTableDados().getModel();
+                            tabela.setRowCount(0);
+                            //Adicionando os produtosCopa na tabela
+                            for(ProdutoCopa produtoCopaAtualDaLista : listaProdutosCopa){
+                                tabela.addRow(new Object[]{
+                                    produtoCopaAtualDaLista.getId(),
+                                    produtoCopaAtualDaLista.getDescricao(),
+                                    produtoCopaAtualDaLista.getValor(),
+                                    produtoCopaAtualDaLista.getObs(),
+                                    produtoCopaAtualDaLista.getCopaQuarto().getId()
+                                });
+                            }
+                            break;
+                        }
+                    case 2://Valor
+                        {
+                            //Criando a lista para receber as produtosCopa
+                            List<ProdutoCopa> listaProdutosCopa = new ArrayList<>();
+                            //Criando um objeto tabela do tipo defaulttablemodel e atribuindo o modelo da tabela a ele
+                            listaProdutosCopa = service.ProdutoCopaService.Carregar("valor", this.telaBuscaProdutoCopa.getjTFFiltro().getText());
+                            tabela = (DefaultTableModel) this.telaBuscaProdutoCopa.getjTableDados().getModel();
+                            tabela.setRowCount(0);
+                            //Adicionando os produtosCopa na tabela
+                            for(ProdutoCopa produtoCopaAtualDaLista : listaProdutosCopa){
+                                tabela.addRow(new Object[]{
+                                    produtoCopaAtualDaLista.getId(),
+                                    produtoCopaAtualDaLista.getDescricao(),
+                                    produtoCopaAtualDaLista.getValor(),
+                                    produtoCopaAtualDaLista.getObs(),
+                                    produtoCopaAtualDaLista.getCopaQuarto().getId()
+                                });
+                            }
+                            break;
+                        }
+                    case 3://Obs
+                        {
+                            //Criando a lista para receber as produtosCopa
+                            List<ProdutoCopa> listaProdutosCopa = new ArrayList<>();
+                            //Criando um objeto tabela do tipo defaulttablemodel e atribuindo o modelo da tabela a ele
+                            listaProdutosCopa = service.ProdutoCopaService.Carregar("obs", this.telaBuscaProdutoCopa.getjTFFiltro().getText());
+                            tabela = (DefaultTableModel) this.telaBuscaProdutoCopa.getjTableDados().getModel();
+                            tabela.setRowCount(0);
+                            //Adicionando os produtosCopa na tabela
+                            for(ProdutoCopa produtoCopaAtualDaLista : listaProdutosCopa){
+                                tabela.addRow(new Object[]{
+                                    produtoCopaAtualDaLista.getId(),
+                                    produtoCopaAtualDaLista.getDescricao(),
+                                    produtoCopaAtualDaLista.getValor(),
+                                    produtoCopaAtualDaLista.getObs(),
+                                    produtoCopaAtualDaLista.getCopaQuarto().getId()
+                                });
+                            }
+                            break;
+                        }
+                    case 4://Copa Quarto Id
+                        {
+                            //Criando a lista para receber as produtosCopa
+                            List<ProdutoCopa> listaProdutosCopa = new ArrayList<>();
+                            //Criando um objeto tabela do tipo defaulttablemodel e atribuindo o modelo da tabela a ele
+                            listaProdutosCopa = service.ProdutoCopaService.Carregar("copa_quarto_id", this.telaBuscaProdutoCopa.getjTFFiltro().getText());
+                            tabela = (DefaultTableModel) this.telaBuscaProdutoCopa.getjTableDados().getModel();
+                            tabela.setRowCount(0);
+                            //Adicionando os produtosCopa na tabela
+                            for(ProdutoCopa produtoCopaAtualDaLista : listaProdutosCopa){
+                                tabela.addRow(new Object[]{
+                                    produtoCopaAtualDaLista.getId(),
+                                    produtoCopaAtualDaLista.getDescricao(),
+                                    produtoCopaAtualDaLista.getValor(),
+                                    produtoCopaAtualDaLista.getObs(),
+                                    produtoCopaAtualDaLista.getCopaQuarto().getId()
+                                });
+                            }       
+                            break;
+                        }
+                    default:
+                        JOptionPane.showMessageDialog(null, "Campo de pesquisa não configurado!");
+                        break;
                 }
             }
             
