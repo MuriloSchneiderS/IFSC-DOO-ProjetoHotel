@@ -58,7 +58,7 @@ public class ControllerCadProdutoCopa implements ActionListener {
                 CopaQuarto copaQuarto = new CopaQuarto();
 
                 produtoCopa.setDescricao(this.telaCadastroProdutoCopa.getjTextFieldDescricao().getText());
-                produtoCopa.setValor(((Double)this.telaCadastroProdutoCopa.getjSpinnerValor().getValue()).floatValue());
+                produtoCopa.setValor((Double)this.telaCadastroProdutoCopa.getjSpinnerValor().getValue());
                 produtoCopa.setObs(this.telaCadastroProdutoCopa.getjTextFieldObs().getText());
                 copaQuarto.setId(Integer.parseInt(this.telaCadastroProdutoCopa.getjComboBoxCopaQuarto().getSelectedItem().toString()));
                 produtoCopa.setCopaQuarto(copaQuarto);
