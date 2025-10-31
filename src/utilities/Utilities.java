@@ -110,5 +110,47 @@ public class Utilities {
         }
         return true; // Todos os campos estão preenchidos
     }
+    
+    public static boolean validaCPF(String cpf){
+        char[] digitosCPF = cpf.replaceAll("[.-]","").toCharArray();
+        // rejeita CPFs com tamanho incorreto, caracteres não numéricos ou todos iguais
+        if (digitosCPF.length != 11) 
+            return false;
+        for (char c : digitosCPF){
+            if (!Character.isDigit(c)) 
+                return false;
+        }
+        boolean todosIguais = true;
+        for (int i=1; i<digitosCPF.length; i++) {
+            if (digitosCPF[i] != digitosCPF[0]) { 
+                todosIguais = false; 
+                break; 
+            }
+        }
+        if (todosIguais) 
+            return false;
+        
+        //primeiro digito verificador
+        int valorTotal=0;
+        for(int i=0, multiplicador=10; i<9; i++, multiplicador--){//1 digito X 10, 2 digito X 9... 9 digito X 2
+            valorTotal += (digitosCPF[i]-'0') * multiplicador;
+        }
+        int primeiroDigitoVerificador = 11 - valorTotal%11;
+        if (primeiroDigitoVerificador >= 10) 
+            primeiroDigitoVerificador = 0;
+        boolean primeiraVerificacao = primeiroDigitoVerificador == (digitosCPF[9]-'0');
+
+        //segundo digito verificador
+        valorTotal = 0;
+        for(int i=0, multiplicador=11; i<10; i++, multiplicador--){//1 digito X 11, 2 digito X 10... 10 digito X 2
+            valorTotal += (digitosCPF[i]-'0') * multiplicador;
+        }
+        int segundoDigitoVerificador = 11 - valorTotal%11;
+        if (segundoDigitoVerificador >= 10) 
+            segundoDigitoVerificador = 0;
+        boolean segundaVerificacao = segundoDigitoVerificador == (digitosCPF[10]-'0');
+
+        return primeiraVerificacao && segundaVerificacao;
+    }
 
 }

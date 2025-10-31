@@ -7,7 +7,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import model.Hospede;
+import utilities.Utilities;
 import view.TelaBuscaHospede;
 import view.TelaCadastroHospede;
 
@@ -67,6 +69,8 @@ public class ControllerCadHospede implements ActionListener {
 
                 hospede.setCep(this.telaCadastroHospede.getjFormattedTextFieldCep().getText());
                 hospede.setCnpj(this.telaCadastroHospede.getjFormattedTextFieldCnpj().getText());
+                if(!Utilities.validaCPF(this.telaCadastroHospede.getjFormattedTextFieldCpf().getText()));
+                    JOptionPane.showMessageDialog(telaCadastroHospede, "CPF invalido!");
                 hospede.setCpf(this.telaCadastroHospede.getjFormattedTextFieldCpf().getText());
                 hospede.setDataCadastro(this.telaCadastroHospede.getjFormattedTextFieldDataCadastro().getText());
                 hospede.setBairro(this.telaCadastroHospede.getjTextFieldBairro().getText());
