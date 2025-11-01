@@ -50,15 +50,12 @@ public class ControllerCadProdutoCopa implements ActionListener {
             
         //Botão Gravar
         } else if (evento.getSource() == this.telaCadastroProdutoCopa.getjButtonGravar()) {
-            if (this.telaCadastroProdutoCopa.getjTextFieldDescricao().getText().trim().equals("")) {
-                JOptionPane.showMessageDialog(null, "Atributo Obrigatório.");
-                this.telaCadastroProdutoCopa.getjTextFieldDescricao().requestFocus();
-            } else {
+            if(utilities.Utilities.todosOsCamposPreenchidos(this.telaCadastroProdutoCopa.getjPanelDados())) {
                 ProdutoCopa produtoCopa = new ProdutoCopa();
                 CopaQuarto copaQuarto = new CopaQuarto();
 
                 produtoCopa.setDescricao(this.telaCadastroProdutoCopa.getjTextFieldDescricao().getText());
-                produtoCopa.setValor((Double)this.telaCadastroProdutoCopa.getjSpinnerValor().getValue());
+                produtoCopa.setValor((float)this.telaCadastroProdutoCopa.getjSpinnerValor().getValue());
                 produtoCopa.setObs(this.telaCadastroProdutoCopa.getjTextFieldObs().getText());
                 copaQuarto.setId(Integer.parseInt(this.telaCadastroProdutoCopa.getjComboBoxCopaQuarto().getSelectedItem().toString()));
                 produtoCopa.setCopaQuarto(copaQuarto);
@@ -69,7 +66,6 @@ public class ControllerCadProdutoCopa implements ActionListener {
                     service.ProdutoCopaService.Criar(produtoCopa);
                 } else {
                     //Atualização
-                    produtoCopa.setStatus('B');
                     produtoCopa.setId(Integer.parseInt(this.telaCadastroProdutoCopa.getjTextFieldId().getText()));
                     service.ProdutoCopaService.Atualizar(produtoCopa);
                 }

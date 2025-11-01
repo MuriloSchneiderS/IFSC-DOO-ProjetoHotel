@@ -3,12 +3,12 @@ package model;
 public class ProdutoCopa {
     private int id;
     private String descricao, obs;
-    private double valor;
+    private float valor;
     private char status;
     private CopaQuarto copaQuarto;
 
     public ProdutoCopa(){}
-    public ProdutoCopa(int id, String descricao, String obs, double valor, char status, CopaQuarto copaQuarto) {
+    public ProdutoCopa(int id, String descricao, String obs, float valor, char status, CopaQuarto copaQuarto) {
         this.id = id;
         this.descricao = descricao;
         this.obs = obs;
@@ -41,11 +41,11 @@ public class ProdutoCopa {
         this.obs = obs;
     }
 
-    public double getValor() {
+    public float getValor() {
         return valor;
     }
 
-    public void setValor(double valor) {
+    public void setValor(float valor) {
         this.valor = valor;
     }
 

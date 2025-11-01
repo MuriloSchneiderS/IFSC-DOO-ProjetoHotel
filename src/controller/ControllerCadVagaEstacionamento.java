@@ -44,10 +44,7 @@ public class ControllerCadVagaEstacionamento implements ActionListener {
             
         //Botão Gravar
         } else if (evento.getSource() == this.telaCadastroVagaEstacionamento.getjButtonGravar()) {
-            if (this.telaCadastroVagaEstacionamento.getjTextFieldDescricao().getText().trim().equals("")) {
-                JOptionPane.showMessageDialog(null, "Atributo Obrigatório.");
-                this.telaCadastroVagaEstacionamento.getjTextFieldDescricao().requestFocus();
-            } else {
+            if(utilities.Utilities.todosOsCamposPreenchidos(this.telaCadastroVagaEstacionamento.getjPanelDados())) {
                 VagaEstacionamento vaga_estacionamento = new VagaEstacionamento();
 
                 vaga_estacionamento.setDescricao(this.telaCadastroVagaEstacionamento.getjTextFieldDescricao().getText());

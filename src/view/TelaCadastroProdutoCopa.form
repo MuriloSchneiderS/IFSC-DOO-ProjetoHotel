@@ -116,11 +116,11 @@
                               <Component id="jTextFieldId" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jLabelObs" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextFieldObs" min="-2" pref="187" max="-2" attributes="0"/>
-                              <Component id="jSpinnerValor" min="-2" pref="187" max="-2" attributes="0"/>
+                              <Component id="jTextFieldObs" pref="187" max="32767" attributes="0"/>
                               <Component id="jLabelValor" min="-2" pref="37" max="-2" attributes="0"/>
+                              <Component id="jSpinnerValor" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Component id="jLabelId" min="-2" max="-2" attributes="0"/>
@@ -154,13 +154,12 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabelCopaQuarto" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jComboBoxCopaQuarto" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jComboBoxCopaQuarto" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jSpinnerValor" alignment="3" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabelValor" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jSpinnerValor" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jLabelValor" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
               </Group>
@@ -189,13 +188,6 @@
             <Property name="text" type="java.lang.String" value="Descri&#xe7;&#xe3;o"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JSpinner" name="jSpinnerValor">
-          <Properties>
-            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-              <SpinnerModel initial="0.0" minimum="0.0" numberType="java.lang.Double" stepSize="1.0" type="number"/>
-            </Property>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabelValor">
           <Properties>
             <Property name="text" type="java.lang.String" value="Valor"/>
@@ -218,6 +210,16 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JSpinner" name="jSpinnerValor">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0.0" minimum="0.0" numberType="java.lang.Float" stepSize="1.0" type="number"/>
+            </Property>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Default Cursor"/>
+            </Property>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

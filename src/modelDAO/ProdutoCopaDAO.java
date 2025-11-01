@@ -24,7 +24,7 @@ public class ProdutoCopaDAO implements InterfaceDAO<ProdutoCopa>{
         try {
             pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setString(1, objeto.getDescricao());
-            pstm.setDouble(2, objeto.getValor());
+            pstm.setFloat(2, objeto.getValor());
             pstm.setString(3, objeto.getObs());
             pstm.setString(4, String.valueOf(objeto.getStatus()));
             pstm.setInt(5, objeto.getCopaQuarto().getId());
@@ -114,22 +114,22 @@ public class ProdutoCopaDAO implements InterfaceDAO<ProdutoCopa>{
 
     @Override
     public void Update(ProdutoCopa objeto) {
-        String sqlInstrucao = "UPDATE produto_copa "
+        String sqlInstrucao = "UPDATE produto_copa"
                 + " SET"
                 + " descricao =?,"
                 + " valor=?,"
                 + " obs=?,"
                 + " status=?,"
-                + " copa_quarto_id=?,"
+                + " copa_quarto_id=?"
                 + " WHERE id =?";
         Connection conexao = ConnectionFactory.getConnection();
         PreparedStatement pstm = null;
         try {
             pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setString(1, objeto.getDescricao());
-            pstm.setDouble(2, objeto.getValor());
+            pstm.setFloat(2, objeto.getValor());
             pstm.setString(3, objeto.getObs());
-            pstm.setString(4, objeto.getStatus()+"");
+            pstm.setString(4, String.valueOf(objeto.getStatus()));
             pstm.setInt(5, objeto.getCopaQuarto().getId());
             pstm.setInt(6, objeto.getId());
             pstm.execute();
