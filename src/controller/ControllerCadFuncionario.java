@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import model.Funcionario;
 import view.TelaBuscaFuncionario;
 import view.TelaCadastroFuncionario;
@@ -53,10 +54,16 @@ public class ControllerCadFuncionario implements ActionListener {
         //Botão Gravar
         } else if (evento.getSource() == this.telaCadastroFuncionario.getjButtonGravar()) {
             if(utilities.Utilities.todosOsCamposPreenchidos(this.telaCadastroFuncionario.getjPanelDados())) {
+                String cpf = this.telaCadastroFuncionario.getjFormattedTextFieldCpf().getText();
+                if(!utilities.Utilities.validaCPF(cpf)){
+                    JOptionPane.showMessageDialog(this.telaCadastroFuncionario, "CPF inválido. Por favor, verifique e tente novamente.");
+                    return;//Interrompe a execução se o CPF for invalido
+                }
+                
                 Funcionario funcionario = new Funcionario();
 
                 funcionario.setCep(this.telaCadastroFuncionario.getjFormattedTextFieldCep().getText());
-                funcionario.setCpf(this.telaCadastroFuncionario.getjFormattedTextFieldCpf().getText());
+                funcionario.setCpf(cpf);
                 funcionario.setDataCadastro(this.telaCadastroFuncionario.getjFormattedTextFieldDataCadastro().getText());
                 funcionario.setBairro(this.telaCadastroFuncionario.getjTextFieldBairro().getText());
                 funcionario.setCidade(this.telaCadastroFuncionario.getjTextFieldCidade().getText());

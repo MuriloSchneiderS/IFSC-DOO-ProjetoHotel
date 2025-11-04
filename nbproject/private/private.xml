@@ -9,10 +9,13 @@
             <file>file:/C:/Users/house/Documents/Aulas%202025%20-%201/DOO/ProjetoHotel/src/controller/ControllerCadHospede.java</file>
         </group>
         <group>
-            <file>file:/C:/Users/Murilo/Documents/Projects/ifsc/ProjetoHotel/src/modelDAO/ModeloDAO.java</file>
-            <file>file:/C:/Users/Murilo/Documents/Projects/ifsc/ProjetoHotel/src/controller/ControllerCadModelo.java</file>
-            <file>file:/C:/Users/Murilo/Documents/Projects/ifsc/ProjetoHotel/src/view/TelaCadastroModelo.java</file>
-            <file>file:/C:/Users/Murilo/Documents/Projects/ifsc/ProjetoHotel/src/service/MarcaService.java</file>
+            <file>file:/C:/Users/muril/Documents/GitHub/IFSC/ProjetoHotel/src/utilities/Utilities.java</file>
+            <file>file:/C:/Users/muril/Documents/GitHub/IFSC/ProjetoHotel/src/controller/ControllerCadHospede.java</file>
+            <file>file:/C:/Users/muril/Documents/GitHub/IFSC/ProjetoHotel/src/controller/ControllerCadFuncionario.java</file>
+            <file>file:/C:/Users/muril/Documents/GitHub/IFSC/ProjetoHotel/src/controller/ControllerCadFornecedor.java</file>
+            <file>file:/C:/Users/muril/Documents/GitHub/IFSC/ProjetoHotel/src/view/TelaCadastroHospede.java</file>
+            <file>file:/C:/Users/muril/Documents/GitHub/IFSC/ProjetoHotel/src/view/TelaCadastroFuncionario.java</file>
+            <file>file:/C:/Users/muril/Documents/GitHub/IFSC/ProjetoHotel/src/view/TelaCadastroFornecedor.java</file>
         </group>
     </open-files>
 </project-private>

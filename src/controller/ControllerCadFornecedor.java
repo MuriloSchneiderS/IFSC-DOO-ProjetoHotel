@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import model.Fornecedor;
 import view.TelaBuscaFornecedor;
 import view.TelaCadastroFornecedor;
@@ -53,11 +54,22 @@ public class ControllerCadFornecedor implements ActionListener {
             //Botão Gravar
         } else if (evento.getSource() == this.telaCadastroFornecedor.getjButtonGravar()) {
             if (utilities.Utilities.todosOsCamposPreenchidos(this.telaCadastroFornecedor.getjPanelDados())) {
+                String cpf = this.telaCadastroFornecedor.getjFormattedTextFieldCpf().getText();
+                String cnpj = this.telaCadastroFornecedor.getjFormattedTextFieldCnpj().getText();
+                if(!utilities.Utilities.validaCPF(cpf)){
+                    JOptionPane.showMessageDialog(this.telaCadastroFornecedor, "CPF inválido. Por favor, verifique e tente novamente.");
+                    return;//Interrompe a execução se o CPF for invalido
+                }
+                if(!utilities.Utilities.validaCNPJ(cnpj)){
+                    JOptionPane.showMessageDialog(this.telaCadastroFornecedor, "CNPJ inválido. Por favor, verifique e tente novamente.");
+                    return;//Interrompe a execução se o CNPJ for invalido
+                }
+                
                 Fornecedor fornecedor = new Fornecedor();
 
                 fornecedor.setCep(this.telaCadastroFornecedor.getjFormattedTextFieldCep().getText());
-                fornecedor.setCnpj(this.telaCadastroFornecedor.getjFormattedTextFieldCnpj().getText());
-                fornecedor.setCpf(this.telaCadastroFornecedor.getjFormattedTextFieldCpf().getText());
+                fornecedor.setCnpj(cnpj);
+                fornecedor.setCpf(cpf);
                 fornecedor.setDataCadastro(this.telaCadastroFornecedor.getjFormattedTextFieldDataCadastro().getText());
                 fornecedor.setBairro(this.telaCadastroFornecedor.getjTextFieldBairro().getText());
                 fornecedor.setCidade(this.telaCadastroFornecedor.getjTextFieldCidade().getText());

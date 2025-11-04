@@ -221,10 +221,11 @@ public class TelaCadastroFornecedor extends javax.swing.JDialog {
         jLabelCnpj.setText("CNPJ");
 
         try {
-            jFormattedTextFieldCnpj.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###/####-##")));
+            jFormattedTextFieldCnpj.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jFormattedTextFieldCnpj.setText("  .   .   /    -  ");
 
         jLabelFone1.setText("Fone1");
 
