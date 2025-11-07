@@ -197,4 +197,61 @@ public class Utilities {
         
         return primeiraVerificacao && segundaVerificacao;
     }
+    
+    //Data Valida
+    public static boolean validaData(String data){//"DD/MM/YYYY"
+        //FORMATO
+        if (data==null || !data.matches("\\d{2}/\\d{2}/\\d{4}")) 
+            return false;
+        
+        String[] dataArray = data.split("/");
+        int dia= Integer.parseInt(dataArray[0]), mes= Integer.parseInt(dataArray[1]), ano= Integer.parseInt(dataArray[2]);
+        
+        //ANO
+        if(ano<1)
+            return false;
+        boolean isBissexto = (ano%4==0 && ano%100!=0) || (ano%400==0);
+        //MES
+        if(mes<1 || mes>12)
+            return false;
+        //DIA
+        int[] totDiasDoMes = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};//Total de dias de cada mes em ordem
+        if (mes == 2 && isBissexto){
+            totDiasDoMes[2] = 29;//Fevereiro bissexto
+        }
+
+        return dia>0 && dia<=totDiasDoMes[mes];
+    }
+    
+    //Compara Datas
+    public static int comparaDatas(String dataString1, String dataString2){
+        //0: iguais
+        //1: 1 > 2 - data 1 é posterior
+        //2: 2 > 1 - data 2 é posterior
+        
+        if(!validaData(dataString1) || !validaData(dataString2))
+            JOptionPane.showMessageDialog(null, "Data invalida.");
+        
+        String[] partes1 = dataString1.split("/");
+        int dia1 = Integer.parseInt(partes1[0]);
+        int mes1 = Integer.parseInt(partes1[1]);
+        int ano1 = Integer.parseInt(partes1[2]);
+        
+        String[] partes2 = dataString2.split("/");
+        int dia2 = Integer.parseInt(partes2[0]);
+        int mes2 = Integer.parseInt(partes2[1]);
+        int ano2 = Integer.parseInt(partes2[2]);
+        
+        //ANO
+        if (ano1 != ano2)
+            return (ano1 < ano2)?2:1;
+        //MES
+        if (mes1 != mes2)
+            return (mes1 < mes2)?2:1;
+        //DIA
+        if(dia1 != dia2)
+            return (dia1 < dia2)?2:1;
+        
+        return 0;
+    }
 }

@@ -9,7 +9,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Hospede;
-import utilities.Utilities;
 import view.TelaBuscaHospede;
 import view.TelaCadastroHospede;
 
