@@ -1,13 +1,29 @@
-package model;
+package model.bo;
 
 import java.sql.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
+@Entity(name="copa_quarto")
 public class CopaQuarto {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column
     private float quantidade;
+    @Column(name="data_hora_pedido")
     private Date dataHoraPedido;
+    @Column
     private String obs;
+    @Column
     private char status;
+    @JoinColumn
+    @ManyToOne
     private CheckQuarto checkQuarto;
 
     public CopaQuarto(){}

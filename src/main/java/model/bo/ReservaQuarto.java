@@ -1,15 +1,36 @@
-package model;
+package model.bo;
 
 import java.security.Timestamp;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
+@Entity(name="reserva_quarto")
 public class ReservaQuarto {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private Timestamp dataHoraInicio, dataHoraFim;
+    @Column(name="data_hora_inicio")
+    private Timestamp dataHoraInicio;
+    @Column(name="data_hora_fim")
+    private Timestamp dataHoraFim;
+    @Column
     private String obs;
+    @Column
     private char status;
+    @JoinColumn
+    @ManyToMany
     private Reserva reserva;
+    @JoinColumn
+    @OneToOne
     private Quarto quarto;
 
+    public ReservaQuarto(){}
     public ReservaQuarto(int id, Timestamp dataHoraInicio, Timestamp dataHoraFim, String obs, char status, Reserva reserva, Quarto quarto) {
         this.id = id;
         this.dataHoraInicio = dataHoraInicio;

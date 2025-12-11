@@ -1,177 +1,92 @@
-package modelDAO;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import model.Veiculo;
-import java.util.List;
-import model.Fornecedor;
-import model.Funcionario;
-import model.Hospede;
-import model.Modelo;
+package model.DAO;
 
-public class VeiculoDAO implements InterfaceDAO<Veiculo>{
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import model.bo.Veiculo;
+
+public class VeiculoDAO implements InterfaceDAO<Veiculo> {
+
+    private static VeiculoDAO instance;
+    protected EntityManager entityManager;
+
+    public VeiculoDAO() {
+        entityManager = getEntityManager();
+    }
+
+    public static VeiculoDAO getInstance() {
+        if (instance == null) {
+            instance = new VeiculoDAO();
+        }
+        return instance;
+    }
+
+    private EntityManager getEntityManager() {
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("PU");
+        if (entityManager == null) {
+            entityManager = factory.createEntityManager();
+        }
+        return entityManager;
+    }
 
     @Override
     public void Create(Veiculo objeto) {
-        String sqlInstrucao = "INSERT INTO veiculo("
-                + " placa,"
-                + " cor,"
-                + " modelo_id,"
-                + " funcionario_id,"
-                + " fornecedor_id,"
-                + " hospede_id,"
-                + " status)"
-                + " VALUES (?,?,?,?,?,?,?)";
-        Connection conexao = ConnectionFactory.getConnection();
-        PreparedStatement pstm = null;
         try {
-            pstm = conexao.prepareStatement(sqlInstrucao);
-            pstm.setString(1, objeto.getPlaca());
-            pstm.setString(2, objeto.getCor());
-            pstm.setInt(3, objeto.getModelo().getId());
-            pstm.setInt(4, objeto.getFuncionario().getId());
-            pstm.setInt(5, objeto.getFornecedor().getId());
-            pstm.setInt(6, objeto.getHospede().getId());
-            pstm.setString(7, objeto.getStatus()+"");
-            pstm.execute();
-        } catch (SQLException ex) {
+            entityManager.getTransaction().begin();
+            entityManager.persist(objeto);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) {
             ex.printStackTrace();
-        } finally {
-            ConnectionFactory.closeConnection(conexao, pstm);
+            entityManager.getTransaction().rollback();
         }
+
     }
 
     @Override
     public Veiculo Retrieve(int id) {
-        String sqlInstrucao = "SELECT"
-                + " id,"
-                + " placa,"
-                + " cor,"
-                + " modelo_id,"
-                + " funcionario_id,"
-                + " fornecedor_id,"
-                + " hospede_id,"
-                + " status"
-                + " FROM veiculo WHERE id=?";
-        Connection conexao = ConnectionFactory.getConnection();
-        PreparedStatement pstm = null;
-        ResultSet rst = null;
-        Veiculo veiculo = new Veiculo();
-        Modelo modelo = new Modelo();
-        Funcionario funcionario = new Funcionario();
-        Fornecedor fornecedor = new Fornecedor();
-        Hospede hospede = new Hospede();
-        try {
-            pstm = conexao.prepareStatement(sqlInstrucao);
-            pstm.setInt(1, id);
-            rst = pstm.executeQuery();
-            while (rst.next()) {
-                veiculo.setId(rst.getInt("id"));
-                veiculo.setPlaca(rst.getString("placa"));
-                veiculo.setCor(rst.getString("cor"));
-                modelo.setId(rst.getInt("modelo_id"));
-                veiculo.setModelo(modelo);
-                funcionario.setId(rst.getInt("funcionario_id"));
-                veiculo.setFuncionario(funcionario);
-                fornecedor.setId(rst.getInt("fornecedor_id"));
-                veiculo.setFornecedor(fornecedor);
-                hospede.setId(rst.getInt("hospede_id"));
-                veiculo.setHospede(hospede);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            ConnectionFactory.closeConnection(conexao, pstm, rst);
-            return veiculo;
-        }
+
+        Veiculo veiculo = entityManager.find(Veiculo.class, id);
+        return veiculo;
     }
 
     @Override
     public List<Veiculo> Retrieve(String atributo, String valor) {
-        String sqlInstrucao = "SELECT"
-                + " id,"
-                + " placa,"
-                + " cor,"
-                + " modelo_id,"
-                + " funcionario_id,"
-                + " fornecedor_id,"
-                + " hospede_id,"
-                + " status"
-                + " FROM veiculo"
-                + " WHERE "+atributo+" LIKE ?";
-        Connection conexao = ConnectionFactory.getConnection();
-        PreparedStatement pstm = null;
-        ResultSet rst = null;
-        List<Veiculo> listaVeiculos = new ArrayList<>();
-        try {
-            pstm = conexao.prepareStatement(sqlInstrucao);
-            pstm.setString(1, "%"+valor+"%");
-            rst = pstm.executeQuery();
-            while (rst.next()) {
-                Veiculo veiculo = new Veiculo();
-                Modelo modelo = new Modelo();
-                Funcionario funcionario = new Funcionario();
-                Fornecedor fornecedor = new Fornecedor();
-                Hospede hospede = new Hospede();
-                veiculo.setId(rst.getInt("id"));
-                veiculo.setPlaca(rst.getString("placa"));
-                veiculo.setCor(rst.getString("cor"));
-                modelo.setId(rst.getInt("modelo_id"));
-                veiculo.setModelo(modelo);
-                funcionario.setId(rst.getInt("funcionario_id"));
-                veiculo.setFuncionario(funcionario);
-                fornecedor.setId(rst.getInt("fornecedor_id"));
-                veiculo.setFornecedor(fornecedor);
-                hospede.setId(rst.getInt("hospede_id"));
-                veiculo.setHospede(hospede);
-                listaVeiculos.add(veiculo);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            ConnectionFactory.closeConnection(conexao, pstm, rst);
-            return listaVeiculos;
-        }
+
+        List<Veiculo> listaVeiculo = new ArrayList<>();
+        listaVeiculo = entityManager.createQuery(" Select hosp From veiculo hosp "
+                + " where " + atributo
+                + " like (%" + valor + " %)", Veiculo.class).getResultList();
+        return listaVeiculo;
     }
 
     @Override
     public void Update(Veiculo objeto) {
-        String sqlInstrucao = "UPDATE veiculo"
-                + " SET"
-                + " placa=?,"
-                + " cor=?,"
-                + " modelo_id=?,"
-                + " funcionario_id=?,"
-                + " fornecedor_id=?,"
-                + " hospede_id=?,"
-                + " status =?"
-                + " WHERE id =?";
-        Connection conexao = ConnectionFactory.getConnection();
-        PreparedStatement pstm = null;
         try {
-            pstm = conexao.prepareStatement(sqlInstrucao);
-            pstm.setString(1, objeto.getPlaca());
-            pstm.setString(2, objeto.getCor());
-            pstm.setInt(3, objeto.getModelo().getId());
-            pstm.setInt(4, objeto.getFuncionario().getId());
-            pstm.setInt(5, objeto.getFornecedor().getId());
-            pstm.setInt(6, objeto.getHospede().getId());
-            pstm.setString(7, String.valueOf(objeto.getStatus()));
-            pstm.setInt(8, objeto.getId());
-            pstm.execute();
-        }catch (SQLException ex) {
+            entityManager.getTransaction().begin();
+            entityManager.merge(objeto);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) {
             ex.printStackTrace();
-        } finally {
-            ConnectionFactory.closeConnection(conexao, pstm);
-            return;
+            entityManager.getTransaction().rollback();
         }
     }
 
     @Override
     public void Delete(Veiculo objeto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+        try{
+            entityManager.getTransaction().begin();
+            Veiculo veiculo = new Veiculo();
+            veiculo = entityManager.find(Veiculo.class, objeto.getId());
+            if(veiculo != null){
+                entityManager.remove(veiculo);
+            }
+            entityManager.getTransaction().commit();
+        } catch (Exception ex){
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();
+        }
     }
-    
 }

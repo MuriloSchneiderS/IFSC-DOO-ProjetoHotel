@@ -1,119 +1,92 @@
-package modelDAO;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import model.Marca;
-import java.util.List;
+package model.DAO;
 
-public class MarcaDAO implements InterfaceDAO<Marca>{
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import model.bo.Marca;
+
+public class MarcaDAO implements InterfaceDAO<Marca> {
+
+    private static MarcaDAO instance;
+    protected EntityManager entityManager;
+
+    public MarcaDAO() {
+        entityManager = getEntityManager();
+    }
+
+    public static MarcaDAO getInstance() {
+        if (instance == null) {
+            instance = new MarcaDAO();
+        }
+        return instance;
+    }
+
+    private EntityManager getEntityManager() {
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("PU");
+        if (entityManager == null) {
+            entityManager = factory.createEntityManager();
+        }
+        return entityManager;
+    }
 
     @Override
     public void Create(Marca objeto) {
-        String sqlInstrucao = "INSERT INTO marca("
-                + " descricao,"
-                + " status)"
-                + " VALUES (?,?)";
-        Connection conexao = ConnectionFactory.getConnection();
-        PreparedStatement pstm = null;
         try {
-            pstm = conexao.prepareStatement(sqlInstrucao);
-            pstm.setString(1, objeto.getDescricao());
-            pstm.setString(2, String.valueOf(objeto.getStatus()));
-            pstm.execute();
-        } catch (SQLException ex) {
+            entityManager.getTransaction().begin();
+            entityManager.persist(objeto);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) {
             ex.printStackTrace();
-        } finally {
-            ConnectionFactory.closeConnection(conexao, pstm);
+            entityManager.getTransaction().rollback();
         }
+
     }
 
     @Override
     public Marca Retrieve(int id) {
-        String sqlInstrucao = "SELECT"
-                + " id,"
-                + " descricao,"
-                + " status"
-                + " FROM marca WHERE id=?";
-        Connection conexao = ConnectionFactory.getConnection();
-        PreparedStatement pstm = null;
-        ResultSet rst = null;
-        Marca marca = new Marca();
-        try {
-            pstm = conexao.prepareStatement(sqlInstrucao);
-            pstm.setInt(1, id);
-            rst = pstm.executeQuery();
-            while (rst.next()) {
-                marca.setId(rst.getInt("id"));
-                marca.setDescricao(rst.getString("descricao"));
-                marca.setStatus(rst.getString("status").charAt(0));
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            ConnectionFactory.closeConnection(conexao, pstm, rst);
-            return marca;
-        }
+
+        Marca marca = entityManager.find(Marca.class, id);
+        return marca;
     }
 
     @Override
     public List<Marca> Retrieve(String atributo, String valor) {
-        String sqlInstrucao = "SELECT"
-                + " id,"
-                + " descricao,"
-                + " status"
-                + " FROM marca"
-                + " WHERE "+atributo+" LIKE ?";
-        Connection conexao = ConnectionFactory.getConnection();
-        PreparedStatement pstm = null;
-        ResultSet rst = null;
-        List<Marca> listaMarcas = new ArrayList<>();
-        try {
-            pstm = conexao.prepareStatement(sqlInstrucao);
-            pstm.setString(1, "%"+valor+"%");
-            rst = pstm.executeQuery();
-            while (rst.next()) {
-                Marca marca = new Marca();
-                marca.setId(rst.getInt("id"));
-                marca.setDescricao(rst.getString("descricao"));
-                marca.setStatus(rst.getString("status").charAt(0));
-                listaMarcas.add(marca);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            ConnectionFactory.closeConnection(conexao, pstm, rst);
-            return listaMarcas;
-        }
+
+        List<Marca> listaMarca = new ArrayList<>();
+        listaMarca = entityManager.createQuery(" Select hosp From marca hosp "
+                + " where " + atributo
+                + " like (%" + valor + " %)", Marca.class).getResultList();
+        return listaMarca;
     }
 
     @Override
     public void Update(Marca objeto) {
-        String sqlInstrucao = "UPDATE marca "
-                + " SET"
-                + " descricao =?,"
-                + " status =?"
-                + " WHERE id =?";
-        Connection conexao = ConnectionFactory.getConnection();
-        PreparedStatement pstm = null;
         try {
-            pstm = conexao.prepareStatement(sqlInstrucao);
-            pstm.setString(1, objeto.getDescricao());
-            pstm.setString(2, String.valueOf(objeto.getStatus()));
-            pstm.setInt(3, objeto.getId());
-            pstm.execute();
-        }catch (SQLException ex) {
+            entityManager.getTransaction().begin();
+            entityManager.merge(objeto);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) {
             ex.printStackTrace();
-        } finally {
-            ConnectionFactory.closeConnection(conexao, pstm);
-            return;
+            entityManager.getTransaction().rollback();
         }
     }
 
     @Override
     public void Delete(Marca objeto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+        try{
+            entityManager.getTransaction().begin();
+            Marca marca = new Marca();
+            marca = entityManager.find(Marca.class, objeto.getId());
+            if(marca != null){
+                entityManager.remove(marca);
+            }
+            entityManager.getTransaction().commit();
+        } catch (Exception ex){
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();
+        }
     }
-    
 }

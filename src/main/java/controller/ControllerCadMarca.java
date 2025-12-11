@@ -2,7 +2,7 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import model.Marca;
+import model.bo.Marca;
 import view.TelaBuscaMarca;
 import view.TelaCadastroMarca;
 

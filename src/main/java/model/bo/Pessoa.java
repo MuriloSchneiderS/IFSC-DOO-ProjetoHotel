@@ -1,21 +1,47 @@
-package model;
+package model.bo;
 
-public abstract class Pessoa {
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 
+@MappedSuperclass
+public class Pessoa {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
+    @Column
     private String nome;
+    
+    @Column(name="fone")
     private String fone1;
+    
+    @Column
     private String fone2;
+    @Column
     private String email;
+    @Column
     private String cep;
+    @Column
     private String logradouro;
+    @Column
     private String bairro;
+    @Column
     private String cidade;
+    @Column
     private String complemento;
+    @Column(name = "data_cadastro")
     private String dataCadastro;
+    @Column
     private String cpf;
+    @Column
     private String rg;
+    @Column
     private String obs;
+    @Column
     private char status;
 
     public Pessoa() {

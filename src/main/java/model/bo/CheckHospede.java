@@ -1,12 +1,32 @@
-package model;
+package model.bo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity(name="check_hospede")
 public class CheckHospede {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String tipoHospede, obs;
+    @Column(name="tipo_hospede")
+    private String tipoHospede;
+    @Column
+    private String obs;
+    @Column
     private char status;
+    @JoinColumn
+    @ManyToOne
     private Hospede hospede;
+    @JoinColumn
+    @ManyToOne
     private Check check;
 
+    public CheckHospede(){}
     public CheckHospede(int id, String tipoHospede, String obs, char status, Hospede hospede, Check check) {
         this.id = id;
         this.tipoHospede = tipoHospede;

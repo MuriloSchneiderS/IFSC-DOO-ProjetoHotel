@@ -3,10 +3,7 @@ package controller;
 import static controller.ControllerCadVagaEstacionamento.codigo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import javax.swing.JOptionPane;
-import model.VagaEstacionamento;
+import model.bo.VagaEstacionamento;
 import view.TelaBuscaVagaEstacionamento;
 import view.TelaCadastroVagaEstacionamento;
 

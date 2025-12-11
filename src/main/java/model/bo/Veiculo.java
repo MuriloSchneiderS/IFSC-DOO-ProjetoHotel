@@ -1,12 +1,35 @@
-package model;
+package model.bo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Veiculo {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String placa, cor;
+    @Column
+    private String placa;
+    @Column
+    private String cor;
+    @JoinColumn
+    @ManyToOne
     private Modelo modelo;
+    @JoinColumn
+    @ManyToOne
     private Funcionario funcionario;
+    @JoinColumn
+    @ManyToOne
     private Fornecedor fornecedor;
+    @JoinColumn
+    @ManyToOne
     private Hospede hospede;
+    @Column
     private char status;
   
     public Veiculo(){}

@@ -1,34 +1,29 @@
 package service;
 
 import java.util.List;
-import model.Servico;
-import modelDAO.ServicoDAO;
+import model.bo.Servico;
+import model.DAO.ServicoDAO;
 
 public class ServicoService{
 
     public static void Criar(Servico objeto) {
-        ServicoDAO servicoDAO = new ServicoDAO();
-        servicoDAO.Create(objeto);
+        ServicoDAO.getInstance().Create(objeto);
     }
 
     public static Servico Carregar(int id) {
-        ServicoDAO servicoDAO = new ServicoDAO();
-        return servicoDAO.Retrieve(id);
+        return ServicoDAO.getInstance().Retrieve(id);
     }
 
     public static List<Servico> Carregar(String atributo, String valor) {
-        ServicoDAO servicoDAO = new ServicoDAO();
-        return servicoDAO.Retrieve(atributo, valor);
+        return ServicoDAO.getInstance().Retrieve(atributo, valor);
     }
 
     public static void Atualizar(Servico objeto) {
-        ServicoDAO servicoDAO = new ServicoDAO();
-        servicoDAO.Update(objeto);
+        ServicoDAO.getInstance().Update(objeto);
     }
 
     public static void Apagar(Servico objeto) {
-        ServicoDAO servicoDAO = new ServicoDAO();
-        servicoDAO.Delete(objeto);
+        ServicoDAO.getInstance().Delete(objeto);
     }
 
 }

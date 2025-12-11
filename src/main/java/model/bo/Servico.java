@@ -1,8 +1,21 @@
-package model;
+package model.bo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Servico {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String descricao, obs;
+    @Column
+    private String descricao;
+    @Column
+    private String obs;
+    @Column
     private char status;
 
     public Servico(){}

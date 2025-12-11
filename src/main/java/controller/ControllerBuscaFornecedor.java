@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.Fornecedor;
+import model.bo.Fornecedor;
 import view.TelaBuscaFornecedor;
 
 public class ControllerBuscaFornecedor implements ActionListener {

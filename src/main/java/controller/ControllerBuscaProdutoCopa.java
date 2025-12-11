@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.ProdutoCopa;
+import model.bo.ProdutoCopa;
 import view.TelaBuscaProdutoCopa;
 
 public class ControllerBuscaProdutoCopa implements ActionListener {

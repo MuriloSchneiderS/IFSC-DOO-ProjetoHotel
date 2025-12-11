@@ -1,34 +1,29 @@
 package service;
 
 import java.util.List;
-import model.CopaQuarto;
-import modelDAO.CopaQuartoDAO;
+import model.bo.CopaQuarto;
+import model.DAO.CopaQuartoDAO;
 
 public class CopaQuartoService{
 
     public static void Criar(CopaQuarto objeto) {
-        CopaQuartoDAO copaQuartoDAO = new CopaQuartoDAO();
-        copaQuartoDAO.Create(objeto);
+        CopaQuartoDAO.getInstance().Create(objeto);
     }
 
     public static CopaQuarto Carregar(int id) {
-        CopaQuartoDAO copaQuartoDAO = new CopaQuartoDAO();
-        return copaQuartoDAO.Retrieve(id);
+        return CopaQuartoDAO.getInstance().Retrieve(id);
     }
 
     public static List<CopaQuarto> Carregar(String atributo, String valor) {
-        CopaQuartoDAO copaQuartoDAO = new CopaQuartoDAO();
-        return copaQuartoDAO.Retrieve(atributo, valor);
+        return CopaQuartoDAO.getInstance().Retrieve(atributo, valor);
     }
 
     public static void Atualizar(CopaQuarto objeto) {
-        CopaQuartoDAO copaQuartoDAO = new CopaQuartoDAO();
-        copaQuartoDAO.Update(objeto);
+        CopaQuartoDAO.getInstance().Update(objeto);
     }
 
     public static void Apagar(CopaQuarto objeto) {
-        CopaQuartoDAO copaQuartoDAO = new CopaQuartoDAO();
-        copaQuartoDAO.Delete(objeto);
+        CopaQuartoDAO.getInstance().Delete(objeto);
     }
 
 }

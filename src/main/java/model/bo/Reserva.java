@@ -1,17 +1,36 @@
-package model;
+package model.bo;
 
 import java.security.Timestamp;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
+@Entity
 public class Reserva {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name="data_hora_reserva")
     private Timestamp dataHoraReserva;
-    private Date dataPrevista, dataPrevistaSaida;
+    @Column(name="data_prevista")
+    private Date dataPrevista;
+    @Column(name="data_prevista_saida")
+    private Date dataPrevistaSaida;
+    @Column
     private String obs;
+    @Column
     private char status;
+    @JoinColumn
+    @OneToMany
     private List<Check> cheques;
 
+    public Reserva(){}
     public Reserva(int id, Timestamp dataHoraReserva, Date dataPrevista, Date dataPrevistaSaida, String obs, char status) {
         this.id = id;
         this.dataHoraReserva = dataHoraReserva;

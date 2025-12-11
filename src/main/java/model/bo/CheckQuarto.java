@@ -1,12 +1,29 @@
-package model;
+package model.bo;   
 
 import java.sql.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
+@Entity(name="check_quarto")
 public class CheckQuarto {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private Date dataHoraInicio, dataHoraFim;
+    @Column(name="data_hora_inicio")
+    private Date dataHoraInicio;
+    @Column(name="data_hora_fim")
+    private Date dataHoraFim;
+    @Column
     private String obs;
+    @Column
     private char status;
+    @JoinColumn
+    @OneToOne
     private Quarto quarto;
 
     public CheckQuarto(){}

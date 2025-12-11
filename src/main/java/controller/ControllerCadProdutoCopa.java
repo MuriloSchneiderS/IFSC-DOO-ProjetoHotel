@@ -3,9 +3,8 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import javax.swing.JOptionPane;
-import model.CopaQuarto;
-import model.ProdutoCopa;
+import model.bo.CopaQuarto;
+import model.bo.ProdutoCopa;
 import view.TelaBuscaProdutoCopa;
 import view.TelaCadastroProdutoCopa;
 

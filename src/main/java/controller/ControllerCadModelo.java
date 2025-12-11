@@ -2,12 +2,9 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import javax.swing.JOptionPane;
-import model.Marca;
-import model.Modelo;
+import model.bo.Marca;
+import model.bo.Modelo;
 import view.TelaBuscaModelo;
 import view.TelaCadastroModelo;
 

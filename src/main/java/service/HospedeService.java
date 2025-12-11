@@ -1,34 +1,29 @@
 package service;
 
 import java.util.List;
-import model.Hospede;
-import modelDAO.HospedeDAO;
+import model.bo.Hospede;
+import model.DAO.HospedeDAO;
 
 public class HospedeService{
 
     public static void Criar(Hospede objeto) {
-        HospedeDAO hospedeDAO = new HospedeDAO();
-        hospedeDAO.Create(objeto);
+        HospedeDAO.getInstance().Create(objeto);
     }
 
     public static Hospede Carregar(int id) {
-        HospedeDAO hospedeDAO = new HospedeDAO();
-        return hospedeDAO.Retrieve(id);
+        return HospedeDAO.getInstance().Retrieve(id);
     }
 
     public static List<Hospede> Carregar(String atributo, String valor) {
-        HospedeDAO hospedeDAO = new HospedeDAO();
-        return hospedeDAO.Retrieve(atributo, valor);
+        return HospedeDAO.getInstance().Retrieve(atributo, valor);
     }
 
     public static void Atualizar(Hospede objeto) {
-        HospedeDAO hospedeDAO = new HospedeDAO();
-        hospedeDAO.Update(objeto);
+        HospedeDAO.getInstance().Update(objeto);
     }
 
     public static void Apagar(Hospede objeto) {
-        HospedeDAO hospedeDAO = new HospedeDAO();
-        hospedeDAO.Delete(objeto);
+        HospedeDAO.getInstance().Delete(objeto);
     }
 
 }

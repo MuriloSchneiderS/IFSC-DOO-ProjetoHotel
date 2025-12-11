@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.Servico;
+import model.bo.Servico;
 import view.TelaBuscaServico;
 
 public class ControllerBuscaServico implements ActionListener {

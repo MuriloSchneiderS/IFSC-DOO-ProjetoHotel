@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.Marca;
-import model.Modelo;
+import model.bo.Marca;
+import model.bo.Modelo;
 import view.TelaBuscaModelo;
 
 public class ControllerBuscaModelo implements ActionListener {

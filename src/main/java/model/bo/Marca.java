@@ -1,11 +1,25 @@
-package model;
+package model.bo;
 
-public class Marca {
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
+public class Marca implements Serializable{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
+    @Column
     private String descricao;
+    
+    @Column
     private char status;
-
+    
     public Marca(){}
     public Marca(int id, String descricao) {
         this.id = id;

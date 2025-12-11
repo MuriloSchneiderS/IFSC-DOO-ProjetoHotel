@@ -1,34 +1,29 @@
 package service;
 
 import java.util.List;
-import model.Quarto;
-import modelDAO.QuartoDAO;
+import model.bo.Quarto;
+import model.DAO.QuartoDAO;
 
 public class QuartoService{
 
     public static void Criar(Quarto objeto) {
-        QuartoDAO quartoDAO = new QuartoDAO();
-        quartoDAO.Create(objeto);
+        QuartoDAO.getInstance().Create(objeto);
     }
 
     public static Quarto Carregar(int id) {
-        QuartoDAO quartoDAO = new QuartoDAO();
-        return quartoDAO.Retrieve(id);
+        return QuartoDAO.getInstance().Retrieve(id);
     }
 
     public static List<Quarto> Carregar(String atributo, String valor) {
-        QuartoDAO quartoDAO = new QuartoDAO();
-        return quartoDAO.Retrieve(atributo, valor);
+        return QuartoDAO.getInstance().Retrieve(atributo, valor);
     }
 
     public static void Atualizar(Quarto objeto) {
-        QuartoDAO quartoDAO = new QuartoDAO();
-        quartoDAO.Update(objeto);
+        QuartoDAO.getInstance().Update(objeto);
     }
 
     public static void Apagar(Quarto objeto) {
-        QuartoDAO quartoDAO = new QuartoDAO();
-        quartoDAO.Delete(objeto);
+        QuartoDAO.getInstance().Delete(objeto);
     }
 
 }

@@ -1,34 +1,29 @@
 package service;
 
 import java.util.List;
-import model.Funcionario;
-import modelDAO.FuncionarioDAO;
+import model.bo.Funcionario;
+import model.DAO.FuncionarioDAO;
 
 public class FuncionarioService{
 
     public static void Criar(Funcionario objeto) {
-        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-        funcionarioDAO.Create(objeto);
+        FuncionarioDAO.getInstance().Create(objeto);
     }
 
     public static Funcionario Carregar(int id) {
-        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-        return funcionarioDAO.Retrieve(id);
+        return FuncionarioDAO.getInstance().Retrieve(id);
     }
 
     public static List<Funcionario> Carregar(String atributo, String valor) {
-        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-        return funcionarioDAO.Retrieve(atributo, valor);
+        return FuncionarioDAO.getInstance().Retrieve(atributo, valor);
     }
 
     public static void Atualizar(Funcionario objeto) {
-        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-        funcionarioDAO.Update(objeto);
+        FuncionarioDAO.getInstance().Update(objeto);
     }
 
     public static void Apagar(Funcionario objeto) {
-        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-        funcionarioDAO.Delete(objeto);
+        FuncionarioDAO.getInstance().Delete(objeto);
     }
 
 }

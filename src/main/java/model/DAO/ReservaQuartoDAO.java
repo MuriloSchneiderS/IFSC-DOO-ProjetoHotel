@@ -1,32 +1,92 @@
-package modelDAO;
-import model.ReservaQuarto;
-import java.util.List;
+package model.DAO;
 
-public class ReservaQuartoDAO implements InterfaceDAO<ReservaQuarto>{
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import model.bo.ReservaQuarto;
+
+public class ReservaQuartoDAO implements InterfaceDAO<ReservaQuarto> {
+
+    private static ReservaQuartoDAO instance;
+    protected EntityManager entityManager;
+
+    public ReservaQuartoDAO() {
+        entityManager = getEntityManager();
+    }
+
+    public static ReservaQuartoDAO getInstance() {
+        if (instance == null) {
+            instance = new ReservaQuartoDAO();
+        }
+        return instance;
+    }
+
+    private EntityManager getEntityManager() {
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("PU");
+        if (entityManager == null) {
+            entityManager = factory.createEntityManager();
+        }
+        return entityManager;
+    }
 
     @Override
     public void Create(ReservaQuarto objeto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(objeto);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();
+        }
+
     }
 
     @Override
     public ReservaQuarto Retrieve(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+        ReservaQuarto reservaQuarto = entityManager.find(ReservaQuarto.class, id);
+        return reservaQuarto;
     }
 
     @Override
     public List<ReservaQuarto> Retrieve(String atributo, String valor) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+        List<ReservaQuarto> listaReservaQuarto = new ArrayList<>();
+        listaReservaQuarto = entityManager.createQuery(" Select hosp From reservaQuarto hosp "
+                + " where " + atributo
+                + " like (%" + valor + " %)", ReservaQuarto.class).getResultList();
+        return listaReservaQuarto;
     }
 
     @Override
     public void Update(ReservaQuarto objeto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.merge(objeto);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();
+        }
     }
 
     @Override
     public void Delete(ReservaQuarto objeto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+        try{
+            entityManager.getTransaction().begin();
+            ReservaQuarto reservaQuarto = new ReservaQuarto();
+            reservaQuarto = entityManager.find(ReservaQuarto.class, objeto.getId());
+            if(reservaQuarto != null){
+                entityManager.remove(reservaQuarto);
+            }
+            entityManager.getTransaction().commit();
+        } catch (Exception ex){
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();
+        }
     }
-    
 }

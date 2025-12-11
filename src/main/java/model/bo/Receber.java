@@ -1,16 +1,41 @@
-package model;
+package model.bo;
 
 import java.security.Timestamp;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
+@Entity
 public class Receber {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name="data_hora_cadastro")
     private Timestamp dataHoraCadastro;
-    private float valorOriginal, desconto, acrescimo, valorpago;
+    @Column(name="valor_original")
+    private float valorOriginal;
+    @Column
+    private float desconto;
+    @Column
+    private float acrescimo;
+    @Column(name="valor_pago")
+    private float valorpago;
+    @Column
     private String obs;
+    @Column
     private char status;
+    @JoinColumn
+    @OneToOne
     private Check check;
+    @JoinColumn
+    @OneToOne
     private MovimentoCaixa movimentoCaixa;
 
+    public Receber(){}
     public Receber(int id, Timestamp dataHoraCadastro, float valorOriginal, float desconto, float acrescimo, float valorpago, String obs, char status, Check check) {
         this.id = id;
         this.dataHoraCadastro = dataHoraCadastro;

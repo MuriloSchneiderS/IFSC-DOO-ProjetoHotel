@@ -1,14 +1,29 @@
-package model;
+package model.bo;
 
 import java.security.Timestamp;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity(name="movimento_caixa")
 public class MovimentoCaixa {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name="data_hora_movimento")
     private Timestamp dataHoraMovimento;
+    @Column
     private float valor;
-    private String descricao, obs;
+    @Column
+    private String descricao;
+    @Column
+    private String obs;
+    @Column
     private char status;
-
+    
+    public MovimentoCaixa(){}
     public MovimentoCaixa(int id, Timestamp dataHoraMovimento, float valor, String descricao, String obs, char status) {
         this.id = id;
         this.dataHoraMovimento = dataHoraMovimento;

@@ -1,11 +1,22 @@
-package model;
+package model.bo;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+@Entity
 public class Fornecedor extends Pessoa{
-    
+    @Column(name="razao_social")
     private String razaoSocial;
+    @Column
     private String cnpj;
+    @Column(name="inscricao_estadual")
     private String inscricaoEstadual;
+    @Column
     private String contato;
-    private String usuario,senha;
+    @Column
+    private String usuario;
+    @Column
+    private String senha;
 
     public Fornecedor() {
     }

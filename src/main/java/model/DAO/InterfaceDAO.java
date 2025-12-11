@@ -1,4 +1,4 @@
-package modelDAO;
+package model.DAO;
 import java.util.List;
 
 public interface InterfaceDAO<T> {

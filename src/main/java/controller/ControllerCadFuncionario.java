@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import model.Funcionario;
+import model.bo.Funcionario;
 import view.TelaBuscaFuncionario;
 import view.TelaCadastroFuncionario;
 

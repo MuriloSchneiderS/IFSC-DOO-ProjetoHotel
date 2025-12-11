@@ -1,16 +1,36 @@
-package model;
+package model.bo;
 
 import java.security.Timestamp;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 
+@Entity(name="oderm_servico")
 public class OrdemServico {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private Timestamp dataHoraCadastro, dataPrevisaoInicio, dataHoraPrevisaoTermino;
+    @Column(name="data_hora_cadastro")
+    private Timestamp dataHoraCadastro;
+    @Column(name="data_hora_prevista_inicio")
+    private Timestamp dataPrevisaoInicio;
+    @Column(name="data_hora_prevista_termino")
+    private Timestamp dataHoraPrevisaoTermino;
+    @Column
     private String obs;
+    @Column
     private char status;
-    private Servico servico;
-    private Quarto quarto;
+    @JoinColumn
     private Check check;
+    @JoinColumn
+    private Servico servico;
+    @JoinColumn
+    private Quarto quarto;
 
+    public OrdemServico(){}
     public OrdemServico(int id, Timestamp dataHoraCadastro, Timestamp dataPrevisaoInicio, Timestamp dataHoraPrevisaoTermino, String obs, char status, Servico servico, Check check) {
         this.id = id;
         this.dataHoraCadastro = dataHoraCadastro;

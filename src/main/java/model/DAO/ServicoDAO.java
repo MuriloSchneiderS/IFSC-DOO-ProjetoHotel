@@ -1,128 +1,92 @@
-package modelDAO;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import model.Servico;
-import java.util.List;
+package model.DAO;
 
-public class ServicoDAO implements InterfaceDAO<Servico>{
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import model.bo.Servico;
+
+public class ServicoDAO implements InterfaceDAO<Servico> {
+
+    private static ServicoDAO instance;
+    protected EntityManager entityManager;
+
+    public ServicoDAO() {
+        entityManager = getEntityManager();
+    }
+
+    public static ServicoDAO getInstance() {
+        if (instance == null) {
+            instance = new ServicoDAO();
+        }
+        return instance;
+    }
+
+    private EntityManager getEntityManager() {
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("PU");
+        if (entityManager == null) {
+            entityManager = factory.createEntityManager();
+        }
+        return entityManager;
+    }
 
     @Override
     public void Create(Servico objeto) {
-        String sqlInstrucao = "INSERT INTO servico("
-                + " descricao,"
-                + " obs,"
-                + " status)"
-                + " VALUES (?,?,?)";
-        Connection conexao = ConnectionFactory.getConnection();
-        PreparedStatement pstm = null;
         try {
-            pstm = conexao.prepareStatement(sqlInstrucao);
-            pstm.setString(1, objeto.getDescricao());
-            pstm.setString(2, objeto.getObs());
-            pstm.setString(3, objeto.getStatus()+"");
-            pstm.execute();
-        } catch (SQLException ex) {
+            entityManager.getTransaction().begin();
+            entityManager.persist(objeto);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) {
             ex.printStackTrace();
-        } finally {
-            ConnectionFactory.closeConnection(conexao, pstm);
+            entityManager.getTransaction().rollback();
         }
+
     }
 
     @Override
     public Servico Retrieve(int id) {
-        String sqlInstrucao = "SELECT"
-                + " id,"
-                + " descricao,"
-                + " obs,"
-                + " status"
-                + " FROM servico WHERE id=?";
-        Connection conexao = ConnectionFactory.getConnection();
-        PreparedStatement pstm = null;
-        ResultSet rst = null;
-        Servico servico = new Servico();
-        
-        try {
-            pstm = conexao.prepareStatement(sqlInstrucao);
-            pstm.setInt(1, id);
-            rst = pstm.executeQuery();
-            while (rst.next()) {
-                servico.setId(rst.getInt("id"));
-                servico.setDescricao(rst.getString(2));
-                servico.setObs(rst.getString("obs"));
-                servico.setStatus(rst.getString("status").charAt(0));
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            ConnectionFactory.closeConnection(conexao, pstm, rst);
-            return servico;
-        }
+
+        Servico servico = entityManager.find(Servico.class, id);
+        return servico;
     }
 
     @Override
     public List<Servico> Retrieve(String atributo, String valor) {
-        String sqlInstrucao = "SELECT"
-                + " id,"
-                + " descricao,"
-                + " obs,"
-                + " status"
-                + " FROM servico"
-                + " WHERE "+atributo+" LIKE ?";
-        Connection conexao = ConnectionFactory.getConnection();
-        PreparedStatement pstm = null;
-        ResultSet rst = null;
-        List<Servico> listaServicos = new ArrayList<>();
-        try {
-            pstm = conexao.prepareStatement(sqlInstrucao);
-            pstm.setString(1, "%"+valor+"%");
-            rst = pstm.executeQuery();
-            while (rst.next()) {
-                Servico servico = new Servico();
-                servico.setId(rst.getInt("id"));
-                servico.setDescricao(rst.getString(2));
-                servico.setObs(rst.getString("obs"));
-                servico.setStatus(rst.getString("status").charAt(0));
-                listaServicos.add(servico);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            ConnectionFactory.closeConnection(conexao, pstm, rst);
-            return listaServicos;
-        }
+
+        List<Servico> listaServico = new ArrayList<>();
+        listaServico = entityManager.createQuery(" Select hosp From servico hosp "
+                + " where " + atributo
+                + " like (%" + valor + " %)", Servico.class).getResultList();
+        return listaServico;
     }
 
     @Override
     public void Update(Servico objeto) {
-        String sqlInstrucao = "UPDATE servico "
-                + " SET"
-                + " descricao =?,"
-                + " obs=?,"
-                + " status=?"
-                + " WHERE id =?";
-        Connection conexao = ConnectionFactory.getConnection();
-        PreparedStatement pstm = null;
         try {
-            pstm = conexao.prepareStatement(sqlInstrucao);
-            pstm.setString(1, objeto.getDescricao());
-            pstm.setString(2, objeto.getObs());
-            pstm.setString(3, objeto.getStatus()+"");
-            pstm.setInt(4, objeto.getId());
-            pstm.execute();
-        }catch (SQLException ex) {
+            entityManager.getTransaction().begin();
+            entityManager.merge(objeto);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) {
             ex.printStackTrace();
-        } finally {
-            ConnectionFactory.closeConnection(conexao, pstm);
-            return;
+            entityManager.getTransaction().rollback();
         }
     }
 
     @Override
     public void Delete(Servico objeto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+        try{
+            entityManager.getTransaction().begin();
+            Servico servico = new Servico();
+            servico = entityManager.find(Servico.class, objeto.getId());
+            if(servico != null){
+                entityManager.remove(servico);
+            }
+            entityManager.getTransaction().commit();
+        } catch (Exception ex){
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();
+        }
     }
-    
 }

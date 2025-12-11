@@ -1,10 +1,29 @@
-package model;
+package model.bo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
+
+@Entity(name="vaga_estacionamento")
 public class VagaEstacionamento {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String descricao, obs;
+    @Column
+    private String descricao;
+    @Column
+    private String obs;
+    @Column(name="metragem_vaga")
     private float metragemVaga;
+    @Column
     private char status;
+    @JoinColumn
+    @OneToMany
     private AlocacaoVaga alocacao;
     
     public VagaEstacionamento(){}

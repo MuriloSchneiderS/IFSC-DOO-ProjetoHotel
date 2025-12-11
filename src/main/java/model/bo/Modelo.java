@@ -1,10 +1,27 @@
-package model;
+package model.bo;
 
-public class Modelo {
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
+@Entity
+public class Modelo implements Serializable{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column
     private String descricao;
+    @Column
     private char status;
+
+    @JoinColumn
+    @ManyToOne
     private Marca marca;
 
     public Modelo(){}

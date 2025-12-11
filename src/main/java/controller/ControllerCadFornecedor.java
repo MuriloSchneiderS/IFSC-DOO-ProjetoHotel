@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import model.Fornecedor;
+import model.bo.Fornecedor;
 import view.TelaBuscaFornecedor;
 import view.TelaCadastroFornecedor;
 

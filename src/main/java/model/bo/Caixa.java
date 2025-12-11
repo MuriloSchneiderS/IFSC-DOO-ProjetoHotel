@@ -1,16 +1,37 @@
-package model;
+package model.bo;
 
 import java.util.List;
 import java.security.Timestamp;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
+@Entity
 public class Caixa {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private float valorDeAbertura, valorDeFechamento;
-    private Timestamp dataHoraAbertura, dataHoraFechamento;
+    @Column(name="valor_de_abertura")
+    private float valorDeAbertura;
+    @Column(name="valor_de_fechamento")
+    private float valorDeFechamento;
+    @Column(name="data_hora_abertura")
+    private Timestamp dataHoraAbertura;
+    @Column(name="data_hora_fechamento")
+    private Timestamp dataHoraFechamento;
+    @Column
     private String obs;
+    @Column
     private char status;
+    @JoinColumn
+    @OneToMany
     private List<MovimentoCaixa> movimentacoes;
 
+    public Caixa(){}
     public Caixa(int id, float valorDeAbertura, float valorDeFechamento, Timestamp dataHoraAbertura, Timestamp dataHoraFechamento, String obs, char status) {
         this.id = id;
         this.valorDeAbertura = valorDeAbertura;

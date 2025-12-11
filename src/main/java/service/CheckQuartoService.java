@@ -1,34 +1,29 @@
 package service;
 
 import java.util.List;
-import model.CheckQuarto;
-import modelDAO.CheckQuartoDAO;
+import model.bo.CheckQuarto;
+import model.DAO.CheckQuartoDAO;
 
 public class CheckQuartoService{
 
     public static void Criar(CheckQuarto objeto) {
-        CheckQuartoDAO checkQuartoDAO = new CheckQuartoDAO();
-        checkQuartoDAO.Create(objeto);
+        CheckQuartoDAO.getInstance().Create(objeto);
     }
 
     public static CheckQuarto Carregar(int id) {
-        CheckQuartoDAO checkQuartoDAO = new CheckQuartoDAO();
-        return checkQuartoDAO.Retrieve(id);
+        return CheckQuartoDAO.getInstance().Retrieve(id);
     }
 
     public static List<CheckQuarto> Carregar(String atributo, String valor) {
-        CheckQuartoDAO checkQuartoDAO = new CheckQuartoDAO();
-        return checkQuartoDAO.Retrieve(atributo, valor);
+        return CheckQuartoDAO.getInstance().Retrieve(atributo, valor);
     }
 
     public static void Atualizar(CheckQuarto objeto) {
-        CheckQuartoDAO checkQuartoDAO = new CheckQuartoDAO();
-        checkQuartoDAO.Update(objeto);
+        CheckQuartoDAO.getInstance().Update(objeto);
     }
 
     public static void Apagar(CheckQuarto objeto) {
-        CheckQuartoDAO checkQuartoDAO = new CheckQuartoDAO();
-        checkQuartoDAO.Delete(objeto);
+        CheckQuartoDAO.getInstance().Delete(objeto);
     }
 
 }

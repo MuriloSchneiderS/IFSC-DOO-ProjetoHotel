@@ -1,34 +1,29 @@
 package service;
 
 import java.util.List;
-import model.ProdutoCopa;
-import modelDAO.ProdutoCopaDAO;
+import model.bo.ProdutoCopa;
+import model.DAO.ProdutoCopaDAO;
 
 public class ProdutoCopaService{
 
     public static void Criar(ProdutoCopa objeto) {
-        ProdutoCopaDAO produtoCopaDAO = new ProdutoCopaDAO();
-        produtoCopaDAO.Create(objeto);
+        ProdutoCopaDAO.getInstance().Create(objeto);
     }
 
     public static ProdutoCopa Carregar(int id) {
-        ProdutoCopaDAO produtoCopaDAO = new ProdutoCopaDAO();
-        return produtoCopaDAO.Retrieve(id);
+        return ProdutoCopaDAO.getInstance().Retrieve(id);
     }
 
     public static List<ProdutoCopa> Carregar(String atributo, String valor) {
-        ProdutoCopaDAO produtoCopaDAO = new ProdutoCopaDAO();
-        return produtoCopaDAO.Retrieve(atributo, valor);
+        return ProdutoCopaDAO.getInstance().Retrieve(atributo, valor);
     }
 
     public static void Atualizar(ProdutoCopa objeto) {
-        ProdutoCopaDAO produtoCopaDAO = new ProdutoCopaDAO();
-        produtoCopaDAO.Update(objeto);
+        ProdutoCopaDAO.getInstance().Update(objeto);
     }
 
     public static void Apagar(ProdutoCopa objeto) {
-        ProdutoCopaDAO produtoCopaDAO = new ProdutoCopaDAO();
-        produtoCopaDAO.Delete(objeto);
+        ProdutoCopaDAO.getInstance().Delete(objeto);
     }
 
 }

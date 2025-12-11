@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.Funcionario;
+import model.bo.Funcionario;
 import view.TelaBuscaFuncionario;
 
 public class ControllerBuscaFuncionario implements ActionListener {

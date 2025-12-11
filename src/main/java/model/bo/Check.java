@@ -1,13 +1,29 @@
-package model;
+package model.bo;
 
 import java.security.Timestamp;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
 public class Check {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private Timestamp dataHoraCadastro, dataHoraEntrada, dataHoraSaida;
+    @Column(name="data_hora_cadastro")
+    private Timestamp dataHoraCadastro;
+    @Column(name="data_hora_entrada")
+    private Timestamp dataHoraEntrada;
+    @Column(name="data_hora_saida")
+    private Timestamp dataHoraSaida;
+    @Column
     private String obs;
+    @Column
     private char status;
 
+    public Check(){}
     public Check(int id, Timestamp dataHoraCadastro, Timestamp dataHoraEntrada, Timestamp dataHoraSaida, String obs, char status) {
         this.id = id;
         this.dataHoraCadastro = dataHoraCadastro;

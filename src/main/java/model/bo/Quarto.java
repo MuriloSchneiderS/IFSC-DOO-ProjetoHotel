@@ -1,10 +1,31 @@
-package model;
+package model.bo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Quarto {
-    private int id, capacidadeHospedes, andar;
-    private String descricao, identificacao, obs;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Column(name="capacidade_hospedes")
+    private int capacidadeHospedes;
+    @Column
+    private int andar;
+    @Column
+    private String descricao;
+    @Column
+    private String identificacao;
+    @Column
+    private String obs;
+    @Column
     private float metragem;
+    @Column(name="flag_animais")
     private int flagAnimais;
+    @Column
     private char status;
 
     public Quarto(){}

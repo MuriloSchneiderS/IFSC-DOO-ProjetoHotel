@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.VagaEstacionamento;
+import model.bo.VagaEstacionamento;
 import view.TelaBuscaVagaEstacionamento;
 
 public class ControllerBuscaVagaEstacionamento implements ActionListener {

@@ -1,7 +1,13 @@
-package model;
+package model.bo;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+@Entity
 public class Funcionario extends Pessoa{
-   
+   @Column
     private String usuario;
+   @Column
     private char[] senha;
 
     public Funcionario() {

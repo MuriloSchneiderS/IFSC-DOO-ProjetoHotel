@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.Quarto;
+import model.bo.Quarto;
 import view.TelaBuscaQuarto;
 
 public class ControllerBuscaQuarto implements ActionListener {
