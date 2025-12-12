@@ -56,9 +56,9 @@ public class CaixaDAO implements InterfaceDAO<Caixa> {
     public List<Caixa> Retrieve(String atributo, String valor) {
 
         List<Caixa> listaCaixa = new ArrayList<>();
-        listaCaixa = entityManager.createQuery(" Select hosp From caixa hosp "
-                + " where " + atributo
-                + " like (%" + valor + " %)", Caixa.class).getResultList();
+        listaCaixa = entityManager.createQuery(" Select x From Caixa x "
+                + " where x." + atributo
+                + " LIKE '%" + valor + "%'", Caixa.class).getResultList();
         return listaCaixa;
     }
 

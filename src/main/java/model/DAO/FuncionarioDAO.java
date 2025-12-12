@@ -55,9 +55,9 @@ public class FuncionarioDAO implements InterfaceDAO<Funcionario> {
     public List<Funcionario> Retrieve(String atributo, String valor) {
 
         List<Funcionario> listaFuncionario = new ArrayList<>();
-        listaFuncionario = entityManager.createQuery(" Select hosp From funcionario hosp "
-                + " where " + atributo
-                + " like (%" + valor + " %)", Funcionario.class).getResultList();
+        listaFuncionario = entityManager.createQuery(" Select x From Funcionario x "
+                + " where x." + atributo
+                + " LIKE '%" + valor + "%'", Funcionario.class).getResultList();
         return listaFuncionario;
     }
 

@@ -56,9 +56,9 @@ public class CopaQuartoDAO implements InterfaceDAO<CopaQuarto> {
     public List<CopaQuarto> Retrieve(String atributo, String valor) {
 
         List<CopaQuarto> listaCopaQuarto = new ArrayList<>();
-        listaCopaQuarto = entityManager.createQuery(" Select hosp From copaQuarto hosp "
-                + " where " + atributo
-                + " like (%" + valor + " %)", CopaQuarto.class).getResultList();
+        listaCopaQuarto = entityManager.createQuery(" Select x From copa_quarto x "
+                + " where x." + atributo
+                + " LIKE '%" + valor + "%'", CopaQuarto.class).getResultList();
         return listaCopaQuarto;
     }
 

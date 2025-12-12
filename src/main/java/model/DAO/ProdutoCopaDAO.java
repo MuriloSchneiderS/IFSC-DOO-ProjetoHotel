@@ -55,9 +55,9 @@ public class ProdutoCopaDAO implements InterfaceDAO<ProdutoCopa> {
     public List<ProdutoCopa> Retrieve(String atributo, String valor) {
 
         List<ProdutoCopa> listaProdutoCopa = new ArrayList<>();
-        listaProdutoCopa = entityManager.createQuery(" Select hosp From produtoCopa hosp "
-                + " where " + atributo
-                + " like (%" + valor + " %)", ProdutoCopa.class).getResultList();
+        listaProdutoCopa = entityManager.createQuery(" Select x From produto_copa x "
+                + " where x." + atributo
+                + " LIKE '%" + valor + "%'", ProdutoCopa.class).getResultList();
         return listaProdutoCopa;
     }
 

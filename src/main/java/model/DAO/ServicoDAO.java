@@ -55,9 +55,9 @@ public class ServicoDAO implements InterfaceDAO<Servico> {
     public List<Servico> Retrieve(String atributo, String valor) {
 
         List<Servico> listaServico = new ArrayList<>();
-        listaServico = entityManager.createQuery(" Select hosp From servico hosp "
-                + " where " + atributo
-                + " like (%" + valor + " %)", Servico.class).getResultList();
+        listaServico = entityManager.createQuery(" Select x From Servico x "
+                + " where x." + atributo
+                + " LIKE '%" + valor + "%'", Servico.class).getResultList();
         return listaServico;
     }
 

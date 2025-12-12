@@ -56,9 +56,9 @@ public class CheckQuartoDAO implements InterfaceDAO<CheckQuarto> {
     public List<CheckQuarto> Retrieve(String atributo, String valor) {
 
         List<CheckQuarto> listaCheckQuarto = new ArrayList<>();
-        listaCheckQuarto = entityManager.createQuery(" Select hosp From checkQuarto hosp "
-                + " where " + atributo
-                + " like (%" + valor + " %)", CheckQuarto.class).getResultList();
+        listaCheckQuarto = entityManager.createQuery(" Select x From check_quarto x "
+                + " where x." + atributo
+                + " LIKE '%" + valor + "%'", CheckQuarto.class).getResultList();
         return listaCheckQuarto;
     }
 

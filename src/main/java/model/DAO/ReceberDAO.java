@@ -55,9 +55,9 @@ public class ReceberDAO implements InterfaceDAO<Receber> {
     public List<Receber> Retrieve(String atributo, String valor) {
 
         List<Receber> listaReceber = new ArrayList<>();
-        listaReceber = entityManager.createQuery(" Select hosp From receber hosp "
-                + " where " + atributo
-                + " like (%" + valor + " %)", Receber.class).getResultList();
+        listaReceber = entityManager.createQuery(" Select x From Receber x "
+                + " where x." + atributo
+                + " LIKE '%" + valor + "%'", Receber.class).getResultList();
         return listaReceber;
     }
 

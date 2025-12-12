@@ -55,9 +55,9 @@ public class OrdemServicoDAO implements InterfaceDAO<OrdemServico> {
     public List<OrdemServico> Retrieve(String atributo, String valor) {
 
         List<OrdemServico> listaOrdemServico = new ArrayList<>();
-        listaOrdemServico = entityManager.createQuery(" Select hosp From ordemServico hosp "
-                + " where " + atributo
-                + " like (%" + valor + " %)", OrdemServico.class).getResultList();
+        listaOrdemServico = entityManager.createQuery(" Select x From oderm_servico x "
+                + " where x." + atributo
+                + " LIKE '%" + valor + "%'", OrdemServico.class).getResultList();
         return listaOrdemServico;
     }
 

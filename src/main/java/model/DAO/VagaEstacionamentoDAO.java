@@ -55,9 +55,9 @@ public class VagaEstacionamentoDAO implements InterfaceDAO<VagaEstacionamento> {
     public List<VagaEstacionamento> Retrieve(String atributo, String valor) {
 
         List<VagaEstacionamento> listaVagaEstacionamento = new ArrayList<>();
-        listaVagaEstacionamento = entityManager.createQuery(" Select hosp From vagaEstacionamento hosp "
-                + " where " + atributo
-                + " like (%" + valor + " %)", VagaEstacionamento.class).getResultList();
+        listaVagaEstacionamento = entityManager.createQuery(" Select x From vaga_estacionamento x "
+                + " where x." + atributo
+                + " LIKE '%" + valor + "%'", VagaEstacionamento.class).getResultList();
         return listaVagaEstacionamento;
     }
 

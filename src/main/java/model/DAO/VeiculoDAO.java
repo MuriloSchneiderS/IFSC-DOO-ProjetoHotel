@@ -55,9 +55,9 @@ public class VeiculoDAO implements InterfaceDAO<Veiculo> {
     public List<Veiculo> Retrieve(String atributo, String valor) {
 
         List<Veiculo> listaVeiculo = new ArrayList<>();
-        listaVeiculo = entityManager.createQuery(" Select hosp From veiculo hosp "
-                + " where " + atributo
-                + " like (%" + valor + " %)", Veiculo.class).getResultList();
+        listaVeiculo = entityManager.createQuery(" Select x From Veiculo x "
+                + " where x." + atributo
+                + " LIKE '%" + valor + "%'", Veiculo.class).getResultList();
         return listaVeiculo;
     }
 

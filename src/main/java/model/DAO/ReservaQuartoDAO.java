@@ -55,9 +55,9 @@ public class ReservaQuartoDAO implements InterfaceDAO<ReservaQuarto> {
     public List<ReservaQuarto> Retrieve(String atributo, String valor) {
 
         List<ReservaQuarto> listaReservaQuarto = new ArrayList<>();
-        listaReservaQuarto = entityManager.createQuery(" Select hosp From reservaQuarto hosp "
-                + " where " + atributo
-                + " like (%" + valor + " %)", ReservaQuarto.class).getResultList();
+        listaReservaQuarto = entityManager.createQuery(" Select x From reserva_quarto x "
+                + " where x." + atributo
+                + " LIKE '%" + valor + "%'", ReservaQuarto.class).getResultList();
         return listaReservaQuarto;
     }
 

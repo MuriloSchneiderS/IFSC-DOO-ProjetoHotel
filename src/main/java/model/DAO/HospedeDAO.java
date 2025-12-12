@@ -55,9 +55,9 @@ public class HospedeDAO implements InterfaceDAO<Hospede> {
     public List<Hospede> Retrieve(String atributo, String valor) {
 
         List<Hospede> listaHospede = new ArrayList<>();
-        listaHospede = entityManager.createQuery(" Select hosp From hospede hosp "
-                + " where " + atributo
-                + " like (%" + valor + " %)", Hospede.class).getResultList();
+        listaHospede = entityManager.createQuery(" Select x From Hospede x "
+                + " where x." + atributo
+                + " LIKE '%" + valor + "%'", Hospede.class).getResultList();
         return listaHospede;
     }
 

@@ -11,38 +11,38 @@ public class Pessoa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    protected int id;
     
     @Column
-    private String nome;
+    protected String nome;
     
     @Column(name="fone")
-    private String fone1;
+    protected String fone1;
     
     @Column
-    private String fone2;
+    protected String fone2;
     @Column
-    private String email;
+    protected String email;
     @Column
-    private String cep;
+    protected String cep;
     @Column
-    private String logradouro;
+    protected String logradouro;
     @Column
-    private String bairro;
+    protected String bairro;
     @Column
-    private String cidade;
+    protected String cidade;
     @Column
-    private String complemento;
+    protected String complemento;
     @Column(name = "data_cadastro")
-    private String dataCadastro;
+    protected String dataCadastro;
     @Column
-    private String cpf;
+    protected String cpf;
     @Column
-    private String rg;
+    protected String rg;
     @Column
-    private String obs;
+    protected String obs;
     @Column
-    private char status;
+    protected char status;
 
     public Pessoa() {
     }

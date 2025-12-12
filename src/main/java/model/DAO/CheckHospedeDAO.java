@@ -56,9 +56,9 @@ public class CheckHospedeDAO implements InterfaceDAO<CheckHospede> {
     public List<CheckHospede> Retrieve(String atributo, String valor) {
 
         List<CheckHospede> listaCheckHospede = new ArrayList<>();
-        listaCheckHospede = entityManager.createQuery(" Select hosp From checkCheckHospede hosp "
-                + " where " + atributo
-                + " like (%" + valor + " %)", CheckHospede.class).getResultList();
+        listaCheckHospede = entityManager.createQuery(" Select x From check_hospede x "
+                + " where x." + atributo
+                + " LIKE '%" + valor + "%'", CheckHospede.class).getResultList();
         return listaCheckHospede;
     }
 

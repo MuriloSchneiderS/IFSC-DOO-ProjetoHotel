@@ -55,9 +55,9 @@ public class MovimentoCaixaDAO implements InterfaceDAO<MovimentoCaixa> {
     public List<MovimentoCaixa> Retrieve(String atributo, String valor) {
 
         List<MovimentoCaixa> listaMovimentoCaixa = new ArrayList<>();
-        listaMovimentoCaixa = entityManager.createQuery(" Select hosp From movimentoCaixa hosp "
-                + " where " + atributo
-                + " like (%" + valor + " %)", MovimentoCaixa.class).getResultList();
+        listaMovimentoCaixa = entityManager.createQuery(" Select x From movimento_caixa x "
+                + " where x." + atributo
+                + " LIKE '%" + valor + "%'", MovimentoCaixa.class).getResultList();
         return listaMovimentoCaixa;
     }
 

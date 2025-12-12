@@ -55,9 +55,9 @@ public class CheckDAO implements InterfaceDAO<Check> {
     public List<Check> Retrieve(String atributo, String valor) {
 
         List<Check> listaCheck = new ArrayList<>();
-        listaCheck = entityManager.createQuery(" Select hosp From check hosp "
-                + " where " + atributo
-                + " like (%" + valor + " %)", Check.class).getResultList();
+        listaCheck = entityManager.createQuery(" Select x From Check x "
+                + " where x." + atributo
+                + " LIKE '%" + valor + "%'", Check.class).getResultList();
         return listaCheck;
     }
 

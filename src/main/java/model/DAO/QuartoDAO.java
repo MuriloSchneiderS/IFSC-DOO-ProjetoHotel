@@ -55,9 +55,9 @@ public class QuartoDAO implements InterfaceDAO<Quarto> {
     public List<Quarto> Retrieve(String atributo, String valor) {
 
         List<Quarto> listaQuarto = new ArrayList<>();
-        listaQuarto = entityManager.createQuery(" Select hosp From quarto hosp "
-                + " where " + atributo
-                + " like (%" + valor + " %)", Quarto.class).getResultList();
+        listaQuarto = entityManager.createQuery(" Select x From Quarto x "
+                + " where x." + atributo
+                + " LIKE '%" + valor + "%'", Quarto.class).getResultList();
         return listaQuarto;
     }
 
