@@ -5,6 +5,17 @@
     <class>model.bo.Marca</class>
     <class>model.bo.Modelo</class>
     <class>model.bo.Hospede</class>
+    <class>model.bo.Funcionario</class>
+    <class>model.bo.Fornecedor</class>
+    <class>model.bo.VagaEstacionamento</class>
+    <class>model.bo.Veiculo</class>
+    <class>model.bo.Servico</class>
+    <class>model.bo.Quarto</class>
+    <class>model.bo.ProdutoCopa</class>
+    <class>model.bo.CopaQuarto</class>
+    <class>model.bo.CheckQuarto</class>
+    <class>model.bo.AlocacaoVaga</class>
+    <class>model.bo.Check</class>
     <validation-mode>NONE</validation-mode>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/hotel?verifyServerCertificate=false&amp;useSSL=false&amp;requireSSL=false&amp;serverTimezone=UTC"/>

@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 
 @Entity(name="produto_copa")
 public class ProdutoCopa {
@@ -21,8 +21,8 @@ public class ProdutoCopa {
     private float valor;
     @Column
     private char status;
-    @JoinColumn
-    @OneToMany
+    @JoinColumn(name="copa_quarto")
+    @ManyToOne
     private CopaQuarto copaQuarto;
 
     public ProdutoCopa(){}

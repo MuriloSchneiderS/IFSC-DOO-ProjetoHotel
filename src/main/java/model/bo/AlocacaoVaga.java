@@ -18,7 +18,8 @@ public class AlocacaoVaga {
     private String obs;
     @Column
     private char status;
-    @Column(name="vaga_estacionamento")
+    @JoinColumn(name="vaga_estacionamento")
+    @ManyToOne
     private VagaEstacionamento vagaEstacionamento;
     @JoinColumn
     @ManyToOne
@@ -27,6 +28,7 @@ public class AlocacaoVaga {
     @OneToOne
     private Check check;
 
+    public AlocacaoVaga(){}
     public AlocacaoVaga(int id, String obs, char status, VagaEstacionamento vagaEstacionamento, Veiculo veiculo, Check check) {
         this.id = id;
         this.obs = obs;

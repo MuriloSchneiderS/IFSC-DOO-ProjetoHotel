@@ -22,7 +22,7 @@ public class CopaQuarto {
     private String obs;
     @Column
     private char status;
-    @JoinColumn
+    @JoinColumn(name="check_quarto")
     @ManyToOne
     private CheckQuarto checkQuarto;
 

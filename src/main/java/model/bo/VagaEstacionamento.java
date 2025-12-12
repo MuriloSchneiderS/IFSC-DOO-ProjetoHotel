@@ -5,11 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 
 
-@Entity(name="vaga_estacionamento")
+@Entity
 public class VagaEstacionamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,9 +20,6 @@ public class VagaEstacionamento {
     private float metragemVaga;
     @Column
     private char status;
-    @JoinColumn
-    @OneToMany
-    private AlocacaoVaga alocacao;
     
     public VagaEstacionamento(){}
     public VagaEstacionamento(int id, String descricao, String obs, float metragemVaga, char status) {
@@ -35,9 +30,6 @@ public class VagaEstacionamento {
         this.status = status;
     }
     
-    public void alocarVaga(AlocacaoVaga alocacao){
-        this.alocacao = alocacao;
-    }
 
     public int getId() {
         return id;
