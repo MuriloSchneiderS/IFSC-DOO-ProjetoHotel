@@ -1,5 +1,6 @@
 package model.DAO;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -34,6 +35,7 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
     @Override
     public void Create(Fornecedor objeto) {
         try {
+            objeto.setDataCadastro(new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd/MM/yyyy").parse(objeto.getDataCadastro())));
             entityManager.getTransaction().begin();
             entityManager.persist(objeto);
             entityManager.getTransaction().commit();
@@ -64,6 +66,7 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
     @Override
     public void Update(Fornecedor objeto) {
         try {
+            objeto.setDataCadastro(new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd/MM/yyyy").parse(objeto.getDataCadastro())));
             entityManager.getTransaction().begin();
             entityManager.merge(objeto);
             entityManager.getTransaction().commit();

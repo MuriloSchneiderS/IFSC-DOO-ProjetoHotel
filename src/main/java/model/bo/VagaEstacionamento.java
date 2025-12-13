@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 
-@Entity
+@Entity(name="vaga_estacionamento")
 public class VagaEstacionamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
