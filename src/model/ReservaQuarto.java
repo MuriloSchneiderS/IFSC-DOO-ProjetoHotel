@@ -4,13 +4,14 @@ import java.security.Timestamp;
 
 public class ReservaQuarto {
     private int id;
-    private Timestamp dataHoraInicio, dataHoraFim;
+    private String dataHoraInicio, dataHoraFim;
     private String obs;
     private char status;
     private Reserva reserva;
     private Quarto quarto;
 
-    public ReservaQuarto(int id, Timestamp dataHoraInicio, Timestamp dataHoraFim, String obs, char status, Reserva reserva, Quarto quarto) {
+    public ReservaQuarto(){}
+    public ReservaQuarto(int id, String dataHoraInicio, String dataHoraFim, String obs, char status, Reserva reserva, Quarto quarto) {
         this.id = id;
         this.dataHoraInicio = dataHoraInicio;
         this.dataHoraFim = dataHoraFim;
@@ -28,19 +29,19 @@ public class ReservaQuarto {
         this.id = id;
     }
 
-    public Timestamp getDataHoraInicio() {
+    public String getDataHoraInicio() {
         return dataHoraInicio;
     }
 
-    public void setDataHoraInicio(Timestamp dataHoraInicio) {
+    public void setDataHoraInicio(String dataHoraInicio) {
         this.dataHoraInicio = dataHoraInicio;
     }
 
-    public Timestamp getDataHoraFim() {
+    public String getDataHoraFim() {
         return dataHoraFim;
     }
 
-    public void setDataHoraFim(Timestamp dataHoraFim) {
+    public void setDataHoraFim(String dataHoraFim) {
         this.dataHoraFim = dataHoraFim;
     }
 
@@ -67,6 +68,7 @@ public class ReservaQuarto {
     public void setReserva(Reserva reserva) {
         this.reserva = reserva;
     }
+    
 
     public Quarto getQuarto() {
         return quarto;

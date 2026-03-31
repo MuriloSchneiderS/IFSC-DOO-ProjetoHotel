@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 
 public class ConnectionFactory {
     private static final String driver = "com.mysql.jdbc.Driver";
-    private static final String banco = "jdbc:mysql://localhost:3306/hotel";
+    private static final String banco = "jdbc:mysql://localhost:3306/Hotel";
     private static final String usuario = "root";
     private static final String senha = "ifsc";
     

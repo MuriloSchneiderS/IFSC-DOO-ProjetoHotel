@@ -1,20 +1,21 @@
 package model;
 
-import java.security.Timestamp;
-
 public class Check {
     private int id;
-    private Timestamp dataHoraCadastro, dataHoraEntrada, dataHoraSaida;
+    private String dataHoraCadastro, dataHoraEntrada, dataHoraSaida;
     private String obs;
     private char status;
-
-    public Check(int id, Timestamp dataHoraCadastro, Timestamp dataHoraEntrada, Timestamp dataHoraSaida, String obs, char status) {
+    private CheckQuarto checkQuarto;
+    
+    public Check(){};
+    public Check(int id, String dataHoraCadastro, String dataHoraEntrada, String dataHoraSaida, String obs, char status, CheckQuarto checkQuarto) {
         this.id = id;
         this.dataHoraCadastro = dataHoraCadastro;
         this.dataHoraEntrada = dataHoraEntrada;
         this.dataHoraSaida = dataHoraSaida;
         this.obs = obs;
         this.status = status;
+        this.checkQuarto = checkQuarto;
     }
 
     public int getId() {
@@ -25,27 +26,27 @@ public class Check {
         this.id = id;
     }
 
-    public Timestamp getDataHoraCadastro() {
+    public String getDataHoraCadastro() {
         return dataHoraCadastro;
     }
 
-    public void setDataHoraCadastro(Timestamp dataHoraCadastro) {
+    public void setDataHoraCadastro(String dataHoraCadastro) {
         this.dataHoraCadastro = dataHoraCadastro;
     }
 
-    public Timestamp getDataHoraEntrada() {
+    public String getDataHoraEntrada() {
         return dataHoraEntrada;
     }
 
-    public void setDataHoraEntrada(Timestamp dataHoraEntrada) {
+    public void setDataHoraEntrada(String dataHoraEntrada) {
         this.dataHoraEntrada = dataHoraEntrada;
     }
 
-    public Timestamp getDataHoraSaida() {
+    public String getDataHoraSaida() {
         return dataHoraSaida;
     }
 
-    public void setDataHoraSaida(Timestamp dataHoraSaida) {
+    public void setDataHoraSaida(String dataHoraSaida) {
         this.dataHoraSaida = dataHoraSaida;
     }
 
@@ -64,5 +65,14 @@ public class Check {
     public void setStatus(char status) {
         this.status = status;
     }
+
+    public CheckQuarto getCheckQuarto() {
+        return checkQuarto;
+    }
+
+    public void setCheckQuarto(CheckQuarto checkQuarto) {
+        this.checkQuarto = checkQuarto;
+    }
+    
     
 }

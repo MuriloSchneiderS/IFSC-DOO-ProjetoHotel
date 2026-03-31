@@ -1,33 +1,24 @@
 package model;
 
-import java.security.Timestamp;
-import java.util.Date;
-import java.util.List;
-
 public class Reserva {
     private int id;
-    private Timestamp dataHoraReserva;
-    private Date dataPrevista, dataPrevistaSaida;
+    private String dataHoraReserva;
+    private String dataPrevistaEntrada, dataPrevistaSaida;
     private String obs;
     private char status;
-    private List<Check> cheques;
+    private ReservaQuarto reservaQuarto;
+    private Check check;
 
-    public Reserva(int id, Timestamp dataHoraReserva, Date dataPrevista, Date dataPrevistaSaida, String obs, char status) {
+    public Reserva(){};
+    public Reserva(int id, String dataHoraReserva, String dataPrevistaEntrada, String dataPrevistaSaida, String obs, char status, ReservaQuarto reservaQuarto, Check check) {
         this.id = id;
         this.dataHoraReserva = dataHoraReserva;
-        this.dataPrevista = dataPrevista;
+        this.dataPrevistaEntrada = dataPrevistaEntrada;
         this.dataPrevistaSaida = dataPrevistaSaida;
         this.obs = obs;
         this.status = status;
-    }
-    public Reserva(int id, Timestamp dataHoraReserva, Date dataPrevista, Date dataPrevistaSaida, String obs, char status, List<Check> cheques) {
-        this.id = id;
-        this.dataHoraReserva = dataHoraReserva;
-        this.dataPrevista = dataPrevista;
-        this.dataPrevistaSaida = dataPrevistaSaida;
-        this.obs = obs;
-        this.status = status;
-        this.cheques = cheques;
+        this.reservaQuarto = reservaQuarto;
+        this.check = check;
     }
 
     public int getId() {
@@ -38,27 +29,27 @@ public class Reserva {
         this.id = id;
     }
 
-    public Timestamp getDataHoraReserva() {
+    public String getDataHoraReserva() {
         return dataHoraReserva;
     }
 
-    public void setDataHoraReserva(Timestamp dataHoraReserva) {
+    public void setDataHoraReserva(String dataHoraReserva) {
         this.dataHoraReserva = dataHoraReserva;
     }
 
-    public Date getDataPrevista() {
-        return dataPrevista;
+    public String getDataPrevistaEntrada() {
+        return dataPrevistaEntrada;
     }
 
-    public void setDataPrevista(Date dataPrevista) {
-        this.dataPrevista = dataPrevista;
+    public void setDataPrevistaEntrada(String dataPrevistaEntrada) {
+        this.dataPrevistaEntrada = dataPrevistaEntrada;
     }
 
-    public Date getDataPrevistaSaida() {
+    public String getDataPrevistaSaida() {
         return dataPrevistaSaida;
     }
 
-    public void setDataPrevistaSaida(Date dataPrevistaSaida) {
+    public void setDataPrevistaSaida(String dataPrevistaSaida) {
         this.dataPrevistaSaida = dataPrevistaSaida;
     }
 
@@ -78,13 +69,15 @@ public class Reserva {
         this.status = status;
     }
 
-    public List<Check> getCheques() {
-        return cheques;
+    public Check getCheck() {
+        return check;
     }
 
-    public void setCheques(List<Check> cheques) {
-        this.cheques = cheques;
+    public void setCheck(Check check) {
+        this.check = check;
     }
+    
+    
     
     
 }
