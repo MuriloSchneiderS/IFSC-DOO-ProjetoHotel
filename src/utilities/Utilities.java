@@ -38,20 +38,26 @@ public class Utilities {
                     textField.setText("");
                 }
                 componenteAtual.setEnabled(ativa);
+                
             } else if (componenteAtual instanceof JFormattedTextField) {
                 ((JFormattedTextField) componenteAtual).setText("");
                 componenteAtual.setEnabled(ativa);
+                
             } else if (componenteAtual instanceof JComboBox) {
                 ((JComboBox) componenteAtual).setSelectedIndex(-1);
                 componenteAtual.setEnabled(ativa);
+                
             } else if (componenteAtual instanceof JCheckBox) {
                 ((JCheckBox) componenteAtual).setSelected(false);
                 componenteAtual.setEnabled(ativa);
+                
             } else if (componenteAtual instanceof JPasswordField) {
                 ((JPasswordField) componenteAtual).setText("");
                 componenteAtual.setEnabled(ativa);
+                
             } else if (componenteAtual instanceof JTextArea) {
                 ((JTextArea) componenteAtual).setEnabled(ativa);
+                
             } else if (componenteAtual instanceof JSpinner) {
                 ((JSpinner) componenteAtual).setValue(0);
                 ((JSpinner) componenteAtual).setEnabled(ativa);

@@ -1,44 +1,16 @@
 package view;
 
 import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 
-public class TelaReservas extends javax.swing.JDialog {
+public class TelaBuscaReserva extends javax.swing.JDialog {
 
-    public TelaReservas(java.awt.Frame parent, boolean modal) {
+    public TelaBuscaReserva(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-    }
-
-    public JButton getjButtonBuscar() {
-        return jButtonExcluir;
-    }
-
-    public JButton getjButtonCancelar() {
-        return jButtonCheckout;
-    }
-
-    public JButton getjButtonGravar() {
-        return jButtonCheckin;
-    }
-
-    public JButton getjButtonNovo() {
-        return jButtonNovo;
-    }
-
-    public JButton getjButtonSair() {
-        return jButtonSair;
-    }
-
-    public JPanel getjPanelBotoes() {
-        return jPanelBotoes;
-    }
-
-    public JPanel getjPanelDados() {
-        return jPanelDados;
     }
 
     public JButton getjButtonCheckin() {
@@ -49,8 +21,36 @@ public class TelaReservas extends javax.swing.JDialog {
         return jButtonCheckout;
     }
 
-    public JButton getjButtonExcluir() {
-        return jButtonExcluir;
+    public JButton getjButtonEditar() {
+        return jButtonEditar;
+    }
+
+    public JButton getjButtonNovo() {
+        return jButtonNovo;
+    }
+
+    public JButton getjButtonSair() {
+        return jButtonSair;
+    }
+
+    public JLabel getjLabelTitulo() {
+        return jLabelTitulo;
+    }
+
+    public JPanel getjPanelBotoes() {
+        return jPanelBotoes;
+    }
+
+    public JPanel getjPanelDados() {
+        return jPanelDados;
+    }
+
+    public JPanel getjPanelTitulo() {
+        return jPanelTitulo;
+    }
+
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
     }
 
     public JTable getjTableReservas() {
@@ -58,14 +58,6 @@ public class TelaReservas extends javax.swing.JDialog {
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -82,9 +74,9 @@ public class TelaReservas extends javax.swing.JDialog {
         jTableReservas = new javax.swing.JTable();
         jPanelBotoes = new javax.swing.JPanel();
         jButtonNovo = new javax.swing.JButton();
+        jButtonEditar = new javax.swing.JButton();
         jButtonCheckin = new javax.swing.JButton();
         jButtonCheckout = new javax.swing.JButton();
-        jButtonExcluir = new javax.swing.JButton();
         jButtonSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -162,6 +154,17 @@ public class TelaReservas extends javax.swing.JDialog {
         jButtonNovo.setActionCommand("0");
         jPanelBotoes.add(jButtonNovo);
 
+        jButtonEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Notes.png"))); // NOI18N
+        jButtonEditar.setText("Editar");
+        jButtonEditar.setActionCommand("1");
+        jButtonEditar.setEnabled(false);
+        jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarActionPerformed(evt);
+            }
+        });
+        jPanelBotoes.add(jButtonEditar);
+
         jButtonCheckin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/OK.png"))); // NOI18N
         jButtonCheckin.setText("Check-in");
         jButtonCheckin.setActionCommand("1");
@@ -184,11 +187,6 @@ public class TelaReservas extends javax.swing.JDialog {
         });
         jPanelBotoes.add(jButtonCheckout);
 
-        jButtonExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Delete.png"))); // NOI18N
-        jButtonExcluir.setText("Excluir");
-        jButtonExcluir.setActionCommand("0");
-        jPanelBotoes.add(jButtonExcluir);
-
         jButtonSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Exit.png"))); // NOI18N
         jButtonSair.setText("Sair");
         jButtonSair.setActionCommand("0");
@@ -202,7 +200,7 @@ public class TelaReservas extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelBotoes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 693, Short.MAX_VALUE)
+                    .addComponent(jPanelBotoes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanelDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -229,6 +227,10 @@ public class TelaReservas extends javax.swing.JDialog {
     private void jButtonCheckinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCheckinActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonCheckinActionPerformed
+
+    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonEditarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -257,7 +259,7 @@ public class TelaReservas extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                TelaReservas dialog = new TelaReservas(new javax.swing.JFrame(), true);
+                TelaBuscaReserva dialog = new TelaBuscaReserva(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -272,7 +274,7 @@ public class TelaReservas extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCheckin;
     private javax.swing.JButton jButtonCheckout;
-    private javax.swing.JButton jButtonExcluir;
+    private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonNovo;
     private javax.swing.JButton jButtonSair;
     private javax.swing.JLabel jLabelTitulo;

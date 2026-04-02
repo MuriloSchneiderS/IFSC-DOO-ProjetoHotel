@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 public class Reserva {
     private int id;
     private String dataHoraReserva;
@@ -7,10 +9,10 @@ public class Reserva {
     private String obs;
     private char status;
     private ReservaQuarto reservaQuarto;
-    private Check check;
+    private List<Check> check;
 
     public Reserva(){};
-    public Reserva(int id, String dataHoraReserva, String dataPrevistaEntrada, String dataPrevistaSaida, String obs, char status, ReservaQuarto reservaQuarto, Check check) {
+    public Reserva(int id, String dataHoraReserva, String dataPrevistaEntrada, String dataPrevistaSaida, String obs, char status, ReservaQuarto reservaQuarto, List<Check> check) {
         this.id = id;
         this.dataHoraReserva = dataHoraReserva;
         this.dataPrevistaEntrada = dataPrevistaEntrada;
@@ -69,11 +71,11 @@ public class Reserva {
         this.status = status;
     }
 
-    public Check getCheck() {
+    public List<Check> getCheck() {
         return check;
     }
 
-    public void setCheck(Check check) {
+    public void setCheck(List<Check> check) {
         this.check = check;
     }
     

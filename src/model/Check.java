@@ -8,6 +8,14 @@ public class Check {
     private CheckQuarto checkQuarto;
     
     public Check(){};
+    public Check(String dataHoraCadastro, String dataHoraEntrada, String dataHoraSaida, String obs, char status, CheckQuarto checkQuarto) {
+        this.dataHoraCadastro = dataHoraCadastro;
+        this.dataHoraEntrada = dataHoraEntrada;
+        this.dataHoraSaida = dataHoraSaida;
+        this.obs = obs;
+        this.status = status;
+        this.checkQuarto = checkQuarto;
+    }
     public Check(int id, String dataHoraCadastro, String dataHoraEntrada, String dataHoraSaida, String obs, char status, CheckQuarto checkQuarto) {
         this.id = id;
         this.dataHoraCadastro = dataHoraCadastro;
