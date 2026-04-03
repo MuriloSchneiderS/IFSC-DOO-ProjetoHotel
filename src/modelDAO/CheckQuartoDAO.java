@@ -23,11 +23,11 @@ public class CheckQuartoDAO implements InterfaceDAO<CheckQuarto>{
         PreparedStatement pstm = null;
         try {
             pstm = conexao.prepareStatement(sqlInstrucao);
-            pstm.setDate(1, objeto.getDataHoraInicio());
-            pstm.setDate(2, objeto.getDataHoraFim());
+            pstm.setString(1, utilities.Utilities.formataDataHoraParaMySQL(objeto.getDataHoraInicio()));
+            pstm.setString(2, utilities.Utilities.formataDataHoraParaMySQL(objeto.getDataHoraFim()));
             pstm.setString(3, objeto.getObs());
             pstm.setString(4, String.valueOf(objeto.getStatus()));
-            pstm.setInt(5, objeto.getQuarto().getId());
+            pstm.setString(5, objeto.getQuarto().getId()+"");
             pstm.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -57,8 +57,8 @@ public class CheckQuartoDAO implements InterfaceDAO<CheckQuarto>{
             rst = pstm.executeQuery();
             while (rst.next()) {
                 checkQuarto.setId(rst.getInt("id"));
-                checkQuarto.setDataHoraInicio(rst.getDate("data_hora_inicio"));
-                checkQuarto.setDataHoraFim(rst.getDate("data_hora_fim"));
+                checkQuarto.setDataHoraInicio(String.valueOf(rst.getDate("data_hora_inicio")));
+                checkQuarto.setDataHoraFim(String.valueOf(rst.getDate("data_hora_fim")));
                 checkQuarto.setObs(rst.getString("obs"));
                 checkQuarto.setStatus(rst.getString("status").charAt(0));
                 quarto.setId(rst.getInt("quarto_id"));
@@ -96,8 +96,8 @@ public class CheckQuartoDAO implements InterfaceDAO<CheckQuarto>{
                 Quarto quarto = new Quarto();
                 
                 checkQuarto.setId(rst.getInt("id"));
-                checkQuarto.setDataHoraInicio(rst.getDate("data_hora_inicio"));
-                checkQuarto.setDataHoraFim(rst.getDate("data_hora_fim"));
+                checkQuarto.setDataHoraInicio(String.valueOf(rst.getDate("data_hora_inicio")));
+                checkQuarto.setDataHoraFim(String.valueOf(rst.getDate("data_hora_fim")));
                 checkQuarto.setObs(rst.getString("obs"));
                 checkQuarto.setStatus(rst.getString("status").charAt(0));
                 quarto.setId(rst.getInt("quarto_id"));
@@ -127,12 +127,12 @@ public class CheckQuartoDAO implements InterfaceDAO<CheckQuarto>{
         PreparedStatement pstm = null;
         try {
             pstm = conexao.prepareStatement(sqlInstrucao);
-            pstm.setDate(1, objeto.getDataHoraInicio());
-            pstm.setDate(2, objeto.getDataHoraFim());
+            pstm.setString(1, utilities.Utilities.formataDataHoraParaMySQL(objeto.getDataHoraInicio()));
+            pstm.setString(2, utilities.Utilities.formataDataHoraParaMySQL(objeto.getDataHoraFim()));
             pstm.setString(3, objeto.getObs());
             pstm.setString(4, objeto.getStatus()+"");
             pstm.setInt(5, objeto.getQuarto().getId());
-            pstm.setInt(6, objeto.getId());
+            pstm.setString(6, objeto.getId()+"");
             pstm.execute();
         }catch (SQLException ex) {
             ex.printStackTrace();

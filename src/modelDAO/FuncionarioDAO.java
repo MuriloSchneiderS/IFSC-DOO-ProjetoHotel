@@ -47,7 +47,7 @@ public class FuncionarioDAO implements InterfaceDAO<Funcionario>{
             pstm.setString(7, objeto.getBairro());
             pstm.setString(8, objeto.getCidade());
             pstm.setString(9, objeto.getComplemento());
-            pstm.setString(10, new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd/MM/yyyy").parse(objeto.getDataCadastro())));
+            pstm.setString(10, utilities.Utilities.formataDataParaMySQL(objeto.getDataCadastro()));
             pstm.setString(11, objeto.getCpf());
             pstm.setString(12, objeto.getRg());
             pstm.setString(13, objeto.getObs());
@@ -57,9 +57,7 @@ public class FuncionarioDAO implements InterfaceDAO<Funcionario>{
             pstm.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();
-        } catch (ParseException ex) {
-            Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
+        }finally {
             ConnectionFactory.closeConnection(conexao, pstm);
         }
     }
@@ -213,7 +211,7 @@ public class FuncionarioDAO implements InterfaceDAO<Funcionario>{
             pstm.setString(7, objeto.getBairro());
             pstm.setString(8, objeto.getCidade());
             pstm.setString(9, objeto.getComplemento());
-            pstm.setString(10, new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd/MM/yyyy").parse(objeto.getDataCadastro())));
+            pstm.setString(10, utilities.Utilities.formataDataParaMySQL(objeto.getDataCadastro()));
             pstm.setString(11, objeto.getCpf());
             pstm.setString(12, objeto.getRg());
             pstm.setString(13, objeto.getObs());

@@ -58,6 +58,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jMenuItemSair = new javax.swing.JMenuItem();
         jMenuMovimentos = new javax.swing.JMenu();
+        jMenuItemReservas = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -186,6 +187,16 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
                 jMenuMovimentosActionPerformed(evt);
             }
         });
+
+        jMenuItemReservas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Blue pin.png"))); // NOI18N
+        jMenuItemReservas.setText("Reservas");
+        jMenuItemReservas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemReservasActionPerformed(evt);
+            }
+        });
+        jMenuMovimentos.add(jMenuItemReservas);
+
         jMenuBar1.add(jMenuMovimentos);
 
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/List.png"))); // NOI18N
@@ -282,10 +293,14 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemMarcaActionPerformed
 
     private void jMenuMovimentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuMovimentosActionPerformed
+        
+    }//GEN-LAST:event_jMenuMovimentosActionPerformed
+
+    private void jMenuItemReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemReservasActionPerformed
         TelaBuscaReserva telaBuscaReserva = new TelaBuscaReserva(null,true);
         ControllerBuscaReserva controllerBuscaReserva = new ControllerBuscaReserva(telaBuscaReserva);
         telaBuscaReserva.setVisible(true);
-    }//GEN-LAST:event_jMenuMovimentosActionPerformed
+    }//GEN-LAST:event_jMenuItemReservasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -335,6 +350,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemModelo;
     private javax.swing.JMenuItem jMenuItemProdutoCopa;
     private javax.swing.JMenuItem jMenuItemQuarto;
+    private javax.swing.JMenuItem jMenuItemReservas;
     private javax.swing.JMenuItem jMenuItemSair;
     private javax.swing.JMenuItem jMenuItemServico;
     private javax.swing.JMenuItem jMenuItemVagaEstacionamento;

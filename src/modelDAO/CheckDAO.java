@@ -3,8 +3,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import model.Check;
 import java.util.List;
@@ -15,7 +13,7 @@ public class CheckDAO implements InterfaceDAO<Check>{
 
     @Override
     public void Create(Check objeto) {
-        String sqlInstrucao = "INSERT INTO check("
+        String sqlInstrucao = "INSERT INTO `check`("
                 + " data_hora_cadastro,"
                 + " data_hora_entrada,"
                 + " data_hora_saida,"
@@ -27,17 +25,15 @@ public class CheckDAO implements InterfaceDAO<Check>{
         PreparedStatement pstm = null;
         try {
             pstm = conexao.prepareStatement(sqlInstrucao);
-            pstm.setString(1, new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd/MM/yyyy").parse(objeto.getDataHoraCadastro())));
-            pstm.setString(2, new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd/MM/yyyy").parse(objeto.getDataHoraEntrada())));
-            pstm.setString(3, new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd/MM/yyyy").parse(objeto.getDataHoraSaida())));
+            pstm.setString(1, utilities.Utilities.formataDataParaMySQL(objeto.getDataHoraCadastro()));
+            pstm.setString(2, utilities.Utilities.formataDataHoraParaMySQL(objeto.getDataHoraEntrada()));
+            pstm.setString(3, utilities.Utilities.formataDataHoraParaMySQL(objeto.getDataHoraSaida()));
             pstm.setString(4, objeto.getObs());
             pstm.setString(5, String.valueOf(objeto.getStatus()));
-            pstm.setInt(6, objeto.getCheckQuarto().getId());
+            pstm.setString(6, objeto.getCheckQuarto().getId()+"");
             pstm.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();
-        } catch (ParseException ex) {
-            System.getLogger(CheckDAO.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         } finally {
             ConnectionFactory.closeConnection(conexao, pstm);
         }
@@ -46,13 +42,14 @@ public class CheckDAO implements InterfaceDAO<Check>{
     @Override
     public Check Retrieve(int id) {
         String sqlInstrucao = "SELECT"
+                + " id,"
                 + " data_hora_cadastro,"
                 + " data_hora_entrada,"
                 + " data_hora_saida,"
                 + " obs,"
                 + " status,"
                 + " check_quarto_id"
-                + " FROM check WHERE id=?";
+                + " FROM `check` WHERE id=?";
         Connection conexao = ConnectionFactory.getConnection();
         PreparedStatement pstm = null;
         ResultSet rst = null;
@@ -83,13 +80,14 @@ public class CheckDAO implements InterfaceDAO<Check>{
     @Override
     public List<Check> Retrieve(String atributo, String valor) {
         String sqlInstrucao = "SELECT"
+                + " id,"
                 + " data_hora_cadastro,"
                 + " data_hora_entrada,"
                 + " data_hora_saida,"
                 + " obs,"
                 + " status,"
                 + " check_quarto_id"
-                + " FROM check"
+                + " FROM `check`"
                 + " WHERE "+atributo+" LIKE ?";
         Connection conexao = ConnectionFactory.getConnection();
         PreparedStatement pstm = null;
@@ -122,7 +120,7 @@ public class CheckDAO implements InterfaceDAO<Check>{
 
     @Override
     public void Update(Check objeto) {
-        String sqlInstrucao = "UPDATE check "
+        String sqlInstrucao = "UPDATE `check` "
                 + " SET"
                 + " data_hora_cadastro=?,"
                 + " data_hora_entrada=?,"
@@ -135,12 +133,12 @@ public class CheckDAO implements InterfaceDAO<Check>{
         PreparedStatement pstm = null;
         try {
             pstm = conexao.prepareStatement(sqlInstrucao);
-            pstm.setString(1, new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd/MM/yyyy").parse(objeto.getDataHoraCadastro())));
-            pstm.setString(2, new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd/MM/yyyy").parse(objeto.getDataHoraEntrada())));
-            pstm.setString(3, new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd/MM/yyyy").parse(objeto.getDataHoraSaida())));
+            pstm.setString(1, utilities.Utilities.formataDataParaMySQL(objeto.getDataHoraCadastro()));
+            pstm.setString(2, utilities.Utilities.formataDataHoraParaMySQL(objeto.getDataHoraEntrada()));
+            pstm.setString(3, utilities.Utilities.formataDataHoraParaMySQL(objeto.getDataHoraSaida()));
             pstm.setString(4, objeto.getObs());
             pstm.setString(5, String.valueOf(objeto.getStatus()));
-            pstm.setInt(6, objeto.getCheckQuarto().getId());
+            pstm.setString(6, objeto.getCheckQuarto().getId()+"");
             pstm.execute();
         }catch (SQLException ex) {
             ex.printStackTrace();
