@@ -53,13 +53,11 @@ public class CheckQuartoDAO implements InterfaceDAO<CheckQuarto> {
         CheckQuarto checkQuarto = new CheckQuarto();
         Quarto quarto = new Quarto();
         try {
-            pstm = conexao.prepareStatement(sqlInstrucao);
             if (id < 0) {//Ultimo id inserido
-                pstm.close();
-                String sqlLast = "SELECT id, data_hora_inicio, data_hora_fim, obs, status, quarto_id "
-                        + "FROM check_quarto WHERE id = LAST_INSERT_ID()";
+                String sqlLast = "SELECT id, data_hora_inicio, data_hora_fim, obs, status, quarto_id FROM check_quarto ORDER BY id DESC LIMIT 1;";
                 pstm = conexao.prepareStatement(sqlLast);
             } else {
+                pstm = conexao.prepareStatement(sqlInstrucao);
                 pstm.setInt(1, id);
             }
             rst = pstm.executeQuery();

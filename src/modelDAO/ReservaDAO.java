@@ -110,7 +110,6 @@ public class ReservaDAO implements InterfaceDAO<Reserva>{
                 reserva.setCheck(checks);
                 listaReservas.add(reserva);
             }
-            System.out.println(listaReservas);
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {

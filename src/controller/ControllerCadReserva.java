@@ -3,6 +3,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import model.Check;
@@ -120,7 +121,9 @@ public class ControllerCadReserva implements ActionListener {
                 reserva.setDataPrevistaEntrada(this.telaCadastroReserva.getjFormattedTextFieldDataPrevistaEntrada().getText());
                 reserva.setDataPrevistaSaida(this.telaCadastroReserva.getjFormattedTextFieldDataPrevistaSaida().getText());
                 reserva.setObs(this.telaCadastroReserva.getjTextFieldObs().getText());
-                reserva.setCheck(service.CheckService.Carregar("data_hora_entrada", utilities.Utilities.formataDataHoraParaMySQL(this.telaCadastroReserva.getjFormattedTextFieldDataPrevistaEntrada().getText())));
+                List<Check> checks = new ArrayList<>();
+                checks.add(check);
+                reserva.setCheck(checks);
 
                 if (this.telaCadastroReserva.getjTextFieldId().getText().trim().equalsIgnoreCase("")) {
                     //Inclusão
