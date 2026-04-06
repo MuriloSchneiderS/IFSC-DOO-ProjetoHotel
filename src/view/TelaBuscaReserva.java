@@ -105,17 +105,17 @@ public class TelaBuscaReserva extends javax.swing.JDialog {
 
         jTableReservas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Cod", "Hóspede", "Check-in", "Check-out"
+                "Cod", "Hóspede", "Quarto", "Reservado", "Check-in", "Check-out"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -126,8 +126,10 @@ public class TelaBuscaReserva extends javax.swing.JDialog {
         if (jTableReservas.getColumnModel().getColumnCount() > 0) {
             jTableReservas.getColumnModel().getColumn(0).setMaxWidth(50);
             jTableReservas.getColumnModel().getColumn(1).setMaxWidth(200);
-            jTableReservas.getColumnModel().getColumn(2).setMaxWidth(200);
-            jTableReservas.getColumnModel().getColumn(3).setMaxWidth(200);
+            jTableReservas.getColumnModel().getColumn(2).setMaxWidth(100);
+            jTableReservas.getColumnModel().getColumn(3).setMaxWidth(400);
+            jTableReservas.getColumnModel().getColumn(4).setMaxWidth(200);
+            jTableReservas.getColumnModel().getColumn(5).setMaxWidth(200);
         }
 
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);
@@ -200,7 +202,7 @@ public class TelaBuscaReserva extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelBotoes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelBotoes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 998, Short.MAX_VALUE)
                     .addComponent(jPanelDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );

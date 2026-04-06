@@ -98,6 +98,7 @@ public class ReservaDAO implements InterfaceDAO<Reserva>{
             rst = pstm.executeQuery();
             while (rst.next()) {
                 Reserva reserva = new Reserva();
+                List<Check> checks = new ArrayList<>();
                 Check check = new Check();
                 reserva.setDataHoraReserva(String.valueOf(rst.getDate("data_hora_reserva")));
                 reserva.setDataPrevistaEntrada(String.valueOf(rst.getDate("data_prevista_entrada")));
@@ -105,9 +106,11 @@ public class ReservaDAO implements InterfaceDAO<Reserva>{
                 reserva.setObs(rst.getString("obs"));
                 reserva.setStatus(rst.getString("status").charAt(0));
                 check.setId(rst.getInt("check_id"));
-                reserva.setCheck((List<Check>) check);
+                checks.add(check);
+                reserva.setCheck(checks);
                 listaReservas.add(reserva);
             }
+            System.out.println(listaReservas);
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
