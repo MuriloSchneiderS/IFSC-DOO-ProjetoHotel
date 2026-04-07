@@ -298,14 +298,15 @@ public class Utilities {
             return mysql.format(d);
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(
-                null,
-                "Data inválida. Use o formato dd/MM/yyyy e verifique valores.",
-                "Erro",
-                JOptionPane.ERROR_MESSAGE
+                    null,
+                    "Data inválida. Use o formato dd/MM/yyyy e verifique valores.",
+                    "Erro",
+                    JOptionPane.ERROR_MESSAGE
             );
             return null;
         }
     }
+
     public static String formataDataHoraParaMySQL(String dataHora) {
         if (dataHora == null || dataHora.trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Data/hora vazia.", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -330,4 +331,50 @@ public class Utilities {
         }
     }
 
+    public static String formataDataDeMySQL(String dataMySQL) {
+        if (dataMySQL == null || dataMySQL.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Data vazia.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+
+        SimpleDateFormat mysql = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat br = new SimpleDateFormat("dd/MM/yyyy");
+        mysql.setLenient(false);
+
+        try {
+            Date d = mysql.parse(dataMySQL); // falha se inválida
+            return br.format(d);
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Data inválida. Use o formato yyyy-MM-dd e verifique valores.",
+                    "Erro",
+                    JOptionPane.ERROR_MESSAGE
+            );
+            return null;
+        }
+    }
+    public static String formataDataHoraDeMySQL(String dataHoraMySQL) {
+        if (dataHoraMySQL == null || dataHoraMySQL.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Data/hora vazia.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+
+        SimpleDateFormat mysql = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat br = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        mysql.setLenient(false);
+
+        try {
+            Date d = mysql.parse(dataHoraMySQL); // falha se inválida
+            return br.format(d);
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Data/hora inválida. Use o formato yyyy-MM-dd HH:mm:ss e verifique valores.",
+                    "Erro",
+                    JOptionPane.ERROR_MESSAGE
+            );
+            return null;
+        }
+    }
 }

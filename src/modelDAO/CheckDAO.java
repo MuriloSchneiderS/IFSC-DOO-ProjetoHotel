@@ -67,9 +67,9 @@ public class CheckDAO implements InterfaceDAO<Check> {
             rst = pstm.executeQuery();
             while (rst.next()) {
                 check.setId(rst.getInt("id"));
-                check.setDataHoraCadastro(String.valueOf(rst.getDate("data_hora_cadastro")));
-                check.setDataHoraEntrada(String.valueOf(rst.getDate("data_hora_entrada")));
-                check.setDataHoraSaida(String.valueOf(rst.getDate("data_hora_saida")));
+                check.setDataHoraCadastro(String.valueOf(rst.getTimestamp("data_hora_cadastro")));
+                check.setDataHoraEntrada(String.valueOf(rst.getTimestamp("data_hora_entrada")));
+                check.setDataHoraSaida(String.valueOf(rst.getTimestamp("data_hora_saida")));
                 check.setObs(rst.getString("obs"));
                 check.setStatus(rst.getString("status").charAt(0));
                 checkQuarto.setId(rst.getInt("check_quarto_id"));
@@ -107,9 +107,9 @@ public class CheckDAO implements InterfaceDAO<Check> {
                 Check check = new Check();
                 CheckQuarto checkQuarto = new CheckQuarto();
                 check.setId(rst.getInt("id"));
-                check.setDataHoraCadastro(String.valueOf(rst.getDate("data_hora_cadastro")));
-                check.setDataHoraEntrada(String.valueOf(rst.getDate("data_hora_entrada")));
-                check.setDataHoraSaida(String.valueOf(rst.getDate("data_hora_saida")));
+                check.setDataHoraCadastro(utilities.Utilities.formataDataHoraDeMySQL(String.valueOf(rst.getObject("data_hora_cadastro", java.time.LocalDateTime.class).toString())));
+                check.setDataHoraEntrada(utilities.Utilities.formataDataHoraDeMySQL(String.valueOf(rst.getObject("data_hora_reserva", java.time.LocalDateTime.class).toString())));
+                check.setDataHoraSaida(utilities.Utilities.formataDataHoraDeMySQL(String.valueOf(rst.getObject("data_hora_saida", java.time.LocalDateTime.class).toString())));
                 check.setObs(rst.getString("obs"));
                 check.setStatus(rst.getString("status").charAt(0));
                 checkQuarto.setId(rst.getInt("check_quarto_id"));
