@@ -312,6 +312,8 @@ public class Utilities {
             JOptionPane.showMessageDialog(null, "Data/hora vazia.", "Erro", JOptionPane.ERROR_MESSAGE);
             return null;
         }
+        if (dataHora.startsWith("00/00/0000"))
+                return "9999-01-01 00:00:00";//BD não aceita datas nulas, esta substitui, sendo uma data impossivel
 
         SimpleDateFormat entrada = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         SimpleDateFormat mysql = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -336,7 +338,6 @@ public class Utilities {
             JOptionPane.showMessageDialog(null, "Data vazia.", "Erro", JOptionPane.ERROR_MESSAGE);
             return null;
         }
-
         SimpleDateFormat mysql = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat br = new SimpleDateFormat("dd/MM/yyyy");
         mysql.setLenient(false);
@@ -354,27 +355,45 @@ public class Utilities {
             return null;
         }
     }
+
     public static String formataDataHoraDeMySQL(String dataHoraMySQL) {
         if (dataHoraMySQL == null || dataHoraMySQL.trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Data/hora vazia.", "Erro", JOptionPane.ERROR_MESSAGE);
             return null;
         }
+        //Verifica se é a data "nula" (9999-01-01)
+        if (dataHoraMySQL.startsWith("9999-01-01"))
+            return "00/00/0000 00:00:00";
+        SimpleDateFormat formatoAlvo = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date dataHora = null;
 
-        SimpleDateFormat mysql = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        SimpleDateFormat br = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        mysql.setLenient(false);
+        //Lista de formatos possíveis do MySQL
+        String[] formatosPossiveis = {
+            "yyyy-MM-dd HH:mm:ss",
+            "yyyy-MM-dd'T'HH:mm",
+            "yyyy-MM-dd'T'HH:mm:ss",
+            "yyyy-MM-dd HH:mm",
+            "yyyy-MM-dd"
+        };
+        //Tenta fazer o parse com cada formato
+        for (String formatoAtual : formatosPossiveis) {
+            SimpleDateFormat formato = new SimpleDateFormat(formatoAtual);
+            formato.setLenient(false);
 
-        try {
-            Date d = mysql.parse(dataHoraMySQL); // falha se inválida
-            return br.format(d);
-        } catch (ParseException ex) {
-            JOptionPane.showMessageDialog(
-                    null,
-                    "Data/hora inválida. Use o formato yyyy-MM-dd HH:mm:ss e verifique valores.",
-                    "Erro",
-                    JOptionPane.ERROR_MESSAGE
-            );
-            return null;
+            try {
+                dataHora = formato.parse(dataHoraMySQL);
+                return formatoAlvo.format(dataHora);
+            } catch (ParseException ex) {
+                continue;//Continua tentando o próximo formato se falhar
+            }
         }
+        //Se nenhum formato funcionar
+        JOptionPane.showMessageDialog(
+                null,
+                "Formato de Data/Hora inválido! ",
+                "Erro",
+                JOptionPane.ERROR_MESSAGE
+        );
+        return null;
     }
 }

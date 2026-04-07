@@ -63,8 +63,8 @@ public class CheckQuartoDAO implements InterfaceDAO<CheckQuarto> {
             rst = pstm.executeQuery();
             while (rst.next()) {
                 checkQuarto.setId(rst.getInt("id"));
-                checkQuarto.setDataHoraInicio(String.valueOf(rst.getTimestamp("data_hora_inicio")));
-                checkQuarto.setDataHoraFim(String.valueOf(rst.getTimestamp("data_hora_fim")));
+                checkQuarto.setDataHoraInicio(utilities.Utilities.formataDataHoraDeMySQL(rst.getObject("data_hora_inicio", java.time.LocalDateTime.class).toString()));
+                checkQuarto.setDataHoraFim(utilities.Utilities.formataDataHoraDeMySQL(rst.getObject("data_hora_fim", java.time.LocalDateTime.class).toString()));
                 checkQuarto.setObs(rst.getString("obs"));
                 checkQuarto.setStatus(rst.getString("status").charAt(0));
                 quarto.setId(rst.getInt("quarto_id"));
@@ -102,8 +102,8 @@ public class CheckQuartoDAO implements InterfaceDAO<CheckQuarto> {
                 Quarto quarto = new Quarto();
 
                 checkQuarto.setId(rst.getInt("id"));
-                checkQuarto.setDataHoraInicio(utilities.Utilities.formataDataHoraDeMySQL(String.valueOf(rst.getObject("data_hora_inicio", java.time.LocalDateTime.class).toString())));
-                checkQuarto.setDataHoraFim(utilities.Utilities.formataDataHoraDeMySQL(String.valueOf(rst.getObject("data_hora_fim", java.time.LocalDateTime.class).toString())));
+                checkQuarto.setDataHoraInicio(utilities.Utilities.formataDataHoraDeMySQL(rst.getObject("data_hora_inicio", java.time.LocalDateTime.class).toString()));
+                checkQuarto.setDataHoraFim(utilities.Utilities.formataDataHoraDeMySQL(rst.getObject("data_hora_fim", java.time.LocalDateTime.class).toString()));
                 checkQuarto.setObs(rst.getString("obs"));
                 checkQuarto.setStatus(rst.getString("status").charAt(0));
                 quarto.setId(rst.getInt("quarto_id"));

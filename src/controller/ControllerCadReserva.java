@@ -84,8 +84,8 @@ public class ControllerCadReserva implements ActionListener {
 
                 //Cria o check_quarto com base na reserva e retorna o que foi criado para poder criar o check
                 CheckQuarto checkQuarto = new CheckQuarto(
-                        "01/01/9999 00:00:00",
-                        "01/01/9999 00:00:00",
+                        "00/00/0000 00:00:00",
+                        "00/00/0000 00:00:00",
                         this.telaCadastroReserva.getjTextFieldObs().getText(),
                         'A',
                         quarto
@@ -96,8 +96,8 @@ public class ControllerCadReserva implements ActionListener {
                 //Criar o check com o check_quarto
                 Check check = new Check(
                         this.telaCadastroReserva.getjFormattedTextFieldDataCadastro().getText(),
-                        "01/01/9999 00:00:00",
-                        "01/01/9999 00:00:00",
+                        "00/00/0000 00:00:00",
+                        "00/00/0000 00:00:00",
                         this.telaCadastroReserva.getjTextFieldObs().getText(),
                         'A',
                         checkQuarto

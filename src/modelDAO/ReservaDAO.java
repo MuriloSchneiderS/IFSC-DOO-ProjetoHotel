@@ -61,9 +61,9 @@ public class ReservaDAO implements InterfaceDAO<Reserva>{
             rst = pstm.executeQuery();
             while (rst.next()) {
                 reserva.setId(rst.getInt("id"));
-                reserva.setDataHoraReserva(String.valueOf(rst.getDate("data_hora_reserva")));
-                reserva.setDataPrevistaEntrada(String.valueOf(rst.getDate("data_prevista_entrada")));
-                reserva.setDataPrevistaSaida(String.valueOf(rst.getDate("data_prevista_saida")));
+                reserva.setDataHoraReserva(utilities.Utilities.formataDataHoraDeMySQL(rst.getObject("data_hora_reserva", java.time.LocalDateTime.class).toString()));
+                reserva.setDataPrevistaEntrada(utilities.Utilities.formataDataDeMySQL(rst.getObject("data_prevista_entrada", java.time.LocalDate.class).toString()));
+                reserva.setDataPrevistaSaida(utilities.Utilities.formataDataDeMySQL(rst.getObject("data_prevista_saida", java.time.LocalDate.class).toString()));
                 reserva.setObs(rst.getString("obs"));
                 reserva.setStatus(rst.getString("status").charAt(0));
                 check.setId(rst.getInt("check_id"));
@@ -102,9 +102,9 @@ public class ReservaDAO implements InterfaceDAO<Reserva>{
                 List<Check> checks = new ArrayList<>();
                 Check check = new Check();
                 reserva.setId(rst.getInt("id"));
-                reserva.setDataHoraReserva(utilities.Utilities.formataDataHoraDeMySQL(String.valueOf(rst.getObject("data_hora_reserva", java.time.LocalDateTime.class).toString())));
-                reserva.setDataPrevistaEntrada(utilities.Utilities.formataDataDeMySQL(String.valueOf(rst.getObject("data_prevista_entrada", java.time.LocalDate.class).toString())));
-                reserva.setDataPrevistaSaida(utilities.Utilities.formataDataDeMySQL(String.valueOf(rst.getObject("data_prevista_saida", java.time.LocalDate.class).toString())));
+                reserva.setDataHoraReserva(utilities.Utilities.formataDataHoraDeMySQL(rst.getObject("data_hora_reserva", java.time.LocalDateTime.class).toString()));
+                reserva.setDataPrevistaEntrada(utilities.Utilities.formataDataDeMySQL(rst.getObject("data_prevista_entrada", java.time.LocalDate.class).toString()));
+                reserva.setDataPrevistaSaida(utilities.Utilities.formataDataDeMySQL(rst.getObject("data_prevista_saida", java.time.LocalDate.class).toString()));
                 reserva.setObs(rst.getString("obs"));
                 reserva.setStatus(rst.getString("status").charAt(0));
                 check.setId(rst.getInt("check_id"));
