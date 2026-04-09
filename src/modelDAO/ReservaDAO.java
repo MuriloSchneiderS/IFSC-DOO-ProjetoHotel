@@ -54,7 +54,7 @@ public class ReservaDAO implements InterfaceDAO<Reserva>{
         PreparedStatement pstm = null;
         ResultSet rst = null;
         Reserva reserva = new Reserva();
-        Check check = new Check();
+        List<Check> checks = new ArrayList<>();
         try {
             pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setInt(1, id);
@@ -66,8 +66,8 @@ public class ReservaDAO implements InterfaceDAO<Reserva>{
                 reserva.setDataPrevistaSaida(utilities.Utilities.formataDataDeMySQL(rst.getObject("data_prevista_saida", java.time.LocalDate.class).toString()));
                 reserva.setObs(rst.getString("obs"));
                 reserva.setStatus(rst.getString("status").charAt(0));
-                check.setId(rst.getInt("check_id"));
-                reserva.setCheck((List<Check>) check);
+                checks.add(service.CheckService.Carregar(rst.getInt("check_id")));
+                reserva.setCheck(checks);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -100,15 +100,13 @@ public class ReservaDAO implements InterfaceDAO<Reserva>{
             while (rst.next()) {
                 Reserva reserva = new Reserva();
                 List<Check> checks = new ArrayList<>();
-                Check check = new Check();
                 reserva.setId(rst.getInt("id"));
                 reserva.setDataHoraReserva(utilities.Utilities.formataDataHoraDeMySQL(rst.getObject("data_hora_reserva", java.time.LocalDateTime.class).toString()));
                 reserva.setDataPrevistaEntrada(utilities.Utilities.formataDataDeMySQL(rst.getObject("data_prevista_entrada", java.time.LocalDate.class).toString()));
                 reserva.setDataPrevistaSaida(utilities.Utilities.formataDataDeMySQL(rst.getObject("data_prevista_saida", java.time.LocalDate.class).toString()));
                 reserva.setObs(rst.getString("obs"));
                 reserva.setStatus(rst.getString("status").charAt(0));
-                check.setId(rst.getInt("check_id"));
-                checks.add(check);
+                checks.add(service.CheckService.Carregar(rst.getInt("check_id")));
                 reserva.setCheck(checks);
                 listaReservas.add(reserva);
             }
@@ -141,6 +139,7 @@ public class ReservaDAO implements InterfaceDAO<Reserva>{
             pstm.setString(4, objeto.getObs());
             pstm.setString(5, String.valueOf(objeto.getStatus()));
             pstm.setString(6, objeto.getCheck().get(0).getId()+"");
+            pstm.setString(7, objeto.getId()+"");
             pstm.execute();
         }catch (SQLException ex) {
             ex.printStackTrace();

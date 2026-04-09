@@ -55,7 +55,6 @@ public class CheckDAO implements InterfaceDAO<Check> {
         PreparedStatement pstm = null;
         ResultSet rst = null;
         Check check = new Check();
-        CheckQuarto checkQuarto = new CheckQuarto();
         try {
             if (id < 0) {//Ultimo id inserido
                 String sqlLast = "SELECT id, data_hora_cadastro, data_hora_entrada, data_hora_saida, obs, status, check_quarto_id FROM `check` ORDER BY id DESC LIMIT 1;";
@@ -72,8 +71,7 @@ public class CheckDAO implements InterfaceDAO<Check> {
                 check.setDataHoraSaida(utilities.Utilities.formataDataHoraDeMySQL(rst.getObject("data_hora_saida", java.time.LocalDateTime.class).toString()));
                 check.setObs(rst.getString("obs"));
                 check.setStatus(rst.getString("status").charAt(0));
-                checkQuarto.setId(rst.getInt("check_quarto_id"));
-                check.setCheckQuarto(checkQuarto);
+                check.setCheckQuarto(service.CheckQuartoService.Carregar(rst.getInt("check_quarto_id")));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -105,15 +103,13 @@ public class CheckDAO implements InterfaceDAO<Check> {
             rst = pstm.executeQuery();
             while (rst.next()) {
                 Check check = new Check();
-                CheckQuarto checkQuarto = new CheckQuarto();
                 check.setId(rst.getInt("id"));
                 check.setDataHoraCadastro(utilities.Utilities.formataDataHoraDeMySQL(rst.getObject("data_hora_cadastro", java.time.LocalDateTime.class).toString()));
                 check.setDataHoraEntrada(utilities.Utilities.formataDataHoraDeMySQL(rst.getObject("data_hora_entrada", java.time.LocalDateTime.class).toString()));
                 check.setDataHoraSaida(utilities.Utilities.formataDataHoraDeMySQL(rst.getObject("data_hora_saida", java.time.LocalDateTime.class).toString()));
                 check.setObs(rst.getString("obs"));
                 check.setStatus(rst.getString("status").charAt(0));
-                checkQuarto.setId(rst.getInt("check_quarto_id"));
-                check.setCheckQuarto(checkQuarto);
+                check.setCheckQuarto(service.CheckQuartoService.Carregar(rst.getInt("check_quarto_id")));
                 listaChecks.add(check);
             }
         } catch (SQLException ex) {

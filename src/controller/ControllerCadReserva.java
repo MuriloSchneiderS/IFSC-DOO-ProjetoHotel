@@ -39,25 +39,36 @@ public class ControllerCadReserva implements ActionListener {
             this.telaCadastroReserva.getjComboBoxHospede().addItem(hospede.getNome());
         }
 
-        if (codigo == 0) {
+        if (codigo == 0 && telaCadastroReserva.getjTextFieldId().getText().isEmpty()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroReserva.getjPanelBotoes(), true);
             utilities.Utilities.limpaComponentes(this.telaCadastroReserva.getjPanelDados(), false);
         } else {//rotina de carga de reserva
+            codigo = Integer.parseInt(telaCadastroReserva.getjTextFieldId().getText());
             utilities.Utilities.ativaDesativa(this.telaCadastroReserva.getjPanelBotoes(), false);
-            utilities.Utilities.limpaComponentes(this.telaCadastroReserva.getjPanelDados(), true);
 
             this.telaCadastroReserva.getjTextFieldId().setText(codigo + "");
             this.telaCadastroReserva.getjTextFieldId().setEnabled(false);
+            
+            java.util.Date dataAtual = new Date();
+            SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+            String novaData = dataFormatada.format(dataAtual);
+            this.telaCadastroReserva.getjFormattedTextFieldDataCadastro().setText(novaData);
+            this.telaCadastroReserva.getjFormattedTextFieldDataCadastro().setEnabled(false);
 
-            Reserva reserva = new Reserva();
-            reserva = service.ReservaService.Carregar(codigo);
+            Reserva reserva = service.ReservaService.Carregar(codigo);
+            Check check = service.CheckService.Carregar(reserva.getCheck().get(0).getId());
+            CheckHospede checkHospede = service.CheckHospedeService.Carregar("check_id", check.getId() + "").get(0);//check_hospede tem check_id
+            Hospede hospede = service.HospedeService.Carregar(checkHospede.getHospede().getId());//check_hospede tem hospede_id
+            CheckQuarto checkQuarto = service.CheckQuartoService.Carregar(check.getCheckQuarto().getId());//check tem check_quarto_id
+            Quarto quarto = service.QuartoService.Carregar(checkQuarto.getQuarto().getId());//checkQuarto tem quarto_id
 
             this.telaCadastroReserva.getjFormattedTextFieldDataPrevistaEntrada().setText(reserva.getDataPrevistaEntrada());
             this.telaCadastroReserva.getjFormattedTextFieldDataPrevistaSaida().setText(reserva.getDataPrevistaSaida());
+            this.telaCadastroReserva.getjComboBoxQuarto().setSelectedItem(quarto.getDescricao());
+            this.telaCadastroReserva.getjComboBoxHospede().setSelectedItem(hospede.getNome());
             this.telaCadastroReserva.getjTextFieldObs().setText(reserva.getObs());
-            Quarto quartoReservado = (Quarto) service.QuartoService.Carregar(reserva.getCheck().get(0).getId());
-            //Hospede
-            this.telaCadastroReserva.getjComboBoxQuarto().setSelectedItem(quartoReservado.getDescricao());
+
+            this.telaCadastroReserva.getjTextFieldObs().requestFocus();
         }
         this.telaCadastroReserva.setVisible(true);
     }
@@ -79,71 +90,111 @@ public class ControllerCadReserva implements ActionListener {
         //Botão Gravar
         } else if (evento.getSource() == this.telaCadastroReserva.getjButtonGravar()) {
             if (utilities.Utilities.todosOsCamposPreenchidos(this.telaCadastroReserva.getjPanelDados())) {
-                Reserva reserva = new Reserva();
-                Quarto quarto = service.QuartoService.Carregar("descricao", (String) this.telaCadastroReserva.getjComboBoxQuarto().getSelectedItem()).get(0);
+                //Inclusão
+                if (codigo == 0 || this.telaCadastroReserva.getjTextFieldId().getText().trim().equalsIgnoreCase("")) {
+                    Reserva reserva = new Reserva();
+                    
+                    //Salvar o Quarto selecionado
+                    Quarto quarto = service.QuartoService.Carregar("descricao", (String) this.telaCadastroReserva.getjComboBoxQuarto().getSelectedItem()).get(0);
 
-                //Cria o check_quarto com base na reserva e retorna o que foi criado para poder criar o check
-                CheckQuarto checkQuarto = new CheckQuarto(
-                        "00/00/0000 00:00:00",
-                        "00/00/0000 00:00:00",
-                        this.telaCadastroReserva.getjTextFieldObs().getText(),
-                        'A',
-                        quarto
-                );
-                service.CheckQuartoService.Criar(checkQuarto);
-                checkQuarto = service.CheckQuartoService.Carregar(-1);
+                    //Cria o check_quarto com base na reserva e retorna o que foi criado para poder criar o check
+                    CheckQuarto checkQuarto = new CheckQuarto(
+                            "00/00/0000 00:00:00",
+                            "00/00/0000 00:00:00",
+                            this.telaCadastroReserva.getjTextFieldObs().getText(),
+                            'A',
+                            quarto
+                    );
+                    service.CheckQuartoService.Criar(checkQuarto);
+                    checkQuarto = service.CheckQuartoService.Carregar(-1);
 
-                //Criar o check com o check_quarto
-                Check check = new Check(
-                        this.telaCadastroReserva.getjFormattedTextFieldDataCadastro().getText(),
-                        "00/00/0000 00:00:00",
-                        "00/00/0000 00:00:00",
-                        this.telaCadastroReserva.getjTextFieldObs().getText(),
-                        'A',
-                        checkQuarto
-                );
-                service.CheckService.Criar(check);
-                check = service.CheckService.Carregar(-1);
+                    //Criar o check com o check_quarto
+                    Check check = new Check(
+                            this.telaCadastroReserva.getjFormattedTextFieldDataCadastro().getText(),
+                            "00/00/0000 00:00:00",
+                            "00/00/0000 00:00:00",
+                            this.telaCadastroReserva.getjTextFieldObs().getText(),
+                            'A',
+                            checkQuarto
+                    );
+                    service.CheckService.Criar(check);
+                    check = service.CheckService.Carregar(-1);
 
-                //Criar check_hospede com o check e o hospede
-                Hospede hospede = service.HospedeService.Carregar("nome", (String) this.telaCadastroReserva.getjComboBoxHospede().getSelectedItem()).get(0);
-                //Cria o check_hospede com base na reserva e retorna o que foi criado para poder criar o check
-                CheckHospede checkHospede = new CheckHospede(
-                        "Hospede",
-                        this.telaCadastroReserva.getjTextFieldObs().getText(),
-                        'A',
-                        check,
-                        hospede
-                );
-                service.CheckHospedeService.Criar(checkHospede);
+                    //Criar hospede com o check e o hospede
+                    Hospede hospede = service.HospedeService.Carregar("nome", (String) this.telaCadastroReserva.getjComboBoxHospede().getSelectedItem()).get(0);
+                    
+                    //Cria o check_hospede com base na reserva e retorna o que foi criado para poder criar o check
+                    CheckHospede checkHospede = new CheckHospede(
+                            "Hospede",
+                            this.telaCadastroReserva.getjTextFieldObs().getText(),
+                            'A',
+                            check,
+                            hospede
+                    );
+                    service.CheckHospedeService.Criar(checkHospede);
 
-                reserva.setDataHoraReserva(this.telaCadastroReserva.getjFormattedTextFieldDataCadastro().getText());
-                reserva.setDataPrevistaEntrada(this.telaCadastroReserva.getjFormattedTextFieldDataPrevistaEntrada().getText());
-                reserva.setDataPrevistaSaida(this.telaCadastroReserva.getjFormattedTextFieldDataPrevistaSaida().getText());
-                reserva.setObs(this.telaCadastroReserva.getjTextFieldObs().getText());
-                List<Check> checks = new ArrayList<>();
-                checks.add(check);
-                reserva.setCheck(checks);
-
-                if (this.telaCadastroReserva.getjTextFieldId().getText().trim().equalsIgnoreCase("")) {
-                    //Inclusão
+                    reserva.setDataHoraReserva(this.telaCadastroReserva.getjFormattedTextFieldDataCadastro().getText());
+                    reserva.setDataPrevistaEntrada(this.telaCadastroReserva.getjFormattedTextFieldDataPrevistaEntrada().getText());
+                    reserva.setDataPrevistaSaida(this.telaCadastroReserva.getjFormattedTextFieldDataPrevistaSaida().getText());
+                    reserva.setObs(this.telaCadastroReserva.getjTextFieldObs().getText());
                     reserva.setStatus('A');
+                    List<Check> checks = new ArrayList<>();
+                    checks.add(check);
+                    reserva.setCheck(checks);
                     service.ReservaService.Criar(reserva);
+                //Atualização
                 } else {
-                    //Atualização
-                    reserva.setId(Integer.parseInt(this.telaCadastroReserva.getjTextFieldId().getText()));
+                    Reserva reserva = service.ReservaService.Carregar("id", String.valueOf(codigo)).get(0);
+
+                    // Atualizar dados da reserva
+                    reserva.setDataHoraReserva(this.telaCadastroReserva.getjFormattedTextFieldDataCadastro().getText());
+                    reserva.setDataPrevistaEntrada(this.telaCadastroReserva.getjFormattedTextFieldDataPrevistaEntrada().getText());
+                    reserva.setDataPrevistaSaida(this.telaCadastroReserva.getjFormattedTextFieldDataPrevistaSaida().getText());
+                    reserva.setObs(this.telaCadastroReserva.getjTextFieldObs().getText());
+                    reserva.setStatus('A');
+
+                    //Recuperar o Quarto selecionado
+                    Quarto quarto = service.QuartoService.Carregar("descricao", (String) this.telaCadastroReserva.getjComboBoxQuarto().getSelectedItem()).get(0);
+                    
+                    //Atualizar o Check Quarto
+                    CheckQuarto checkQuarto = reserva.getCheck().get(0).getCheckQuarto();
+                    checkQuarto.setQuarto(quarto);
+                    checkQuarto.setObs(this.telaCadastroReserva.getjTextFieldObs().getText());
+
+                    //Reiniciar o Check
+                    Check check = new Check(
+                            reserva.getCheck().get(0).getId(),
+                            this.telaCadastroReserva.getjFormattedTextFieldDataCadastro().getText(),
+                            "00/00/0000 00:00:00",
+                            "00/00/0000 00:00:00",
+                            this.telaCadastroReserva.getjTextFieldObs().getText(),
+                            'A',
+                            checkQuarto
+                    );
+
+                    //Recuperar o Hospede selecionado
+                    Hospede hospede = service.HospedeService.Carregar("nome", (String) this.telaCadastroReserva.getjComboBoxHospede().getSelectedItem()).get(0);
+
+                    //Atualizar o Check Hospede
+                    CheckHospede checkHospede = service.CheckHospedeService.Carregar("check_id", reserva.getCheck().get(0).getId()+"").get(0);
+                    checkHospede.setHospede(hospede);
+                    
+                    //Subir atualizações
+                    service.CheckQuartoService.Atualizar(checkQuarto);
+                    service.CheckService.Atualizar(check);
+                    service.CheckHospedeService.Atualizar(checkHospede);
+                    
+                    //Atualizar a Reserva
                     service.ReservaService.Atualizar(reserva);
                 }
                 utilities.Utilities.ativaDesativa(this.telaCadastroReserva.getjPanelBotoes(), true);
                 utilities.Utilities.limpaComponentes(this.telaCadastroReserva.getjPanelDados(), false);
             }
-
-            //Botão Cancelar
+        //Botão Cancelar
         } else if (evento.getSource() == this.telaCadastroReserva.getjButtonCancelar()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroReserva.getjPanelBotoes(), true);
             utilities.Utilities.limpaComponentes(this.telaCadastroReserva.getjPanelDados(), false);
-
-            //Botão Sair
+        //Botão Sair
         } else if (evento.getSource() == this.telaCadastroReserva.getjButtonSair()) {
             this.telaCadastroReserva.dispose();
         }
