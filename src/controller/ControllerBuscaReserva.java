@@ -59,9 +59,7 @@ public class ControllerBuscaReserva implements ActionListener {
     }
 
     private void atualizarTabela(DefaultTableModel tabela) {
-        telaBuscaReserva.getjButtonEditar().setEnabled(false);
-        telaBuscaReserva.getjButtonCheckin().setEnabled(false);
-        telaBuscaReserva.getjButtonCheckout().setEnabled(false);
+        utilities.Utilities.ativaDesativa(this.telaBuscaReserva.getjPanelBotoes(), true);
         //Criando a lista para receber as reservas
         tabela.setRowCount(0);//Reseta a tabela
         List<Reserva> listaReservas = service.ReservaService.Carregar("obs", "");//Armazena todas as reservas
@@ -101,7 +99,7 @@ public class ControllerBuscaReserva implements ActionListener {
 
             //Botão Editar
         } else if (evento.getSource() == this.telaBuscaReserva.getjButtonEditar()) {
-            if (this.telaBuscaReserva.getjTableReservas().getRowCount() == 0) {
+            if (this.telaBuscaReserva.getjTableReservas().getRowCount() <= 0) {
                 JOptionPane.showMessageDialog(null, "Nenhuma reserva selecionada.");
             } else {
                 int cod = (int) this.telaBuscaReserva.getjTableReservas().getValueAt(this.telaBuscaReserva.getjTableReservas().getSelectedRow(), 0);
@@ -109,7 +107,7 @@ public class ControllerBuscaReserva implements ActionListener {
                 telaCadastroReserva.getjTextFieldId().setText(cod+"");
                 ControllerCadReserva controllerCadReserva = new ControllerCadReserva(telaCadastroReserva);
             }
-
+            atualizarTabela((DefaultTableModel) ControllerBuscaReserva.this.telaBuscaReserva.getjTableReservas().getModel());
             //Botão Check-in
         } else if (evento.getSource() == this.telaBuscaReserva.getjButtonCheckin()) {
             if (this.telaBuscaReserva.getjTableReservas().getRowCount() == 0) {
