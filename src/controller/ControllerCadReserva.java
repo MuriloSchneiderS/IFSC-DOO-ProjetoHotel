@@ -62,8 +62,8 @@ public class ControllerCadReserva implements ActionListener {
             CheckQuarto checkQuarto = service.CheckQuartoService.Carregar(check.getCheckQuarto().getId());//check tem check_quarto_id
             Quarto quarto = service.QuartoService.Carregar(checkQuarto.getQuarto().getId());//checkQuarto tem quarto_id
 
-            this.telaCadastroReserva.getjFormattedTextFieldDataPrevistaEntrada().setText(reserva.getDataPrevistaEntrada());
-            this.telaCadastroReserva.getjFormattedTextFieldDataPrevistaSaida().setText(reserva.getDataPrevistaSaida());
+            this.telaCadastroReserva.getjFormattedTextFieldDataPrevistaEntrada().setText(checkQuarto.getDataHoraInicio());
+            this.telaCadastroReserva.getjFormattedTextFieldDataPrevistaSaida().setText(checkQuarto.getDataHoraFim());
             this.telaCadastroReserva.getjComboBoxQuarto().setSelectedItem(quarto.getDescricao());
             this.telaCadastroReserva.getjComboBoxHospede().setSelectedItem(hospede.getNome());
             this.telaCadastroReserva.getjTextFieldObs().setText(reserva.getObs());
@@ -98,9 +98,9 @@ public class ControllerCadReserva implements ActionListener {
                     Quarto quarto = service.QuartoService.Carregar("descricao", (String) this.telaCadastroReserva.getjComboBoxQuarto().getSelectedItem()).get(0);
 
                     //Cria o check_quarto com base na reserva e retorna o que foi criado para poder criar o check
-                    CheckQuarto checkQuarto = new CheckQuarto(
-                            "00/00/0000 00:00:00",
-                            "00/00/0000 00:00:00",
+                    CheckQuarto checkQuarto = new CheckQuarto(//Check quarto armazena a datahora de inicio e fim para quando for editar
+                            this.telaCadastroReserva.getjFormattedTextFieldDataPrevistaEntrada().getText(),
+                            this.telaCadastroReserva.getjFormattedTextFieldDataPrevistaSaida().getText(),
                             this.telaCadastroReserva.getjTextFieldObs().getText(),
                             'A',
                             quarto
@@ -160,6 +160,8 @@ public class ControllerCadReserva implements ActionListener {
                     CheckQuarto checkQuarto = reserva.getCheck().get(0).getCheckQuarto();
                     checkQuarto.setQuarto(quarto);
                     checkQuarto.setObs(this.telaCadastroReserva.getjTextFieldObs().getText());
+                    checkQuarto.setDataHoraInicio(this.telaCadastroReserva.getjFormattedTextFieldDataPrevistaEntrada().getText());
+                    checkQuarto.setDataHoraFim(this.telaCadastroReserva.getjFormattedTextFieldDataPrevistaSaida().getText());
 
                     //Reiniciar o Check
                     Check check = new Check(

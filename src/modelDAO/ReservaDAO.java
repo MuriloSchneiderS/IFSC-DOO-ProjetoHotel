@@ -62,8 +62,8 @@ public class ReservaDAO implements InterfaceDAO<Reserva>{
             while (rst.next()) {
                 reserva.setId(rst.getInt("id"));
                 reserva.setDataHoraReserva(utilities.Utilities.formataDataHoraDeMySQL(rst.getObject("data_hora_reserva", java.time.LocalDateTime.class).toString()));
-                reserva.setDataPrevistaEntrada(utilities.Utilities.formataDataDeMySQL(rst.getObject("data_prevista_entrada", java.time.LocalDate.class).toString()));
-                reserva.setDataPrevistaSaida(utilities.Utilities.formataDataDeMySQL(rst.getObject("data_prevista_saida", java.time.LocalDate.class).toString()));
+                reserva.setDataPrevistaEntrada(utilities.Utilities.formataDataHoraDeMySQL(rst.getObject("data_prevista_entrada", java.time.LocalDate.class).toString()));
+                reserva.setDataPrevistaSaida(utilities.Utilities.formataDataHoraDeMySQL(rst.getObject("data_prevista_saida", java.time.LocalDate.class).toString()));
                 reserva.setObs(rst.getString("obs"));
                 reserva.setStatus(rst.getString("status").charAt(0));
                 checks.add(service.CheckService.Carregar(rst.getInt("check_id")));
