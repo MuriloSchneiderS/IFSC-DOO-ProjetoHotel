@@ -72,6 +72,13 @@ public class TelaBuscaReserva extends javax.swing.JDialog {
         jPanelDados = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableReservas = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableReservasVaga = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTableReservasServico = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jPanelBotoes = new javax.swing.JPanel();
         jButtonNovo = new javax.swing.JButton();
         jButtonEditar = new javax.swing.JButton();
@@ -127,11 +134,79 @@ public class TelaBuscaReserva extends javax.swing.JDialog {
         if (jTableReservas.getColumnModel().getColumnCount() > 0) {
             jTableReservas.getColumnModel().getColumn(0).setMaxWidth(50);
             jTableReservas.getColumnModel().getColumn(1).setMaxWidth(150);
-            jTableReservas.getColumnModel().getColumn(2).setMaxWidth(100);
-            jTableReservas.getColumnModel().getColumn(3).setMaxWidth(250);
+            jTableReservas.getColumnModel().getColumn(2).setMaxWidth(150);
+            jTableReservas.getColumnModel().getColumn(3).setMaxWidth(300);
             jTableReservas.getColumnModel().getColumn(4).setMaxWidth(200);
             jTableReservas.getColumnModel().getColumn(5).setMaxWidth(200);
         }
+
+        jTableReservasVaga.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Cod", "Proprietário", "Placa", "Vaga", "Reserva", "Check-in", "Check-out"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableReservasVaga.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane2.setViewportView(jTableReservasVaga);
+        if (jTableReservasVaga.getColumnModel().getColumnCount() > 0) {
+            jTableReservasVaga.getColumnModel().getColumn(0).setMaxWidth(50);
+            jTableReservasVaga.getColumnModel().getColumn(1).setMaxWidth(150);
+            jTableReservasVaga.getColumnModel().getColumn(2).setMaxWidth(150);
+            jTableReservasVaga.getColumnModel().getColumn(3).setMaxWidth(50);
+            jTableReservasVaga.getColumnModel().getColumn(3).setHeaderValue("Vaga");
+            jTableReservasVaga.getColumnModel().getColumn(4).setMaxWidth(300);
+            jTableReservasVaga.getColumnModel().getColumn(5).setMaxWidth(200);
+            jTableReservasVaga.getColumnModel().getColumn(6).setMaxWidth(200);
+        }
+
+        jTableReservasServico.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Cod", "Quarto", "Servico", "Reserva", "Inicio", "Fim"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableReservasServico.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane4.setViewportView(jTableReservasServico);
+        if (jTableReservasServico.getColumnModel().getColumnCount() > 0) {
+            jTableReservasServico.getColumnModel().getColumn(0).setMaxWidth(50);
+            jTableReservasServico.getColumnModel().getColumn(1).setMaxWidth(150);
+            jTableReservasServico.getColumnModel().getColumn(2).setMaxWidth(150);
+            jTableReservasServico.getColumnModel().getColumn(3).setMaxWidth(300);
+            jTableReservasServico.getColumnModel().getColumn(4).setMaxWidth(200);
+            jTableReservasServico.getColumnModel().getColumn(5).setMaxWidth(200);
+        }
+
+        jLabel1.setText("Quarto");
+
+        jLabel2.setText("Vaga");
+
+        jLabel3.setText("Serviço");
 
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);
         jPanelDados.setLayout(jPanelDadosLayout);
@@ -139,15 +214,34 @@ public class TelaBuscaReserva extends javax.swing.JDialog {
             jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelDadosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelDadosLayout.createSequentialGroup()
+                        .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(0, 1032, Short.MAX_VALUE))
+                    .addComponent(jScrollPane4)
+                    .addComponent(jScrollPane2))
                 .addContainerGap())
         );
         jPanelDadosLayout.setVerticalGroup(
             jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDadosLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanelDadosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 8, Short.MAX_VALUE))
         );
 
         jPanelBotoes.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -199,11 +293,11 @@ public class TelaBuscaReserva extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelBotoes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 998, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanelTitulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, 1091, Short.MAX_VALUE)
                     .addComponent(jPanelDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -214,9 +308,9 @@ public class TelaBuscaReserva extends javax.swing.JDialog {
                 .addComponent(jPanelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanelBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -280,11 +374,18 @@ public class TelaBuscaReserva extends javax.swing.JDialog {
     private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonNovo;
     private javax.swing.JButton jButtonSair;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JPanel jPanelBotoes;
     private javax.swing.JPanel jPanelDados;
     private javax.swing.JPanel jPanelTitulo;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTableReservas;
+    private javax.swing.JTable jTableReservasServico;
+    private javax.swing.JTable jTableReservasVaga;
     // End of variables declaration//GEN-END:variables
 }
