@@ -7,7 +7,15 @@ public class CheckHospede {
     private Hospede hospede;
     private Check check;
 
-    public CheckHospede(int id, String tipoHospede, String obs, char status, Hospede hospede, Check check) {
+    public CheckHospede(){}
+    public CheckHospede(String tipoHospede, String obs, char status, Check check, Hospede hospede) {
+        this.tipoHospede = tipoHospede;
+        this.obs = obs;
+        this.status = status;
+        this.hospede = hospede;
+        this.check = check;
+    }
+    public CheckHospede(int id, String tipoHospede, String obs, char status, Check check, Hospede hospede) {
         this.id = id;
         this.tipoHospede = tipoHospede;
         this.obs = obs;

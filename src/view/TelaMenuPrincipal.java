@@ -5,6 +5,7 @@
  */
 package view;
 
+import controller.ControllerBuscaReserva;
 import controller.ControllerCadFornecedor;
 import controller.ControllerCadFuncionario;
 import controller.ControllerCadHospede;
@@ -56,14 +57,17 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         jMenuItemFuncionario = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jMenuItemSair = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        jMenuMovimentos = new javax.swing.JMenu();
+        jMenuItemReservas = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu Principal");
-        setResizable(false);
+        setMaximumSize(new java.awt.Dimension(1920, 1080));
+        setMinimumSize(new java.awt.Dimension(800, 600));
+        setPreferredSize(new java.awt.Dimension(800, 600));
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Create.png"))); // NOI18N
         jMenu2.setText("Cadastros");
@@ -178,9 +182,24 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Diagram.png"))); // NOI18N
-        jMenu3.setText("Movimentos");
-        jMenuBar1.add(jMenu3);
+        jMenuMovimentos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Diagram.png"))); // NOI18N
+        jMenuMovimentos.setText("Movimentos");
+        jMenuMovimentos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuMovimentosActionPerformed(evt);
+            }
+        });
+
+        jMenuItemReservas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Blue pin.png"))); // NOI18N
+        jMenuItemReservas.setText("Reservas");
+        jMenuItemReservas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemReservasActionPerformed(evt);
+            }
+        });
+        jMenuMovimentos.add(jMenuItemReservas);
+
+        jMenuBar1.add(jMenuMovimentos);
 
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/List.png"))); // NOI18N
         jMenu4.setText("Relatórios");
@@ -201,11 +220,11 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 532, Short.MAX_VALUE)
+            .addGap(0, 1119, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 383, Short.MAX_VALUE)
+            .addGap(0, 543, Short.MAX_VALUE)
         );
 
         pack();
@@ -275,6 +294,16 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         telaCadastroMarca.setVisible(true);
     }//GEN-LAST:event_jMenuItemMarcaActionPerformed
 
+    private void jMenuMovimentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuMovimentosActionPerformed
+        
+    }//GEN-LAST:event_jMenuMovimentosActionPerformed
+
+    private void jMenuItemReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemReservasActionPerformed
+        TelaBuscaReserva telaBuscaReserva = new TelaBuscaReserva(null,true);
+        ControllerBuscaReserva controllerBuscaReserva = new ControllerBuscaReserva(telaBuscaReserva);
+        telaBuscaReserva.setVisible(true);
+    }//GEN-LAST:event_jMenuItemReservasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -312,7 +341,6 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
@@ -324,10 +352,12 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemModelo;
     private javax.swing.JMenuItem jMenuItemProdutoCopa;
     private javax.swing.JMenuItem jMenuItemQuarto;
+    private javax.swing.JMenuItem jMenuItemReservas;
     private javax.swing.JMenuItem jMenuItemSair;
     private javax.swing.JMenuItem jMenuItemServico;
     private javax.swing.JMenuItem jMenuItemVagaEstacionamento;
     private javax.swing.JMenuItem jMenuItemVeiculo;
+    private javax.swing.JMenu jMenuMovimentos;
     private javax.swing.JMenu jMenuVeiculos;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;

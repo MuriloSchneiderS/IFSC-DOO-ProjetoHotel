@@ -3,8 +3,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import model.ReservaQuarto;
 import java.util.List;
@@ -28,17 +26,15 @@ public class ReservaQuartoDAO implements InterfaceDAO<ReservaQuarto>{
         PreparedStatement pstm = null;
         try {
             pstm = conexao.prepareStatement(sqlInstrucao);
-            pstm.setString(1, new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd/MM/yyyy").parse(objeto.getDataHoraInicio())));
-            pstm.setString(2, new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd/MM/yyyy").parse(objeto.getDataHoraFim())));
+            pstm.setString(1, utilities.Utilities.formataDataHoraParaMySQL(objeto.getDataHoraInicio()));
+            pstm.setString(2, utilities.Utilities.formataDataHoraParaMySQL(objeto.getDataHoraFim()));
             pstm.setString(3, objeto.getObs());
             pstm.setString(4, String.valueOf(objeto.getStatus()));
-            pstm.setInt(5, objeto.getReserva().getId());
-            pstm.setInt(6, objeto.getQuarto().getId());
+            pstm.setString(5, objeto.getReserva().getId()+"");
+            pstm.setString(6, objeto.getQuarto().getId()+"");
             pstm.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();
-        } catch (ParseException ex) {
-            System.getLogger(ReservaQuartoDAO.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         } finally {
             ConnectionFactory.closeConnection(conexao, pstm);
         }
@@ -47,6 +43,7 @@ public class ReservaQuartoDAO implements InterfaceDAO<ReservaQuarto>{
     @Override
     public ReservaQuarto Retrieve(int id) {
         String sqlInstrucao = "SELECT"
+                + " id,"
                 + " data_hora_inicio,"
                 + " data_hora_fim,"
                 + " obs,"
@@ -86,6 +83,7 @@ public class ReservaQuartoDAO implements InterfaceDAO<ReservaQuarto>{
     @Override
     public List<ReservaQuarto> Retrieve(String atributo, String valor) {
         String sqlInstrucao = "SELECT"
+                + " id,"
                 + " data_hora_inicio,"
                 + " data_hora_fim,"
                 + " obs,"
@@ -140,12 +138,12 @@ public class ReservaQuartoDAO implements InterfaceDAO<ReservaQuarto>{
         PreparedStatement pstm = null;
         try {
             pstm = conexao.prepareStatement(sqlInstrucao);
-            pstm.setString(1, new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd/MM/yyyy").parse(objeto.getDataHoraInicio())));
-            pstm.setString(2, new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd/MM/yyyy").parse(objeto.getDataHoraFim())));
+            pstm.setString(1, utilities.Utilities.formataDataHoraParaMySQL(objeto.getDataHoraInicio()));
+            pstm.setString(2, utilities.Utilities.formataDataHoraParaMySQL(objeto.getDataHoraFim()));
             pstm.setString(3, objeto.getObs());
             pstm.setString(4, String.valueOf(objeto.getStatus()));
-            pstm.setInt(5, objeto.getReserva().getId());
-            pstm.setInt(6, objeto.getQuarto().getId());
+            pstm.setString(5, objeto.getReserva().getId()+"");
+            pstm.setString(6, objeto.getQuarto().getId()+"");
             pstm.execute();
         }catch (SQLException ex) {
             ex.printStackTrace();

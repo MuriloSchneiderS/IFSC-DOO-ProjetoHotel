@@ -3,8 +3,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import model.Reserva;
 import java.util.List;
@@ -26,17 +25,15 @@ public class ReservaDAO implements InterfaceDAO<Reserva>{
         PreparedStatement pstm = null;
         try {
             pstm = conexao.prepareStatement(sqlInstrucao);
-            pstm.setString(1, new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd/MM/yyyy").parse(objeto.getDataHoraReserva())));
-            pstm.setString(2, new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd/MM/yyyy").parse(objeto.getDataPrevistaEntrada())));
-            pstm.setString(3, new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd/MM/yyyy").parse(objeto.getDataPrevistaSaida())));
+            pstm.setString(1, utilities.Utilities.formataDataParaMySQL(objeto.getDataHoraReserva()));
+            pstm.setString(2, utilities.Utilities.formataDataHoraParaMySQL(objeto.getDataPrevistaEntrada()));
+            pstm.setString(3, utilities.Utilities.formataDataHoraParaMySQL(objeto.getDataPrevistaSaida()));
             pstm.setString(4, objeto.getObs());
             pstm.setString(5, String.valueOf(objeto.getStatus()));
-            pstm.setInt(6, objeto.getCheck().getId());
+            pstm.setString(6, objeto.getCheck().get(0).getId()+"");
             pstm.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();
-        } catch (ParseException ex) {
-            System.getLogger(ReservaDAO.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         } finally {
             ConnectionFactory.closeConnection(conexao, pstm);
         }
@@ -45,6 +42,7 @@ public class ReservaDAO implements InterfaceDAO<Reserva>{
     @Override
     public Reserva Retrieve(int id) {
         String sqlInstrucao = "SELECT"
+                + " id,"
                 + " data_hora_reserva,"
                 + " data_prevista_entrada,"
                 + " data_prevista_saida,"
@@ -56,20 +54,20 @@ public class ReservaDAO implements InterfaceDAO<Reserva>{
         PreparedStatement pstm = null;
         ResultSet rst = null;
         Reserva reserva = new Reserva();
-        Check check = new Check();
+        List<Check> checks = new ArrayList<>();
         try {
             pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setInt(1, id);
             rst = pstm.executeQuery();
             while (rst.next()) {
                 reserva.setId(rst.getInt("id"));
-                reserva.setDataHoraReserva(String.valueOf(rst.getDate("data_hora_reserva")));
-                reserva.setDataPrevistaEntrada(String.valueOf(rst.getDate("data_prevista_entrada")));
-                reserva.setDataPrevistaSaida(String.valueOf(rst.getDate("data_prevista_saida")));
+                reserva.setDataHoraReserva(utilities.Utilities.formataDataHoraDeMySQL(rst.getObject("data_hora_reserva", java.time.LocalDateTime.class).toString()));
+                reserva.setDataPrevistaEntrada(utilities.Utilities.formataDataHoraDeMySQL(rst.getObject("data_prevista_entrada", java.time.LocalDate.class).toString()));
+                reserva.setDataPrevistaSaida(utilities.Utilities.formataDataHoraDeMySQL(rst.getObject("data_prevista_saida", java.time.LocalDate.class).toString()));
                 reserva.setObs(rst.getString("obs"));
                 reserva.setStatus(rst.getString("status").charAt(0));
-                check.setId(rst.getInt("check_id"));
-                reserva.setCheck(check);
+                checks.add(service.CheckService.Carregar(rst.getInt("check_id")));
+                reserva.setCheck(checks);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -82,6 +80,7 @@ public class ReservaDAO implements InterfaceDAO<Reserva>{
     @Override
     public List<Reserva> Retrieve(String atributo, String valor) {
         String sqlInstrucao = "SELECT"
+                + " id,"
                 + " data_hora_reserva,"
                 + " data_prevista_entrada,"
                 + " data_prevista_saida,"
@@ -100,14 +99,15 @@ public class ReservaDAO implements InterfaceDAO<Reserva>{
             rst = pstm.executeQuery();
             while (rst.next()) {
                 Reserva reserva = new Reserva();
-                Check check = new Check();
-                reserva.setDataHoraReserva(String.valueOf(rst.getDate("data_hora_reserva")));
-                reserva.setDataPrevistaEntrada(String.valueOf(rst.getDate("data_prevista_entrada")));
-                reserva.setDataPrevistaSaida(String.valueOf(rst.getDate("data_prevista_saida")));
+                List<Check> checks = new ArrayList<>();
+                reserva.setId(rst.getInt("id"));
+                reserva.setDataHoraReserva(utilities.Utilities.formataDataHoraDeMySQL(rst.getObject("data_hora_reserva", java.time.LocalDateTime.class).toString()));
+                reserva.setDataPrevistaEntrada(utilities.Utilities.formataDataDeMySQL(rst.getObject("data_prevista_entrada", java.time.LocalDate.class).toString()));
+                reserva.setDataPrevistaSaida(utilities.Utilities.formataDataDeMySQL(rst.getObject("data_prevista_saida", java.time.LocalDate.class).toString()));
                 reserva.setObs(rst.getString("obs"));
                 reserva.setStatus(rst.getString("status").charAt(0));
-                check.setId(rst.getInt("check_id"));
-                reserva.setCheck(check);
+                checks.add(service.CheckService.Carregar(rst.getInt("check_id")));
+                reserva.setCheck(checks);
                 listaReservas.add(reserva);
             }
         } catch (SQLException ex) {
@@ -133,12 +133,13 @@ public class ReservaDAO implements InterfaceDAO<Reserva>{
         PreparedStatement pstm = null;
         try {
             pstm = conexao.prepareStatement(sqlInstrucao);
-            pstm.setString(1, new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd/MM/yyyy").parse(objeto.getDataHoraReserva())));
-            pstm.setString(2, new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd/MM/yyyy").parse(objeto.getDataPrevistaEntrada())));
-            pstm.setString(3, new SimpleDateFormat("yyyy-MM-dd").format(new SimpleDateFormat("dd/MM/yyyy").parse(objeto.getDataPrevistaSaida())));
+            pstm.setString(1, utilities.Utilities.formataDataParaMySQL(objeto.getDataHoraReserva()));
+            pstm.setString(2, utilities.Utilities.formataDataHoraParaMySQL(objeto.getDataPrevistaEntrada()));
+            pstm.setString(3, utilities.Utilities.formataDataHoraParaMySQL(objeto.getDataPrevistaSaida()));
             pstm.setString(4, objeto.getObs());
             pstm.setString(5, String.valueOf(objeto.getStatus()));
-            pstm.setInt(6, objeto.getCheck().getId());
+            pstm.setString(6, objeto.getCheck().get(0).getId()+"");
+            pstm.setString(7, objeto.getId()+"");
             pstm.execute();
         }catch (SQLException ex) {
             ex.printStackTrace();

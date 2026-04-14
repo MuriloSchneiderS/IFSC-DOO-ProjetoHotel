@@ -1,4 +1,5 @@
 package modelDAO;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,7 +9,7 @@ import java.util.List;
 import model.CheckQuarto;
 import model.Quarto;
 
-public class CheckQuartoDAO implements InterfaceDAO<CheckQuarto>{
+public class CheckQuartoDAO implements InterfaceDAO<CheckQuarto> {
 
     @Override
     public void Create(CheckQuarto objeto) {
@@ -23,11 +24,11 @@ public class CheckQuartoDAO implements InterfaceDAO<CheckQuarto>{
         PreparedStatement pstm = null;
         try {
             pstm = conexao.prepareStatement(sqlInstrucao);
-            pstm.setDate(1, objeto.getDataHoraInicio());
-            pstm.setDate(2, objeto.getDataHoraFim());
+            pstm.setString(1, utilities.Utilities.formataDataHoraParaMySQL(objeto.getDataHoraInicio()));
+            pstm.setString(2, utilities.Utilities.formataDataHoraParaMySQL(objeto.getDataHoraFim()));
             pstm.setString(3, objeto.getObs());
             pstm.setString(4, String.valueOf(objeto.getStatus()));
-            pstm.setInt(5, objeto.getQuarto().getId());
+            pstm.setString(5, objeto.getQuarto().getId() + "");
             pstm.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -52,13 +53,18 @@ public class CheckQuartoDAO implements InterfaceDAO<CheckQuarto>{
         CheckQuarto checkQuarto = new CheckQuarto();
         Quarto quarto = new Quarto();
         try {
-            pstm = conexao.prepareStatement(sqlInstrucao);
-            pstm.setInt(1, id);
+            if (id < 0) {//Ultimo id inserido
+                String sqlLast = "SELECT id, data_hora_inicio, data_hora_fim, obs, status, quarto_id FROM check_quarto ORDER BY id DESC LIMIT 1;";
+                pstm = conexao.prepareStatement(sqlLast);
+            } else {
+                pstm = conexao.prepareStatement(sqlInstrucao);
+                pstm.setInt(1, id);
+            }
             rst = pstm.executeQuery();
             while (rst.next()) {
                 checkQuarto.setId(rst.getInt("id"));
-                checkQuarto.setDataHoraInicio(rst.getDate("data_hora_inicio"));
-                checkQuarto.setDataHoraFim(rst.getDate("data_hora_fim"));
+                checkQuarto.setDataHoraInicio(utilities.Utilities.formataDataHoraDeMySQL(rst.getObject("data_hora_inicio", java.time.LocalDateTime.class).toString()));
+                checkQuarto.setDataHoraFim(utilities.Utilities.formataDataHoraDeMySQL(rst.getObject("data_hora_fim", java.time.LocalDateTime.class).toString()));
                 checkQuarto.setObs(rst.getString("obs"));
                 checkQuarto.setStatus(rst.getString("status").charAt(0));
                 quarto.setId(rst.getInt("quarto_id"));
@@ -82,27 +88,27 @@ public class CheckQuartoDAO implements InterfaceDAO<CheckQuarto>{
                 + " status,"
                 + " quarto_id"
                 + " FROM check_quarto"
-                + " WHERE "+atributo+" LIKE ?";
+                + " WHERE " + atributo + " LIKE ?";
         Connection conexao = ConnectionFactory.getConnection();
         PreparedStatement pstm = null;
         ResultSet rst = null;
         List<CheckQuarto> listaCheckQuartos = new ArrayList<>();
         try {
             pstm = conexao.prepareStatement(sqlInstrucao);
-            pstm.setString(1, "%"+valor+"%");
+            pstm.setString(1, "%" + valor + "%");
             rst = pstm.executeQuery();
             while (rst.next()) {
                 CheckQuarto checkQuarto = new CheckQuarto();
                 Quarto quarto = new Quarto();
-                
+
                 checkQuarto.setId(rst.getInt("id"));
-                checkQuarto.setDataHoraInicio(rst.getDate("data_hora_inicio"));
-                checkQuarto.setDataHoraFim(rst.getDate("data_hora_fim"));
+                checkQuarto.setDataHoraInicio(utilities.Utilities.formataDataHoraDeMySQL(rst.getObject("data_hora_inicio", java.time.LocalDateTime.class).toString()));
+                checkQuarto.setDataHoraFim(utilities.Utilities.formataDataHoraDeMySQL(rst.getObject("data_hora_fim", java.time.LocalDateTime.class).toString()));
                 checkQuarto.setObs(rst.getString("obs"));
                 checkQuarto.setStatus(rst.getString("status").charAt(0));
                 quarto.setId(rst.getInt("quarto_id"));
                 checkQuarto.setQuarto(quarto);
-                
+
                 listaCheckQuartos.add(checkQuarto);
             }
         } catch (SQLException ex) {
@@ -121,20 +127,20 @@ public class CheckQuartoDAO implements InterfaceDAO<CheckQuarto>{
                 + " data_hora_fim=?,"
                 + " obs=?,"
                 + " status=?,"
-                + " quarto_id=?,"
+                + " quarto_id=?"
                 + " WHERE id =?";
         Connection conexao = ConnectionFactory.getConnection();
         PreparedStatement pstm = null;
         try {
             pstm = conexao.prepareStatement(sqlInstrucao);
-            pstm.setDate(1, objeto.getDataHoraInicio());
-            pstm.setDate(2, objeto.getDataHoraFim());
+            pstm.setString(1, utilities.Utilities.formataDataHoraParaMySQL(objeto.getDataHoraInicio()));
+            pstm.setString(2, utilities.Utilities.formataDataHoraParaMySQL(objeto.getDataHoraFim()));
             pstm.setString(3, objeto.getObs());
-            pstm.setString(4, objeto.getStatus()+"");
+            pstm.setString(4, objeto.getStatus() + "");
             pstm.setInt(5, objeto.getQuarto().getId());
-            pstm.setInt(6, objeto.getId());
+            pstm.setString(6, objeto.getId() + "");
             pstm.execute();
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
             ConnectionFactory.closeConnection(conexao, pstm);
@@ -146,5 +152,5 @@ public class CheckQuartoDAO implements InterfaceDAO<CheckQuarto>{
     public void Delete(CheckQuarto objeto) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
 }

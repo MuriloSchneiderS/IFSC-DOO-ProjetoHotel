@@ -1,16 +1,21 @@
 package model;
 
-import java.sql.Date;
-
 public class CheckQuarto {
     private int id;
-    private Date dataHoraInicio, dataHoraFim;
+    private String dataHoraInicio, dataHoraFim;
     private String obs;
     private char status;
     private Quarto quarto;
 
     public CheckQuarto(){}
-    public CheckQuarto(int id, Date dataHoraInicio, Date dataHoraFim, String obs, char status, Quarto quarto) {
+    public CheckQuarto(String dataHoraInicio, String dataHoraFim, String obs, char status, Quarto quarto) {
+        this.dataHoraInicio = dataHoraInicio;
+        this.dataHoraFim = dataHoraFim;
+        this.obs = obs;
+        this.status = status;
+        this.quarto = quarto;
+    }
+    public CheckQuarto(int id, String dataHoraInicio, String dataHoraFim, String obs, char status, Quarto quarto) {
         this.id = id;
         this.dataHoraInicio = dataHoraInicio;
         this.dataHoraFim = dataHoraFim;
@@ -27,19 +32,19 @@ public class CheckQuarto {
         this.id = id;
     }
 
-    public Date getDataHoraInicio() {
+    public String getDataHoraInicio() {
         return dataHoraInicio;
     }
 
-    public void setDataHoraInicio(Date dataHoraInicio) {
+    public void setDataHoraInicio(String dataHoraInicio) {
         this.dataHoraInicio = dataHoraInicio;
     }
 
-    public Date getDataHoraFim() {
+    public String getDataHoraFim() {
         return dataHoraFim;
     }
 
-    public void setDataHoraFim(Date dataHoraFim) {
+    public void setDataHoraFim(String dataHoraFim) {
         this.dataHoraFim = dataHoraFim;
     }
 
