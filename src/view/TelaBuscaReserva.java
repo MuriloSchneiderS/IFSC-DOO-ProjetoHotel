@@ -126,9 +126,9 @@ public class TelaBuscaReserva extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jTableReservas);
         if (jTableReservas.getColumnModel().getColumnCount() > 0) {
             jTableReservas.getColumnModel().getColumn(0).setMaxWidth(50);
-            jTableReservas.getColumnModel().getColumn(1).setMaxWidth(200);
+            jTableReservas.getColumnModel().getColumn(1).setMaxWidth(150);
             jTableReservas.getColumnModel().getColumn(2).setMaxWidth(100);
-            jTableReservas.getColumnModel().getColumn(3).setMaxWidth(400);
+            jTableReservas.getColumnModel().getColumn(3).setMaxWidth(250);
             jTableReservas.getColumnModel().getColumn(4).setMaxWidth(200);
             jTableReservas.getColumnModel().getColumn(5).setMaxWidth(200);
         }

@@ -82,7 +82,7 @@ public class ControllerBuscaReserva implements ActionListener {
                 reservaAtualDaLista.getId(),
                 hospede.getNome(),
                 quarto.getIdentificacao(),
-                reservaAtualDaLista.getDataPrevistaEntrada() + " - " + reservaAtualDaLista.getDataPrevistaSaida(),
+                reservaAtualDaLista.getDataPrevistaEntrada() + "  -  " + reservaAtualDaLista.getDataPrevistaSaida(),
                 check.getDataHoraEntrada() + "",
                 check.getDataHoraSaida() + ""
             });
