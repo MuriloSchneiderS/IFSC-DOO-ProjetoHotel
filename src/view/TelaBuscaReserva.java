@@ -56,6 +56,14 @@ public class TelaBuscaReserva extends javax.swing.JDialog {
     public JTable getjTableReservas() {
         return jTableReservas;
     }
+
+    public JTable getjTableReservasServico() {
+        return jTableReservasServico;
+    }
+
+    public JTable getjTableReservasVaga() {
+        return jTableReservasVaga;
+    }
     
     
     /**
