@@ -21,6 +21,11 @@ import view.TelaCadastroReserva;
 public class ControllerBuscaReserva implements ActionListener {
 
     TelaBuscaReserva telaBuscaReserva;
+    private JTable jtableReservas;
+    private JTable jtableReservasVaga;
+    private JTable jtableReservasServico;
+    private JTable tabelaSelecionada;
+    private int linhaSelecionada;
 
     public ControllerBuscaReserva(TelaBuscaReserva telaBuscaReserva) {
 
@@ -32,37 +37,81 @@ public class ControllerBuscaReserva implements ActionListener {
         this.telaBuscaReserva.getjButtonCheckout().addActionListener(this);
         this.telaBuscaReserva.getjButtonSair().addActionListener(this);
 
-        JTable jtableReservas = this.telaBuscaReserva.getjTableReservas();
-        //sempre que o cadastro for fechado e esta janela voltar para o foco a tabela é reiniciada
-        this.telaBuscaReserva.addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+        jtableReservas = this.telaBuscaReserva.getjTableReservas();
+        jtableReservasVaga = this.telaBuscaReserva.getjTableReservasVaga();
+        jtableReservasServico = this.telaBuscaReserva.getjTableReservasServico();
+        tabelaSelecionada = jtableReservas;
+
+        //FocusListener para tabela de Reservas
+        jtableReservas.addFocusListener(new java.awt.event.FocusListener() {
             @Override
-            public void windowGainedFocus(WindowEvent we) {
+            public void focusGained(java.awt.event.FocusEvent e) {
                 jtableReservas.setEnabled(true);
                 atualizarTabela((DefaultTableModel) ControllerBuscaReserva.this.telaBuscaReserva.getjTableReservas().getModel());
+                tabelaSelecionada = jtableReservas;
             }
 
             @Override
-            public void windowLostFocus(WindowEvent we) {
-                jtableReservas.setEnabled(false);
+            public void focusLost(java.awt.event.FocusEvent e) {
+                linhaSelecionada = tabelaSelecionada.getSelectedRow();
+                jtableReservas.clearSelection();
             }
         });
-        //
+        //FocusListener para tabela de Reservas de Vaga
+        jtableReservasVaga.addFocusListener(new java.awt.event.FocusListener() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent e) {
+                jtableReservasVaga.setEnabled(true);
+                //atualizarTabela((DefaultTableModel) ControllerBuscaReserva.this.telaBuscaReserva.getjTableReservas().getModel());
+                tabelaSelecionada = jtableReservasVaga;
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent e) {
+                linhaSelecionada = tabelaSelecionada.getSelectedRow();
+                jtableReservasVaga.clearSelection();
+            }
+        });
+        //FocusListener para tabela de Reservas de Servico
+        jtableReservasServico.addFocusListener(new java.awt.event.FocusListener() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent e) {
+                jtableReservasServico.setEnabled(true);
+                //atualizarTabela((DefaultTableModel) ControllerBuscaReserva.this.telaBuscaReserva.getjTableReservas().getModel());
+                tabelaSelecionada = jtableReservasServico;
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent e) {
+                linhaSelecionada = tabelaSelecionada.getSelectedRow();
+                jtableReservasServico.clearSelection();
+            }
+        });
+
+        //ListSelectionListener para capturar a linha selecionada
         jtableReservas.getSelectionModel().addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             @Override
             public void valueChanged(javax.swing.event.ListSelectionEvent e) {
-                // Habilitar botão se houver linha selecionada, caso contrário desabilitar
-                telaBuscaReserva.getjButtonEditar().setEnabled(true);
-                telaBuscaReserva.getjButtonCheckin().setEnabled(true);
-                telaBuscaReserva.getjButtonCheckout().setEnabled(true);
+                if (!e.getValueIsAdjusting()) {
+                    telaBuscaReserva.getjButtonEditar().setEnabled(true);
+                    telaBuscaReserva.getjButtonCheckin().setEnabled(true);
+                    telaBuscaReserva.getjButtonCheckout().setEnabled(true);
+                }
             }
         });
     }
 
     private void atualizarTabela(DefaultTableModel tabela) {
         utilities.Utilities.ativaDesativa(this.telaBuscaReserva.getjPanelBotoes(), true);
+
         //Criando a lista para receber as reservas
-        tabela.setRowCount(0);//Reseta a tabela
         List<Reserva> listaReservas = service.ReservaService.Carregar("obs", "");//Armazena todas as reservas
+        if (listaReservas.isEmpty()) {
+            tabela.setRowCount(1);
+            return;
+        }
+        tabela.setRowCount(0);//Reseta a tabela
+
         Check check;
         CheckHospede checkHospede;
         Hospede hospede;
@@ -93,21 +142,40 @@ public class ControllerBuscaReserva implements ActionListener {
     public void actionPerformed(ActionEvent evento) {
         //Botão Novo
         if (evento.getSource() == this.telaBuscaReserva.getjButtonNovo()) {
-            ControllerCadReserva controllerCadReserva = new ControllerCadReserva(new TelaCadastroReserva(null, true));
-            ControllerCadReserva.codigo = 0;
-            controllerCadReserva.telaCadastroReserva.getjFormattedTextFieldDataPrevistaEntrada().requestFocus();
+            if (tabelaSelecionada.getName().equals(jtableReservas.getName())) {
+                TelaCadastroReserva telaCadastroReserva = new TelaCadastroReserva(null, true);
+                telaCadastroReserva.getjTextFieldId().setText(0 + "");
+                ControllerCadReserva controllerCadReserva = new ControllerCadReserva(telaCadastroReserva);
+                controllerCadReserva.telaCadastroReserva.getjFormattedTextFieldDataPrevistaEntrada().requestFocus();
+            } else if (tabelaSelecionada.getName().equals(jtableReservasVaga.getName())) {
+
+            } else if (tabelaSelecionada.getName().equals(jtableReservasServico.getName())) {
+
+            } else {
+
+            }
 
             //Botão Editar
         } else if (evento.getSource() == this.telaBuscaReserva.getjButtonEditar()) {
-            if (this.telaBuscaReserva.getjTableReservas().getRowCount() <= 0) {
+            if (tabelaSelecionada == null) {
+                JOptionPane.showMessageDialog(null, "Nenhuma tabela selecionada.");
+            } else if (linhaSelecionada < 0) {
                 JOptionPane.showMessageDialog(null, "Nenhuma reserva selecionada.");
             } else {
-                int cod = (int) this.telaBuscaReserva.getjTableReservas().getValueAt(this.telaBuscaReserva.getjTableReservas().getSelectedRow(), 0);
-                TelaCadastroReserva telaCadastroReserva = new TelaCadastroReserva(null,true);
-                telaCadastroReserva.getjTextFieldId().setText(cod+"");
-                ControllerCadReserva controllerCadReserva = new ControllerCadReserva(telaCadastroReserva);
+                if (tabelaSelecionada.getName().equals(jtableReservas.getName())) {
+                    int cod = (int) tabelaSelecionada.getValueAt(linhaSelecionada, 0);
+                    TelaCadastroReserva telaCadastroReserva = new TelaCadastroReserva(null, true);
+                    telaCadastroReserva.getjTextFieldId().setText(cod + "");
+                    ControllerCadReserva controllerCadReserva = new ControllerCadReserva(telaCadastroReserva);
+                } else if (tabelaSelecionada.getName().equals(jtableReservasVaga.getName())) {
+
+                } else if (tabelaSelecionada.getName().equals(jtableReservasServico.getName())) {
+
+                } else {
+
+                }
             }
-            atualizarTabela((DefaultTableModel) ControllerBuscaReserva.this.telaBuscaReserva.getjTableReservas().getModel());
+            tabelaSelecionada.requestFocus();
             //Botão Check-in
         } else if (evento.getSource() == this.telaBuscaReserva.getjButtonCheckin()) {
             if (this.telaBuscaReserva.getjTableReservas().getRowCount() == 0) {

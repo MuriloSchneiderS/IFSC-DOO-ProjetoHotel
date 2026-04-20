@@ -38,8 +38,10 @@ public class ControllerCadReserva implements ActionListener {
         for (Hospede hospede : hospedes) {
             this.telaCadastroReserva.getjComboBoxHospede().addItem(hospede.getNome());
         }
-
-        if (codigo == 0 && telaCadastroReserva.getjTextFieldId().getText().isEmpty()) {
+        
+        //carregar variavel codigo com valor 0 para novo ou valor armazenado em id para editar
+        codigo = telaCadastroReserva.getjTextFieldId().getText().isEmpty()? 0 : Integer.parseInt(telaCadastroReserva.getjTextFieldId().getText());
+        if (codigo == 0){//nova reserva
             utilities.Utilities.ativaDesativa(this.telaCadastroReserva.getjPanelBotoes(), true);
             utilities.Utilities.limpaComponentes(this.telaCadastroReserva.getjPanelDados(), false);
         } else {//rotina de carga de reserva

@@ -137,6 +137,7 @@ public class TelaBuscaReserva extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        jTableReservas.setName("jtableReservasQuarto"); // NOI18N
         jTableReservas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jTableReservas);
         if (jTableReservas.getColumnModel().getColumnCount() > 0) {
@@ -167,6 +168,7 @@ public class TelaBuscaReserva extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        jTableReservasVaga.setName("jtableReservasVaga"); // NOI18N
         jTableReservasVaga.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(jTableReservasVaga);
         if (jTableReservasVaga.getColumnModel().getColumnCount() > 0) {
@@ -199,6 +201,7 @@ public class TelaBuscaReserva extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        jTableReservasServico.setName("jtableReservasServico"); // NOI18N
         jTableReservasServico.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane4.setViewportView(jTableReservasServico);
         if (jTableReservasServico.getColumnModel().getColumnCount() > 0) {
