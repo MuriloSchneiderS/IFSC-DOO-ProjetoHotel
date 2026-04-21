@@ -8,6 +8,7 @@ public class AlocacaoVaga {
     private Veiculo veiculo;
     private Check check;
 
+    public AlocacaoVaga(){};
     public AlocacaoVaga(int id, String obs, char status, VagaEstacionamento vagaEstacionamento, Veiculo veiculo, Check check) {
         this.id = id;
         this.obs = obs;

@@ -6,9 +6,9 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class TelaCadastroReservaVaga extends javax.swing.JDialog {
+public class TelaCadastroAlocacaoVagaEstacionamento extends javax.swing.JDialog {
 
-    public TelaCadastroReservaVaga(java.awt.Frame parent, boolean modal) {
+    public TelaCadastroAlocacaoVagaEstacionamento(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -77,12 +77,12 @@ public class TelaCadastroReservaVaga extends javax.swing.JDialog {
         return jPanelDados;
     }
 
-    public JComboBox<String> getjComboBoxVaga() {
-        return jComboBoxVaga;
+    public JComboBox<String> getjComboBoxVagaEstacionamento() {
+        return jComboBoxVagaEstacionamento;
     }
 
-    public void setjComboBoxVaga(JComboBox<String> jComboBoxVaga) {
-        this.jComboBoxVaga = jComboBoxVaga;
+    public void setjComboBoxVagaEstacionamento(JComboBox<String> jComboBoxVagaEstacionamento) {
+        this.jComboBoxVagaEstacionamento = jComboBoxVagaEstacionamento;
     }
 
     public JComboBox<String> getjComboBoxVeiculo() {
@@ -120,7 +120,7 @@ public class TelaCadastroReservaVaga extends javax.swing.JDialog {
         jFormattedTextFieldDataCadastro = new javax.swing.JFormattedTextField();
         jFormattedTextFieldDataPrevistaSaida = new javax.swing.JFormattedTextField();
         jLabelVaga = new javax.swing.JLabel();
-        jComboBoxVaga = new javax.swing.JComboBox<>();
+        jComboBoxVagaEstacionamento = new javax.swing.JComboBox<>();
         jComboBoxVeiculo = new javax.swing.JComboBox<>();
         jLabelVeiculo = new javax.swing.JLabel();
         jPanelBotoes = new javax.swing.JPanel();
@@ -183,7 +183,7 @@ public class TelaCadastroReservaVaga extends javax.swing.JDialog {
             ex.printStackTrace();
         }
 
-        jLabelVaga.setText("Vaga");
+        jLabelVaga.setText("Vaga do Estacionamento");
 
         jLabelVeiculo.setText("Veículo");
 
@@ -203,7 +203,7 @@ public class TelaCadastroReservaVaga extends javax.swing.JDialog {
                             .addComponent(jFormattedTextFieldDataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelCadastro)))
                     .addGroup(jPanelDadosLayout.createSequentialGroup()
-                        .addComponent(jComboBoxVaga, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxVagaEstacionamento, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jComboBoxVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelDadosLayout.createSequentialGroup()
@@ -251,7 +251,7 @@ public class TelaCadastroReservaVaga extends javax.swing.JDialog {
                     .addComponent(jLabelVeiculo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxVaga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxVagaEstacionamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addComponent(jLabelObs)
@@ -342,7 +342,7 @@ public class TelaCadastroReservaVaga extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                TelaCadastroReservaVaga dialog = new TelaCadastroReservaVaga(new javax.swing.JFrame(), true);
+                TelaCadastroAlocacaoVagaEstacionamento dialog = new TelaCadastroAlocacaoVagaEstacionamento(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -359,7 +359,7 @@ public class TelaCadastroReservaVaga extends javax.swing.JDialog {
     private javax.swing.JButton jButtonGravar;
     private javax.swing.JButton jButtonNovo;
     private javax.swing.JButton jButtonSair;
-    private javax.swing.JComboBox<String> jComboBoxVaga;
+    private javax.swing.JComboBox<String> jComboBoxVagaEstacionamento;
     private javax.swing.JComboBox<String> jComboBoxVeiculo;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataCadastro;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataPrevistaEntrada;

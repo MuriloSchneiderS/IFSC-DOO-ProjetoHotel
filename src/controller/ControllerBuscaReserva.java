@@ -16,6 +16,7 @@ import model.Hospede;
 import model.Quarto;
 import model.Reserva;
 import view.TelaBuscaReserva;
+import view.TelaCadastroAlocacaoVagaEstacionamento;
 import view.TelaCadastroReserva;
 
 public class ControllerBuscaReserva implements ActionListener {
@@ -148,11 +149,14 @@ public class ControllerBuscaReserva implements ActionListener {
                 ControllerCadReserva controllerCadReserva = new ControllerCadReserva(telaCadastroReserva);
                 controllerCadReserva.telaCadastroReserva.getjFormattedTextFieldDataPrevistaEntrada().requestFocus();
             } else if (tabelaSelecionada.getName().equals(jtableReservasVaga.getName())) {
-
+                TelaCadastroAlocacaoVagaEstacionamento telaCadastroAlocacaoVagaEstacionamento = new TelaCadastroAlocacaoVagaEstacionamento(null, true);
+                telaCadastroAlocacaoVagaEstacionamento.getjTextFieldId().setText(0 + "");
+                ControllerCadAlocacaoVagaEstacionamento controllerCadAlocacaoVagaEstacionamento = new ControllerCadAlocacaoVagaEstacionamento(telaCadastroAlocacaoVagaEstacionamento);
+                controllerCadAlocacaoVagaEstacionamento.telaCadastroAlocacaoVagaEstacionamento.getjFormattedTextFieldDataPrevistaEntrada().requestFocus();
             } else if (tabelaSelecionada.getName().equals(jtableReservasServico.getName())) {
-
+                
             } else {
-
+                JOptionPane.showMessageDialog(null, "Nenhuma tabela selecionada.");
             }
 
             //Botão Editar
