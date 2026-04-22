@@ -203,12 +203,12 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelNomeFantasia">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Data Prevista de Entrada"/>
+            <Property name="text" type="java.lang.String" value="Data Prevista de In&#xed;cio"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelRazaoSocial">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Data Prevista de Sa&#xed;da"/>
+            <Property name="text" type="java.lang.String" value="Data Prevista de T&#xe9;rmino"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldDataPrevistaEntrada">

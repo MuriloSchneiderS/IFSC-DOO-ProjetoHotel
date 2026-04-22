@@ -18,6 +18,7 @@ import model.Reserva;
 import view.TelaBuscaReserva;
 import view.TelaCadastroAlocacaoVagaEstacionamento;
 import view.TelaCadastroReserva;
+import view.TelaCadastroOrdemServico;
 
 public class ControllerBuscaReserva implements ActionListener {
 
@@ -154,7 +155,10 @@ public class ControllerBuscaReserva implements ActionListener {
                 ControllerCadAlocacaoVagaEstacionamento controllerCadAlocacaoVagaEstacionamento = new ControllerCadAlocacaoVagaEstacionamento(telaCadastroAlocacaoVagaEstacionamento);
                 controllerCadAlocacaoVagaEstacionamento.telaCadastroAlocacaoVagaEstacionamento.getjFormattedTextFieldDataPrevistaEntrada().requestFocus();
             } else if (tabelaSelecionada.getName().equals(jtableReservasServico.getName())) {
-                
+                TelaCadastroOrdemServico telaCadastroOrdemServico = new TelaCadastroOrdemServico(null, true);
+                telaCadastroOrdemServico.getjTextFieldId().setText(0 + "");
+                ControllerCadOrdemServico controllerCadOrdemServico = new ControllerCadOrdemServico(telaCadastroOrdemServico);
+                controllerCadOrdemServico.telaCadastroOrdemServico.getjFormattedTextFieldDataPrevistaEntrada().requestFocus();
             } else {
                 JOptionPane.showMessageDialog(null, "Nenhuma tabela selecionada.");
             }
@@ -172,11 +176,11 @@ public class ControllerBuscaReserva implements ActionListener {
                     telaCadastroReserva.getjTextFieldId().setText(cod + "");
                     ControllerCadReserva controllerCadReserva = new ControllerCadReserva(telaCadastroReserva);
                 } else if (tabelaSelecionada.getName().equals(jtableReservasVaga.getName())) {
-
+                    
                 } else if (tabelaSelecionada.getName().equals(jtableReservasServico.getName())) {
 
                 } else {
-
+                    JOptionPane.showMessageDialog(null, "Nenhuma reserva selecionada.");
                 }
             }
             tabelaSelecionada.requestFocus();

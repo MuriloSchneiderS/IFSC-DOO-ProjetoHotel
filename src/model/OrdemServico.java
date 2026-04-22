@@ -1,31 +1,30 @@
 package model;
 
-import java.security.Timestamp;
-
 public class OrdemServico {
     private int id;
-    private Timestamp dataHoraCadastro, dataPrevisaoInicio, dataHoraPrevisaoTermino;
+    private String dataHoraCadastro, dataHoraPrevistaInicio, dataHoraPrevistaTermino;
     private String obs;
     private char status;
     private Servico servico;
     private Quarto quarto;
     private Check check;
 
-    public OrdemServico(int id, Timestamp dataHoraCadastro, Timestamp dataPrevisaoInicio, Timestamp dataHoraPrevisaoTermino, String obs, char status, Servico servico, Check check) {
+    public OrdemServico(){};
+    public OrdemServico(int id, String dataHoraCadastro, String dataHoraPrevistaInicio, String dataHoraPrevistaTermino, String obs, char status, Servico servico, Check check) {
         this.id = id;
         this.dataHoraCadastro = dataHoraCadastro;
-        this.dataPrevisaoInicio = dataPrevisaoInicio;
-        this.dataHoraPrevisaoTermino = dataHoraPrevisaoTermino;
+        this.dataHoraPrevistaInicio = dataHoraPrevistaInicio;
+        this.dataHoraPrevistaTermino = dataHoraPrevistaTermino;
         this.obs = obs;
         this.status = status;
         this.servico = servico;
         this.check = check;
     }
-    public OrdemServico(int id, Timestamp dataHoraCadastro, Timestamp dataPrevisaoInicio, Timestamp dataHoraPrevisaoTermino, String obs, char status, Servico servico, Quarto quarto, Check check) {
+    public OrdemServico(int id, String dataHoraCadastro, String dataHoraPrevistaInicio, String dataHoraPrevistaTermino, String obs, char status, Servico servico, Quarto quarto, Check check) {
         this.id = id;
         this.dataHoraCadastro = dataHoraCadastro;
-        this.dataPrevisaoInicio = dataPrevisaoInicio;
-        this.dataHoraPrevisaoTermino = dataHoraPrevisaoTermino;
+        this.dataHoraPrevistaInicio = dataHoraPrevistaInicio;
+        this.dataHoraPrevistaTermino = dataHoraPrevistaTermino;
         this.obs = obs;
         this.status = status;
         this.servico = servico;
@@ -41,28 +40,28 @@ public class OrdemServico {
         this.id = id;
     }
 
-    public Timestamp getDataHoraCadastro() {
+    public String getDataHoraCadastro() {
         return dataHoraCadastro;
     }
 
-    public void setDataHoraCadastro(Timestamp dataHoraCadastro) {
+    public void setDataHoraCadastro(String dataHoraCadastro) {
         this.dataHoraCadastro = dataHoraCadastro;
     }
 
-    public Timestamp getDataPrevisaoInicio() {
-        return dataPrevisaoInicio;
+    public String getDataHoraPrevistaInicio() {
+        return dataHoraPrevistaInicio;
     }
 
-    public void setDataPrevisaoInicio(Timestamp dataPrevisaoInicio) {
-        this.dataPrevisaoInicio = dataPrevisaoInicio;
+    public void setDataHoraPrevistaInicio(String dataHoraPrevistaInicio) {
+        this.dataHoraPrevistaInicio = dataHoraPrevistaInicio;
     }
 
-    public Timestamp getDataHoraPrevisaoTermino() {
-        return dataHoraPrevisaoTermino;
+    public String getDataHoraPrevistaTermino() {
+        return dataHoraPrevistaTermino;
     }
 
-    public void setDataHoraPrevisaoTermino(Timestamp dataHoraPrevisaoTermino) {
-        this.dataHoraPrevisaoTermino = dataHoraPrevisaoTermino;
+    public void setDataHoraPrevistaTermino(String dataHoraPrevistaTermino) {
+        this.dataHoraPrevistaTermino = dataHoraPrevistaTermino;
     }
 
     public String getObs() {

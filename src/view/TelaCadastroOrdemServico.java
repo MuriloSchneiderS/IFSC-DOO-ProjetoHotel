@@ -6,9 +6,9 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class TelaCadastroReservaServico extends javax.swing.JDialog {
+public class TelaCadastroOrdemServico extends javax.swing.JDialog {
 
-    public TelaCadastroReservaServico(java.awt.Frame parent, boolean modal) {
+    public TelaCadastroOrdemServico(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -158,9 +158,9 @@ public class TelaCadastroReservaServico extends javax.swing.JDialog {
 
         jLabelId.setText("ID");
 
-        jLabelNomeFantasia.setText("Data Prevista de Entrada");
+        jLabelNomeFantasia.setText("Data Prevista de Início");
 
-        jLabelRazaoSocial.setText("Data Prevista de Saída");
+        jLabelRazaoSocial.setText("Data Prevista de Término");
 
         try {
             jFormattedTextFieldDataPrevistaEntrada.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/#### ##:##:##")));
@@ -343,7 +343,7 @@ public class TelaCadastroReservaServico extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                TelaCadastroReservaServico dialog = new TelaCadastroReservaServico(new javax.swing.JFrame(), true);
+                TelaCadastroOrdemServico dialog = new TelaCadastroOrdemServico(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
