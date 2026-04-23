@@ -126,7 +126,7 @@ public class TelaBuscaReserva extends javax.swing.JDialog {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Cod", "Hóspede", "Quarto", "Reservado", "Check-in", "Check-out"
+                "Cod", "Hóspede", "Quarto", "Reserva", "Check-in", "Check-out"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -190,7 +190,7 @@ public class TelaBuscaReserva extends javax.swing.JDialog {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Cod", "Quarto", "Servico", "Reserva", "Inicio", "Fim"
+                "Cod", "Quarto", "Servico", "Reserva", "Check-in", "Check-out"
             }
         ) {
             boolean[] canEdit = new boolean [] {

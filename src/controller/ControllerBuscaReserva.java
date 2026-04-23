@@ -2,12 +2,11 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import model.AlocacaoVaga;
 import model.Check;
@@ -17,6 +16,9 @@ import model.Hospede;
 import model.OrdemServico;
 import model.Quarto;
 import model.Reserva;
+import model.Servico;
+import model.VagaEstacionamento;
+import model.Veiculo;
 import view.TelaBuscaReserva;
 import view.TelaCadastroAlocacaoVagaEstacionamento;
 import view.TelaCadastroReserva;
@@ -51,8 +53,8 @@ public class ControllerBuscaReserva implements ActionListener {
             @Override
             public void focusGained(java.awt.event.FocusEvent e) {
                 jtableReservas.setEnabled(true);
-                atualizarTabela((DefaultTableModel) ControllerBuscaReserva.this.telaBuscaReserva.getjTableReservas().getModel());
                 tabelaSelecionada = jtableReservas;
+                atualizarTabela((DefaultTableModel) tabelaSelecionada.getModel());
             }
 
             @Override
@@ -66,8 +68,8 @@ public class ControllerBuscaReserva implements ActionListener {
             @Override
             public void focusGained(java.awt.event.FocusEvent e) {
                 jtableReservasVaga.setEnabled(true);
-                //atualizarTabela((DefaultTableModel) ControllerBuscaReserva.this.telaBuscaReserva.getjTableReservas().getModel());
                 tabelaSelecionada = jtableReservasVaga;
+                atualizarTabela((DefaultTableModel) tabelaSelecionada.getModel());
             }
 
             @Override
@@ -81,8 +83,8 @@ public class ControllerBuscaReserva implements ActionListener {
             @Override
             public void focusGained(java.awt.event.FocusEvent e) {
                 jtableReservasServico.setEnabled(true);
-                //atualizarTabela((DefaultTableModel) ControllerBuscaReserva.this.telaBuscaReserva.getjTableReservas().getModel());
                 tabelaSelecionada = jtableReservasServico;
+                atualizarTabela((DefaultTableModel) tabelaSelecionada.getModel());
             }
 
             @Override
@@ -93,52 +95,117 @@ public class ControllerBuscaReserva implements ActionListener {
         });
 
         //ListSelectionListener para capturar a linha selecionada
-        jtableReservas.getSelectionModel().addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            @Override
-            public void valueChanged(javax.swing.event.ListSelectionEvent e) {
-                if (!e.getValueIsAdjusting()) {
-                    telaBuscaReserva.getjButtonEditar().setEnabled(true);
-                    telaBuscaReserva.getjButtonCheckin().setEnabled(true);
-                    telaBuscaReserva.getjButtonCheckout().setEnabled(true);
-                }
+        ListSelectionListener listener = e -> {
+            if (!e.getValueIsAdjusting()) {
+                habilitarAcoesBuscaReserva();
             }
-        });
+        };
+        //anexar o mesmo listener às 3 tabelas
+        jtableReservas.getSelectionModel().addListSelectionListener(listener);
+        jtableReservasVaga.getSelectionModel().addListSelectionListener(listener);
+        jtableReservasServico.getSelectionModel().addListSelectionListener(listener);
+        
+        jtableReservasServico.requestFocus();
+        jtableReservasVaga.requestFocus();
+        jtableReservas.requestFocus();
+    }
+
+    private void habilitarAcoesBuscaReserva() {
+        telaBuscaReserva.getjButtonEditar().setEnabled(true);
+        telaBuscaReserva.getjButtonCheckin().setEnabled(true);
+        telaBuscaReserva.getjButtonCheckout().setEnabled(true);
     }
 
     private void atualizarTabela(DefaultTableModel tabela) {
         utilities.Utilities.ativaDesativa(this.telaBuscaReserva.getjPanelBotoes(), true);
 
-        //Criando a lista para receber as reservas
-        List<Reserva> listaReservas = service.ReservaService.Carregar("obs", "");//Armazena todas as reservas
-        if (listaReservas.isEmpty()) {
-            tabela.setRowCount(1);
-            return;
-        }
-        tabela.setRowCount(0);//Reseta a tabela
+        if (tabelaSelecionada.getName().equals(jtableReservas.getName())) {
+            //Criando a lista para receber as reservas
+            List<Reserva> listaReservas = service.ReservaService.Carregar("obs", "");//Armazena todas as reservas
+            if (listaReservas.isEmpty())
+                return;
 
-        Check check;
-        CheckHospede checkHospede;
-        Hospede hospede;
-        CheckQuarto checkQuarto;
-        Quarto quarto;
+            tabela.setRowCount(0);//Reseta a tabela
 
-        //Adicionando as reservas na tabela
-        for (Reserva reservaAtualDaLista : listaReservas) {
-            //busca no banco de dados as linhas necessárias para popular os objetos usados na tabela de busca de reservas
-            check = service.CheckService.Carregar(reservaAtualDaLista.getCheck().get(0).getId());//reserva tem check_id
-            checkHospede = service.CheckHospedeService.Carregar("check_id", check.getId() + "").get(0);//check_hospede tem check_id
-            hospede = service.HospedeService.Carregar(checkHospede.getHospede().getId());//check_hospede tem hospede_id
-            checkQuarto = service.CheckQuartoService.Carregar(check.getCheckQuarto().getId());//check tem check_quarto_id
-            quarto = service.QuartoService.Carregar(checkQuarto.getQuarto().getId());//checkQuarto tem quarto_id
-            //Adiciona as informações às colunas da tabela
-            tabela.addRow(new Object[]{
-                reservaAtualDaLista.getId(),
-                hospede.getNome(),
-                quarto.getIdentificacao(),
-                reservaAtualDaLista.getDataPrevistaEntrada() + "  -  " + reservaAtualDaLista.getDataPrevistaSaida(),
-                check.getDataHoraEntrada() + "",
-                check.getDataHoraSaida() + ""
-            });
+            Check check;
+            CheckHospede checkHospede;
+            Hospede hospede;
+            CheckQuarto checkQuarto;
+            Quarto quarto;
+
+            //Adicionando as reservas na tabela
+            for (Reserva reservaAtualDaLista : listaReservas) {
+                //busca no banco de dados as linhas necessárias para popular os objetos usados na tabela de busca de reservas
+                check = service.CheckService.Carregar(reservaAtualDaLista.getCheck().get(0).getId());//reserva tem check_id
+                checkHospede = service.CheckHospedeService.Carregar("check_id", check.getId() + "").get(0);//check_hospede tem check_id
+                hospede = service.HospedeService.Carregar(checkHospede.getHospede().getId());//check_hospede tem hospede_id
+                checkQuarto = service.CheckQuartoService.Carregar(check.getCheckQuarto().getId());//check tem check_quarto_id
+                quarto = service.QuartoService.Carregar(checkQuarto.getQuarto().getId());//checkQuarto tem quarto_id
+                //Adiciona as informações às colunas da tabela
+                tabela.addRow(new Object[]{
+                    reservaAtualDaLista.getId(),
+                    hospede.getNome(),
+                    quarto.getIdentificacao(),
+                    reservaAtualDaLista.getDataPrevistaEntrada() + "  -  " + reservaAtualDaLista.getDataPrevistaSaida(),
+                    check.getDataHoraEntrada() + "",
+                    check.getDataHoraSaida() + ""
+                });
+            }
+        } else if (tabelaSelecionada.getName().equals(jtableReservasVaga.getName())) {
+            List<AlocacaoVaga> alocacaoVagas = service.AlocacaoVagaService.Carregar("obs", "");
+            if (alocacaoVagas.isEmpty()) {
+                return;
+            }
+
+            tabela.setRowCount(0);
+
+            Veiculo veiculo;
+            VagaEstacionamento vagaEstacionamento;
+            Check check;
+            CheckQuarto checkQuarto;
+
+            for (AlocacaoVaga alocacaoVaga : alocacaoVagas) {
+                veiculo = service.VeiculoService.Carregar(alocacaoVaga.getVeiculo().getId());
+                vagaEstacionamento = service.VagaEstacionamentoService.Carregar(alocacaoVaga.getVagaEstacionamento().getId());
+                check = service.CheckService.Carregar(alocacaoVaga.getCheck().getId());
+                checkQuarto = service.CheckQuartoService.Carregar(check.getCheckQuarto().getId());
+
+                tabela.addRow(new Object[]{
+                    alocacaoVaga.getId(),
+                    veiculo.getHospede().getNome(),
+                    veiculo.getPlaca(),
+                    vagaEstacionamento.getDescricao(),
+                    checkQuarto.getDataHoraInicio() + "  -  " + checkQuarto.getDataHoraFim(),
+                    check.getDataHoraEntrada() + "",
+                    check.getDataHoraSaida() + ""
+                });
+            }
+        } else if (tabelaSelecionada.getName().equals(jtableReservasServico.getName())) {
+            List<OrdemServico> ordemServicos = service.OrdemServicoService.Carregar("obs", "");
+            if (ordemServicos.isEmpty()) {
+                return;
+            }
+
+            tabela.setRowCount(0);
+
+            Check check;
+            Servico servico;
+            Quarto quarto;
+
+            for (OrdemServico ordemServico : ordemServicos) {
+                servico = service.ServicoService.Carregar(ordemServico.getServico().getId());
+                quarto = service.QuartoService.Carregar(ordemServico.getQuarto().getId());
+                check = service.CheckService.Carregar(ordemServico.getCheck().getId());
+
+                tabela.addRow(new Object[]{
+                    ordemServico.getId(),
+                    quarto.getDescricao(),
+                    servico.getDescricao(),
+                    ordemServico.getDataHoraPrevistaInicio() + "  -  " + ordemServico.getDataHoraPrevistaTermino(),
+                    check.getDataHoraEntrada() + "",
+                    check.getDataHoraSaida() + ""
+                });
+            }
         }
     }
 
@@ -197,20 +264,20 @@ public class ControllerBuscaReserva implements ActionListener {
             } else {
                 try {
                     Check checkAtualiza = new Check();
-                    
+
                     if (tabelaSelecionada.getName().equals(jtableReservas.getName())) {
-                        Reserva reserva = service.ReservaService.Carregar((int)tabelaSelecionada.getValueAt(linhaSelecionada, 0));
+                        Reserva reserva = service.ReservaService.Carregar((int) tabelaSelecionada.getValueAt(linhaSelecionada, 0));
                         checkAtualiza = service.CheckService.Carregar(reserva.getCheck().get(0).getId());
                     } else if (tabelaSelecionada.getName().equals(jtableReservasVaga.getName())) {
-                        AlocacaoVaga reserva = service.AlocacaoVagaService.Carregar((int)tabelaSelecionada.getValueAt(linhaSelecionada, 0));
+                        AlocacaoVaga reserva = service.AlocacaoVagaService.Carregar((int) tabelaSelecionada.getValueAt(linhaSelecionada, 0));
                         checkAtualiza = service.CheckService.Carregar(reserva.getCheck().getId());
                     } else if (tabelaSelecionada.getName().equals(jtableReservasServico.getName())) {
-                        OrdemServico reserva = service.OrdemServicoService.Carregar((int)tabelaSelecionada.getValueAt(linhaSelecionada, 0));
+                        OrdemServico reserva = service.OrdemServicoService.Carregar((int) tabelaSelecionada.getValueAt(linhaSelecionada, 0));
                         checkAtualiza = service.CheckService.Carregar(reserva.getCheck().getId());
                     } else {
                         JOptionPane.showMessageDialog(null, "Nenhuma reserva selecionada.");
                     }
-                    
+
                     checkAtualiza.setDataHoraEntrada(new Date().toString());
 
                     service.CheckService.Atualizar(checkAtualiza);
@@ -227,20 +294,20 @@ public class ControllerBuscaReserva implements ActionListener {
             } else {
                 try {
                     Check checkAtualiza = new Check();
-                    
+
                     if (tabelaSelecionada.getName().equals(jtableReservas.getName())) {
-                        Reserva reserva = service.ReservaService.Carregar((int)tabelaSelecionada.getValueAt(linhaSelecionada, 0));
+                        Reserva reserva = service.ReservaService.Carregar((int) tabelaSelecionada.getValueAt(linhaSelecionada, 0));
                         checkAtualiza = service.CheckService.Carregar(reserva.getCheck().get(0).getId());
                     } else if (tabelaSelecionada.getName().equals(jtableReservasVaga.getName())) {
-                        AlocacaoVaga reserva = service.AlocacaoVagaService.Carregar((int)tabelaSelecionada.getValueAt(linhaSelecionada, 0));
+                        AlocacaoVaga reserva = service.AlocacaoVagaService.Carregar((int) tabelaSelecionada.getValueAt(linhaSelecionada, 0));
                         checkAtualiza = service.CheckService.Carregar(reserva.getCheck().getId());
                     } else if (tabelaSelecionada.getName().equals(jtableReservasServico.getName())) {
-                        OrdemServico reserva = service.OrdemServicoService.Carregar((int)tabelaSelecionada.getValueAt(linhaSelecionada, 0));
+                        OrdemServico reserva = service.OrdemServicoService.Carregar((int) tabelaSelecionada.getValueAt(linhaSelecionada, 0));
                         checkAtualiza = service.CheckService.Carregar(reserva.getCheck().getId());
                     } else {
                         JOptionPane.showMessageDialog(null, "Nenhuma reserva selecionada.");
                     }
-                    
+
                     checkAtualiza.setDataHoraSaida(new Date().toString());
 
                     service.CheckService.Atualizar(checkAtualiza);

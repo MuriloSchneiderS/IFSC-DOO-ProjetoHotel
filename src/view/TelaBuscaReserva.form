@@ -153,7 +153,7 @@
                     <Column editable="false" title="Cod" type="java.lang.Object"/>
                     <Column editable="false" title="H&#xf3;spede" type="java.lang.Object"/>
                     <Column editable="false" title="Quarto" type="java.lang.Object"/>
-                    <Column editable="false" title="Reservado" type="java.lang.Object"/>
+                    <Column editable="false" title="Reserva" type="java.lang.Object"/>
                     <Column editable="false" title="Check-in" type="java.lang.Object"/>
                     <Column editable="false" title="Check-out" type="java.lang.Object"/>
                   </Table>
@@ -284,8 +284,8 @@
                     <Column editable="false" title="Quarto" type="java.lang.Object"/>
                     <Column editable="false" title="Servico" type="java.lang.Object"/>
                     <Column editable="false" title="Reserva" type="java.lang.Object"/>
-                    <Column editable="false" title="Inicio" type="java.lang.Object"/>
-                    <Column editable="false" title="Fim" type="java.lang.Object"/>
+                    <Column editable="false" title="Check-in" type="java.lang.Object"/>
+                    <Column editable="false" title="Check-out" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
