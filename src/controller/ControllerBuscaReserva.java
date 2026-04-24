@@ -125,7 +125,9 @@ public class ControllerBuscaReserva implements ActionListener {
             List<Reserva> listaReservas = service.ReservaService.Carregar("obs", "");//Armazena todas as reservas
             if (listaReservas.isEmpty()){
                 tabela.addRow(new Object[]{
-                    -1,
+                    null,
+                    null,
+                    null,
                     "nenhuma reserva encontrada"
                 });
                 return;
@@ -159,7 +161,10 @@ public class ControllerBuscaReserva implements ActionListener {
             List<AlocacaoVaga> alocacaoVagas = service.AlocacaoVagaService.Carregar("obs", "");
             if (alocacaoVagas.isEmpty()){
                 tabela.addRow(new Object[]{
-                    -1,
+                    null,
+                    null,
+                    null,
+                    null,
                     "nenhuma reserva encontrada"
                 });
                 return;
@@ -190,7 +195,9 @@ public class ControllerBuscaReserva implements ActionListener {
             List<OrdemServico> ordemServicos = service.OrdemServicoService.Carregar("obs", "");
             if (ordemServicos.isEmpty()){
                 tabela.addRow(new Object[]{
-                    -1,
+                    null,
+                    null,
+                    null,
                     "nenhuma reserva encontrada"
                 });
                 return;
@@ -224,17 +231,14 @@ public class ControllerBuscaReserva implements ActionListener {
         if (evento.getSource() == this.telaBuscaReserva.getjButtonNovo()) {
             if (tabelaSelecionada.getName().equals(jtableReservas.getName())) {
                 TelaCadastroReserva telaCadastroReserva = new TelaCadastroReserva(null, true);
-                telaCadastroReserva.getjTextFieldId().setText(0 + "");
                 ControllerCadReserva controllerCadReserva = new ControllerCadReserva(telaCadastroReserva);
                 controllerCadReserva.telaCadastroReserva.getjFormattedTextFieldDataPrevistaEntrada().requestFocus();
             } else if (tabelaSelecionada.getName().equals(jtableReservasVaga.getName())) {
                 TelaCadastroAlocacaoVagaEstacionamento telaCadastroAlocacaoVagaEstacionamento = new TelaCadastroAlocacaoVagaEstacionamento(null, true);
-                telaCadastroAlocacaoVagaEstacionamento.getjTextFieldId().setText(0 + "");
                 ControllerCadAlocacaoVagaEstacionamento controllerCadAlocacaoVagaEstacionamento = new ControllerCadAlocacaoVagaEstacionamento(telaCadastroAlocacaoVagaEstacionamento);
                 controllerCadAlocacaoVagaEstacionamento.telaCadastroAlocacaoVagaEstacionamento.getjFormattedTextFieldDataPrevistaEntrada().requestFocus();
             } else if (tabelaSelecionada.getName().equals(jtableReservasServico.getName())) {
                 TelaCadastroOrdemServico telaCadastroOrdemServico = new TelaCadastroOrdemServico(null, true);
-                telaCadastroOrdemServico.getjTextFieldId().setText(0 + "");
                 ControllerCadOrdemServico controllerCadOrdemServico = new ControllerCadOrdemServico(telaCadastroOrdemServico);
                 controllerCadOrdemServico.telaCadastroOrdemServico.getjFormattedTextFieldDataPrevistaEntrada().requestFocus();
             } else {

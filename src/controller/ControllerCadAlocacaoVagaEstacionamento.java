@@ -40,7 +40,7 @@ public class ControllerCadAlocacaoVagaEstacionamento implements ActionListener {
         }
 
         //carregar variavel codigo com valor 0 para novo ou valor armazenado em id para editar
-        codigo = telaCadastroAlocacaoVagaEstacionamento.getjTextFieldId().getText().isEmpty() ? 0 : Integer.parseInt(telaCadastroAlocacaoVagaEstacionamento.getjTextFieldId().getText());
+        codigo = this.telaCadastroAlocacaoVagaEstacionamento.getjTextFieldId().getText().isEmpty() ? 0 : Integer.parseInt(telaCadastroAlocacaoVagaEstacionamento.getjTextFieldId().getText());
         if (codigo == 0) {//nova alocacaoVaga
             utilities.Utilities.ativaDesativa(this.telaCadastroAlocacaoVagaEstacionamento.getjPanelBotoes(), true);
             utilities.Utilities.limpaComponentes(this.telaCadastroAlocacaoVagaEstacionamento.getjPanelDados(), false);
@@ -143,6 +143,8 @@ public class ControllerCadAlocacaoVagaEstacionamento implements ActionListener {
                     alocacaoVaga.setObs(this.telaCadastroAlocacaoVagaEstacionamento.getjTextFieldObs().getText());
                     alocacaoVaga.setStatus('A');
                     alocacaoVaga.setCheck(check);
+                    alocacaoVaga.setVeiculo(veiculo);
+                    alocacaoVaga.setVagaEstacionamento(vagaEstacionamento);
                     service.AlocacaoVagaService.Criar(alocacaoVaga);
                 //Atualização
                 } else {

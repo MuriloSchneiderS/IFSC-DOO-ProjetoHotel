@@ -73,11 +73,11 @@ public class VeiculoDAO implements InterfaceDAO<Veiculo>{
                 veiculo.setCor(rst.getString("cor"));
                 modelo.setId(rst.getInt("modelo_id"));
                 veiculo.setModelo(modelo);
-                funcionario.setId(rst.getInt("funcionario_id"));
+                funcionario = service.FuncionarioService.Carregar(rst.getInt("funcionario_id"));
                 veiculo.setFuncionario(funcionario);
-                fornecedor.setId(rst.getInt("fornecedor_id"));
+                fornecedor = service.FornecedorService.Carregar(rst.getInt("fornecedor_id"));
                 veiculo.setFornecedor(fornecedor);
-                hospede.setId(rst.getInt("hospede_id"));
+                hospede = service.HospedeService.Carregar(rst.getInt("hospede_id"));
                 veiculo.setHospede(hospede);
             }
         } catch (SQLException ex) {
@@ -120,11 +120,11 @@ public class VeiculoDAO implements InterfaceDAO<Veiculo>{
                 veiculo.setCor(rst.getString("cor"));
                 modelo.setId(rst.getInt("modelo_id"));
                 veiculo.setModelo(modelo);
-                funcionario.setId(rst.getInt("funcionario_id"));
+                funcionario = service.FuncionarioService.Carregar(rst.getInt("funcionario_id"));
                 veiculo.setFuncionario(funcionario);
-                fornecedor.setId(rst.getInt("fornecedor_id"));
+                fornecedor = service.FornecedorService.Carregar(rst.getInt("fornecedor_id"));
                 veiculo.setFornecedor(fornecedor);
-                hospede.setId(rst.getInt("hospede_id"));
+                hospede = service.HospedeService.Carregar(rst.getInt("hospede_id"));
                 veiculo.setHospede(hospede);
                 listaVeiculos.add(veiculo);
             }
