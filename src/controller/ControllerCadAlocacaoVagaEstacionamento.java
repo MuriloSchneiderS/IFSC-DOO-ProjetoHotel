@@ -112,7 +112,7 @@ public class ControllerCadAlocacaoVagaEstacionamento implements ActionListener {
                                     service.CheckService.Carregar(
                                             service.CheckHospedeService.Carregar(
                                                     "hospede_id", veiculo.getHospede().getId()+""
-                                            ).get(0).getCheck().getId()
+                                            ).getLast().getCheck().getId()
                                     ).getCheckQuarto().getId()
                             ).getQuarto().getId()
                     );
@@ -150,39 +150,49 @@ public class ControllerCadAlocacaoVagaEstacionamento implements ActionListener {
                 } else {
                     AlocacaoVaga alocacaoVaga = service.AlocacaoVagaService.Carregar("id", String.valueOf(codigo)).get(0);
                     
+                    String dataPrevistaEntrada = this.telaCadastroAlocacaoVagaEstacionamento.getjFormattedTextFieldDataPrevistaEntrada().getText();
+                    String dataPrevistaSaida = this.telaCadastroAlocacaoVagaEstacionamento.getjFormattedTextFieldDataPrevistaSaida().getText();
+                    String vagaSelecionada = (String) this.telaCadastroAlocacaoVagaEstacionamento.getjComboBoxVagaEstacionamento().getSelectedItem();
+                    String veiculoSelecionado = (String) this.telaCadastroAlocacaoVagaEstacionamento.getjComboBoxVeiculo().getSelectedItem();
+                    String obs = this.telaCadastroAlocacaoVagaEstacionamento.getjTextFieldObs().getText();
+                    
                     //Recuperar o VagaEstacionamento selecionado
-                    VagaEstacionamento vagaEstacionamento = service.VagaEstacionamentoService.Carregar("descricao", (String) this.telaCadastroAlocacaoVagaEstacionamento.getjComboBoxVagaEstacionamento().getSelectedItem()).get(0);
+                    VagaEstacionamento vagaEstacionamento = service.VagaEstacionamentoService.Carregar("descricao", vagaSelecionada).get(0);
 
                     //Recuperar o Veiculo selecionado
-                    Veiculo veiculo = service.VeiculoService.Carregar("placa", (String) this.telaCadastroAlocacaoVagaEstacionamento.getjComboBoxVeiculo().getSelectedItem()).get(0);
+                    Veiculo veiculo = service.VeiculoService.Carregar("placa", veiculoSelecionado).get(0);
 
                     //Atualizar dados da alocacao_vaga
                     alocacaoVaga.setVeiculo(veiculo);
                     alocacaoVaga.setVagaEstacionamento(vagaEstacionamento);
-                    alocacaoVaga.setObs(this.telaCadastroAlocacaoVagaEstacionamento.getjTextFieldObs().getText());
+                    alocacaoVaga.setObs(obs);
                     alocacaoVaga.setStatus('A');
                     
                     //Atualizar dados do check
                     Check check = service.CheckService.Carregar(alocacaoVaga.getCheck().getId());
                     check.setDataHoraCadastro(this.telaCadastroAlocacaoVagaEstacionamento.getjFormattedTextFieldDataCadastro().getText());
-                    check.setDataHoraEntrada(this.telaCadastroAlocacaoVagaEstacionamento.getjFormattedTextFieldDataPrevistaEntrada().getText());
-                    check.setDataHoraSaida(this.telaCadastroAlocacaoVagaEstacionamento.getjFormattedTextFieldDataPrevistaSaida().getText());
-                    check.setObs(alocacaoVaga.getObs());
+                    check.setDataHoraEntrada(dataPrevistaEntrada);
+                    check.setDataHoraSaida(dataPrevistaSaida);
+                    check.setObs(obs);
                     
+                    CheckQuarto checkQuarto = service.CheckQuartoService.Carregar(check.getCheckQuarto().getId());
+                    checkQuarto.setDataHoraInicio(dataPrevistaEntrada);
+                    checkQuarto.setDataHoraFim(dataPrevistaSaida);
                     Quarto quarto = service.QuartoService.Carregar(
                             service.CheckQuartoService.Carregar(
                                     service.CheckService.Carregar(
                                             service.CheckHospedeService.Carregar(
                                                     "hospede_id", veiculo.getHospede().getId()+""
-                                            ).get(0).getCheck().getId()
+                                            ).getLast().getCheck().getId()
                                     ).getCheckQuarto().getId()
                             ).getQuarto().getId()
                     );
-                    CheckQuarto checkQuarto = service.CheckQuartoService.Carregar("quarto_id", quarto.getId()+"").get(0);
+                    checkQuarto.setQuarto(quarto);
                     
                     check.setCheckQuarto(checkQuarto);
                     
                     //Subir atualizações
+                    service.CheckQuartoService.Atualizar(checkQuarto);
                     service.CheckService.Atualizar(check);
                     service.AlocacaoVagaService.Atualizar(alocacaoVaga);
                 }

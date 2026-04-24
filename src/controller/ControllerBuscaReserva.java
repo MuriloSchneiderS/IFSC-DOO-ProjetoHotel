@@ -52,9 +52,7 @@ public class ControllerBuscaReserva implements ActionListener {
         jtableReservas.addFocusListener(new java.awt.event.FocusListener() {
             @Override
             public void focusGained(java.awt.event.FocusEvent e) {
-                jtableReservas.setEnabled(true);
-                tabelaSelecionada = jtableReservas;
-                atualizarTabela((DefaultTableModel) tabelaSelecionada.getModel());
+                atualizarTabela(jtableReservas);
             }
 
             @Override
@@ -67,9 +65,7 @@ public class ControllerBuscaReserva implements ActionListener {
         jtableReservasVaga.addFocusListener(new java.awt.event.FocusListener() {
             @Override
             public void focusGained(java.awt.event.FocusEvent e) {
-                jtableReservasVaga.setEnabled(true);
-                tabelaSelecionada = jtableReservasVaga;
-                atualizarTabela((DefaultTableModel) tabelaSelecionada.getModel());
+                atualizarTabela(jtableReservasVaga);
             }
 
             @Override
@@ -82,9 +78,7 @@ public class ControllerBuscaReserva implements ActionListener {
         jtableReservasServico.addFocusListener(new java.awt.event.FocusListener() {
             @Override
             public void focusGained(java.awt.event.FocusEvent e) {
-                jtableReservasServico.setEnabled(true);
-                tabelaSelecionada = jtableReservasServico;
-                atualizarTabela((DefaultTableModel) tabelaSelecionada.getModel());
+                atualizarTabela(jtableReservasServico);
             }
 
             @Override
@@ -104,10 +98,10 @@ public class ControllerBuscaReserva implements ActionListener {
         jtableReservas.getSelectionModel().addListSelectionListener(listener);
         jtableReservasVaga.getSelectionModel().addListSelectionListener(listener);
         jtableReservasServico.getSelectionModel().addListSelectionListener(listener);
-        
-        jtableReservasServico.requestFocus();
-        jtableReservasVaga.requestFocus();
-        jtableReservas.requestFocus();
+
+        atualizarTabela(this.jtableReservasServico);
+        atualizarTabela(this.jtableReservasVaga);
+        atualizarTabela(this.jtableReservas);
     }
 
     private void habilitarAcoesBuscaReserva(boolean ativa) {
@@ -116,14 +110,17 @@ public class ControllerBuscaReserva implements ActionListener {
         telaBuscaReserva.getjButtonCheckout().setEnabled(ativa);
     }
 
-    private void atualizarTabela(DefaultTableModel tabela) {
+    private void atualizarTabela(JTable jtable) {
+        jtable.setEnabled(true);
+        tabelaSelecionada = jtable;
+        DefaultTableModel tabela = (DefaultTableModel)jtable.getModel();
         tabela.setRowCount(0);//Reseta a tabela
         utilities.Utilities.ativaDesativa(this.telaBuscaReserva.getjPanelBotoes(), true);
 
         if (tabelaSelecionada.getName().equals(jtableReservas.getName())) {
             //Criando a lista para receber as reservas
             List<Reserva> listaReservas = service.ReservaService.Carregar("obs", "");//Armazena todas as reservas
-            if (listaReservas.isEmpty()){
+            if (listaReservas.isEmpty()) {
                 tabela.addRow(new Object[]{
                     null,
                     null,
@@ -132,7 +129,7 @@ public class ControllerBuscaReserva implements ActionListener {
                 });
                 return;
             }
-            
+
             Check check;
             CheckHospede checkHospede;
             Hospede hospede;
@@ -159,7 +156,7 @@ public class ControllerBuscaReserva implements ActionListener {
             }
         } else if (tabelaSelecionada.getName().equals(jtableReservasVaga.getName())) {
             List<AlocacaoVaga> alocacaoVagas = service.AlocacaoVagaService.Carregar("obs", "");
-            if (alocacaoVagas.isEmpty()){
+            if (alocacaoVagas.isEmpty()) {
                 tabela.addRow(new Object[]{
                     null,
                     null,
@@ -193,7 +190,7 @@ public class ControllerBuscaReserva implements ActionListener {
             }
         } else if (tabelaSelecionada.getName().equals(jtableReservasServico.getName())) {
             List<OrdemServico> ordemServicos = service.OrdemServicoService.Carregar("obs", "");
-            if (ordemServicos.isEmpty()){
+            if (ordemServicos.isEmpty()) {
                 tabela.addRow(new Object[]{
                     null,
                     null,
@@ -244,11 +241,12 @@ public class ControllerBuscaReserva implements ActionListener {
             } else {
                 JOptionPane.showMessageDialog(null, "Nenhuma tabela selecionada.");
             }
+            atualizarTabela(tabelaSelecionada);
 
             //Botão Editar
         } else if (evento.getSource() == this.telaBuscaReserva.getjButtonEditar()) {
             if (tabelaSelecionada == null) {
-                 JOptionPane.showMessageDialog(null, "Nenhuma tabela selecionada.");
+                JOptionPane.showMessageDialog(null, "Nenhuma tabela selecionada.");
             } else if (linhaSelecionada < 0) {
                 JOptionPane.showMessageDialog(null, "Nenhuma reserva selecionada.");
             } else {
@@ -268,11 +266,12 @@ public class ControllerBuscaReserva implements ActionListener {
                 } else {
                     JOptionPane.showMessageDialog(null, "Nenhuma reserva selecionada.");
                 }
+                atualizarTabela(tabelaSelecionada);
             }
             tabelaSelecionada.requestFocus();
             //Botão Check-in
         } else if (evento.getSource() == this.telaBuscaReserva.getjButtonCheckin()) {
-            if (tabelaSelecionada==null || linhaSelecionada<0) {
+            if (tabelaSelecionada == null || linhaSelecionada < 0) {
                 JOptionPane.showMessageDialog(null, "Nenhuma reserva selecionada.");
             } else {
                 try {
@@ -292,8 +291,7 @@ public class ControllerBuscaReserva implements ActionListener {
                     checkAtualiza.setDataHoraEntrada(new Date().toString());
 
                     service.CheckService.Atualizar(checkAtualiza);
-                    
-                    atualizarTabela((DefaultTableModel) ControllerBuscaReserva.this.telaBuscaReserva.getjTableReservas().getModel());
+                    atualizarTabela(tabelaSelecionada);
                 } catch (Exception e) {
                     System.out.println("Erro ao atualizar check: " + e.getMessage());
                     e.printStackTrace();
@@ -301,7 +299,7 @@ public class ControllerBuscaReserva implements ActionListener {
             }
             //Botão Check-out
         } else if (evento.getSource() == this.telaBuscaReserva.getjButtonCheckout()) {
-            if (tabelaSelecionada==null || linhaSelecionada<0) {
+            if (tabelaSelecionada == null || linhaSelecionada < 0) {
                 JOptionPane.showMessageDialog(null, "Nenhuma reserva selecionada.");
             } else {
                 try {
@@ -321,7 +319,7 @@ public class ControllerBuscaReserva implements ActionListener {
                     checkAtualiza.setDataHoraSaida(new Date().toString());
 
                     service.CheckService.Atualizar(checkAtualiza);
-                    atualizarTabela((DefaultTableModel) ControllerBuscaReserva.this.telaBuscaReserva.getjTableReservas().getModel());
+                    atualizarTabela(tabelaSelecionada);
                 } catch (Exception e) {
                     System.out.println("Erro ao atualizar check: " + e.getMessage());
                     e.printStackTrace();
