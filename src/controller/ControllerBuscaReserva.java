@@ -97,7 +97,7 @@ public class ControllerBuscaReserva implements ActionListener {
         //ListSelectionListener para capturar a linha selecionada
         ListSelectionListener listener = e -> {
             if (!e.getValueIsAdjusting()) {
-                habilitarAcoesBuscaReserva();
+                habilitarAcoesBuscaReserva(true);
             }
         };
         //anexar o mesmo listener às 3 tabelas
@@ -110,23 +110,27 @@ public class ControllerBuscaReserva implements ActionListener {
         jtableReservas.requestFocus();
     }
 
-    private void habilitarAcoesBuscaReserva() {
-        telaBuscaReserva.getjButtonEditar().setEnabled(true);
-        telaBuscaReserva.getjButtonCheckin().setEnabled(true);
-        telaBuscaReserva.getjButtonCheckout().setEnabled(true);
+    private void habilitarAcoesBuscaReserva(boolean ativa) {
+        telaBuscaReserva.getjButtonEditar().setEnabled(ativa);
+        telaBuscaReserva.getjButtonCheckin().setEnabled(ativa);
+        telaBuscaReserva.getjButtonCheckout().setEnabled(ativa);
     }
 
     private void atualizarTabela(DefaultTableModel tabela) {
+        tabela.setRowCount(0);//Reseta a tabela
         utilities.Utilities.ativaDesativa(this.telaBuscaReserva.getjPanelBotoes(), true);
 
         if (tabelaSelecionada.getName().equals(jtableReservas.getName())) {
             //Criando a lista para receber as reservas
             List<Reserva> listaReservas = service.ReservaService.Carregar("obs", "");//Armazena todas as reservas
-            if (listaReservas.isEmpty())
+            if (listaReservas.isEmpty()){
+                tabela.addRow(new Object[]{
+                    -1,
+                    "nenhuma reserva encontrada"
+                });
                 return;
-
-            tabela.setRowCount(0);//Reseta a tabela
-
+            }
+            
             Check check;
             CheckHospede checkHospede;
             Hospede hospede;
@@ -153,11 +157,13 @@ public class ControllerBuscaReserva implements ActionListener {
             }
         } else if (tabelaSelecionada.getName().equals(jtableReservasVaga.getName())) {
             List<AlocacaoVaga> alocacaoVagas = service.AlocacaoVagaService.Carregar("obs", "");
-            if (alocacaoVagas.isEmpty()) {
+            if (alocacaoVagas.isEmpty()){
+                tabela.addRow(new Object[]{
+                    -1,
+                    "nenhuma reserva encontrada"
+                });
                 return;
             }
-
-            tabela.setRowCount(0);
 
             Veiculo veiculo;
             VagaEstacionamento vagaEstacionamento;
@@ -182,11 +188,13 @@ public class ControllerBuscaReserva implements ActionListener {
             }
         } else if (tabelaSelecionada.getName().equals(jtableReservasServico.getName())) {
             List<OrdemServico> ordemServicos = service.OrdemServicoService.Carregar("obs", "");
-            if (ordemServicos.isEmpty()) {
+            if (ordemServicos.isEmpty()){
+                tabela.addRow(new Object[]{
+                    -1,
+                    "nenhuma reserva encontrada"
+                });
                 return;
             }
-
-            tabela.setRowCount(0);
 
             Check check;
             Servico servico;
@@ -207,6 +215,7 @@ public class ControllerBuscaReserva implements ActionListener {
                 });
             }
         }
+        habilitarAcoesBuscaReserva(false);
     }
 
     @Override
@@ -235,7 +244,7 @@ public class ControllerBuscaReserva implements ActionListener {
             //Botão Editar
         } else if (evento.getSource() == this.telaBuscaReserva.getjButtonEditar()) {
             if (tabelaSelecionada == null) {
-                JOptionPane.showMessageDialog(null, "Nenhuma tabela selecionada.");
+                 JOptionPane.showMessageDialog(null, "Nenhuma tabela selecionada.");
             } else if (linhaSelecionada < 0) {
                 JOptionPane.showMessageDialog(null, "Nenhuma reserva selecionada.");
             } else {
@@ -259,8 +268,8 @@ public class ControllerBuscaReserva implements ActionListener {
             tabelaSelecionada.requestFocus();
             //Botão Check-in
         } else if (evento.getSource() == this.telaBuscaReserva.getjButtonCheckin()) {
-            if (this.telaBuscaReserva.getjTableReservas().getRowCount() == 0) {
-                JOptionPane.showMessageDialog(null, "Nenhum dado selecionado.");
+            if (tabelaSelecionada==null || linhaSelecionada<0) {
+                JOptionPane.showMessageDialog(null, "Nenhuma reserva selecionada.");
             } else {
                 try {
                     Check checkAtualiza = new Check();
@@ -274,13 +283,12 @@ public class ControllerBuscaReserva implements ActionListener {
                     } else if (tabelaSelecionada.getName().equals(jtableReservasServico.getName())) {
                         OrdemServico reserva = service.OrdemServicoService.Carregar((int) tabelaSelecionada.getValueAt(linhaSelecionada, 0));
                         checkAtualiza = service.CheckService.Carregar(reserva.getCheck().getId());
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Nenhuma reserva selecionada.");
                     }
 
                     checkAtualiza.setDataHoraEntrada(new Date().toString());
 
                     service.CheckService.Atualizar(checkAtualiza);
+                    
                     atualizarTabela((DefaultTableModel) ControllerBuscaReserva.this.telaBuscaReserva.getjTableReservas().getModel());
                 } catch (Exception e) {
                     System.out.println("Erro ao atualizar check: " + e.getMessage());
@@ -289,8 +297,8 @@ public class ControllerBuscaReserva implements ActionListener {
             }
             //Botão Check-out
         } else if (evento.getSource() == this.telaBuscaReserva.getjButtonCheckout()) {
-            if (this.telaBuscaReserva.getjTableReservas().getRowCount() == 0) {
-                JOptionPane.showMessageDialog(null, "Nenhum dado selecionado.");
+            if (tabelaSelecionada==null || linhaSelecionada<0) {
+                JOptionPane.showMessageDialog(null, "Nenhuma reserva selecionada.");
             } else {
                 try {
                     Check checkAtualiza = new Check();
@@ -304,8 +312,6 @@ public class ControllerBuscaReserva implements ActionListener {
                     } else if (tabelaSelecionada.getName().equals(jtableReservasServico.getName())) {
                         OrdemServico reserva = service.OrdemServicoService.Carregar((int) tabelaSelecionada.getValueAt(linhaSelecionada, 0));
                         checkAtualiza = service.CheckService.Carregar(reserva.getCheck().getId());
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Nenhuma reserva selecionada.");
                     }
 
                     checkAtualiza.setDataHoraSaida(new Date().toString());
