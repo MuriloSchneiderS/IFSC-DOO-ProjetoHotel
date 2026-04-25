@@ -28,7 +28,7 @@ public class OrdemServicoDAO implements InterfaceDAO<OrdemServico>{
         PreparedStatement pstm = null;
         try {
             pstm = conexao.prepareStatement(sqlInstrucao);
-            pstm.setString(1, utilities.Utilities.formataDataHoraParaMySQL(objeto.getDataHoraCadastro()));
+            pstm.setString(1, utilities.Utilities.formataDataParaMySQL(objeto.getDataHoraCadastro()));
             pstm.setString(2, utilities.Utilities.formataDataHoraParaMySQL(objeto.getDataHoraPrevistaInicio()));
             pstm.setString(3, utilities.Utilities.formataDataHoraParaMySQL(objeto.getDataHoraPrevistaTermino()));
             pstm.setString(4, objeto.getObs());

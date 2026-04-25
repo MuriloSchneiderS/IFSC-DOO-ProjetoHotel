@@ -121,7 +121,7 @@ public class ControllerCadOrdemServico implements ActionListener {
                     );
                     service.CheckService.Criar(check);
                     check = service.CheckService.Carregar(-1);
-
+                    System.out.println(this.telaCadastroOrdemServico.getjFormattedTextFieldDataCadastro().getText());
                     ordemServico.setDataHoraCadastro(this.telaCadastroOrdemServico.getjFormattedTextFieldDataCadastro().getText());
                     ordemServico.setDataHoraPrevistaInicio(this.telaCadastroOrdemServico.getjFormattedTextFieldDataPrevistaEntrada().getText());
                     ordemServico.setDataHoraPrevistaTermino(this.telaCadastroOrdemServico.getjFormattedTextFieldDataPrevistaSaida().getText());

@@ -91,6 +91,8 @@ public class ControllerBuscaReserva implements ActionListener {
         //ListSelectionListener para capturar a linha selecionada
         ListSelectionListener listener = e -> {
             if (!e.getValueIsAdjusting()) {
+                if(tabelaSelecionada.getSelectedRow()<0)
+                    return;
                 habilitarAcoesBuscaReserva(true);
             }
         };
